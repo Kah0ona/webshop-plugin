@@ -28,7 +28,7 @@ License:
 
 class SytematicWebshop {
 	protected $options = null;
-	protected $hostname = 'test';//TODO fix me, should be fetched from the $this->options.
+	protected $hostname = 'denimes';//TODO fix me, should be fetched from the $this->options.
 	/**
 	 * Initializes the plugin by setting localization, filters, and administration functions.
 	 */
@@ -134,19 +134,26 @@ class SytematicWebshop {
 	 * Controller Functions
 	 *---------------------------------------------*/
 	public function render_categories(){
-	
-		include_once('views/IGenericView.php');	
-		include_once('views/CategoryView.php');
-	
+		include_once('views/GenericView.php');	
+		
 		include_once('models/GenericModel.php');
 		include_once('models/CategoryModel.php');
 
-		$m = new CategoryModel($this->hostname, $this->options); 
-		$sortedMap = $m->fetchSortedMap();
+		$model = new CategoryModel($this->hostname, $this->options); 
+		
+		if($model->isDetailPage()) {
+			include_once('views/CategoryDetailView.php');
+			$model->fetchCategory();
+			$v = new CategoryDetailView($model);
+			$v->render();
+		}
+		else {
+			include_once('views/CategoryView.php');
+			$model->fetchSortedMap();
+			$v = new CategoryView($model);
+			$v->render();
+		}		
 
-		$c = new CategoryView();
-		$c->setData($sortedMap);
-		$c->render();
 	}
   
 } // end class

@@ -6,20 +6,21 @@ class CategoryModel extends GenericModel {
 	function __construct($hostname) {
 		$this->hostname=$hostname;
 	} 
-	
+		
 	public function fetchCategories($params, $returnString=false){
-		$url = BASE_URL_CATERINGSOFTWARE.'/categories?'.$this->decodeParamsIntoGetString($params);
-		$jsonString = $this->curl_fetch($url);
+		$url = BASE_URL_WEBSHOP.'/categories';
+		return $this->fetch($url, $params, $returnString);
+	}
 	
-		if($returnString)
-			return $jsonString;
-		else {
-			if($jsonString == null) {
-				return Array();
-			}
-			return json_decode($jsonString);
-			
-		}
+	/**
+	* Fetches the category with the id currently set by $this->setId(), or set by a previous call to $this->isDetailPage(); 
+	*/
+	public function fetchCategory(){
+		return $this->fetchByID('Category_id');
+	}
+	
+	public function isDetailPage(){
+		return parent::isDetailPage('categories');
 	}
 	
 	public function setCategoryTitleOrder($map){
@@ -53,8 +54,7 @@ class CategoryModel extends GenericModel {
 			else {
 				if($map['nogroup'] == null)
 					$map['nogroup'] = Array();
-					
-					
+									
 				$map['nogroup'][] = $c;
 			}
 		}
@@ -72,6 +72,7 @@ class CategoryModel extends GenericModel {
 		
 		return $this->sortedMap;
 	}
+	
 	
 	/**
 	* Is null, unless fetchSortedMap has been called before. This returns the in-memory version

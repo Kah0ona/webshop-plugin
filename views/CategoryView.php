@@ -2,26 +2,25 @@
 /**
 * Overview, showing a list of categories
 */
-class CategoryView implements IGenericView {
-	private $sortedMap=Array();
+class CategoryView extends GenericView {
 
-	public function setData($data) {
-		$this->sortedMap = $data;
-	}
 
-	public function render($args=null) { ?>	
+	public function render($data=null) { 
+		if($data == null)
+			$data = $this->model->getSortedMap();
+	?>	
 		<!-- Start rendering CategoryView -->
 		<ul class="categories">
 		<?php
-			if($this->sortedMap == null):
+			if($data == null):
 		?>
 			<div><p>Er zijn geen categorie&euml;n gevonden.</p></div>
 		<?php endif; ?>
-		<?php foreach ($this->sortedMap as $group=>$cats) : ?>
+		<?php foreach ($data as $group=>$cats) : ?>
 			<?php if($group == 'nogroup') : ?>
 				<?php foreach($cats as $cat) : ?>
 					<li class="category-item category-package">
-						<a href="/categories/<?php echo $cat->Category_id; ?>#<?php echo $cat->categoryName; ?>">
+						<a href="<?php echo site_url(); ?>/categories/<?php echo $cat->Category_id; ?>#<?php echo $cat->categoryName; ?>">
 							<?php echo $cat->categoryName; ?>
 						</a>
 					</li>
@@ -32,7 +31,7 @@ class CategoryView implements IGenericView {
 					<ul>
 					<?php foreach($cats as $cat) : ?>
 						<li class="category-item category-package">
-							<a href="/categories/<?php echo $cat->Category_id; ?>#<?php echo $cat->categoryName; ?>">
+							<a href="<?php echo site_url(); ?>/categories/<?php echo $cat->Category_id; ?>#<?php echo $cat->categoryName; ?>">
 								<?php echo $cat->categoryName; ?>
 							</a>
 						</li>
