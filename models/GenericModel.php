@@ -1,14 +1,11 @@
 <?php 
-define('SYSTEM_URL_WEBSHOP', 'http://webshop.sytematic.nl');
-define('BASE_URL_WEBSHOP', SYSTEM_URL_WEBSHOP.'/public');
-define('EURO_FORMAT', '%.2n');
 
-setlocale(LC_MONETARY, 'it_IT');
 
 class GenericModel {
 	protected $hostname;
 	protected $options;	
 	protected $data; //any data fetched will be put in this variable
+	protected $serviceUrl = null;
 	/*
 	* When we are viewing a detail page of one item, this id field will be set.
 	*/
@@ -80,13 +77,22 @@ class GenericModel {
 	}
 
 	public function fetchById($idKeyName, $asString = false){
-		$arr = Array()
+		$arr = Array();
 		if($this->id == null)
 			throw new Exception('No ID set, make sure you use setId($id) to set an id');
 		
 		$arr[$idKeyName] = $this->id;
 		
-		return $this->fetch($url, $arr, $asString);
+		
+		
+		$ret = $this->fetch($this->serviceUrl, $arr, $asString);
+		if(!$asString && $ret != null && count($ret)> 0){
+			return $ret[0];
+		}
+		elseif($asString){
+			return $ret;
+		}
+		else return Array();
 		
 	}
 
@@ -121,13 +127,29 @@ class GenericModel {
 	}
 
 	protected function fetch($url, $params, $getString = true){
-	 	$url = $url.'?'.$this->decodeParamsIntoGetString($params);
-		$jsonString = $this->curl_fetch();
+		$this->data = null; //reset
 		
-		if($getString)
+	    $params['hostname'] = $this->hostname;
+	    
+	 	$url = $url.'?'.$this->decodeParamsIntoGetString($params);
+		$jsonString = $this->curl_fetch($url);
+		
+		if($getString) {
+			$this->data = $jsonString;
 			return $jsonString;
-		else 
-			return json_decode($jsonString);
+		}
+		else {
+			$obj = json_decode($jsonString);
+			if($this->isDetailPage()){
+				if($obj != null && count($obj) > 0)
+					$this->data = $obj[0];
+			}
+			else {
+				$this->data = $obj;
+			}
+			
+			return $obj;
+		}
 		
 	}
 
@@ -146,7 +168,6 @@ class GenericModel {
 			$json = curl_exec($ch);
 			curl_close($ch);
 			$this->setCachedData($url, $json); 
-			$this->data = $json;
 			return $json;
 		}
 	}

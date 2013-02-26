@@ -3,20 +3,18 @@
 * Overview, showing a list of categories
 */
 class CategoryDetailView extends GenericView {
-	private $sortedMap=Array();
 
-	public function setData($data) {
-		$this->sortedMap = $data;
-	}
-
-	public function render($args=null) { 
-		if($args == null)
-			$args = $this->model->getData();
+	public function render($data=null) { 
+		if($data == null)
+			$data = $this->model->getData();
 		
-	?>	
-		<!-- Start rendering CategoryDetailView -->
-		<div>DETAIL OF ID <?php echo $args['title']; ?> </div>
-		<!-- End CategoryDetailView -->
-	<?php }
+		include_once('ProductView.php');
+		$productView = new ProductView(null);
+	
+		if($data != null && count($data) > 0) 
+			echo $productView->render($data->Product); 
+		else
+			echo '<div>Deze categorie bestaat niet (meer).</div>';
+	}
 }
 ?>

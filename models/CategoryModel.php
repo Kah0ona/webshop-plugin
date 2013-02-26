@@ -2,14 +2,15 @@
 class CategoryModel extends GenericModel {
 	protected $sortedMap=null;
 	protected $categoryTitleOrder=null;
+	protected $serviceUrl = null;
 	
 	function __construct($hostname) {
 		$this->hostname=$hostname;
+		$this->serviceUrl = BASE_URL_WEBSHOP.'/categories';
 	} 
 		
 	public function fetchCategories($params, $returnString=false){
-		$url = BASE_URL_WEBSHOP.'/categories';
-		return $this->fetch($url, $params, $returnString);
+		return $this->fetch($this->serviceUrl, $params, $returnString);
 	}
 	
 	/**
@@ -27,18 +28,12 @@ class CategoryModel extends GenericModel {
 		$this->categoryTitleOrder = $map;
 	}
 	
-	public function fetchSortedMap(){
+	public function fetchSortedCategories(){
 		$arr = array(
-			'hostname'=>$this->hostname
+			'hostname'=>$this->hostname,
+			'useNesting'=>'false'
 		);
 		
-		if($_GET['id'] != null){
-			$arr['Category_id'] = $_GET['id'];
-		}
-		else {
-			$arr['useNesting']='false';
-		}
-	
 		$cats = $this->fetchCategories($arr);
 		
 		//order by group title, and remap
@@ -75,7 +70,7 @@ class CategoryModel extends GenericModel {
 	
 	
 	/**
-	* Is null, unless fetchSortedMap has been called before. This returns the in-memory version
+	* Is null, unless fetchSortedCategories has been called before. This returns the in-memory version
 	*/
 	public function getSortedMap(){
 		return $this->sortedMap;

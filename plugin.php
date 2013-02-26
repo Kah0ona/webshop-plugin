@@ -26,6 +26,12 @@ License:
   
 */
 
+define('SYSTEM_URL_WEBSHOP', 'http://webshop.sytematic.nl');
+define('BASE_URL_WEBSHOP', SYSTEM_URL_WEBSHOP.'/public');
+define('EURO_FORMAT', '%.2n');
+
+setlocale(LC_MONETARY, 'it_IT');
+
 class SytematicWebshop {
 	protected $options = null;
 	protected $hostname = 'denimes';//TODO fix me, should be fetched from the $this->options.
@@ -149,7 +155,7 @@ class SytematicWebshop {
 		}
 		else {
 			include_once('views/CategoryView.php');
-			$model->fetchSortedMap();
+			$model->fetchSortedCategories();
 			$v = new CategoryView($model);
 			$v->render();
 		}		
@@ -158,4 +164,4 @@ class SytematicWebshop {
   
 } // end class
 
-$plugin_name = new SytematicWebshop();
+$sytematicWebshop = new SytematicWebshop();
