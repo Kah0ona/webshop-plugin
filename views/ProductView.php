@@ -10,6 +10,7 @@ class ProductView extends GenericView {
 	}
 	
 	protected function calculateSpan(){
+		$numColName = '';
 		switch($this->numCols){
 			case 1:
 				$numColName='span12';
@@ -33,7 +34,7 @@ class ProductView extends GenericView {
 				$numColName='span4';
 			break;
 		}
-
+		return $numColName;
 	}
 	
 	protected function renderScript(){
@@ -42,7 +43,7 @@ class ProductView extends GenericView {
 
 	public function render($data=null) { 
 		if($data == null)
-			$this->$data = $this->model->getProducts();
+			$this->data = $this->model->getData();
 		else 
 			$this->data = $data;
 	
@@ -57,16 +58,20 @@ class ProductView extends GenericView {
 	}
 	
 	protected function shouldRenderRowHtmlStart($i){
-		return $i%$this->numCols == 0;
+		return $i%$this->numCols == 1;
 	}
 	
 	protected function shouldRenderRowHtmlEnd($i){
-		return $i%$this->numCols == $this->numCols-1;
+		return $i%$this->numCols == 0;
+	}
+	
+	protected function getDetailLink($product){
+		return site_url().'/products/'.$product->Product_id.'#'.$product->productName;
 	}
 	
 	protected function renderMain(){ 
 		$span = $this->calculateSpan();
-		$i = 0;
+		$i = 1;
 	?>	
 		<!-- Start rendering ProductView -->
 		<div class="container product-overview">
@@ -87,8 +92,7 @@ class ProductView extends GenericView {
 	 <?php
 	 }
 
-
-	 protected function renderProduct($product){ ?>
+	 public function renderProduct($product){ ?>
 		 <!-- Rendering single product -->
 		 <div class="product-image">
 		 	<?php echo $product->imageProduct; ?>
@@ -98,6 +102,9 @@ class ProductView extends GenericView {
 		 </div>
 		 <div class="product-price">
 		 	<?php echo $this->formatMoney($product->productPrice); ?>
+		 </div>
+		 <div class="product-detail-button">
+		 	<a href="<?php echo $this->getDetailLink($product); ?>">details</a>
 		 </div>
 		 <!-- End Rendering single product -->
 	 <?php 

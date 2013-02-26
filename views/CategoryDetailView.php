@@ -1,6 +1,6 @@
 <?php 
 /**
-* Overview, showing a list of categories
+* Detailview, renders a list of products in this category
 */
 class CategoryDetailView extends GenericView {
 

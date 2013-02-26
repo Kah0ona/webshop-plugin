@@ -58,7 +58,7 @@ class SytematicWebshop {
 		
 		
 		add_shortcode('webshop_category', array($this, 'render_categories'));
-
+		add_shortcode('webshop_products', array($this, 'render_products'));
 
 	} // end constructor
 	
@@ -100,7 +100,6 @@ class SytematicWebshop {
 	 */
 	public function plugin_textdomain() {
 	
-		// TODO: replace "plugin-name-locale" with a unique value for your plugin
 		$domain = 'sytematic-webshop-locale';
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
         load_textdomain( $domain, WP_LANG_DIR.'/'.$domain.'/'.$domain.'-'.$locale.'.mo' );
@@ -112,30 +111,34 @@ class SytematicWebshop {
 	 * Registers and enqueues admin-specific styles.
 	 */
 	public function register_admin_styles() {
-		wp_enqueue_style( 'sytematic-webshop-admin-styles', plugins_url( '/css/admin.css' ) );
+		wp_enqueue_style( 'sytematic-webshop-admin-styles', plugins_url( '/webshop-plugin/css/admin.css' ) );
 	} // end register_admin_styles
 
 	/**
 	 * Registers and enqueues admin-specific JavaScript.
 	 */	
 	public function register_admin_scripts() {
-		wp_enqueue_script( 'sytematic-webshop-admin-script', plugins_url( '/js/admin.js' ) );
+		wp_enqueue_script( 'sytematic-webshop-admin-script', plugins_url( '/webshop-plugin/js/admin.js' ) );
 	} // end register_admin_scripts
 	
 	/**
 	 * Registers and enqueues plugin-specific styles.
 	 */
 	public function register_plugin_styles() {
-		wp_enqueue_style( 'sytematic-webshop-plugin-styles', plugins_url( '/css/display.css' ) );
+		wp_enqueue_style( 'sytematic-webshop-plugin-styles', plugins_url( '/webshop-plugin/css/display.css' ) );
+		wp_enqueue_style( 'bootstrap', plugins_url( '/webshop-plugin/css/bootstrap.min.css' ) );
+		wp_enqueue_style( 'bootstrap-responsive', plugins_url( '/webshop-plugin/css/bootstrap-responsive.min.css' ) );
+		
 	} // end register_plugin_styles
 	
 	/**
 	 * Registers and enqueues plugin-specific scripts.
 	 */
 	public function register_plugin_scripts() {
-		wp_enqueue_script( 'sytematic-webshop-plugin-script', plugins_url( '/js/display.js' ) );
+		wp_enqueue_script( 'sytematic-webshop-plugin-script', plugins_url( '/webshop-plugin/js/display.js' ) );
 	} // end register_plugin_scripts
 	
+
 	/*---------------------------------------------*
 	 * Controller Functions
 	 *---------------------------------------------*/
@@ -157,6 +160,29 @@ class SytematicWebshop {
 			include_once('views/CategoryView.php');
 			$model->fetchSortedCategories();
 			$v = new CategoryView($model);
+			$v->render();
+		}		
+
+	}
+	
+	public function render_products(){
+		include_once('views/GenericView.php');	
+		
+		include_once('models/GenericModel.php');
+		include_once('models/ProductModel.php');
+
+		$model = new ProductModel($this->hostname, $this->options); 
+		
+		if($model->isDetailPage()) {
+			include_once('views/ProductDetailView.php');
+			$model->fetchProduct();
+			$v = new ProductDetailView($model);
+			$v->render();
+		}
+		else {
+			include_once('views/ProductView.php');
+			$model->fetchProductsDefault();
+			$v = new ProductView($model);
 			$v->render();
 		}		
 
