@@ -48,7 +48,6 @@ class ProductView extends GenericView {
 			$this->data = $data;
 	
 		$this->renderScript();
-
 		$this->renderFeaturedProducts();		
 		$this->renderMain();
 	}
@@ -74,7 +73,7 @@ class ProductView extends GenericView {
 		$i = 1;
 	?>	
 		<!-- Start rendering ProductView -->
-		<div class="container product-overview">
+		<div class=" product-overview">
 			<?php foreach($this->data as $k=>$v) : ?>
 				<?php if($this->shouldRenderRowHtmlStart($i)) :?>
 					<div class="row-fluid product-row">
@@ -95,7 +94,7 @@ class ProductView extends GenericView {
 	 public function renderProduct($product){ ?>
 		 <!-- Rendering single product -->
 		 <div class="product-image">
-		 	<?php echo $product->imageProduct; ?>
+		 	<img src="<?php echo SYSTEM_URL_WEBSHOP.'/'.$product->imageDish; ?>" />
 		 </div>
 		 <div class="product-title">
 		 	<?php echo $product->productName; ?>

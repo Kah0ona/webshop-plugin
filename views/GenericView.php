@@ -15,6 +15,15 @@ abstract class GenericView {
 		 return money_format('%.2n', $amount);
 	}
 	
+	public function renderBackLink(){
+	
+		?>
+		<div class="row-fluid">
+			<div class="span12"><p><a class="backtooverview" href="javascript:history.back()">&larr; terug naar overzicht</a></p></div>
+		</div>
+		<?php
+	}
+	
 	/**
 	* $args contains an object or array with values, to be used for rendering
 	*/

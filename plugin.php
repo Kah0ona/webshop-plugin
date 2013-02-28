@@ -29,6 +29,7 @@ License:
 define('SYSTEM_URL_WEBSHOP', 'http://webshop.sytematic.nl');
 define('BASE_URL_WEBSHOP', SYSTEM_URL_WEBSHOP.'/public');
 define('EURO_FORMAT', '%.2n');
+define('WEBSHOP_PLUGIN_PATH', plugin_dir_path(__FILE__) );
 
 setlocale(LC_MONETARY, 'it_IT');
 
@@ -59,9 +60,15 @@ class SytematicWebshop {
 		
 		add_shortcode('webshop_category', array($this, 'render_categories'));
 		add_shortcode('webshop_products', array($this, 'render_products'));
-
+		
+		add_action( 'widgets_init', array($this, 'register_widgets' ));
 	} // end constructor
 	
+	public function register_widgets(){
+		include_once('widgets/CategoryWidget.php');
+
+		register_widget('CategoryWidget');
+	}
 	
 	public function load_options(){
 		include_once('models/WebshopOptions.php');
