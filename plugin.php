@@ -36,6 +36,7 @@ setlocale(LC_MONETARY, 'it_IT');
 class SytematicWebshop {
 	protected $options = null;
 	protected $hostname = 'denimes';//TODO fix me, should be fetched from the $this->options.
+	protected $adminView = null;
 	/**
 	 * Initializes the plugin by setting localization, filters, and administration functions.
 	 */
@@ -62,6 +63,11 @@ class SytematicWebshop {
 		add_shortcode('webshop_products', array($this, 'render_products'));
 		
 		add_action( 'widgets_init', array($this, 'register_widgets' ));
+		
+		
+		add_action( 'admin_menu', array($this, 'settings_menu' ));
+		add_action( 'admin_init', array($this, 'register_settings') );
+		
 	} // end constructor
 	
 	public function register_widgets(){
@@ -75,6 +81,32 @@ class SytematicWebshop {
 		$w = new WebshopOptions();
 		$this->options = $w;
 	}
+	
+	
+	public function settings_menu(){
+		add_options_page( 'Webshop opties', 
+						  'Webshop', 
+						  'manage_options', 
+						  'sytematic-webshop', 
+						  array($this, 'render_settings_menu'));
+	}
+	
+	public function render_settings_menu(){
+		if ( !current_user_can( 'manage_options' ) )  {
+			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+		}
+		
+		$this->adminView->render();		
+	}
+	
+	public function register_settings(){
+		$this->options->registerSettings();
+
+		include_once('views/AdminView.php');
+		$this->adminView = new AdminView($this->options);	
+		$this->adminView->registerFieldSettings();
+	}
+	
 	/**
 	 * Fired when the plugin is activated.
 	 *

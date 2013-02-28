@@ -3,8 +3,6 @@
 * Overview, showing a list of categories
 */
 class CategoryView extends GenericView {
-
-
 	public function render($data=null) { 
 		if($data == null)
 			$data = $this->model->getSortedMap();

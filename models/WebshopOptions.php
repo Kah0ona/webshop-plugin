@@ -17,5 +17,9 @@ class WebshopOptions {
 		return $this->options[$optionKey];
 	}
 	
+	public function registerSettings(){
+		register_setting( 'sytematic_webshop', 'sytematic_webshop' ); //store all webshop settings in one array
+	}
+	
 }
 ?>

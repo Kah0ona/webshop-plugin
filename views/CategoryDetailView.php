@@ -11,12 +11,12 @@ class CategoryDetailView extends GenericView {
 		include_once('ProductView.php');
 		$productView = new ProductView(null);
 	
-		$this->renderBackLink();
+		//$this->renderBackLink();
 	
 		if($data != null && count($data->Product) > 0) 
 			echo $productView->render($data->Product); 
 		else
-			echo '<div></div>';
+			echo '<div>Deze categorie bevat momenteel geen producten.</div>';
 	}
 }
 ?>
