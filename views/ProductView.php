@@ -73,7 +73,7 @@ class ProductView extends GenericView {
 		$i = 1;
 	?>	
 		<!-- Start rendering ProductView -->
-		<div class=" product-overview">
+		<div class="product-overview">
 			<?php foreach($this->data as $k=>$v) : ?>
 				<?php if($this->shouldRenderRowHtmlStart($i)) :?>
 					<div class="row-fluid product-row">
@@ -94,7 +94,9 @@ class ProductView extends GenericView {
 	 public function renderProduct($product){ ?>
 		 <!-- Rendering single product -->
 		 <div class="product-image">
-		 	<img src="<?php echo SYSTEM_URL_WEBSHOP.'/'.$product->imageDish; ?>" />
+		 	<a href="<?php echo $this->getDetailLink($product); ?>">
+			 	<img src="<?php echo SYSTEM_URL_WEBSHOP.'/'.$product->imageDish; ?>" />
+		 	</a>
 		 </div>
 		 <div class="product-title">
 		 	<?php echo $product->productName; ?>
