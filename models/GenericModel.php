@@ -86,6 +86,7 @@ class GenericModel {
 		
 		
 		$ret = $this->fetch($this->serviceUrl, $arr, $asString);
+
 		if(!$asString && $ret != null && count($ret)> 0){
 			return $ret[0];
 		}

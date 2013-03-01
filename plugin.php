@@ -35,13 +35,19 @@ setlocale(LC_MONETARY, 'it_IT');
 
 class SytematicWebshop {
 	protected $options = null;
-	protected $hostname = 'denimes';//TODO fix me, should be fetched from the $this->options.
+	protected $hostname = null;//TODO fix me, should be fetched from the $this->options.
 	protected $adminView = null;
+	protected $productModel = null; //only set if there is a post with a product shortcode
+	protected $categoryModel = null; //only set if there is a post with a category shortcode
+	
 	/**
 	 * Initializes the plugin by setting localization, filters, and administration functions.
 	 */
 	function __construct() {
-		
+		include_once('views/GenericView.php');	
+		include_once('models/GenericModel.php');		
+
+
 		// Load plugin text domain
 		add_action('init', array( $this, 'plugin_textdomain' ) );
 		add_action('init', array($this, 'load_options'));
@@ -59,16 +65,62 @@ class SytematicWebshop {
 		register_uninstall_hook( __FILE__, array( $this, 'uninstall' ) );
 		
 		
-		add_shortcode('webshop_category', array($this, 'render_categories'));
+		add_shortcode('webshop_categories', array($this, 'render_categories'));
 		add_shortcode('webshop_products', array($this, 'render_products'));
 		
 		add_action( 'widgets_init', array($this, 'register_widgets' ));
 		
 		
 		add_action( 'admin_menu', array($this, 'settings_menu' ));
-		add_action( 'admin_init', array($this, 'register_settings') );
-		
+		add_action( 'admin_init', array($this, 'register_settings'));
+	
+		add_filter( 'the_title', array($this, 'modify_title'));	
+		add_filter('the_posts', array($this, 'check_for_shortcode_and_init_models'));
+
 	} // end constructor
+	
+	public function check_for_shortcode_and_init_models($posts){
+		if($this->containsShortcode($posts, 'products')){
+			include_once('models/ProductModel.php');
+			$this->productModel = new ProductModel($this->hostname);
+			$this->productModel->isDetailPage('products') ? $this->productModel->fetchProduct() : $this->productModel->fetchProductsDefault();
+		} //else, no fetch is done
+		
+		if($this->containsShortcode($posts, 'category')) {
+			include_once('models/CategoryModel.php');		
+			$this->categoryModel = new CategoryModel($this->hostname);
+			$this->categoryModel->isDetailPage('categories') ? 	$this->categoryModel->fetchCategory() : $this->categoryModel->fetchSortedCategories();
+		}
+		return $posts;
+	}
+	
+	private function containsShortcode($posts, $type='products'){
+		foreach($posts as $post){
+			if(stripos($post->post_content, '[webshop_'.$type) !== false ) {
+	        	return true;
+	        }
+		}
+		return false;
+	}
+	
+	public function modify_title($title){
+		if($this->isWebshopPage())	{ //modify the title, iff it is a page from the webshop
+			return $this->getWebshopPageTitle();
+		}
+		return $title;
+	}
+
+	public function isWebshopPage(){
+		//examine $_SERVER, to see if 'categories' or 'products' is in the URL.
+		$url = $_SERVER['REDIRECT_URL'];
+		return stristr($url, 'categories') || stristr($url, 'products');
+	}
+	
+	
+	public function getWebshopPageTitle(){
+		
+	}
+	
 	
 	public function register_widgets(){
 		include_once('widgets/CategoryWidget.php');
@@ -80,6 +132,7 @@ class SytematicWebshop {
 		include_once('models/WebshopOptions.php');
 		$w = new WebshopOptions();
 		$this->options = $w;
+		$this->hostname = $options->getOption('hostname');
 	}
 	
 	
@@ -182,22 +235,15 @@ class SytematicWebshop {
 	 * Controller Functions
 	 *---------------------------------------------*/
 	public function render_categories(){
-		include_once('views/GenericView.php');	
-		
-		include_once('models/GenericModel.php');
-		include_once('models/CategoryModel.php');
-
-		$model = new CategoryModel($this->hostname, $this->options); 
+		$this->model = new CategoryModel($this->hostname, $this->options); 
 		
 		if($model->isDetailPage()) {
 			include_once('views/CategoryDetailView.php');
-			$model->fetchCategory();
 			$v = new CategoryDetailView($model);
 			$v->render();
 		}
 		else {
 			include_once('views/CategoryView.php');
-			$model->fetchSortedCategories();
 			$v = new CategoryView($model);
 			$v->render();
 		}		
@@ -205,22 +251,14 @@ class SytematicWebshop {
 	}
 	
 	public function render_products(){
-		include_once('views/GenericView.php');	
-		
-		include_once('models/GenericModel.php');
-		include_once('models/ProductModel.php');
-
 		$model = new ProductModel($this->hostname, $this->options); 
-		
 		if($model->isDetailPage()) {
 			include_once('views/ProductDetailView.php');
-			$model->fetchProduct();
 			$v = new ProductDetailView($model);
 			$v->render();
 		}
 		else {
 			include_once('views/ProductView.php');
-			$model->fetchProductsDefault();
 			$v = new ProductView($model);
 			$v->render();
 		}		

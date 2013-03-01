@@ -31,7 +31,10 @@ class CategoryWidget extends WP_Widget {
 	}
 
 	public function update( $new_instance, $old_instance ) {
-		// processes widget options to be saved
+		$instance = array();
+		$instance['title'] = strip_tags( $new_instance['title'] );
+
+		return $instance;
 	}
 
 	public function widget( $args, $instance ) {
