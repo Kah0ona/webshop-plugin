@@ -51,6 +51,7 @@ class SytematicWebshop {
 		// Load plugin text domain
 		add_action('init', array( $this, 'plugin_textdomain' ) );
 		add_action('init', array($this, 'load_options'));
+		add_filter('the_posts', array($this, 'init_models'));
 		// Register admin styles and scripts
 		add_action('admin_print_styles', array( $this, 'register_admin_styles' ) );
 		add_action('admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
@@ -69,30 +70,33 @@ class SytematicWebshop {
 		add_shortcode('webshop_products', array($this, 'render_products'));
 		
 		add_action( 'widgets_init', array($this, 'register_widgets' ));
-		
-		
+				
 		add_action( 'admin_menu', array($this, 'settings_menu' ));
 		add_action( 'admin_init', array($this, 'register_settings'));
 	
 		add_filter( 'the_title', array($this, 'modify_title'));	
-		add_filter('the_posts', array($this, 'check_for_shortcode_and_init_models'));
+		add_action('wp_head', array($this, 'init_cart'));
 
 	} // end constructor
 	
-	public function check_for_shortcode_and_init_models($posts){
-		if($this->containsShortcode($posts, 'products')){
+	public function init_models($posts){
+		if($this->containsShortCode($posts, 'products')){
 			include_once('models/ProductModel.php');
 			$this->productModel = new ProductModel($this->hostname);
-			$this->productModel->isDetailPage('products') ? $this->productModel->fetchProduct() : $this->productModel->fetchProductsDefault();
-		} //else, no fetch is done
+			$this->productModel->isDetailPage('products') ? $this->productModel->fetchProduct() : 
+															$this->productModel->fetchProductsDefault();
+		}
 		
-		if($this->containsShortcode($posts, 'category')) {
+		if($this->containsShortCode($posts, 'categories')){
 			include_once('models/CategoryModel.php');		
 			$this->categoryModel = new CategoryModel($this->hostname);
 			$this->categoryModel->isDetailPage('categories') ? 	$this->categoryModel->fetchCategory() : $this->categoryModel->fetchSortedCategories();
 		}
+			
 		return $posts;
 	}
+	
+	
 	
 	private function containsShortcode($posts, $type='products'){
 		foreach($posts as $post){
@@ -103,8 +107,15 @@ class SytematicWebshop {
 		return false;
 	}
 	
+	
+	public function init_cart(){
+		include_once('views/CartInitializerView.php');
+		$init = new CartInitializerView($this->options);
+		$init->render($this->options);
+	}
+	
 	public function modify_title($title){
-		if($this->isWebshopPage())	{ //modify the title, iff it is a page from the webshop
+		if($this->isWebshopPage() && in_the_loop())	{ //modify the title, iff it is a page from the webshop
 			return $this->getWebshopPageTitle();
 		}
 		return $title;
@@ -132,7 +143,7 @@ class SytematicWebshop {
 		include_once('models/WebshopOptions.php');
 		$w = new WebshopOptions();
 		$this->options = $w;
-		$this->hostname = $options->getOption('hostname');
+		$this->hostname = $this->options->getOption('hostname');
 	}
 	
 	
@@ -227,7 +238,8 @@ class SytematicWebshop {
 	 * Registers and enqueues plugin-specific scripts.
 	 */
 	public function register_plugin_scripts() {
-		wp_enqueue_script( 'sytematic-webshop-plugin-script', plugins_url( '/webshop-plugin/js/display.js' ) );
+		wp_enqueue_script( 'jquery.json', plugins_url( '/webshop-plugin/js/jquery.json.min.js' ), array('jquery') );		
+		wp_enqueue_script( 'sytematic-webshop-shopping-cart', plugins_url( '/webshop-plugin/js/jquery.shoppingcart.js' ), array('jquery','jquery.json') );		
 	} // end register_plugin_scripts
 	
 
@@ -235,31 +247,28 @@ class SytematicWebshop {
 	 * Controller Functions
 	 *---------------------------------------------*/
 	public function render_categories(){
-		$this->model = new CategoryModel($this->hostname, $this->options); 
-		
-		if($model->isDetailPage()) {
+		if($this->categoryModel->isDetailPage()) {
 			include_once('views/CategoryDetailView.php');
-			$v = new CategoryDetailView($model);
+			$v = new CategoryDetailView($this->categoryModel);
 			$v->render();
 		}
 		else {
 			include_once('views/CategoryView.php');
-			$v = new CategoryView($model);
+			$v = new CategoryView($this->categoryModel);
 			$v->render();
 		}		
 
 	}
 	
 	public function render_products(){
-		$model = new ProductModel($this->hostname, $this->options); 
-		if($model->isDetailPage()) {
+		if($this->productModel->isDetailPage()) {
 			include_once('views/ProductDetailView.php');
-			$v = new ProductDetailView($model);
+			$v = new ProductDetailView($this->productModel);
 			$v->render();
 		}
 		else {
 			include_once('views/ProductView.php');
-			$v = new ProductView($model);
+			$v = new ProductView($this->productModel);
 			$v->render();
 		}		
 
