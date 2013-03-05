@@ -39,7 +39,7 @@ class SytematicWebshop {
 	protected $adminView = null;
 	protected $productModel = null; //only set if there is a post with a product shortcode
 	protected $categoryModel = null; //only set if there is a post with a category shortcode
-	
+	protected $checkoutModel = null;
 	/**
 	 * Initializes the plugin by setting localization, filters, and administration functions.
 	 */
@@ -70,6 +70,8 @@ class SytematicWebshop {
 		
 		add_shortcode('webshop_categories', array($this, 'render_categories'));
 		add_shortcode('webshop_products', array($this, 'render_products'));
+		add_shortcode('webshop_checkout', array($this, 'render_checkout'));
+
 		
 		add_action( 'widgets_init', array($this, 'register_widgets' ));
 				
@@ -126,6 +128,8 @@ class SytematicWebshop {
 		}
 		return $title;
 	}
+
+
 
 	public function isWebshopPage(){
 		//examine $_SERVER, to see if 'categories' or 'products' is in the URL.
@@ -281,6 +285,15 @@ class SytematicWebshop {
 
 	}
   
+	public function render_checkout(){
+		include_once('models/CheckoutModel.php');
+		include_once('views/CheckoutView.php');
+		$this->checkoutModel = new CheckoutModel($this->hostname);
+		$this->checkoutModel->setOptions($this->options);
+		$v = new CheckoutView($this->checkoutModel);
+		$v->render();
+	}
+	  
 } // end class
 
 $sytematicWebshop = new SytematicWebshop();

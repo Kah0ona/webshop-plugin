@@ -99,7 +99,7 @@
 		    });
 		    $("body").on('click.shoppingCart', 'a.removefromcart-checkout', function(event){
 		    	methods.removeProduct(elt,event);
-		    	//methods.removeProductFromCheckoutPage(elt,event);
+		    	methods.removeProductFromCheckoutPage(elt,event);
     			methods.updatePrices(elt);
 		    });
 		    $('.addtocart').on('click.shoppingCart', function(event){
@@ -233,7 +233,7 @@
 			var cartDataStore = settings.cartDataStore;	    	
 	    	
 	    	var clicked = $(event.currentTarget);
-		    		    	
+		    
 	       	var id;
 	       	
 	       	if(clicked.attr("productid") != null)
@@ -251,11 +251,23 @@
 				     } 
 			    }
 	    	}
-	    	
+	    		    	
 	    	methods.persist(elt);
+	    	
+	    	//click from the checkout page or from the X in the cart?
+	    	if(clicked.attr('class') == 'removefromcart-checkout'){
+			    $('li.product-row span.product-remove a.removefromcart').each(function(){
+				   if($(this).attr('productid') == id){
+					   $(this).parents('.product-row').fadeOut();
+				   } 
+			    });
+		    }	
+		    else {
+		    	var parentRow = clicked.parents('.product-row');			    
+		    	parentRow.fadeOut();		    	
+		    }
+	    	
 
-	    	var parentRow = clicked.parents('.product-row');
-	    	parentRow.fadeOut();
 	    },
 	    
 	    productExists : function(elt, product){
@@ -390,6 +402,39 @@
 					'</ul>';	
 		    return str;
 	    },		
+	    showValidationError : function(){
+		    $('#validation-error').removeClass('hidden');
+	    },	    
+	    hideValidationError : function(){
+			$('#validation-error').addClass('hidden');	    
+	    },	    
+	    createAutoClosingAlert : function(selector, delay) {
+	    	$(selector).html('<div class="the-alert alert alert-info fade in">' +
+	    						 '<button data-dismiss="alert" class="close" type="button">×</button>' +
+	    						 '<p>Product toegevoegd aan de bestelling.</p>' +
+	    					 '</div>');
+		    var alert = $('.the-alert').alert();
+		    window.setTimeout(function() { alert.alert('close') }, delay);
+   		},
+   		clearCart : function(elt){
+	   		var $this = $(elt);
+			var settings = $this.data('shoppingCart').settings;
+			cartDataStore = settings.cartDataStore;
+	    	methods.logger("Clearing cart!");
+	    	cartDataStore = [];
+	    	methods.persist();
+	    	methods.render();
+	    	methods.updatePrices();
+	    },    
+	    removeProductFromCheckoutPage : function(elt,event){
+	    	methods.logger("removeProductFromCheckoutPage");
+	  	    	
+			event.preventDefault();
+ 	    	var clicked = $(event.currentTarget);
+			var parentRow = clicked.parent().parent();
+
+			parentRow.addClass('hidden');			
+	    },   		
 		/**
 		* Want to call a plugin function later than on initialization (as a public method)?
 		* $('#someElement').shoppingCart();
