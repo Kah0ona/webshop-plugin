@@ -11,13 +11,14 @@ class CartInitializerView extends GenericView {
 		?>
 		<script type="text/javascript">
 		jQuery(document).ready(function($){
-			$('#shoppingcart').shoppingCart({});
+			$('#shoppingcart').shoppingCart({
+				'session_url' : '<?php echo  get_site_url(); ?>/wp-content/plugins/webshop-plugin/models/CartStore.php'	,		
+				'checkout_page' : '<?php echo  get_site_url(); ?>/checkout'								
+			});
 			$('#shoppingcart').shoppingCart('test');			
 		});
 		</script> 		
 		<?php
-		
-		
 	}
 }
 ?>

@@ -97,7 +97,7 @@ class GenericModel {
 		
 	}
 
-	protected function encodeProductToJson($pro,  $getString = true){
+	public function encodeProductToJson($pro,  $getString = true){
 		$id = $pro->Product_id;
 		$title = addslashes($pro->productName);	
 		$desc = $pro->productDesc;

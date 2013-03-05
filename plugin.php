@@ -52,6 +52,8 @@ class SytematicWebshop {
 		add_action('init', array( $this, 'plugin_textdomain' ) );
 		add_action('init', array($this, 'load_options'));
 		add_filter('the_posts', array($this, 'init_models'));
+		add_filter('plugins_loaded', array($this,'start_session')); //first code to be executed.
+
 		// Register admin styles and scripts
 		add_action('admin_print_styles', array( $this, 'register_admin_styles' ) );
 		add_action('admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
@@ -78,6 +80,10 @@ class SytematicWebshop {
 		add_action('wp_head', array($this, 'init_cart'));
 
 	} // end constructor
+	
+	public function start_session(){
+		session_start();
+	}
 	
 	public function init_models($posts){
 		if($this->containsShortCode($posts, 'products')){
@@ -238,6 +244,7 @@ class SytematicWebshop {
 	 * Registers and enqueues plugin-specific scripts.
 	 */
 	public function register_plugin_scripts() {
+		wp_enqueue_script( 'bootstrap-js', plugins_url( '/webshop-plugin/js/bootstrap.min.js' ), array('jquery') );		
 		wp_enqueue_script( 'jquery.json', plugins_url( '/webshop-plugin/js/jquery.json.min.js' ), array('jquery') );		
 		wp_enqueue_script( 'sytematic-webshop-shopping-cart', plugins_url( '/webshop-plugin/js/jquery.shoppingcart.js' ), array('jquery','jquery.json') );		
 	} // end register_plugin_scripts

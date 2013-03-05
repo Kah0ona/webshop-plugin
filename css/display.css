@@ -1,1 +1,26 @@
 /* This stylesheet is used to style the public view of the plugin. */
+
+.quantity {
+	width: 15%;
+	float: left;
+}
+
+.product-name {
+	width: 70%;
+	float: left;
+	margin-left: 5px;
+}
+
+.product-remove {
+	float: left;
+	width: 5%;
+}
+.product-remove a {
+	padding-top: 0px !important;
+	line-height: 18px;
+}
+.product-row {
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
