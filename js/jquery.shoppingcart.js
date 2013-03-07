@@ -265,11 +265,8 @@
 		    else {
 		    	var parentRow = clicked.parents('.product-row');			    
 		    	parentRow.fadeOut();		    	
-		    }
-	    	
-
+		    }        
 	    },
-	    
 	    productExists : function(elt, product){
 			var $this = $(elt);
 			var settings = $this.data('shoppingCart').settings;

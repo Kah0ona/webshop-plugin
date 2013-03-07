@@ -250,6 +250,7 @@ class SytematicWebshop {
 	public function register_plugin_scripts() {
 		wp_enqueue_script( 'bootstrap-js', plugins_url( '/webshop-plugin/js/bootstrap.min.js' ), array('jquery') );		
 		wp_enqueue_script( 'jquery.json', plugins_url( '/webshop-plugin/js/jquery.json.min.js' ), array('jquery') );		
+
 		wp_enqueue_script( 'sytematic-webshop-shopping-cart', plugins_url( '/webshop-plugin/js/jquery.shoppingcart.js' ), array('jquery','jquery.json') );		
 	} // end register_plugin_scripts
 	
