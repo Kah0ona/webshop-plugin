@@ -75,6 +75,11 @@ class GenericModel {
 			return false;
 		}
 	}
+	
+	public function isCheckoutPage(){
+		return strpos($_SERVER['REDIRECT_URL'], 'checkout') !== false;
+	}
+	
 
 	public function fetchById($idKeyName, $asString = false){
 		$arr = Array();
@@ -101,7 +106,7 @@ class GenericModel {
 		$id = $pro->Product_id;
 		$title = addslashes($pro->productName);	
 		$desc = $pro->productDesc;
-		$thumb = SYSTEM_URL_WEBSHOP.'/'.$pro->imageProduct;
+		$thumb = SYSTEM_URL_WEBSHOP.'/'.$pro->imageDish;
 		$quantity = $pro->amount;
 		$price = $pro->productPrice;
 		$VAT = $pro->productVAT;

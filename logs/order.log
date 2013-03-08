@@ -1,0 +1,28 @@
+2013-03-08 11:18:09: -------
+2013-03-08 11:18:09: Processing cart: 
+2013-03-08 11:18:09: 
+2013-03-08 11:18:09: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 62
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 12
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [invoice] => Plaats bestelling
+    [hostname] => denimes
+)
+
+2013-03-08 11:18:09: Error sending post to /orders: 

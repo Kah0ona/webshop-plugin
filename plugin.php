@@ -30,6 +30,7 @@ define('SYSTEM_URL_WEBSHOP', 'http://webshop.sytematic.nl');
 define('BASE_URL_WEBSHOP', SYSTEM_URL_WEBSHOP.'/public');
 define('EURO_FORMAT', '%.2n');
 define('WEBSHOP_PLUGIN_PATH', plugin_dir_path(__FILE__) );
+define('SUBMIT_ORDER_URL', plugins_url('/webshop-plugin/models/SubmitOrder.php'));
 
 setlocale(LC_MONETARY, 'it_IT');
 
@@ -238,21 +239,33 @@ class SytematicWebshop {
 	 * Registers and enqueues plugin-specific styles.
 	 */
 	public function register_plugin_styles() {
+		//wp_enqueue_style('jquery-ui-css', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css');
 		wp_enqueue_style( 'sytematic-webshop-plugin-styles', plugins_url( '/webshop-plugin/css/display.css' ) );
 		wp_enqueue_style( 'bootstrap', plugins_url( '/webshop-plugin/css/bootstrap.min.css' ) );
 		wp_enqueue_style( 'bootstrap-responsive', plugins_url( '/webshop-plugin/css/bootstrap-responsive.min.css' ) );
-		
 	} // end register_plugin_styles
 	
 	/**
 	 * Registers and enqueues plugin-specific scripts.
 	 */
 	public function register_plugin_scripts() {
-		wp_enqueue_script( 'bootstrap-js', plugins_url( '/webshop-plugin/js/bootstrap.min.js' ), array('jquery') );		
-		wp_enqueue_script( 'jquery.json', plugins_url( '/webshop-plugin/js/jquery.json.min.js' ), array('jquery') );		
+		wp_enqueue_script('bootstrap-js', plugins_url('/webshop-plugin/js/bootstrap.min.js'), array('jquery') );		
+		wp_enqueue_script('jquery.json', plugins_url('/webshop-plugin/js/jquery.json.min.js'), array('jquery') );		
+		
+		if($this->isCheckoutPage()){
+			wp_enqueue_script('form.js', plugins_url('/webshop-plugin/js/jquery.form.js'), array('jquery'));
+			wp_enqueue_script('validation.js', plugins_url('/webshop-plugin/js/jquery.validate.js'), array('jquery', 'form.js'));
+			wp_enqueue_script('sytematic-webshop-shopping-cart-order', plugins_url('/webshop-plugin/js/order-form.js' ), array('jquery','jquery.json') );		
+		}
+		
+		wp_enqueue_script('sytematic-webshop-shopping-cart', plugins_url( '/webshop-plugin/js/jquery.shoppingcart.js' ), array('jquery','jquery.json') );		
 
-		wp_enqueue_script( 'sytematic-webshop-shopping-cart', plugins_url( '/webshop-plugin/js/jquery.shoppingcart.js' ), array('jquery','jquery.json') );		
 	} // end register_plugin_scripts
+	
+
+	public function isCheckoutPage(){
+		return strpos($_SERVER['REDIRECT_URL'], 'checkout') !== false;
+	}
 	
 
 	/*---------------------------------------------*
@@ -269,7 +282,6 @@ class SytematicWebshop {
 			$v = new CategoryView($this->categoryModel);
 			$v->render();
 		}		
-
 	}
 	
 	public function render_products(){
@@ -283,7 +295,6 @@ class SytematicWebshop {
 			$v = new ProductView($this->productModel);
 			$v->render();
 		}		
-
 	}
   
 	public function render_checkout(){

@@ -20,15 +20,13 @@ class CheckoutView extends GenericView {
 		setlocale(LC_MONETARY, 'it_IT');
 		
 		$vatMap = $this->model->initVatMap();
-
 		$numProducts = count($cart);
-
-
 
 		?>
 		<script type="text/javascript">
 		 	var thisPageUrl = '<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>';
 		 	var couponUrl = '<?php echo $couponUrl; ?>';
+		 	var hostname ='<?php echo $this->model->getHostname(); ?>';
 			var baseUrl = '<?php echo $_SERVER['HTTP_HOST']; ?>';
 			var deliveryCostUrl = '<?php echo $deliveryCostUrl; ?>';
 			jQuery(document).ready(function($){
@@ -158,8 +156,6 @@ class CheckoutView extends GenericView {
 					<?php endif;?>
 				 
 			 		<h3>Persoonlijke gegevens</h3>
-			 		<input type="hidden" name="hostname" value="<?php echo $theHostname; ?>" />
-			 		
 			 		<div class="control-group">
 						<label class="control-label" for="companyName">Bedrijfsnaam:</label>			
 			
@@ -217,7 +213,7 @@ class CheckoutView extends GenericView {
 					</div>	
 				
 				    <div class="control-group">
-						<label class="control-label" for="country">Land: *</label>			
+						<label class="control-label" for="country">Land: </label>			
 			
 						<div class="controls">	
 							<input type="text" name="country" class="input-large address-line" id="country" />

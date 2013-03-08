@@ -7,52 +7,29 @@ var emailMsg = "Vul een geldig e-mailadres in. ";
 var discount = 0;
 
 var submitType = "invoice";
-var shouldCheckDate = true; //set this in like header.php to false if you want to enable orders that don't have the 2 day in advance check
-$(document).ready(function(){
+jQuery(document).ready(function($){
 
-	$.datepicker.setDefaults( $.datepicker.regional[ "nl" ] )		
-	$("#orderDate").datepicker({
-		onSelect: function(dateText, inst){
-			if(shouldCheckDate){
-				var show = !checkDate(dateText);
-				if(show){
-					$('#dateError').removeClass('hidden');
-				}
-				else {
-					$('#dateError').addClass('hidden');
-				}
-			}
-		}
-	});
-	
+		
 	var submitOptions = {
 		beforeSubmit : function(arr, form, options){
 			if($('.submit-controls').hasClass('disabled')){
 				return false;
 			}
-				
-			if(!updating){ //only if it's a new order, updating existing one does not need this check
-				if(shouldCheckDate){
-				var b = checkDate($('#orderDate').val());
-					if(!b) {
-						return false;
-					}
-				}
-			}
-							
+										
 		  	//hide the form to prevent another click
 		  	var f = $('#order-form');
-		
+		alert('PPP'+hostname);
 			showSendingMessage(f);
 			return true;	
+			
 		},
 		data : { 
 			"hostname" : hostname /*,  
 			orderType : submitType*/
 		},
 		success : function(data, textStatus, jqXHR) {
-		  	resetCookie();
-			showSuccesMessage();
+			console.log(data);
+			
 		}
 	};
 	
@@ -139,53 +116,7 @@ $(document).ready(function(){
 	
     $('#order-form').validate(validationOptions);
 	
-	if(!updating && shouldCheckDate){
-	
-		var show = !checkDate($('#orderDate').val());
-		if(show){
-			$('#dateError').removeClass('hidden');
-		}
-		else {
-			$('#dateError').addClass('hidden');
-		}
-	}
-	
 });
-
-function resetCookie(){
-	var exDate=new Date();
-	exDate.setTime(exDate.getTime()+ 1000*60*60*24); //24 hours
-	//exDate.setUTCMilliSeconds(999); //todo check timezone
-	
-	var jsonString = "[]";
-	
-	var c_value=escape(jsonString) + "; expires="+exDate.toUTCString()+'; path=/';
-	document.cookie="shoppingCart" + "=" + c_value;	
-}
-
-function getCartCookie(){
-  var i,x,y,ARRcookies=document.cookie.split(";");
-  for (i=0; i<ARRcookies.length; i++) {
-	  x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
-	  y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
-	  x=x.replace(/^\s+|\s+$/g,"");
-	  if(x == "shoppingCart"){
-      	return unescape(y); //return the stored json object
-      }
-
-  }
-  return null;
-   
-}
-
-function saveFormInCookie(){
-		
-}
-
-function restoreFormFromCookie(){
-	
-}
-
 
 function formatEuro(price){
 	Number.prototype.formatMoney = function(c, d, t){
@@ -203,24 +134,4 @@ function showSendingMessage(f){
 function showSuccesMessage(ret){
 	//just redirect to the success page
 	window.location.href = baseUrl+"/success/";
-}
-
-var numDaysBeforeOneCanOrder = 1;
-
-function checkDate(dateText){
-
-	
-	
-	var txt = dateText;
-	var p1 = txt.split("-");
-
-	var sel =  new Date(p1[2], p1[1]-1, p1[0], "00", "00", "00"); //this is also tested on iPhone, and now works
-
-	//atleast 2 days from now
-	var d = new Date();
-	d.setHours(0);
-	d.setMinutes(0);
-	
-	d.setSeconds(0);
-	return !(sel.getTime() < parseInt(d.getTime())+parseInt(numDaysBeforeOneCanOrder*24*60*60*1000));
 }
