@@ -67,7 +67,7 @@ class CheckoutModel extends GenericModel {
 				$post['Person_id'] = $obj->Person_id;
 				$post['viaSite'] = true;
 				$ret = $this->curl_post(BASE_URL_WEBSHOP.'/orders', $post);
-				
+
 				if(!$ret){
 					$this->logMessage("Error sending post to /orders: ".$this->curlError);			
 					$this->status = ORDER_FAILED;
