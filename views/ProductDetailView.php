@@ -36,12 +36,39 @@ class ProductDetailView extends GenericView {
 						</div><!-- /row-fluid -->
 						<div class="row-fluid">
 							<div class="span12 product-data">
-								<br/>
-								<h4>Aantal:
-								    <span class="small">
-								    	<input class="input-small" name="product-amount" id="product-amount" value="1" type="text" /> 
-								    </span>
-							    </h4>							
+								 <form class="form-horizontal">
+								    <div class="control-group" style="margin-top: 15px;">
+										<label class="control-label" for="surname">Aantal: *</label>
+										
+										<div class="controls">		
+											<input class="input-small" name="product-amount" id="product-amount" value="1" type="text" /> 
+										</div>
+									</div>
+								    
+									<div class="control-group" style="margin-top: 15px;">
+										<label class="control-label" for="surname">Maat: *</label>
+										
+										<div class="controls">		
+											<select name="size" class="input-small" >
+												<option>S</option>
+												<option>L</option>
+												<option>XL</option>											
+											</select>
+										</div>
+									</div>	
+									
+									<div class="control-group" style="margin-top: 15px;">
+										<label class="control-label" for="kleur">Kleur: *</label>
+										
+										<div class="controls">		
+											<select name="size" class="input-small" >
+												<option>Rood</option>
+												<option>Beige</option>
+												<option>Zwart</option>											
+											</select>
+										</div>
+									</div>															    
+								  </form>
 								<span product-type="product" product-index='0' class="addtocart">
 									<a href="#" class="btn" ><i class="icon-shopping-cart icon-white"></i> Toevoegen</a>
 						  		</span>							
