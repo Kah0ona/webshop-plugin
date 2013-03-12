@@ -110,7 +110,11 @@ class GenericModel {
 		$quantity = $pro->amount;
 		$price = $pro->productPrice;
 		$VAT = $pro->productVAT;
-			
+
+		$options = array();
+		if($pro->ProductOption != null)
+			$options = $pro->ProductOption;		
+	
 		if($quantity === null) {
 			$quantity=1;
 		}
@@ -123,6 +127,7 @@ class GenericModel {
 			"quantity" => $quantity,
 			"price"=> $price,
 			"VAT" => $VAT,
+			"ProductOption"=> $options
 		);
 		if($getString){
 			return json_encode($jsonObj);				
