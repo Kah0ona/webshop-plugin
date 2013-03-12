@@ -44,30 +44,20 @@ class ProductDetailView extends GenericView {
 											<input class="input-small" name="product-amount" id="product-amount" value="1" type="text" /> 
 										</div>
 									</div>
-								    
+									<!-- Product options, if any -->
+								    <?php foreach($data->ProductOption as $p){ ?>
 									<div class="control-group" style="margin-top: 15px;">
-										<label class="control-label" for="surname">Maat: *</label>
+										<label class="control-label" id="ProductOptionName_<?php echo $p->ProductOption_id; ?>" for="<?php echo $p->optionName; ?>"><?php echo $p->optionName; ?>:</label>
 										
 										<div class="controls">		
-											<select name="size" class="input-small" >
-												<option>S</option>
-												<option>L</option>
-												<option>XL</option>											
+											<select name="size" class="input-small" id="ProductOption_<?php echo $p->ProductOption_id; ?>">
+												<?php foreach($p->ProductOptionValue as $v ) {?>
+												<option value="<?php echo $v->ProductOptionValue_id; ?>" id="ProductOptionValueName_<?php echo $v->ProductOptionValue_id; ?>"><?php echo $v->optionValue; ?></option>
+												<? } ?>										
 											</select>
 										</div>
 									</div>	
-									
-									<div class="control-group" style="margin-top: 15px;">
-										<label class="control-label" for="kleur">Kleur: *</label>
-										
-										<div class="controls">		
-											<select name="size" class="input-small" >
-												<option>Rood</option>
-												<option>Beige</option>
-												<option>Zwart</option>											
-											</select>
-										</div>
-									</div>															    
+									<? } ?>														    
 								  </form>
 								<span product-type="product" product-index='0' class="addtocart">
 									<a href="#" class="btn" ><i class="icon-shopping-cart icon-white"></i> Toevoegen</a>
