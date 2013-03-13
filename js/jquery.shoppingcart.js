@@ -135,8 +135,9 @@
 		    	productRef = methods.lookupProduct();
 		    	//deepcopy it
 		    	product = jQuery.extend(true, {}, productRef);
-		    	methods.logger("TODO product options adding");
-	    		//product = methods.addSelectedOptionsToProduct(product);
+
+	    		product = methods.addSelectedOptionsToProduct(product, productRef);
+
 				product.quantity = quant;
 			
 			}
@@ -193,20 +194,20 @@
 					var title = obj.title;					
 					var selected_options_attr =''; 
 
-					if(obj.options != null && obj.options != undefined){
+					if(obj.ProductOption != null && obj.ProductOption != undefined){
 						title += " (";
-						if(obj.options.length > 0){
+						if(obj.ProductOption.length > 0){
 							selected_options_attr += 'selected_options="';
 						}
-						for(var j = 0; j < obj.options.length; j++){
-							title += obj.options[j].optionName+": "+obj.options[i].optionValue;
-							selected_options_attr += obj.options[j].option_id;
-							if(j < obj.options.length-1) {
+						for(var j = 0; j < obj.ProductOption.length; j++){
+							title += obj.ProductOption[j].optionName+" "+obj.ProductOption[j].optionValueName;
+							selected_options_attr += obj.ProductOption[j].option_id;
+							if(j < obj.ProductOption.length-1) {
 								title+= ', ';
 								selected_options_attr+=',';
 							}
 						}
-						if(obj.options.length > 0){
+						if(obj.ProductOption.length > 0){
 							selected_options_attr += '"';
 						}
 						
@@ -277,7 +278,7 @@
 	    	   if (product.Product_id == obj.Product_id){
 			    	 //if it is a product, first check if there is an extra option configuration, AND one with this option config does not exist.
 			    	 methods.logger("TODO implement options on productExists");
-			    	//if(methods.checkProductOptionsAreEqual(product, obj))
+			    	if(methods.checkProductOptionsAreEqual(product, obj))
 			    		return obj;
 			    	//else continue to loop the cart
 			    	
@@ -286,8 +287,8 @@
 	    	return null;
 	    },	    
 	    checkProductOptionsAreEqual : function(product1, product2){
-		    var options1 = product1.options;
-		    var options2 = product2.options;
+		    var options1 = product1.ProductOption;
+		    var options2 = product2.ProductOption;
 		    
 		    if(options1 == null && options2 == null)
 		    	return true;
@@ -296,34 +297,38 @@
 		    	return false;
 		    
 		    if(options1.length != options2.length) return false;
-		    	
+	
 		    //both options1 and 2 are not null and have same length;
 		    for(var i = 0; i < options1.length; i++){
-		    	var checking = options1[i].ingredients_id;
-		    	found = false;
+		    	var checkingVal = options1[i].ProductOptionValue_id;
+		    	var checkingOption = options1[i].ProductOption_id;
+		    	
+		    	var found = false;
 			    for(var j = 0; j < options2.length; j++){
-				   if(checking == options2[i].ingredients_id) {
+				   if(checkingVal    === options2[j].ProductOptionValue_id &&
+				   	  checkingOption === options2[j].ProductOption_id) {
 				   		found = true;
 				   		break;
 				   }
 			    }
+			    
 			    if(!found) return false;
 		    }
-			//if we reach this, they are equal		    
 		    return true;
-		    
 	    },	        
-	    addSelectedOptionsToProduct : function(product){
-    		for(var i = 0; i < productOptions.options.length ; i++){
-	    		if(methods.optionIsSelected(parseInt(productOptions.options[i].option_id))){
-	    			if(product.options == null || product.options == undefined){
-		    			product.options = [];
-	    			}
-	    			
-			    	product.options.push(productOptions.options[i]);			    		
-	    		}
-    		}
+	    addSelectedOptionsToProduct : function(product, productInSite){
+	    	product.ProductOption = [];
+    		for(var i = 0; i < productInSite.ProductOption.length ; i++){
+    			var cur = productInSite.ProductOption[i];
+    			var optionSelectObj = {};
+    			optionSelectObj.ProductOption_id = cur.ProductOption_id;
+    			optionSelectObj.ProductOptionValue_id = $('#ProductOption_'+cur.ProductOption_id).val();
+    			optionSelectObj.optionName = $('#ProductOptionName_'+cur.ProductOption_id).html();
+    			var valName = $('#ProductOptionValueName_'+optionSelectObj.ProductOptionValue_id).html();
+    			optionSelectObj.optionValueName = valName;
 
+    			product.ProductOption.push(optionSelectObj);
+    		}
 	    	return product;
 	    },	
 	    optionIsSelected : function(id){
