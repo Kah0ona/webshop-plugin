@@ -194,11 +194,11 @@
 					var title = obj.title;					
 					var selected_options_attr =''; 
 
-					if(obj.ProductOption != null && obj.ProductOption != undefined){
+					if(obj.ProductOption != null && obj.ProductOption != undefined && obj.ProductOption.length > 0){
 						title += " (";
-						if(obj.ProductOption.length > 0){
-							selected_options_attr += 'selected_options="';
-						}
+
+						selected_options_attr += 'selected_options="';
+
 						for(var j = 0; j < obj.ProductOption.length; j++){
 							title += obj.ProductOption[j].optionName+" "+obj.ProductOption[j].optionValueName;
 							selected_options_attr += obj.ProductOption[j].option_id;
@@ -207,10 +207,8 @@
 								selected_options_attr+=',';
 							}
 						}
-						if(obj.ProductOption.length > 0){
-							selected_options_attr += '"';
-						}
-						
+
+						selected_options_attr += '"';
 						title += ")";
 					}
 					

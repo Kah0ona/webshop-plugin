@@ -5,6 +5,18 @@
 class CheckoutView extends GenericView {
 
 	private function getProductOptionString($product){
+		if(isset($product->ProductOption) && count($product->ProductOption) > 0){
+			$s = array();
+
+			$ret = "(";
+			foreach($product->ProductOption as $o){
+				$s[]  = $o['optionName'].' '.$o['optionValueName'];
+			}
+			$ret .= implode($s, ', ');
+			$ret .= ")";
+
+			return $ret;
+		}
 		return "";
 	}
 	
