@@ -1,19 +1,19 @@
-2013-03-08 11:18:09: -------
-2013-03-08 11:18:09: Processing cart: 
-2013-03-08 11:18:09: 
-2013-03-08 11:18:09: Array
+2013-03-18 13:22:09: -------
+2013-03-18 13:22:09: Processing cart: 
+2013-03-18 13:22:09: %5B%7B%22Product_id%22%3A%2223%22%2C%22title%22%3A%22Malene+Birger%22%2C%22desc%22%3A%22Lourena+jurkje%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshop.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_23_1358530224321.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22499.95%22%2C%22VAT%22%3A%220.21%22%7D%5D
+2013-03-18 13:22:09: Array
 (
     [deliveryType] => bezorgen
     [companyName] => Sytematic Software
-    [firstname] => Marten
+    [firstname] => syt
     [surname] => Sijtema
     [street] => Hugo de Grootstraat 62b
-    [number] => 62
+    [number] => 1
     [postcode] => 2518EE
     [city] => Den Haag
     [country] => Overijssel
     [email] => marten@sytematic.nl
-    [phone] => 12
+    [phone] => 1
     [VATnumber] => 
     [deliveryStreet] => 
     [deliveryNumber] => 
@@ -21,8 +21,142 @@
     [deliveryCity] => 
     [orderComment] => 
     [coupon] => 
+    [issuerid] => 01
     [invoice] => Plaats bestelling
     [hostname] => denimes
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
 )
 
-2013-03-08 11:18:09: Error sending post to /orders: 
+2013-03-18 13:22:09: Inserted person id: 19
+2013-03-18 13:22:09: Error sending post to /orders: 0
+2013-03-18 13:23:06: -------
+2013-03-18 13:23:06: Processing cart: 
+2013-03-18 13:23:06: %5B%7B%22Product_id%22%3A%2223%22%2C%22title%22%3A%22Malene+Birger%22%2C%22desc%22%3A%22Lourena+jurkje%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshop.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_23_1358530224321.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22499.95%22%2C%22VAT%22%3A%220.21%22%7D%5D
+2013-03-18 13:23:06: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => syt
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 1
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 1
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [issuerid] => 01
+    [invoice] => Plaats bestelling
+    [hostname] => denimes
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+)
+
+2013-03-18 13:23:06: Inserted person id: 20
+2013-03-18 13:23:07: Error sending post to /orders: Internal service error
+2013-03-18 13:56:42: -------
+2013-03-18 13:56:42: Processing cart: 
+2013-03-18 13:56:42: %5B%7B%22Product_id%22%3A%2223%22%2C%22title%22%3A%22Malene+Birger%22%2C%22desc%22%3A%22Lourena+jurkje%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshop.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_23_1358530224321.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22499.95%22%2C%22VAT%22%3A%220.21%22%7D%5D
+2013-03-18 13:56:42: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => syt
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 1
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 1
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [issuerid] => 01
+    [invoice] => Plaats bestelling
+    [hostname] => denimes
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+)
+
+2013-03-18 13:56:42: Inserted person id: 21
+2013-03-18 13:56:42: Error sending post to /orders: Internal service error
+2013-03-18 13:58:49: -------
+2013-03-18 13:58:49: Processing cart: 
+2013-03-18 13:58:49: %5B%7B%22Product_id%22%3A%2223%22%2C%22title%22%3A%22Malene+Birger%22%2C%22desc%22%3A%22Lourena+jurkje%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshop.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_23_1358530224321.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22499.95%22%2C%22VAT%22%3A%220.21%22%7D%5D
+2013-03-18 13:58:49: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => syt
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 1
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 1
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [issuerid] => 01
+    [invoice] => Plaats bestelling
+    [hostname] => denimes
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+)
+
+2013-03-18 13:58:49: Inserted person id: 22
+2013-03-18 13:58:49: Error sending post to /orders: Internal service error
+2013-03-18 14:45:24: -------
+2013-03-18 14:45:24: Processing cart: 
+2013-03-18 14:45:24: %5B%7B%22Product_id%22%3A%2223%22%2C%22title%22%3A%22Malene+Birger%22%2C%22desc%22%3A%22Lourena+jurkje%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshop.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_23_1358530224321.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22499.95%22%2C%22VAT%22%3A%220.21%22%7D%5D
+2013-03-18 14:45:24: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => syt
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 1
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 1
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [issuerid] => 01
+    [invoice] => Plaats bestelling
+    [hostname] => denimes
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+)
+
+2013-03-18 14:45:24: Inserted person id: 23
+2013-03-18 14:45:26: Inserted Order id: 12
+2013-03-18 14:45:26: returned value from /orders: 
+2013-03-18 14:45:26: Creating iDeal transaction

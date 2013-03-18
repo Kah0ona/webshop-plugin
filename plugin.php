@@ -30,7 +30,6 @@ define('SYSTEM_URL_WEBSHOP', 'http://webshop.sytematic.nl');
 define('BASE_URL_WEBSHOP', SYSTEM_URL_WEBSHOP.'/public');
 define('EURO_FORMAT', '%.2n');
 define('WEBSHOP_PLUGIN_PATH', plugin_dir_path(__FILE__) );
-define('SUBMIT_ORDER_URL', plugins_url('/webshop-plugin/models/SubmitOrder.php'));
 
 setlocale(LC_MONETARY, 'it_IT');
 
@@ -81,8 +80,42 @@ class SytematicWebshop {
 	
 		add_filter( 'the_title', array($this, 'modify_title'));	
 		add_action('wp_head', array($this, 'init_cart'));
-
+	
+		//this must be inside is_admin, see: http://codex.wordpress.org/AJAX_in_Plugins#Ajax_on_the_Viewer-Facing_Side	
+		if(is_admin()){
+			add_action('wp_ajax_nopriv_place_order',array($this,'process_order'));			
+			add_action('wp_ajax_place_order',array($this,'process_order'));			
+		}
 	} // end constructor
+	
+	
+	/**
+	* Responds to the ajax call that submits the checkout form
+	*/
+	public function process_order(){
+		session_start();
+		include_once('models/GenericModel.php');
+		include_once('lib/ideal/sisow.cls5.php');
+		include_once('models/CheckoutModel.php');
+		
+		$this->load_options();
+		
+		$checkout = new CheckoutModel($this->options);
+		$resultStatus = $checkout->sendOrderToBackend();
+		$error = null;
+		if($resultStatus == 200){
+			$error = $checkout->doIDeal(); //redirects away if everything goes well, returns an error if not. 
+		}		
+
+		header('Content-Type: application/json; charset=UTF8');
+		
+		if($resultStatus != 200 || $error != null)
+			echo json_encode(array('error' => $checkout->getStatusMessage()));
+		else 
+			echo json_encode(array('message' => 'Bestelling geplaatst'));
+		
+		exit;
+	}
 	
 	public function start_session(){
 		session_start();
@@ -252,10 +285,23 @@ class SytematicWebshop {
 		wp_enqueue_script('bootstrap-js', plugins_url('/webshop-plugin/js/bootstrap.min.js'), array('jquery') );		
 		wp_enqueue_script('jquery.json', plugins_url('/webshop-plugin/js/jquery.json.min.js'), array('jquery') );		
 		
+		
 		if($this->isCheckoutPage()){
 			wp_enqueue_script('form.js', plugins_url('/webshop-plugin/js/jquery.form.js'), array('jquery'));
 			wp_enqueue_script('validation.js', plugins_url('/webshop-plugin/js/jquery.validate.js'), array('jquery', 'form.js'));
-			wp_enqueue_script('sytematic-webshop-shopping-cart-order', plugins_url('/webshop-plugin/js/order-form.js' ), array('jquery','jquery.json') );		
+			wp_enqueue_script('sytematic-webshop-shopping-cart-order', plugins_url('/webshop-plugin/js/order-form.js' ), array('jquery','jquery.json') );
+			
+			wp_localize_script( 'sytematic-webshop-shopping-cart-order', 'SubmitFormUrl', array( 
+						'ajaxurl' => plugins_url('/webshop-plugin/models/SubmitOrder.php'),
+					//	'cart_nonce'=>wp_create_nonce('cart_nonce')
+						
+							
+					) 
+			);
+
+			
+			include_once('lib/ideal/sisow.cls5.php');
+		
 		}
 		
 		wp_enqueue_script('sytematic-webshop-shopping-cart', plugins_url( '/webshop-plugin/js/jquery.shoppingcart.js' ), array('jquery','jquery.json') );		

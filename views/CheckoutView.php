@@ -4,6 +4,13 @@
 */
 class CheckoutView extends GenericView {
 
+	private function renderIDealForm(){
+		$sisow = new Sisow("2537278813", "f1bcac04ef461e7a84757e6394ba205b1f63936e");
+		$select = null;
+		$sisow->DirectoryRequest($select, true, false);
+		return $select;
+	}
+
 	private function getProductOptionString($product){
 		if(isset($product->ProductOption) && count($product->ProductOption) > 0){
 			$s = array();
@@ -149,7 +156,7 @@ class CheckoutView extends GenericView {
 				<strong>NB:</strong> Voor deze bestelling wordt <strong>€ <span class="deposit-total">34,50</span></strong> borg gerekend voor borden etc. Dit dient contant te worden betaald, en krijgt u ook weer contant terug.
 			</div>
 		</div>
-		<form name="order-form_" id="order-form" class="form-horizontal" action="<?php echo SUBMIT_ORDER_URL; ?>" method="post">
+		<form name="order-form_" id="order-form" class="form-horizontal" action="<?php echo site_url(); ?>/wp-admin/admin-ajax.php" method="post">
 			<div class="row-fluid">
 			
 			  <fieldset> 
@@ -344,12 +351,29 @@ class CheckoutView extends GenericView {
 								</div>		
 							</div>	
 						</div>
-					</div>		
+					</div>
+					
+					<div class="row-fluid">
+						<div class="span12">
+							<h3>Betaalmethode</h3>
+							<div class="control-group">
+								<p>Kies uw bank om direct via iDeal te betalen</p>						
+							    <div id="discount-text" class="alert hidden"></div>
+			
+								<label class="control-label" for="coupon">Uw bank:</label>					
+								<div class="controls">	
+									<?php echo $this->renderIDealForm(); ?>
+									
+								</div>		
+							</div>	
+						</div>
+					</div>							
+							
 					<div class="row-fluid">
 						<div class="span12">
 							<h3 class="payment-options">Verzenden</h3>
 							<div class="control-group">
-								<p>Bij het klikken op de knop hieronder wordt uw bestelling definitief.</p>
+								<p>Als u op de knop hieronder drukt, wordt uw bestelling opgeslagen, en wordt u naar de beveiligde omgeving van uw bank gestuurd, om de betaling te doen via iDeal.</p>
 								<div class="controls">	
 									<input type="submit" name="invoice" class="submit-controls btn btn-primary " id="invoice" value="Plaats bestelling" style="width: 130px;" />
 								</div>		

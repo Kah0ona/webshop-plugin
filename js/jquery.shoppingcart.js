@@ -416,6 +416,42 @@
 		    var alert = $('.the-alert').alert();
 		    window.setTimeout(function() { alert.alert('close') }, delay);
    		},
+	    checkCoupon : function(callback){
+			$('#discount-text').html('Controleren couponcode…').addClass('hidden');
+			if($('#coupon').val() == null || $('#coupon').val() == "" || $('#coupon').val() == undefined)
+				return;
+	
+			$('#discount-text').html('Controleren couponcode…').removeClass('hidden');
+			
+			$.ajax({
+				url: couponUrl,
+				data: { "hostname" : hostname , "couponCode" : $('#coupon').val()},
+				success: function (jsonObj, textStatus, jqXHR){
+
+					discount = jsonObj.discount;
+					couponType = jsonObj.couponType;
+					if(discount == 0){
+						$('#discount-text')
+							.removeClass('hidden')
+							.html('Dit is geen geldige couponcode.')
+							.addClass('alert-error');
+					}
+					else {
+						$('#discount-text').html('Couponcode geldig, u krijgt '+discount+'% korting.');
+						
+						$('#discount-text').removeClass('alert-error')
+											.addClass('alert-success')
+											.removeClass('hidden');
+					}
+					
+					if(callback!=null && callback!=undefined)
+						callback(discount, couponType);
+				},
+				dataType: 'jsonp'
+			});		
+		},   		
+   		
+   		
    		clearCart : function(elt){
 	   		var $this = $(elt);
 			var settings = $this.data('shoppingCart').settings;

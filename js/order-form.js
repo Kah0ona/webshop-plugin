@@ -18,18 +18,27 @@ jQuery(document).ready(function($){
 										
 		  	//hide the form to prevent another click
 		  	var f = $('#order-form');
-		alert('PPP'+hostname);
+		
 			showSendingMessage(f);
 			return true;	
 			
 		},
 		data : { 
-			"hostname" : hostname /*,  
+			"hostname" : hostname,
+			"action" : "place_order",
+			"cart_nonce" : SubmitFormUrl.cart_nonce /*,  
 			orderType : submitType*/
 		},
 		success : function(data, textStatus, jqXHR) {
+			console.log("success");
+			console.log(textStatus);
 			console.log(data);
 			
+		},
+		failure: function(data,textStatus,jqXHR){
+			console.log("failure");
+			console.log(textStatus);
+			console.log(data);
 		}
 	};
 	

@@ -2,6 +2,7 @@
 define('ORDER_SUCCESS', 200);
 define('ORDER_FAILED', 400); //add other codes, if necessary
 define('ORDER_VALIDATION_ERROR', 400);
+define('SISOW_NOTIFY_URL', BASE_URL_WEBSHOP.'/sisow_notifications');
 class CheckoutModel extends GenericModel {
 	protected $status;
 	protected $statusMessage;
@@ -9,9 +10,10 @@ class CheckoutModel extends GenericModel {
 	protected $vatMap =null;
 	protected $options;
 	protected $curlError=0;
-	public function __construct($hostname) {
-		$this->hostname=$hostname;
-
+	protected $insertedOrderId=null;
+	public function __construct($options) {
+		$this->options=$options;
+		$this->getCartFromSession();
 	} 
 	
 	public function setOptions($options){
@@ -23,7 +25,7 @@ class CheckoutModel extends GenericModel {
 			$this->cart = json_decode('[]');
 		}
 		else {
-			$this->cart =  $_SESSION['shoppingCart'];
+			$this->cart = $_SESSION['shoppingCart'];
 		} 
 	}
 	
@@ -33,10 +35,12 @@ class CheckoutModel extends GenericModel {
 	}
 	
 	public function sendOrderToBackend(){
+		$_POST['hostname'] = $this->options->getOption('hostname');
 		$post = $_POST;
+		$post['shoppingCart'] = json_encode($this->cart);
 		$this->logMessage("-------");
 		$this->logMessage("Processing cart: ");
-		$this->logMessage(urlencode($_POST['shoppingCart']));
+		$this->logMessage(urlencode($post['shoppingCart']));
 		ob_start();
 		print_r($post);	
 		$bod = ob_get_contents();
@@ -63,33 +67,103 @@ class CheckoutModel extends GenericModel {
 				$this->statusMessage = "De klantgegevens konden niet worden opgeslagen: ".$obj->error;
 			}
 			elseif($obj->Person_id != null) { //success continue
+				$this->logMessage("Inserted person id: ".$obj->Person_id);			
 
 				$post['Person_id'] = $obj->Person_id;
 				$post['viaSite'] = true;
-				$ret = $this->curl_post(BASE_URL_WEBSHOP.'/orders', $post);
+				
+				$savedOrder = $this->curl_post(BASE_URL_WEBSHOP.'/orders', $post);
 
-				if(!$ret){
+				if(!$savedOrder){
 					$this->logMessage("Error sending post to /orders: ".$this->curlError);			
 					$this->status = ORDER_FAILED;
 					$this->statusMessage = "De ordergegevens konden niet worden opgeslagen.";
 				}
 				else {
-					$this->status = ORDER_SUCCESS;
-					$this->statusMessage = "De bestelling is succesvol verstuurd.";
-					$this->logMessage("returned value from /orders: ".$ret);				
+					$savedOrder = utf8_encode($savedOrder);
+					$obj = json_decode($savedOrder);				
+					if($obj->error != null){
+						$this->logMessage("Error sending post to /orders: ".$obj->error);			
+						$this->status = ORDER_FAILED;
+						$this->statusMessage = "De bestelgegevens konden niet worden opgeslagen: ".$obj->error;
+					}
+					else {
+						if($obj->Order__id != null) {
+							$this->logMessage("Inserted Order id: ".$obj->Order__id);			
+						
+							$this->status = ORDER_SUCCESS;
+							$this->statusMessage = "De bestelling is succesvol verstuurd.";
+							$this->insertedOrderId= $ret->Order__id;
+						}
+						else {
+							$this->logMessage("Error sending post to /orders without an error message!");			
+							$this->status = ORDER_FAILED;
+						}
+					}
 				}					
 			}
 			else { //unknown error
 				$this->logMessage("Error sending post to /persons without an error message!");			
 				$this->status = ORDER_FAILED;
 			}
-
 		}
 		return $this->status;
 	}
 	
+	
+	public function doIDeal(){
+		$this->logMessage("Creating iDeal transaction");
+		$sisow = new Sisow($this->options->getOption('SisowMerchantId'), $this->options->getOption('SisowMerchantKey'));
+		$sisow->purchaseId = $this->insertedOrderId;
+		$sisow->description = $this->options->getOption('SisowDescription');
+		$sisow->amount = $this->calculateTotalPriceInCents();
+		$sisow->issuerId = $_POST["issuerid"];
+		$sisow->returnUrl = site_url()+'/success';
+		$sisow->notifyUrl = NOTIFY_URL;
+		
+		if (($ex = $sisow->TransactionRequest()) < 0) {
+			$this->status = ORDER_FAILED;
+			$this->statusMessage = 'De iDeal betaling is mislukt, foutmelding: '.$sisow->errorCode.", ".$sisow->errorMessage;
+			return $sisow->errorCode;			
+		}
+		header("Location: " . $sisow->issuerUrl);
+		exit;
+	}
+	
+	private function calculateTotalPriceInCents() {
+		$total = 0;
+		foreach($this->cart as $product){
+			$total += ($product->price * $product->quantity)*100;	
+		}
+		$total += (int) $this->options->getOption('ShippingCosts');
+		$discount = 0;
+		if(isset($_POST['coupon']) && $_POST['coupon'] != "" &&  $_POST['coupon'] != null){
+			$discount = $this->getCouponPercentage($_POST['coupon']);		
+		}
+		$total = $total * (1-($discount/100));
+		
+		return round($total);
+	}
+	
+	private function getCouponPercentage($coupon){
+		$couponResult = $this->curl_post(BASE_URL_WEBSHOP.'/coupons', array('couponCode'=>$coupon, 'hostname'=>$this->options->getOption('hostname')));
+		if(!$couponResult){
+			return 0;
+		}
+		else {
+			$perc = $couponResult->discount;
+			if($perc == null || $perc == undefined){
+				return 0;
+			} 
+			else {
+				return $perc;	
+			} 
+		}
+	}
+	
+	
 	private function logMessage($msg){
-		@file_put_contents('../logs/order.log',@date("Y-m-d H:i:s").': '.$msg."\n",FILE_APPEND);
+		file_put_contents(WEBSHOP_PLUGIN_PATH.'/logs/order.log',date("Y-m-d H:i:s").': '.$msg."\n",FILE_APPEND);
 	}
 
 	/**
@@ -150,4 +224,3 @@ class CheckoutModel extends GenericModel {
 	}
 
 }
-?>
