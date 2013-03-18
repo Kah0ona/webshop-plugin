@@ -15,10 +15,7 @@ class CheckoutModel extends GenericModel {
 		$this->options=$options;
 		$this->getCartFromSession();
 	} 
-	
-	public function setOptions($options){
-		$this->options = options;
-	}
+
 
 	private function getCartFromSession(){
 		if(!isset($_SESSION['shoppingCart'])){
@@ -40,7 +37,7 @@ class CheckoutModel extends GenericModel {
 		$post['shoppingCart'] = json_encode($this->cart);
 		$this->logMessage("-------");
 		$this->logMessage("Processing cart: ");
-		$this->logMessage(urlencode($post['shoppingCart']));
+		$this->logMessage($post['shoppingCart']);
 		ob_start();
 		print_r($post);	
 		$bod = ob_get_contents();
@@ -93,7 +90,7 @@ class CheckoutModel extends GenericModel {
 						
 							$this->status = ORDER_SUCCESS;
 							$this->statusMessage = "De bestelling is succesvol verstuurd.";
-							$this->insertedOrderId= $ret->Order__id;
+							$this->insertedOrderId= $obj->Order__id;
 						}
 						else {
 							$this->logMessage("Error sending post to /orders without an error message!");			
@@ -113,15 +110,27 @@ class CheckoutModel extends GenericModel {
 	
 	public function doIDeal(){
 		$this->logMessage("Creating iDeal transaction");
+		
 		$sisow = new Sisow($this->options->getOption('SisowMerchantId'), $this->options->getOption('SisowMerchantKey'));
+		$total = $this->calculateTotalPriceInCents();
 		$sisow->purchaseId = $this->insertedOrderId;
 		$sisow->description = $this->options->getOption('SisowDescription');
-		$sisow->amount = $this->calculateTotalPriceInCents();
+		$sisow->amount = $total;
 		$sisow->issuerId = $_POST["issuerid"];
 		$sisow->returnUrl = site_url()+'/success';
-		$sisow->notifyUrl = NOTIFY_URL;
+		$sisow->notifyUrl = SISOW_NOTIFY_URL;
+
+		$this->logMessage("purchaseId: ".$this->insertedOrderId);
+		$this->logMessage("description: ".$this->options->getOption('SisowDescription'));
+		$this->logMessage("amount: ".$total);
+		$this->logMessage("issuerId: ".$_POST["issuerid"]);
+		$this->logMessage("returnUrl: ".site_url().'/success');
+		$this->logMessage("notifyUrl: ".SISOW_NOTIFY_URL);
+
+
 		
 		if (($ex = $sisow->TransactionRequest()) < 0) {
+			$this->logMessage('De iDeal betaling is mislukt, foutmelding: '.$sisow->errorCode.", ".$sisow->errorMessage);
 			$this->status = ORDER_FAILED;
 			$this->statusMessage = 'De iDeal betaling is mislukt, foutmelding: '.$sisow->errorCode.", ".$sisow->errorMessage;
 			return $sisow->errorCode;			
@@ -133,7 +142,8 @@ class CheckoutModel extends GenericModel {
 	private function calculateTotalPriceInCents() {
 		$total = 0;
 		foreach($this->cart as $product){
-			$total += ($product->price * $product->quantity)*100;	
+			$this->logMessage('adding price: '.$product['price'].' '.$product['quantity']);
+			$total += ($product['price'] * $product['quantity'])*100;	
 		}
 		$total += (int) $this->options->getOption('ShippingCosts');
 		$discount = 0;
@@ -222,5 +232,7 @@ class CheckoutModel extends GenericModel {
 	public function getStatusMessage(){
 		return $this->statusMessage;
 	}
-
+	public function getStatus(){
+		return $this->status;
+	}
 }

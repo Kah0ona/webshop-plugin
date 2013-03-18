@@ -104,12 +104,12 @@ class SytematicWebshop {
 		$resultStatus = $checkout->sendOrderToBackend();
 		$error = null;
 		if($resultStatus == 200){
-			$error = $checkout->doIDeal(); //redirects away if everything goes well, returns an error if not. 
+			$checkout->doIDeal(); //redirects away if everything goes well, returns an error if not. 
 		}		
 
 		header('Content-Type: application/json; charset=UTF8');
-		
-		if($resultStatus != 200 || $error != null)
+
+		if($checkout->getStatus() != 200)
 			echo json_encode(array('error' => $checkout->getStatusMessage()));
 		else 
 			echo json_encode(array('message' => 'Bestelling geplaatst'));
@@ -346,8 +346,7 @@ class SytematicWebshop {
 	public function render_checkout(){
 		include_once('models/CheckoutModel.php');
 		include_once('views/CheckoutView.php');
-		$this->checkoutModel = new CheckoutModel($this->hostname);
-		$this->checkoutModel->setOptions($this->options);
+		$this->checkoutModel = new CheckoutModel($this->options);
 		$v = new CheckoutView($this->checkoutModel);
 		$v->render();
 	}

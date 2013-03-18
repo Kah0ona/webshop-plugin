@@ -5,9 +5,13 @@
 class CheckoutView extends GenericView {
 
 	private function renderIDealForm(){
-		$sisow = new Sisow("2537278813", "f1bcac04ef461e7a84757e6394ba205b1f63936e");
+		$sisow = new Sisow($this->model->getOptions()->getOption('SisowMerchantId'), 
+						   $this->model->getOptions()->getOption('SisowMerchantKey')
+						   );
 		$select = null;
-		$sisow->DirectoryRequest($select, true, false);
+		$testMode = $this->model->getOptions()->getOption('SisowTestModus') === 'true' ?  true : false; 
+		
+		$sisow->DirectoryRequest($select, true, $testMode);
 		return $select;
 	}
 

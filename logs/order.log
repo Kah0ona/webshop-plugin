@@ -160,3 +160,409 @@
 2013-03-18 14:45:26: Inserted Order id: 12
 2013-03-18 14:45:26: returned value from /orders: 
 2013-03-18 14:45:26: Creating iDeal transaction
+2013-03-18 15:20:47: -------
+2013-03-18 15:20:47: Processing cart: 
+2013-03-18 15:20:47: %5B%7B%22Product_id%22%3A%2223%22%2C%22title%22%3A%22Malene+Birger%22%2C%22desc%22%3A%22Lourena+jurkje%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshop.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_23_1358530224321.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22499.95%22%2C%22VAT%22%3A%220.21%22%7D%5D
+2013-03-18 15:20:47: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 62
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 03
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => Test bestelling
+    [coupon] => 
+    [issuerid] => 99
+    [invoice] => Plaats bestelling
+    [hostname] => denimes
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+)
+
+2013-03-18 15:20:48: Inserted person id: 24
+2013-03-18 15:20:48: Inserted Order id: 13
+2013-03-18 15:20:48: Creating iDeal transaction
+2013-03-18 15:20:48: purchaseId: 
+2013-03-18 15:20:48: description: Sytematic Sisow Account
+2013-03-18 15:20:48: amount: 0
+2013-03-18 15:20:48: issuerId: 99
+2013-03-18 15:20:48: 0
+2013-03-18 15:20:48: notifyUrl: NOTIFY_URL
+2013-03-18 15:24:55: -------
+2013-03-18 15:24:55: Processing cart: 
+2013-03-18 15:24:55: %5B%7B%22Product_id%22%3A%2223%22%2C%22title%22%3A%22Malene+Birger%22%2C%22desc%22%3A%22Lourena+jurkje%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshop.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_23_1358530224321.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22499.95%22%2C%22VAT%22%3A%220.21%22%7D%5D
+2013-03-18 15:24:55: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 3
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 3
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [issuerid] => 99
+    [invoice] => Plaats bestelling
+    [hostname] => denimes
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+)
+
+2013-03-18 15:24:55: Inserted person id: 25
+2013-03-18 15:24:55: Inserted Order id: 14
+2013-03-18 15:24:55: Creating iDeal transaction
+2013-03-18 15:24:55: purchaseId: 14
+2013-03-18 15:24:55: description: Sytematic Sisow Account
+2013-03-18 15:24:55: amount: 0
+2013-03-18 15:24:55: issuerId: 99
+2013-03-18 15:24:55: returnUrl: http://localhost/~marten/wordpress/success
+2013-03-18 15:24:55: notifyUrl: http://webshop.sytematic.nl/public/sisow_notifications
+2013-03-18 15:24:55: De iDeal betaling is mislukt, foutmelding: , Amount < 0.45
+2013-03-18 15:29:18: -------
+2013-03-18 15:29:18: Processing cart: 
+2013-03-18 15:29:18: [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+2013-03-18 15:29:18: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 3
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 3
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [issuerid] => 99
+    [invoice] => Plaats bestelling
+    [hostname] => denimes
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+)
+
+2013-03-18 15:29:18: Inserted person id: 26
+2013-03-18 15:29:18: Inserted Order id: 15
+2013-03-18 15:29:18: Creating iDeal transaction
+2013-03-18 15:29:18: purchaseId: 15
+2013-03-18 15:29:18: description: Sytematic Sisow Account
+2013-03-18 15:29:18: amount: 0
+2013-03-18 15:29:18: issuerId: 99
+2013-03-18 15:29:18: returnUrl: http://localhost/~marten/wordpress/success
+2013-03-18 15:29:18: notifyUrl: http://webshop.sytematic.nl/public/sisow_notifications
+2013-03-18 15:29:18: De iDeal betaling is mislukt, foutmelding: , Amount < 0.45
+2013-03-18 15:31:02: -------
+2013-03-18 15:31:02: Processing cart: 
+2013-03-18 15:31:02: [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+2013-03-18 15:31:02: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 3
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 3
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [issuerid] => 99
+    [invoice] => Plaats bestelling
+    [hostname] => denimes
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+)
+
+2013-03-18 15:31:02: Inserted person id: 27
+2013-03-18 15:31:02: Inserted Order id: 16
+2013-03-18 15:31:02: Creating iDeal transaction
+2013-03-18 15:31:02: adding price:  
+2013-03-18 15:31:02: purchaseId: 16
+2013-03-18 15:31:02: description: Sytematic Sisow Account
+2013-03-18 15:31:02: amount: 0
+2013-03-18 15:31:02: issuerId: 99
+2013-03-18 15:31:02: returnUrl: http://localhost/~marten/wordpress/success
+2013-03-18 15:31:02: notifyUrl: http://webshop.sytematic.nl/public/sisow_notifications
+2013-03-18 15:31:02: De iDeal betaling is mislukt, foutmelding: , Amount < 0.45
+2013-03-18 15:31:40: -------
+2013-03-18 15:31:40: Processing cart: 
+2013-03-18 15:31:40: [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+2013-03-18 15:31:40: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 12
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 12
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [issuerid] => 99
+    [invoice] => Plaats bestelling
+    [hostname] => denimes
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+)
+
+2013-03-18 15:31:40: Inserted person id: 28
+2013-03-18 15:31:41: Inserted Order id: 17
+2013-03-18 15:31:41: Creating iDeal transaction
+2013-03-18 15:31:41: adding price:  
+2013-03-18 15:31:41: purchaseId: 17
+2013-03-18 15:31:41: description: Sytematic Sisow Account
+2013-03-18 15:31:41: amount: 0
+2013-03-18 15:31:41: issuerId: 99
+2013-03-18 15:31:41: returnUrl: http://localhost/~marten/wordpress/success
+2013-03-18 15:31:41: notifyUrl: http://webshop.sytematic.nl/public/sisow_notifications
+2013-03-18 15:31:41: De iDeal betaling is mislukt, foutmelding: , Amount < 0.45
+2013-03-18 15:33:14: -------
+2013-03-18 15:33:14: Processing cart: 
+2013-03-18 15:33:14: [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+2013-03-18 15:33:14: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 12
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 12
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [issuerid] => 99
+    [invoice] => Plaats bestelling
+    [hostname] => denimes
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+)
+
+2013-03-18 15:33:14: Inserted person id: 29
+2013-03-18 15:33:14: Inserted Order id: 18
+2013-03-18 15:33:14: Creating iDeal transaction
+2013-03-18 15:33:14: adding price: 499.95 1
+2013-03-18 15:33:14: purchaseId: 18
+2013-03-18 15:33:14: description: Sytematic Sisow Account
+2013-03-18 15:33:14: amount: 49995
+2013-03-18 15:33:14: issuerId: 99
+2013-03-18 15:33:14: returnUrl: http://localhost/~marten/wordpress/success
+2013-03-18 15:33:14: notifyUrl: http://webshop.sytematic.nl/public/sisow_notifications
+2013-03-18 15:33:14: De iDeal betaling is mislukt, foutmelding: , No returnurl
+2013-03-18 15:37:49: -------
+2013-03-18 15:37:49: Processing cart: 
+2013-03-18 15:37:49: [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+2013-03-18 15:37:49: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 1
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 1
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [issuerid] => 99
+    [invoice] => Plaats bestelling
+    [hostname] => denimes
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+)
+
+2013-03-18 15:37:49: Inserted person id: 30
+2013-03-18 15:37:49: Inserted Order id: 19
+2013-03-18 15:37:49: Creating iDeal transaction
+2013-03-18 15:37:49: adding price: 499.95 1
+2013-03-18 15:37:49: purchaseId: 19
+2013-03-18 15:37:49: description: Sytematic Sisow Account
+2013-03-18 15:37:49: amount: 49995
+2013-03-18 15:37:49: issuerId: 99
+2013-03-18 15:37:49: returnUrl: http://localhost/~marten/wordpress/success
+2013-03-18 15:37:49: notifyUrl: http://webshop.sytematic.nl/public/sisow_notifications
+2013-03-18 15:37:49: De iDeal betaling is mislukt, foutmelding: , No returnurl
+2013-03-18 15:39:10: -------
+2013-03-18 15:39:10: Processing cart: 
+2013-03-18 15:39:10: [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+2013-03-18 15:39:10: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => sd
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 12
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 12
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [issuerid] => 99
+    [invoice] => Plaats bestelling
+    [hostname] => denimes
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+)
+
+2013-03-18 15:39:11: Inserted person id: 31
+2013-03-18 15:39:11: Inserted Order id: 20
+2013-03-18 15:39:11: Creating iDeal transaction
+2013-03-18 15:39:11: adding price: 499.95 1
+2013-03-18 15:39:11: purchaseId: 20
+2013-03-18 15:39:11: description: Sytematic Sisow Account
+2013-03-18 15:39:11: amount: 49995
+2013-03-18 15:39:11: issuerId: 99
+2013-03-18 15:39:11: returnUrl: http://localhost/~marten/wordpress/success
+2013-03-18 15:39:11: notifyUrl: http://webshop.sytematic.nl/public/sisow_notifications
+2013-03-18 15:39:11: De iDeal betaling is mislukt, foutmelding: , No returnurl
+2013-03-18 15:40:17: -------
+2013-03-18 15:40:17: Processing cart: 
+2013-03-18 15:40:17: [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+2013-03-18 15:40:17: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 12
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 12
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [issuerid] => 99
+    [invoice] => Plaats bestelling
+    [hostname] => denimes
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+)
+
+2013-03-18 15:40:17: Inserted person id: 32
+2013-03-18 15:40:17: Inserted Order id: 21
+2013-03-18 15:40:17: Creating iDeal transaction
+2013-03-18 15:40:17: adding price: 499.95 1
+2013-03-18 15:40:17: purchaseId: 21
+2013-03-18 15:40:17: description: Sytematic Sisow Account
+2013-03-18 15:40:17: amount: 49995
+2013-03-18 15:40:17: issuerId: 99
+2013-03-18 15:40:17: returnUrl: http://localhost/~marten/wordpress/success
+2013-03-18 15:40:17: notifyUrl: http://webshop.sytematic.nl/public/sisow_notifications
+2013-03-18 15:40:17: De iDeal betaling is mislukt, foutmelding: , No returnurl
+2013-03-18 15:41:48: -------
+2013-03-18 15:41:48: Processing cart: 
+2013-03-18 15:41:48: [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+2013-03-18 15:41:48: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 1
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 1
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [issuerid] => 99
+    [invoice] => Plaats bestelling
+    [hostname] => denimes
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"23","title":"Malene Birger","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+)
+
+2013-03-18 15:41:48: Inserted person id: 33
+2013-03-18 15:41:48: Inserted Order id: 22
+2013-03-18 15:41:48: Creating iDeal transaction
+2013-03-18 15:41:48: adding price: 499.95 1
+2013-03-18 15:41:48: purchaseId: 22
+2013-03-18 15:41:48: description: Sytematic Sisow Account
+2013-03-18 15:41:48: amount: 49995
+2013-03-18 15:41:48: issuerId: 99
+2013-03-18 15:41:48: returnUrl: http://localhost/~marten/wordpress/success
+2013-03-18 15:41:48: notifyUrl: http://webshop.sytematic.nl/public/sisow_notifications
+2013-03-18 15:41:48: De iDeal betaling is mislukt, foutmelding: , No returnurl

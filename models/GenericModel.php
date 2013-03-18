@@ -207,5 +207,9 @@ class GenericModel {
 	public function getData(){
 		return $this->data;
 	}
+	
+	public function getOptions(){
+		return $this->options;
+	}
 }
 ?>

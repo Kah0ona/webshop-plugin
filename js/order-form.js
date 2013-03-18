@@ -34,11 +34,6 @@ jQuery(document).ready(function($){
 			console.log(textStatus);
 			console.log(data);
 			
-		},
-		failure: function(data,textStatus,jqXHR){
-			console.log("failure");
-			console.log(textStatus);
-			console.log(data);
 		}
 	};
 	
