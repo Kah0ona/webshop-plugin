@@ -30,10 +30,8 @@ jQuery(document).ready(function($){
 			orderType : submitType*/
 		},
 		success : function(data, textStatus, jqXHR) {
-			console.log("success");
-			console.log(textStatus);
-			console.log(data);
-			
+
+			window.location = data.redirectUrl;
 		}
 	};
 	

@@ -11,6 +11,7 @@ class CheckoutModel extends GenericModel {
 	protected $options;
 	protected $curlError=0;
 	protected $insertedOrderId=null;
+	protected $redirectUrl = '';
 	public function __construct($options) {
 		$this->options=$options;
 		$this->getCartFromSession();
@@ -112,12 +113,12 @@ class CheckoutModel extends GenericModel {
 		$this->logMessage("Creating iDeal transaction");
 		
 		$sisow = new Sisow($this->options->getOption('SisowMerchantId'), $this->options->getOption('SisowMerchantKey'));
-		$total = $this->calculateTotalPriceInCents();
+		$total = $this->calculateTotalPrice();
+		$sisow->returnUrl = site_url().'/success';
 		$sisow->purchaseId = $this->insertedOrderId;
 		$sisow->description = $this->options->getOption('SisowDescription');
 		$sisow->amount = $total;
 		$sisow->issuerId = $_POST["issuerid"];
-		$sisow->returnUrl = site_url()+'/success';
 		$sisow->notifyUrl = SISOW_NOTIFY_URL;
 
 		$this->logMessage("purchaseId: ".$this->insertedOrderId);
@@ -135,15 +136,15 @@ class CheckoutModel extends GenericModel {
 			$this->statusMessage = 'De iDeal betaling is mislukt, foutmelding: '.$sisow->errorCode.", ".$sisow->errorMessage;
 			return $sisow->errorCode;			
 		}
-		header("Location: " . $sisow->issuerUrl);
-		exit;
+		$this->redirectUrl = $sisow->issuerUrl;
+		$this->logMessage("Setting redirect url: ".$this->redirectUrl);
 	}
 	
-	private function calculateTotalPriceInCents() {
+	private function calculateTotalPrice() {
 		$total = 0;
 		foreach($this->cart as $product){
 			$this->logMessage('adding price: '.$product['price'].' '.$product['quantity']);
-			$total += ($product['price'] * $product['quantity'])*100;	
+			$total += ($product['price'] * $product['quantity']);	
 		}
 		$total += (int) $this->options->getOption('ShippingCosts');
 		$discount = 0;
@@ -152,7 +153,7 @@ class CheckoutModel extends GenericModel {
 		}
 		$total = $total * (1-($discount/100));
 		
-		return round($total);
+		return $total;
 	}
 	
 	private function getCouponPercentage($coupon){
@@ -234,5 +235,9 @@ class CheckoutModel extends GenericModel {
 	}
 	public function getStatus(){
 		return $this->status;
+	}
+	
+	public function getRedirectUrl(){
+		return $this->redirectUrl;
 	}
 }

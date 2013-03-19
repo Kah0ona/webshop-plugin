@@ -109,11 +109,14 @@ class SytematicWebshop {
 
 		header('Content-Type: application/json; charset=UTF8');
 
-		if($checkout->getStatus() != 200)
+		if($checkout->getStatus() != 200) {
 			echo json_encode(array('error' => $checkout->getStatusMessage()));
-		else 
-			echo json_encode(array('message' => 'Bestelling geplaatst'));
-		
+		}
+		else {
+			$redirect = $checkout->getRedirectUrl();
+			echo json_encode(array('redirectUrl' => $redirect));			
+		}
+
 		exit;
 	}
 	
