@@ -36,6 +36,7 @@ class CheckoutModel extends GenericModel {
 		$_POST['hostname'] = $this->options->getOption('hostname');
 		$post = $_POST;
 		$post['shoppingCart'] = json_encode($this->cart);
+		$post['orderStatus'] = 'nieuw';
 		$this->logMessage("-------");
 		$this->logMessage("Processing cart: ");
 		$this->logMessage($post['shoppingCart']);

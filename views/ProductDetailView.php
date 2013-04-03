@@ -30,7 +30,7 @@ class ProductDetailView extends GenericView {
 									<?php echo $data->productDesc; ?>
 								</p>
 								<p class="product-price">
-									<?php echo $this->formatMoney($data->productPrice); ?>
+									€ <?php echo $this->formatMoney($data->productPrice); ?>
 								</p>
 							</div><!-- /span12 -->
 						</div><!-- /row-fluid -->
@@ -52,7 +52,11 @@ class ProductDetailView extends GenericView {
 										<div class="controls">		
 											<select name="size" class="input-small" id="ProductOption_<?php echo $p->ProductOption_id; ?>">
 												<?php foreach($p->ProductOptionValue as $v ) {?>
-												<option value="<?php echo $v->ProductOptionValue_id; ?>" id="ProductOptionValueName_<?php echo $v->ProductOptionValue_id; ?>"><?php echo $v->optionValue; ?></option>
+												<option value="<?php echo $v->ProductOptionValue_id; ?>" id="ProductOptionValueName_<?php echo $v->ProductOptionValue_id; ?>"><?php echo $v->optionValue; ?>
+													<?php if($v->extraPrice != null) { ?>
+														(€ <?php echo $this->formatMoney($v->extraPrice); ?>)
+													<?php } ?>
+												</option>
 												<? } ?>										
 											</select>
 										</div>

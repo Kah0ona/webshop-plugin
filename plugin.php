@@ -40,6 +40,7 @@ class SytematicWebshop {
 	protected $productModel = null; //only set if there is a post with a product shortcode
 	protected $categoryModel = null; //only set if there is a post with a category shortcode
 	protected $checkoutModel = null;
+	protected $resultModel = null;
 	/**
 	 * Initializes the plugin by setting localization, filters, and administration functions.
 	 */
@@ -71,7 +72,7 @@ class SytematicWebshop {
 		add_shortcode('webshop_categories', array($this, 'render_categories'));
 		add_shortcode('webshop_products', array($this, 'render_products'));
 		add_shortcode('webshop_checkout', array($this, 'render_checkout'));
-
+		add_shortcode('webshop_after_order', array($this,'render_after_order'));
 		
 		add_action( 'widgets_init', array($this, 'register_widgets' ));
 				
@@ -87,6 +88,8 @@ class SytematicWebshop {
 			add_action('wp_ajax_place_order',array($this,'process_order'));			
 		}
 	} // end constructor
+	
+	
 	
 	
 	/**
@@ -353,7 +356,15 @@ class SytematicWebshop {
 		$v = new CheckoutView($this->checkoutModel);
 		$v->render();
 	}
-	  
+	
+	//Order result page	
+	public function render_after_order(){
+		include_once('models/TransactionResultModel.php');
+		include_once('views/TransactionResultView.php');
+		$this->resultModel = new TransactionResultModel($this->options);
+		$v = new TransactionResultView($this->resultModel);
+		$v->render();			
+	}
 } // end class
 
 $sytematicWebshop = new SytematicWebshop();

@@ -10,7 +10,7 @@ abstract class GenericView {
 		return $this->model;
 	}
 	
-	public function formatMoney($amount, $format = 'it_IT'){
+	public function formatMoney($amount, $format = 'nl_NL'){
 		 setlocale(LC_MONETARY, $format);
 		 return money_format('%.2n', $amount);
 	}
