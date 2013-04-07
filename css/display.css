@@ -28,3 +28,7 @@
 	color: red;
 }
 
+td.text-right {
+	text-align: right !important;
+	align: right !important;
+}

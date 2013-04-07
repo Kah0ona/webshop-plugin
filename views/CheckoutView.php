@@ -32,7 +32,15 @@ class CheckoutView extends GenericView {
 	}
 	
 	private function calculateProductPrice($product){
-		return $product->price;
+		$optionPrice = 0;
+		if($product->ProductOption != null) {
+			foreach($product->ProductOption as $option){
+				if($option['extraPrice'] != null){
+					$optionPrice += (float) $option['extraPrice'];					
+				}
+			}
+		}
+		return $product->price + $optionPrice;
 	}
 	private function getSelectedOptionIdAttr($product){
 		return '';

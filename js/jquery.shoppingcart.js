@@ -322,17 +322,17 @@
     			optionSelectObj.ProductOption_id = cur.ProductOption_id;
     			optionSelectObj.ProductOptionValue_id = $('#ProductOption_'+cur.ProductOption_id).val();
     			optionSelectObj.optionName = $('#ProductOptionName_'+cur.ProductOption_id).html();
-    			var valName = $('#ProductOptionValueName_'+optionSelectObj.ProductOptionValue_id).html();
-    			optionSelectObj.optionValueName = valName;
 
+    			optionSelectObj.extraPrice = $('#ProductOptionValueName_'+optionSelectObj.ProductOptionValue_id).attr('extraPrice');
+    			var valName = $('#ProductOptionValueName_'+optionSelectObj.ProductOptionValue_id).attr('valueName');
+    			optionSelectObj.optionValueName = valName;
+    			methods.logger("adding product option: ");
+    			methods.logger(optionSelectObj);
     			product.ProductOption.push(optionSelectObj);
     		}
 	    	return product;
 	    },	
-	    optionIsSelected : function(id){
-	    	methods.logger("TODO: IMPLEMENT ME (optionIsSelected)");
-	    	return true; 
-	    },	        
+	    	        
 	    updatePrices : function(elt){
 			var $this = $(elt);
 			var settings = $this.data('shoppingCart').settings;
@@ -341,7 +341,6 @@
 			var vatMap = {};
 	    	//loop over cartDataStore
 	    	totalInclVat=0;
-	    	
 	    	for(var i = 0; i < cartDataStore.length ; i++){
 	    		var obj = cartDataStore[i];
 	    		var currentPrice = 0;
@@ -350,6 +349,7 @@
 	    		currentPrice = p * parseInt(obj.quantity);
 	    		
 	    		totalInclVat += currentPrice;
+	    		totalInclVat += methods.addOptionPrices(obj);
 	    		
 	    		//update vatMap
     			if(vatMap["x"+obj.VAT] == null || vatMap["x"+obj.VAT] == undefined){
@@ -358,13 +358,58 @@
 
 	    		methods.logger("updating vatMap with: "+ parseFloat(obj.price));
 	    		vatMap["x"+obj.VAT] += parseFloat(currentPrice);
+	    		
+	    		
 	    	}
 	    	
+	    	var totalExclVat = methods.renderVatRowsOnCheckout(vatMap, totalInclVat);
+	    	methods.renderExclPriceOnCheckout(totalExclVat);
+
 	    	settings.vatMap = vatMap;
 
 	    	$('.total-price').html(methods.formatEuro(totalInclVat));
+	    	$('.total-field').html("<strong>&euro; "+methods.formatEuro(totalInclVat)+"</strong>");
 
+	    },
+	    renderExclPriceOnCheckout : function(totalExclVat){
+		   $('.subtotal-field').html('&euro; '+methods.formatEuro(totalExclVat));
+	    },
+	    renderVatRowsOnCheckout : function(vatMap, totalInclVat) {
+	    	var totalExclVat = totalInclVat;
+		    methods.logger("renderVatRowsOnCheckout");
+		    methods.logger(vatMap);
+		  	for(var vatKey in vatMap){
+			  	var perc = parseFloat(vatKey.substring(1));
 
+			  	var x = vatKey.replace(".", "_");
+			  	var val = vatMap[vatKey];
+
+			  	$('.vat-value-'+x).html(methods.formatEuro(perc*parseFloat(val)));
+			  	totalExclVat -= (perc * parseFloat(val));
+		  	}  
+		  	return totalExclVat;
+	    },	    
+	    addOptionPrices : function(obj){
+	    	methods.logger("addOptionPrices: ", obj);
+	    	methods.logger(obj);
+	    	if(obj.ProductOption == null){
+		    	methods.logger("addOptionPrices: No option, returning 0");
+		    	return 0;
+	    	}
+	    	var ret = 0;
+	    	for(var i = 0; i < obj.ProductOption.length; i++){
+	    		var option = obj.ProductOption[i];
+
+	    		if(option.extraPrice != null && option.extraPrice != undefined && option.extraPrice != "") {    			
+				    methods.logger("Adding option price: "+option.extraPrice);
+			    	ret += parseFloat(option.extraPrice);
+			    }
+			    else {
+				    methods.logger("No option price, continueing...");
+			    }
+	    	}
+	    	methods.logger("total option price: "+ret);
+	    	return ret * parseInt(obj.quantity);
 	    },
 	    formatEuro : function(price){
 			Number.prototype.formatMoney = function(c, d, t){

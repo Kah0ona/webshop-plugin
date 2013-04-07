@@ -144,10 +144,14 @@ class CheckoutModel extends GenericModel {
 	private function calculateTotalPrice() {
 		$total = 0;
 		foreach($this->cart as $product){
-			$this->logMessage('adding price: '.$product['price'].' '.$product['quantity']);
+			$this->logMessage('Adding price: '.$product['price'].' '.$product['quantity']);
+			
 			$total += ($product['price'] * $product['quantity']);	
+			$this->logMessage('Adding optionsprices');
+			
+			$total += $this->calculateOptionsPrices($product) * $product['quantity'];
 		}
-		$total += (int) $this->options->getOption('ShippingCosts');
+		$total += (double) $this->options->getOption('ShippingCosts');
 		$discount = 0;
 		if(isset($_POST['coupon']) && $_POST['coupon'] != "" &&  $_POST['coupon'] != null){
 			$discount = $this->getCouponPercentage($_POST['coupon']);		
@@ -155,6 +159,18 @@ class CheckoutModel extends GenericModel {
 		$total = $total * (1-($discount/100));
 		
 		return $total;
+	}
+	
+	private function calculateOptionsPrices($product){
+		$ret = 0;
+		foreach($product['ProductOption'] as $option){
+			if($option['extraPrice'] != null) {
+				$ret += (double) $option['extraPrice'];
+				$this->logMessage('adding '.$option['extraPrice']);	
+			}
+		}
+    	$this->logMessage('total options price '.$ret);		
+		return $ret;
 	}
 	
 	private function getCouponPercentage($coupon){
