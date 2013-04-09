@@ -140,10 +140,11 @@
 	
 	    	if(productData == null || productData == undefined){
 		       	var clicked = $(event.currentTarget);
+		       	var prodId = clicked.attr('product-id');
 
-				quant = parseInt($('#product-amount').val());
+				quant = parseInt($('#product-amount-'+prodId).val());
 	  			
-		    	productRef = methods.lookupProduct(clicked.attr('product-id'));
+		    	productRef = methods.lookupProduct(prodId);
 
 		    	if(productRef == null){
 			    	methods.logger("FATAL: product data is not embedded in page!");

@@ -89,14 +89,13 @@ class ProductView extends GenericView {
 		$span = $this->calculateSpan();
 		$i = 1;
 	?>	
-		<?php echo $this->renderScript(); ?>
 		<!-- Start rendering ProductView -->
 		<div class="product-overview">
 			<?php foreach($this->data as $k=>$v) : ?>
 				<?php if($this->shouldRenderRowHtmlStart($i)) :?>
 					<div class="row-fluid product-row">
 				<?php endif; ?>	
-						<div class="<?php echo $span; ?> product product-<?php echo $v->Product_id; ?>">
+						<div class="<?php echo $span; ?> product product-<?php echo $v->Product_id; ?> <?php echo $this->shouldRenderRowHtmlEnd($i) ? 'last' : ''; ?>">
 							<?php $this->renderProduct($v); ?>
 						</div>
 				<?php if($this->shouldRenderRowHtmlEnd($i)) :?>

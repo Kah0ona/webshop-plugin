@@ -55,12 +55,13 @@ class ProductDetailView extends GenericView {
 	* @param $data contains data of one product
 	*/
 	public function renderOptionForm($data){ ?>
+		<div style="clear:both"></div>
 		<form class="form">
 		    <div class="control-group" style="margin-top: 15px;">
 				<label class="control-label control-label-<?php echo $data->Product_id; ?>" for="surname">Aantal: *</label>
 				
 				<div class="controls">		
-					<input class="input-small product-amount-<?php echo $data->Product_id; ?>" name="product-amount" id="product-amount" value="1" type="text" /> 
+					<input class="input-large product-amount-<?php echo $data->Product_id; ?>" name="product-amount" id="product-amount-<?php echo $data->Product_id; ?>" value="1" type="text" /> 
 				</div>
 			</div>
 			<!-- Product options, if any -->
