@@ -27,10 +27,10 @@ class ProductModel extends GenericModel {
 	public function fetchProductsDefault(){
 		$arr = array(
 			'hostname'=>$this->hostname,
-			'useNesting'=>'false'
+			'useNesting'=>'true'
 		);
-		
-		return $this->fetchProducts($arr);	
+		$prods = $this->fetchProducts($arr);	
+		return $prods;
 	}
 		
 }

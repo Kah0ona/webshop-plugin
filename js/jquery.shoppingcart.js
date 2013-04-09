@@ -113,11 +113,22 @@
 			    }
 		   });
 	    },
-	    /* This method assumes that on a page there is a variable holding the product data. 
-		 *    We currently only support adding a product to the cart from a detail page
-	     */
-	    lookupProduct: function(){
-	   		return webshopProduct;
+	    lookupProduct: function(productId){
+	    	if(webshopProducts instanceof Array) {
+	    		for(var i = 0; i < webshopProducts.length; i++){
+	    			var prod = webshopProducts[i];
+	    			
+		    		if(prod.Product_id == productId){
+			    		return prod;
+		    		}
+	    		}
+	    		
+	    		return null;
+	    	}
+	    	else { //detailpage
+		    	return webshopProducts;
+	    	}
+
 	   	},
 	    addProduct : function (elt, event, productData) {
 			var $this = $(elt);
@@ -126,13 +137,18 @@
 				    	
 	    	var quant=1;
 	    	var product = null;
-	    	
+	
 	    	if(productData == null || productData == undefined){
 		       	var clicked = $(event.currentTarget);
 
 				quant = parseInt($('#product-amount').val());
+	  			
+		    	productRef = methods.lookupProduct(clicked.attr('product-id'));
 
-		    	productRef = methods.lookupProduct();
+		    	if(productRef == null){
+			    	methods.logger("FATAL: product data is not embedded in page!");
+		    	}
+
 		    	//deepcopy it
 		    	product = jQuery.extend(true, {}, productRef);
 

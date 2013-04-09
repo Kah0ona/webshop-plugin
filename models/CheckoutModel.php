@@ -46,8 +46,7 @@ class CheckoutModel extends GenericModel {
 		ob_end_clean();			
 		
 		$this->logMessage($bod);
-		
-		
+			
 		$post['orderType'] = 'invoice';
 		$savedPerson = $this->curl_post(BASE_URL_WEBSHOP.'/persons', $post); //extra fields are automatically removed.
 		if(!$savedPerson){

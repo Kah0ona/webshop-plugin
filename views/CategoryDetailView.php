@@ -4,17 +4,18 @@
 */
 class CategoryDetailView extends GenericView {
 
-	public function render($data=null) { 
-		if($data == null)
+	public function render($data=null, $renderDetailOnOverview=false) { 
+		if($data == null) {
 			$data = $this->model->getData();
+		}
 		
 		include_once('ProductView.php');
-		$productView = new ProductView(null);
-	
+		//not a problem if we feed it a category model
+		$productView = new ProductView($this->model);
 		//$this->renderBackLink();
 	
 		if($data != null && count($data->Product) > 0) 
-			echo $productView->render($data->Product); 
+			echo $productView->render($data->Product, $renderDetailOnOverview); 
 		else
 			echo '<div>Deze categorie bevat momenteel geen producten.</div>';
 	}

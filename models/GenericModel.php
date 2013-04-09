@@ -6,6 +6,7 @@ class GenericModel {
 	protected $options;	
 	protected $data; //any data fetched will be put in this variable
 	protected $serviceUrl = null;
+	protected $rawData = null;
 	/*
 	* When we are viewing a detail page of one item, this id field will be set.
 	*/
@@ -137,6 +138,10 @@ class GenericModel {
 		}
 	}
 
+	public function getRawData(){
+		return $this->rawData;
+	}
+
 	protected function fetch($url, $params, $getString = true){
 		$this->data = null; //reset
 		
@@ -144,9 +149,12 @@ class GenericModel {
 	    
 	 	$url = $url.'?'.$this->decodeParamsIntoGetString($params);
 		$jsonString = $this->curl_fetch($url);
-		
+
+		$this->rawData = $jsonString;		
+
 		if($getString) {
 			$this->data = $jsonString;
+
 			return $jsonString;
 		}
 		else {

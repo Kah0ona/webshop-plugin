@@ -138,7 +138,7 @@ class SytematicWebshop {
 		if($this->containsShortCode($posts, 'categories')){
 			include_once('models/CategoryModel.php');		
 			$this->categoryModel = new CategoryModel($this->hostname);
-			$this->categoryModel->isDetailPage('categories') ? 	$this->categoryModel->fetchCategory() : $this->categoryModel->fetchSortedCategories();
+			$this->categoryModel->isDetailPage('categories') ? 	$this->categoryModel->fetchCategory() : $this->categoryModel->fetchSortedCategories(true);
 		}
 			
 		return $posts;
@@ -323,13 +323,24 @@ class SytematicWebshop {
 	/*---------------------------------------------*
 	 * Controller Functions
 	 *---------------------------------------------*/
-	public function render_categories(){
+	public function render_categories($atts){
+		extract(shortcode_atts(
+			array(
+				'render_options_on_overview'=>'false',
+			), $atts)
+		);
+	
 		if($this->categoryModel->isDetailPage()) {
 			include_once('views/CategoryDetailView.php');
+			$renderOptions = $render_options_on_overview === 'true';
+			if($renderOptions){
+				include_once('views/ProductDetailView.php');
+			}
 			$v = new CategoryDetailView($this->categoryModel);
-			$v->render();
+			$v->render(null, $renderOptions);
 		}
 		else {
+		
 			include_once('views/CategoryView.php');
 			$v = new CategoryView($this->categoryModel);
 			$v->render();

@@ -28,14 +28,14 @@ class CategoryModel extends GenericModel {
 		$this->categoryTitleOrder = $map;
 	}
 	
-	public function fetchSortedCategories(){
+	public function fetchSortedCategories($useNesting = false){
 		$arr = array(
 			'hostname'=>$this->hostname,
-			'useNesting'=>'false'
+			'useNesting'=>$useNesting
 		);
 		
 		$cats = $this->fetchCategories($arr);
-		
+		//print_r($cats);
 		//order by group title, and remap
 		$map = Array();
 		foreach($cats as $c){
