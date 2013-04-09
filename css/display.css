@@ -32,3 +32,12 @@ td.text-right {
 	text-align: right !important;
 	align: right !important;
 }
+
+.dropdown-menu {
+	width: 400px;
+}
+
+
+.dropdown-menu li a {
+	text-align: right;
+}

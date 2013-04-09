@@ -1,4 +1,4 @@
-<?php 
+d<?php 
 /**
 * Detailview, renders a list of products in this Product
 */
@@ -50,7 +50,7 @@ class ProductDetailView extends GenericView {
 										<label class="control-label" id="ProductOptionName_<?php echo $p->ProductOption_id; ?>" for="<?php echo $p->optionName; ?>"><?php echo $p->optionName; ?>:</label>
 										
 										<div class="controls">		
-											<select name="size" class="input-small" id="ProductOption_<?php echo $p->ProductOption_id; ?>">
+											<select name="size" class="input-medium" id="ProductOption_<?php echo $p->ProductOption_id; ?>">
 												<?php foreach($p->ProductOptionValue as $v ) {?>
 												
 												<option extraPrice="<?php echo $v->extraPrice; ?>" 

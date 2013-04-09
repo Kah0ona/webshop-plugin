@@ -102,7 +102,7 @@ class ProductView extends GenericView {
 		 	<?php echo $product->productName; ?>
 		 </div>
 		 <div class="product-price">
-		 	<?php echo $this->formatMoney($product->productPrice); ?>
+		 	€ <?php echo $this->formatMoney($product->productPrice); ?>
 		 </div>
 		 <div class="product-detail-button">
 		 	<a href="<?php echo $this->getDetailLink($product); ?>">details</a>

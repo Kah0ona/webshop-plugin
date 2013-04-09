@@ -345,19 +345,22 @@
 	    		var obj = cartDataStore[i];
 	    		var currentPrice = 0;
 
+
+
 	    		var p = parseFloat(obj.price);
 	    		currentPrice = p * parseInt(obj.quantity);
-	    		
+	    		var optionsPrice = methods.addOptionPrices(obj);
+	    			    		
 	    		totalInclVat += currentPrice;
-	    		totalInclVat += methods.addOptionPrices(obj);
+	    		totalInclVat += optionsPrice
 	    		
 	    		//update vatMap
     			if(vatMap["x"+obj.VAT] == null || vatMap["x"+obj.VAT] == undefined){
 	    			vatMap["x"+obj.VAT] = 0;
 	    		}
 
-	    		methods.logger("updating vatMap with: "+ parseFloat(obj.price));
-	    		vatMap["x"+obj.VAT] += parseFloat(currentPrice);
+	    		methods.logger("updating vatMap with: "+ parseFloat(obj.price+optionsPrice));
+	    		vatMap["x"+obj.VAT] += parseFloat(currentPrice+optionsPrice);
 	    		
 	    		
 	    	}

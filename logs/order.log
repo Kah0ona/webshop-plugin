@@ -863,3 +863,138 @@
 2013-04-07 18:38:53: returnUrl: http://localhost/~marten/wordpress/success
 2013-04-07 18:38:53: notifyUrl: http://webshop.sytematic.nl/public/sisow_notifications
 2013-04-07 18:38:53: Setting redirect url: https://www.sisow.nl/Sisow/iDeal/Simulator.aspx?merchantid=2537507457&txid=TEST080486882283&sha1=cff44ecb7af50235fbbf672d92d259d0772f082a
+2013-04-07 18:50:06: -------
+2013-04-07 18:50:06: Processing cart: 
+2013-04-07 18:50:06: [{"Product_id":"25","title":"Malene Birger jurkje","desc":"Adiba jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_25_1358530381425.jpg","quantity":"1","price":"469.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"4","ProductOptionValue_id":"14","optionName":"Maat:","extraPrice":"10","optionValueName":"S"},{"ProductOption_id":"5","ProductOptionValue_id":"20","optionName":"Kleur:","extraPrice":"","optionValueName":"Bruin"}]}]
+2013-04-07 18:50:06: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 62
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 02
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [issuerid] => 99
+    [invoice] => Plaats bestelling
+    [hostname] => denimes
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"25","title":"Malene Birger jurkje","desc":"Adiba jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_25_1358530381425.jpg","quantity":"1","price":"469.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"4","ProductOptionValue_id":"14","optionName":"Maat:","extraPrice":"10","optionValueName":"S"},{"ProductOption_id":"5","ProductOptionValue_id":"20","optionName":"Kleur:","extraPrice":"","optionValueName":"Bruin"}]}]
+    [orderStatus] => nieuw
+)
+
+2013-04-07 18:50:06: Inserted person id: 55
+2013-04-07 18:50:08: Inserted Order id: 45
+2013-04-07 18:50:08: Creating iDeal transaction
+2013-04-07 18:50:08: Adding price: 469.95 1
+2013-04-07 18:50:08: Adding optionsprices
+2013-04-07 18:50:08: adding 10
+2013-04-07 18:50:08: total options price 10
+2013-04-07 18:50:08: purchaseId: 45
+2013-04-07 18:50:08: description: ABC Webshop bestelling
+2013-04-07 18:50:08: amount: 479.95
+2013-04-07 18:50:08: issuerId: 99
+2013-04-07 18:50:08: returnUrl: http://localhost/~marten/wordpress/success
+2013-04-07 18:50:08: notifyUrl: http://webshop.sytematic.nl/public/sisow_notifications
+2013-04-07 18:50:08: Setting redirect url: https://www.sisow.nl/Sisow/iDeal/Simulator.aspx?merchantid=2537507457&txid=TEST080486882498&sha1=751aac66ad5d9a5b00b75abf83c42257bb832ec5
+2013-04-07 18:56:49: -------
+2013-04-07 18:56:49: Processing cart: 
+2013-04-07 18:56:49: [{"Product_id":"25","title":"Malene Birger jurkje","desc":"Adiba jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_25_1358530381425.jpg","quantity":"1","price":"469.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"4","ProductOptionValue_id":"14","optionName":"Maat:","extraPrice":"10","optionValueName":"S"},{"ProductOption_id":"5","ProductOptionValue_id":"20","optionName":"Kleur:","extraPrice":"","optionValueName":"Bruin"}]}]
+2013-04-07 18:56:49: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 12
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 12
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [issuerid] => 99
+    [invoice] => Plaats bestelling
+    [hostname] => denimes
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"25","title":"Malene Birger jurkje","desc":"Adiba jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_25_1358530381425.jpg","quantity":"1","price":"469.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"4","ProductOptionValue_id":"14","optionName":"Maat:","extraPrice":"10","optionValueName":"S"},{"ProductOption_id":"5","ProductOptionValue_id":"20","optionName":"Kleur:","extraPrice":"","optionValueName":"Bruin"}]}]
+    [orderStatus] => nieuw
+)
+
+2013-04-07 18:56:49: Inserted person id: 56
+2013-04-07 18:56:49: Inserted Order id: 46
+2013-04-07 18:56:49: Creating iDeal transaction
+2013-04-07 18:56:49: Adding price: 469.95 1
+2013-04-07 18:56:49: Adding optionsprices
+2013-04-07 18:56:49: adding 10
+2013-04-07 18:56:49: total options price 10
+2013-04-07 18:56:49: purchaseId: 46
+2013-04-07 18:56:49: description: ABC Webshop bestelling
+2013-04-07 18:56:49: amount: 479.95
+2013-04-07 18:56:49: issuerId: 99
+2013-04-07 18:56:49: returnUrl: http://localhost/~marten/wordpress/success
+2013-04-07 18:56:49: notifyUrl: http://webshop.sytematic.nl/public/sisow_notifications
+2013-04-07 18:56:50: Setting redirect url: https://www.sisow.nl/Sisow/iDeal/Simulator.aspx?merchantid=2537507457&txid=TEST080486882639&sha1=0394f62a78375d7deeece386e2c48acc38e8f2b4
+2013-04-07 18:58:30: -------
+2013-04-07 18:58:30: Processing cart: 
+2013-04-07 18:58:30: [{"Product_id":"25","title":"Malene Birger jurkje","desc":"Adiba jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_25_1358530381425.jpg","quantity":"1","price":"469.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"4","ProductOptionValue_id":"14","optionName":"Maat:","extraPrice":"10","optionValueName":"S"},{"ProductOption_id":"5","ProductOptionValue_id":"20","optionName":"Kleur:","extraPrice":"","optionValueName":"Bruin"}]}]
+2013-04-07 18:58:30: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 43
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 4
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [issuerid] => 99
+    [invoice] => Plaats bestelling
+    [hostname] => denimes
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"25","title":"Malene Birger jurkje","desc":"Adiba jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_25_1358530381425.jpg","quantity":"1","price":"469.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"4","ProductOptionValue_id":"14","optionName":"Maat:","extraPrice":"10","optionValueName":"S"},{"ProductOption_id":"5","ProductOptionValue_id":"20","optionName":"Kleur:","extraPrice":"","optionValueName":"Bruin"}]}]
+    [orderStatus] => nieuw
+)
+
+2013-04-07 18:58:30: Inserted person id: 57
+2013-04-07 18:58:30: Inserted Order id: 47
+2013-04-07 18:58:30: Creating iDeal transaction
+2013-04-07 18:58:30: Adding price: 469.95 1
+2013-04-07 18:58:30: Adding optionsprices
+2013-04-07 18:58:30: adding 10
+2013-04-07 18:58:30: total options price 10
+2013-04-07 18:58:30: purchaseId: 47
+2013-04-07 18:58:30: description: ABC Webshop bestelling
+2013-04-07 18:58:30: amount: 479.95
+2013-04-07 18:58:30: issuerId: 99
+2013-04-07 18:58:30: returnUrl: http://localhost/~marten/wordpress/success
+2013-04-07 18:58:30: notifyUrl: http://webshop.sytematic.nl/public/sisow_notifications
+2013-04-07 18:58:31: Setting redirect url: https://www.sisow.nl/Sisow/iDeal/Simulator.aspx?merchantid=2537507457&txid=TEST080486882666&sha1=f523a1202ab12a6316cffd5cbd55680bf0b6457b
