@@ -3,7 +3,7 @@
 * Renders the checkout page
 */
 class CheckoutView extends GenericView {
-
+	protected $paymentMethodModel=null;
 	private function renderIDealForm(){
 		$sisow = new Sisow($this->model->getOptions()->getOption('SisowMerchantId'), 
 						   $this->model->getOptions()->getOption('SisowMerchantKey')
@@ -42,6 +42,25 @@ class CheckoutView extends GenericView {
 		}
 		return $product->price + $optionPrice;
 	}
+	
+	
+	private function renderPaymentMethodForm() {
+		$paymentMethods = $this->paymentMethodModel->getData();
+		$ret .= '<select class="payment-methods-form">';	
+		$ret .= '<option value="ideal">iDeal</option>';	
+		if($paymentMethods != null){
+			foreach($paymentMethods as $method){ 
+				$ret .= '<option value="'.$method->PaymentMethod_id.'">'.$method->paymentMethodName.'</option>';
+			}
+		}
+		$ret .= '</select>';
+		return $ret;
+	}
+	
+	public function setPaymentMethodModel($m){
+		$this->paymentMethodModel = $m;
+	}
+	
 	private function getSelectedOptionIdAttr($product){
 		return '';
 	}
@@ -122,7 +141,12 @@ class CheckoutView extends GenericView {
 				<?php } ?>
 					
 				
-				
+					<tr class="transactioncosts-row thick-border">
+						<td><strong>&nbsp;</strong></td>
+						<td><strong>Transactiekosten</strong></td>
+						<td class="text-right transactioncosts-field"></td>
+						<td>&nbsp;</td>
+					</tr>							
 					<tr class="deliverycosts-row thick-border">
 						<td><strong>&nbsp;</strong></td>
 						<td><strong>Verzendkosten</strong></td>
@@ -365,12 +389,28 @@ class CheckoutView extends GenericView {
 						</div>
 					</div>
 					
+					
+					
 					<div class="row-fluid">
 						<div class="span12">
 							<h3>Betaalmethode</h3>
 							<div class="control-group">
+								<p>Kies uw betaalmethode</p>						
+							    <div id="payment-text" class="alert hidden"></div>
+			
+<!--								<label class="control-label" for="paymentmethod">Betaalmethode:</label>					-->
+								<div class="controls">	
+									<?php echo $this->renderPaymentMethodForm(); ?>
+									
+								</div>		
+							</div>	
+
+
+
+
+							<div class="control-group">
 								<p>Kies uw bank om direct via iDeal te betalen</p>						
-							    <div id="discount-text" class="alert hidden"></div>
+							    <div id="ideal-text" class="alert hidden"></div>
 			
 								<label class="control-label" for="coupon">Uw bank:</label>					
 								<div class="controls">	

@@ -14,6 +14,7 @@ class CheckoutModel extends GenericModel {
 	protected $redirectUrl = '';
 	public function __construct($options) {
 		$this->options=$options;
+		$this->hostname=$options->getOption('hostname');
 		$this->getCartFromSession();
 	} 
 

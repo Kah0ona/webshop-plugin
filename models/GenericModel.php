@@ -149,7 +149,6 @@ class GenericModel {
 	    
 	 	$url = $url.'?'.$this->decodeParamsIntoGetString($params);
 		$jsonString = $this->curl_fetch($url);
-
 		$this->rawData = $jsonString;		
 
 		if($getString) {

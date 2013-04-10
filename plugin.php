@@ -41,6 +41,7 @@ class SytematicWebshop {
 	protected $categoryModel = null; //only set if there is a post with a category shortcode
 	protected $checkoutModel = null;
 	protected $resultModel = null;
+	protected $paymentMethodModel=null;
 	/**
 	 * Initializes the plugin by setting localization, filters, and administration functions.
 	 */
@@ -362,9 +363,18 @@ class SytematicWebshop {
   
 	public function render_checkout(){
 		include_once('models/CheckoutModel.php');
+		include_once('models/PaymentMethodModel.php');
 		include_once('views/CheckoutView.php');
+
 		$this->checkoutModel = new CheckoutModel($this->options);
+	
+		$this->paymentMethodModel = new PaymentMethodModel($this->options->getOption('hostname'));
+		$this->paymentMethodModel->fetchPaymentMethods();
+		$this->paymentMethodModel->storeDataInSession();
+		
 		$v = new CheckoutView($this->checkoutModel);
+		$v->setPaymentMethodModel($this->paymentMethodModel);
+		
 		$v->render();
 	}
 	
