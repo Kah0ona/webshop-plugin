@@ -107,7 +107,16 @@ class SytematicWebshop {
 		$checkout = new CheckoutModel($this->options);
 		$resultStatus = $checkout->sendOrderToBackend();
 		$error = null;
-		if($resultStatus == 200){
+		
+		header('Content-Type: application/json; charset=UTF8');
+
+		if($_POST['payment-method'] != "ideal") {
+			echo json_encode(array('redirectUrl' => site_url('/success')));
+			exit;
+		}
+		
+		
+		if($resultStatus == 200 ){
 			$checkout->doIDeal(); //redirects away if everything goes well, returns an error if not. 
 		}		
 

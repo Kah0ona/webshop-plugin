@@ -46,7 +46,7 @@ class CheckoutView extends GenericView {
 	
 	private function renderPaymentMethodForm() {
 		$paymentMethods = $this->paymentMethodModel->getData();
-		$ret .= '<select class="payment-methods-form">';	
+		$ret .= '<select name="payment-method" class="payment-methods-form" id="payment-methods-form">';	
 		$ret .= '<option value="ideal">iDeal</option>';	
 		if($paymentMethods != null){
 			foreach($paymentMethods as $method){ 
@@ -79,6 +79,17 @@ class CheckoutView extends GenericView {
 		 	var hostname ='<?php echo $this->model->getHostname(); ?>';
 			var baseUrl = '<?php echo $_SERVER['HTTP_HOST']; ?>';
 			var deliveryCostUrl = '<?php echo $deliveryCostUrl; ?>';
+			
+			function hideIdealFormIfNecessary(){
+				var elt = jQuery('#payment-methods-form');
+				if(elt.val() == 'ideal'){
+						jQuery('.ideal-group').removeClass('hidden');
+					}
+					else {
+						jQuery('.ideal-group').addClass('hidden');
+				}
+			}
+			
 			jQuery(document).ready(function($){
 				$('.xtooltip').popover();
 				
@@ -92,6 +103,12 @@ class CheckoutView extends GenericView {
 					var id = $(this).attr("id");
 					$('.info-click-'+id).toggleClass('hidden');
 				});
+				
+				
+				$('#payment-methods-form').change(function(){
+					hideIdealFormIfNecessary();
+				});
+				hideIdealFormIfNecessary();			
 				
 			});
 			
@@ -405,10 +422,7 @@ class CheckoutView extends GenericView {
 								</div>		
 							</div>	
 
-
-
-
-							<div class="control-group">
+							<div class="control-group ideal-group">
 								<p>Kies uw bank om direct via iDeal te betalen</p>						
 							    <div id="ideal-text" class="alert hidden"></div>
 			

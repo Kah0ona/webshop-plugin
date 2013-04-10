@@ -30,7 +30,6 @@ jQuery(document).ready(function($){
 			orderType : submitType*/
 		},
 		success : function(data, textStatus, jqXHR) {
-
 			window.location = data.redirectUrl;
 		}
 	};
