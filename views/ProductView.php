@@ -55,7 +55,7 @@ class ProductView extends GenericView {
 		<?php
 	}
 
-	public function render($data=null, $renderDetailOnOverview=false) { 
+	public function render($data=null, $renderDetailOnOverview=false, $categoryId = null) { 
 		$this->renderDetailOnOverview = $renderDetailOnOverview;
 		
 		if($data == null)
@@ -65,7 +65,7 @@ class ProductView extends GenericView {
 	
 		$this->renderScript();
 		$this->renderFeaturedProducts();		
-		$this->renderMain();
+		$this->renderMain($categoryId);
 	}
 
 	protected function renderFeaturedProducts(){
@@ -85,12 +85,12 @@ class ProductView extends GenericView {
 	}
 
 	
-	protected function renderMain(){ 
+	protected function renderMain($categoryId = null){ 
 		$span = $this->calculateSpan();
 		$i = 1;
 	?>	
 		<!-- Start rendering ProductView -->
-		<div class="product-overview">
+		<div class="product-overview <?php echo $categoryId != null ? 'product-category-'.$categoryId : ""; ?>">
 			<?php foreach($this->data as $k=>$v) : ?>
 				<?php if($this->shouldRenderRowHtmlStart($i)) :?>
 					<div class="row-fluid product-row">

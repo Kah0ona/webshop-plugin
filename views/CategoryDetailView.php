@@ -15,7 +15,7 @@ class CategoryDetailView extends GenericView {
 		//$this->renderBackLink();
 	
 		if($data != null && count($data->Product) > 0) 
-			echo $productView->render($data->Product, $renderDetailOnOverview); 
+			echo $productView->render($data->Product, $renderDetailOnOverview, $data->Category_id); 
 		else
 			echo '<div>Deze categorie bevat momenteel geen producten.</div>';
 	}
