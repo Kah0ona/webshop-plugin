@@ -344,6 +344,7 @@ class SytematicWebshop {
 			include_once('views/CategoryDetailView.php');
 			$renderOptions = $render_options_on_overview === 'true';
 			if($renderOptions){
+				include_once('models/ProductModel.php');
 				include_once('views/ProductDetailView.php');
 			}
 			$v = new CategoryDetailView($this->categoryModel);

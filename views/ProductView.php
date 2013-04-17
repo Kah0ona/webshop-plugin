@@ -38,6 +38,19 @@ class ProductView extends GenericView {
 		return $numColName;
 	}
 	
+	public function render($data=null, $renderDetailOnOverview=false, $categoryId = null) { 
+		$this->renderDetailOnOverview = $renderDetailOnOverview;
+		
+		if($data == null)
+			$this->data = $this->model->getData();
+		else 
+			$this->data = $data;
+	
+		$this->renderScript();
+		$this->renderMain($categoryId);
+	}
+
+
 	protected function renderScript(){
 		?>
 		<script type="text/javascript">
@@ -55,23 +68,7 @@ class ProductView extends GenericView {
 		<?php
 	}
 
-	public function render($data=null, $renderDetailOnOverview=false, $categoryId = null) { 
-		$this->renderDetailOnOverview = $renderDetailOnOverview;
-		
-		if($data == null)
-			$this->data = $this->model->getData();
-		else 
-			$this->data = $data;
-	
-		$this->renderScript();
-		$this->renderFeaturedProducts();		
-		$this->renderMain($categoryId);
-	}
 
-	protected function renderFeaturedProducts(){
-		
-	}
-	
 	protected function shouldRenderRowHtmlStart($i){
 		return $i%$this->numCols == 1;
 	}
@@ -83,32 +80,36 @@ class ProductView extends GenericView {
 	protected function getDetailLink($product){
 		return site_url().'/products/'.$product->Product_id.'#'.$product->productName;
 	}
-
 	
 	protected function renderMain($categoryId = null){ 
+		$productModel = new ProductModel($this->model->getHostname());
+
 		$span = $this->calculateSpan();
 		$i = 1;
 	?>	
 		<!-- Start rendering ProductView -->
 		<div class="product-overview <?php echo $categoryId != null ? 'product-category-'.$categoryId : ""; ?>">
 			<?php foreach($this->data as $k=>$v) : ?>
+				<?php if($productModel->shouldShowProductBasedOnSku($v)) : ?>
+			
 				<?php if($this->shouldRenderRowHtmlStart($i)) :?>
 					<div class="row-fluid product-row">
 				<?php endif; ?>	
 						<div class="<?php echo $span; ?> product product-<?php echo $v->Product_id; ?> <?php echo $this->shouldRenderRowHtmlEnd($i) ? 'last' : ''; ?>">
-							<?php $this->renderProduct($v); ?>
+							<?php $this->renderProduct($v, $productModel); ?>
 						</div>
 				<?php if($this->shouldRenderRowHtmlEnd($i)) :?>
 					</div><!-- end row-fluid -->
 				<?php endif; ?>
-				<?php $i++; ?>				
+				<?php $i++; ?>
+				<?php endif; ?>				
 			<?php endforeach; ?>
 		</div>
 		<!-- End ProductView -->
 	 <?php
 	 }
 
-	 public function renderProduct($product){  ?>
+	 public function renderProduct($product, $productModel=null){  ?>
 		 <!-- Rendering single product -->
 		 <div class="product-image">
 		 	<a href="<?php echo $this->getDetailLink($product); ?>">
@@ -122,7 +123,7 @@ class ProductView extends GenericView {
 		 	€ <?php echo $this->formatMoney($product->productPrice); ?>
 		 </div>
 		 <?php if($this->renderDetailOnOverview) { 
-				 	$v = new ProductDetailView(null);
+				 	$v = new ProductDetailView($productModel);
 				 	echo $v->renderOptionForm($product);
 			 	}
 		 ?>

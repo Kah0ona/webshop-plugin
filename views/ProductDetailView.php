@@ -72,16 +72,22 @@ class ProductDetailView extends GenericView {
 				<div class="controls controls-<?php echo $data->Product_id; ?>">		
 					<select name="size" class="input-large " id="ProductOption_<?php echo $p->ProductOption_id; ?>">
 						<?php foreach($p->ProductOptionValue as $v ) {?>
-						
-						<option extraPrice="<?php echo $v->extraPrice; ?>" 
-								value="<?php echo $v->ProductOptionValue_id; ?>" 
-								valueName="<?php echo $v->optionValue;?>" 
-								id="ProductOptionValueName_<?php echo $v->ProductOptionValue_id; ?>">
-									<?php echo $v->optionValue; ?>
-							<?php if($v->extraPrice != null && $v->extraPrice > 0) { ?>
-								(€ <?php echo $this->formatMoney($data->productPrice+ $v->extraPrice); ?>)
+							<?php if((count($data->ProductOption) == 1 &&
+							         $this->model->productIsInStockSimple($data, $v->ProductOptionValue_id)
+							         )
+							         ||
+							         (count($data->ProductOption) > 1)
+							         ) { ?>
+								<option extraPrice="<?php echo $v->extraPrice; ?>" 
+										value="<?php echo $v->ProductOptionValue_id; ?>" 
+										valueName="<?php echo $v->optionValue;?>" 
+										id="ProductOptionValueName_<?php echo $v->ProductOptionValue_id; ?>">
+											<?php echo $v->optionValue; ?>
+									<?php if($v->extraPrice != null && $v->extraPrice > 0) { ?>
+										(€ <?php echo $this->formatMoney($data->productPrice+ $v->extraPrice); ?>)
+									<?php } ?>
+								</option>
 							<?php } ?>
-						</option>
 						<? } ?>										
 					</select>
 				</div>
