@@ -32,7 +32,6 @@ define('EURO_FORMAT', '%.2n');
 define('WEBSHOP_PLUGIN_PATH', plugin_dir_path(__FILE__) );
 
 setlocale(LC_MONETARY, 'it_IT');
-
 class SytematicWebshop {
 	protected $options = null;
 	protected $hostname = null;//TODO fix me, should be fetched from the $this->options.
@@ -49,6 +48,11 @@ class SytematicWebshop {
 		include_once('views/GenericView.php');	
 		include_once('models/GenericModel.php');		
 
+
+		add_shortcode('webshop_categories', array($this, 'render_categories'));
+		add_shortcode('webshop_products', array($this, 'render_products'));
+		add_shortcode('webshop_checkout', array($this, 'render_checkout'));
+		add_shortcode('webshop_after_order', array($this,'render_after_order'));
 
 		// Load plugin text domain
 		add_action('init', array( $this, 'plugin_textdomain' ) );
@@ -70,10 +74,6 @@ class SytematicWebshop {
 		register_uninstall_hook( __FILE__, array( $this, 'uninstall' ) );
 		
 		
-		add_shortcode('webshop_categories', array($this, 'render_categories'));
-		add_shortcode('webshop_products', array($this, 'render_products'));
-		add_shortcode('webshop_checkout', array($this, 'render_checkout'));
-		add_shortcode('webshop_after_order', array($this,'render_after_order'));
 		
 		add_action( 'widgets_init', array($this, 'register_widgets' ));
 				
@@ -341,7 +341,8 @@ class SytematicWebshop {
 				'numcols'=>'3'
 			), $atts)
 		);
-		
+		ob_start();
+
 	
 		if($this->categoryModel->isDetailPage()) {
 			include_once('views/CategoryDetailView.php');
@@ -358,11 +359,21 @@ class SytematicWebshop {
 			include_once('views/CategoryView.php');
 			$v = new CategoryView($this->categoryModel);
 			$v->setNumCols($numcols);
+			
+	
 			$v->render(null, $style);
-		}		
+			
+			
+		}	
+		$output = ob_get_contents();
+		ob_end_clean();	
+	
+		return $output;	
 	}
 	
 	public function render_products(){
+		ob_start();
+	
 		if($this->productModel->isDetailPage()) {
 			include_once('views/ProductDetailView.php');
 			$v = new ProductDetailView($this->productModel);
@@ -372,13 +383,20 @@ class SytematicWebshop {
 			include_once('views/ProductView.php');
 			$v = new ProductView($this->productModel);
 			$v->render();
-		}		
+		}	
+			
+		$output = ob_get_contents();
+		ob_end_clean();	
+	
+		return $output;		
 	}
   
 	public function render_checkout(){
 		include_once('models/CheckoutModel.php');
 		include_once('models/PaymentMethodModel.php');
 		include_once('views/CheckoutView.php');
+
+		ob_start();
 
 		$this->checkoutModel = new CheckoutModel($this->options);
 	
@@ -390,15 +408,25 @@ class SytematicWebshop {
 		$v->setPaymentMethodModel($this->paymentMethodModel);
 		
 		$v->render();
+			
+		$output = ob_get_contents();
+		ob_end_clean();	
+	
+		return $output;			
 	}
 	
 	//Order result page	
 	public function render_after_order(){
 		include_once('models/TransactionResultModel.php');
 		include_once('views/TransactionResultView.php');
+		ob_start();
 		$this->resultModel = new TransactionResultModel($this->options);
 		$v = new TransactionResultView($this->resultModel);
-		$v->render();			
+		$v->render();		
+		$output = ob_get_contents();
+		ob_end_clean();	
+	
+		return $output;				
 	}
 } // end class
 

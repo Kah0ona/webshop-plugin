@@ -8,7 +8,7 @@ class CategoryView extends GenericView {
 	public function render($data=null, $renderMode='list') { 
 		if($data == null)
 			$data = $this->model->getSortedMap();
-			
+
 		if($renderMode == 'list'){
 			$this->renderList($data);
 		}	
@@ -70,7 +70,7 @@ class CategoryView extends GenericView {
 		$span = $this->calculateSpan();
 	?>
 				
-		<!-- Start rendering ProductView -->
+		<!-- Start rendering CategoryView -->
 		<div class="category-overview-grid">
 			<?php foreach($data as $k=>$v) : $i = 1; ?>
 				<h3><?php echo $k; ?></h3>
@@ -78,7 +78,7 @@ class CategoryView extends GenericView {
 				<?php if($this->shouldRenderRowHtmlStart($i)) :?>
 					<div class="row-fluid category-row">
 				<?php endif; ?>	
-						<div class="<?php echo $span; ?> category category-<?php echo $v->Category_id; ?> <?php echo $this->shouldRenderRowHtmlEnd($i) ? 'last' : ''; ?>">
+						<div class="<?php echo $span; ?> category category-<?php echo $category->Category_id; ?> <?php echo $this->shouldRenderRowHtmlEnd($i) ? 'last' : ''; ?>">
 							<?php $this->renderCategory($category); ?>
 						</div>
 				<?php if($this->shouldRenderRowHtmlEnd($i)) :?>
@@ -88,7 +88,7 @@ class CategoryView extends GenericView {
 				<?php endforeach; ?>				
 			<?php endforeach; ?>
 		</div>
-		<!-- End ProductView -->
+		<!-- End CategoryView -->
 
  
 	
