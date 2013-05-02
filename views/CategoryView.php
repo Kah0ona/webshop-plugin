@@ -3,10 +3,121 @@
 * Overview, showing a list of categories
 */
 class CategoryView extends GenericView {
-	public function render($data=null) { 
+	protected $numCols = 2;
+
+	public function render($data=null, $renderMode='list') { 
 		if($data == null)
 			$data = $this->model->getSortedMap();
-	?>	
+			
+		if($renderMode == 'list'){
+			$this->renderList($data);
+		}	
+		else {
+			$this->renderGrid($data);
+		}
+	}
+	
+	
+	public function setNumCols($num){
+		$this->numCols = $num;
+	}
+	
+	protected function calculateSpan(){
+		$numColName = '';
+		switch($this->numCols){
+			case 1:
+				$numColName='span12';
+			break;
+			case 2:
+				$numColName='span6';
+			break;
+			case 3:
+				$numColName='span4';
+			break;
+			case 4:
+				$numColName='span3';
+			break;
+			case 6:
+				$numColName='span2';
+			break;
+			case 12: 
+				$numColName='span1';	
+			break;
+			default:
+				$numColName='span4';
+			break;
+		}
+		return $numColName;
+	}
+
+
+	protected function shouldRenderRowHtmlStart($i){
+		return $i%$this->numCols == 1;
+	}
+	
+	protected function shouldRenderRowHtmlEnd($i){
+		return $i%$this->numCols == 0;
+	}
+	
+	protected function getDetailLink($category){
+		return site_url().'/categories/'.$category->Category_id.'#'.$category->categoryName;
+	}
+	
+	public function renderGrid($data=null){ 
+		if($data == null)
+			$data = $this->model->getSortedMap();
+			
+		$span = $this->calculateSpan();
+	?>
+				
+		<!-- Start rendering ProductView -->
+		<div class="category-overview-grid">
+			<?php foreach($data as $k=>$v) : $i = 1; ?>
+				<h3><?php echo $k; ?></h3>
+				<?php foreach($v as $category) : ?>
+				<?php if($this->shouldRenderRowHtmlStart($i)) :?>
+					<div class="row-fluid category-row">
+				<?php endif; ?>	
+						<div class="<?php echo $span; ?> category category-<?php echo $v->Category_id; ?> <?php echo $this->shouldRenderRowHtmlEnd($i) ? 'last' : ''; ?>">
+							<?php $this->renderCategory($category); ?>
+						</div>
+				<?php if($this->shouldRenderRowHtmlEnd($i)) :?>
+					</div><!-- end row-fluid -->
+				<?php endif; ?>
+				<?php $i++; ?>
+				<?php endforeach; ?>				
+			<?php endforeach; ?>
+		</div>
+		<!-- End ProductView -->
+
+ 
+	
+	<?php	
+	}
+	
+	
+	public function renderCategory($category){ ?>
+		<div class="category-image category-image-<?php echo $category->Category_id; ?>">
+			<?php 
+				if($category->categoryImage != null) {
+					echo '<a href="'.$this->getDetailLink($category).'">';
+					echo   '<img src="'.SYSTEM_URL_WEBSHOP.'/uploads/Category/'.$category->categoryImage.'" alt="'.$category->categoryName.'" title="'.$category->categoryName.'">';
+					echo '</a>';
+				}
+			?>		
+		</div>		
+		<div class="category-name category-name-<?php echo $category->Category_id; ?>">
+			<?php 
+			echo '<a href="'.$this->getDetailLink($category).'">';
+			echo $category->categoryName; 
+			echo '</a>';			
+			?>
+		</div>	
+		
+	<?php 
+	}
+	
+	public function renderList($data=null){ ?>
 		<!-- Start rendering CategoryView -->
 		<ul class="categories">
 		<?php
@@ -43,7 +154,8 @@ class CategoryView extends GenericView {
 		</ul>
 		<!-- End CategoryView -->
 
-	<?php }
-	
+
+	<?php	
+	}
 }
 ?>

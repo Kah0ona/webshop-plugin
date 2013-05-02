@@ -337,8 +337,11 @@ class SytematicWebshop {
 		extract(shortcode_atts(
 			array(
 				'render_options_on_overview'=>'false',
+				'style'=>'list',
+				'numcols'=>'3'
 			), $atts)
 		);
+		
 	
 		if($this->categoryModel->isDetailPage()) {
 			include_once('views/CategoryDetailView.php');
@@ -351,10 +354,11 @@ class SytematicWebshop {
 			$v->render(null, $renderOptions);
 		}
 		else {
-		
+			
 			include_once('views/CategoryView.php');
 			$v = new CategoryView($this->categoryModel);
-			$v->render();
+			$v->setNumCols($numcols);
+			$v->render(null, $style);
 		}		
 	}
 	
