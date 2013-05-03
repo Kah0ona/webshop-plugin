@@ -4,6 +4,18 @@
 */
 class ProductDetailView extends GenericView {
 
+	public function containsProductWithExtraPrice($options){
+		if($options == null) return false;
+		$ret = false;
+		foreach($options as $option){
+			foreach($option->ProductOptionValue as $v){
+				if($v->extraPrice != null && $v->extraPrice > 0)
+					return true;
+			}
+		}
+		return $ret;
+	}
+
 	public function render($data=null) { 
 		if($data == null)
 			$data = $this->model->getData();
@@ -30,6 +42,7 @@ class ProductDetailView extends GenericView {
 									<?php echo $data->productDesc; ?>
 								</p>
 								<p class="product-price">
+								<?php if($this->containsProductWithExtraPrice($data->ProductOption)) { echo 'vanaf '; } ?>
 									€ <?php echo $this->formatMoney($data->productPrice); ?>
 								</p>
 							</div><!-- /span12 -->
