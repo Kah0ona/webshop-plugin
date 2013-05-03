@@ -10,6 +10,19 @@ class ProductView extends GenericView {
 		$this->numCols = $num;
 	}
 	
+	public function containsProductWithExtraPrice($options){
+		if($options == null) return false;
+		$ret = false;
+		foreach($options as $option){
+			foreach($option->ProductOptionValue as $v){
+				if($v->extraPrice != null && $v->extraPrice > 0)
+					return true;
+			}
+		}
+		return $ret;
+	}
+
+	
 	protected function calculateSpan(){
 		$numColName = '';
 		switch($this->numCols){
@@ -120,6 +133,7 @@ class ProductView extends GenericView {
 		 	<?php echo $product->productName; ?>
 		 </div>
 		 <div class="product-price product-price-<?php echo $product->Product_id; ?>">
+		 	<?php if($this->containsProductWithExtraPrice($product->ProductOption)){ echo 'vanaf '; } ?>
 		 	€ <?php echo $this->formatMoney($product->productPrice); ?>
 		 </div>
 		 <?php if($this->renderDetailOnOverview) { 
