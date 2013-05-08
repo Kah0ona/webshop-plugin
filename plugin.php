@@ -83,7 +83,7 @@ class SytematicWebshop {
 		add_action('admin_init', array($this, 'register_settings'));
 	
 		add_filter('the_title', array($this, 'modify_title'));	
-		add_filter('wp_title', array($this, 'modify_title_tag'));	
+		add_filter('wp_title', array($this, 'modify_title_tag'), 100);	//priority is 100, to beat Yoast SEO
 		add_action('wp_head', array($this, 'init_cart'));
 	
 		//this must be inside is_admin, see: http://codex.wordpress.org/AJAX_in_Plugins#Ajax_on_the_Viewer-Facing_Side	
@@ -94,21 +94,7 @@ class SytematicWebshop {
 	} // end constructor
 	
 	
-	public function modify_title_tag($title){
-		///return 
-		if($this->isProductPage() && $this->productModel->isDetailPage()){
-			//fetch the title of this product
-			return $this->productModel->getData()->productName;
-
-		}
-		if($this->isCategoryPage() && $this->categoryModel->isDetailPage()) {
-			return $this->categoryModel->getData()->categoryName;
-
-		}
-		return $title;
-	}
-	
-	
+		
 	/**
 	* Responds to the ajax call that submits the checkout form
 	*/
@@ -194,6 +180,18 @@ class SytematicWebshop {
 		}
 		return $title;
 	}
+	
+	public function modify_title_tag($title){
+		$suffix = ' | '.get_bloginfo();
+		if($this->isProductPage() && $this->productModel->isDetailPage()){
+			return $this->productModel->getData()->productName.$suffix;
+		}
+		if($this->isCategoryPage() && $this->categoryModel->isDetailPage()) {
+			return $this->categoryModel->getData()->categoryName.$suffix;
+		}
+		return $title;
+	}
+	
 
 
 	
