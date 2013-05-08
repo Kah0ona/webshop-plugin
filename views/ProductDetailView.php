@@ -39,7 +39,7 @@ class ProductDetailView extends GenericView {
 							<div class="span12">
 								<h3><?php echo $data->productName; ?></h3>
 								<p class="product-description">
-									<?php echo $data->productDesc; ?>
+									<?php echo nl2br($data->productDesc); ?>
 								</p>
 								<p class="product-price">
 								<?php if($this->containsProductWithExtraPrice($data->ProductOption)) { echo 'vanaf '; } ?>

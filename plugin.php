@@ -57,8 +57,10 @@ class SytematicWebshop {
 		// Load plugin text domain
 		add_action('init', array( $this, 'plugin_textdomain' ) );
 		add_action('init', array($this, 'load_options'));
+
 		add_filter('the_posts', array($this, 'init_models'));
 		add_filter('plugins_loaded', array($this,'start_session')); //first code to be executed.
+
 
 		// Register admin styles and scripts
 		add_action('admin_print_styles', array( $this, 'register_admin_styles' ) );
@@ -75,12 +77,13 @@ class SytematicWebshop {
 		
 		
 		
-		add_action( 'widgets_init', array($this, 'register_widgets' ));
+		add_action('widgets_init', array($this, 'register_widgets' ));
 				
-		add_action( 'admin_menu', array($this, 'settings_menu' ));
-		add_action( 'admin_init', array($this, 'register_settings'));
+		add_action('admin_menu', array($this, 'settings_menu' ));
+		add_action('admin_init', array($this, 'register_settings'));
 	
-		add_filter( 'the_title', array($this, 'modify_title'));	
+		add_filter('the_title', array($this, 'modify_title'));	
+		add_filter('wp_title', array($this, 'modify_title_tag'));	
 		add_action('wp_head', array($this, 'init_cart'));
 	
 		//this must be inside is_admin, see: http://codex.wordpress.org/AJAX_in_Plugins#Ajax_on_the_Viewer-Facing_Side	
@@ -91,6 +94,19 @@ class SytematicWebshop {
 	} // end constructor
 	
 	
+	public function modify_title_tag($title){
+		///return 
+		if($this->isProductPage() && $this->productModel->isDetailPage()){
+			//fetch the title of this product
+			return $this->productModel->getData()->productName;
+
+		}
+		if($this->isCategoryPage() && $this->categoryModel->isDetailPage()) {
+			return $this->categoryModel->getData()->categoryName;
+
+		}
+		return $title;
+	}
 	
 	
 	/**
@@ -180,6 +196,16 @@ class SytematicWebshop {
 	}
 
 
+	
+	public function isProductPage(){
+		$url = $_SERVER['REDIRECT_URL'];
+		return stristr($url, 'products');		
+	}
+	
+	public function isCategoryPage(){
+		$url = $_SERVER['REDIRECT_URL'];
+		return stristr($url, 'categories');
+	}
 
 	public function isWebshopPage(){
 		//examine $_SERVER, to see if 'categories' or 'products' is in the URL.
@@ -189,7 +215,7 @@ class SytematicWebshop {
 	
 	
 	public function getWebshopPageTitle(){
-		
+				
 	}
 	
 	
