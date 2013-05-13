@@ -132,13 +132,17 @@ class ProductView extends GenericView {
 		 <div class="product-title product-title-<?php echo $product->Product_id; ?>">
 		 	<?php echo $product->productName; ?>
 		 </div>
+		 <?php if($product->priceOnDemand) {  ?>
+			 <div class="product-price product-price-<?php echo $product->Product_id; ?> price-on-demand">Prijs op aanvraag, <br/>zie details.</div>
+		 <?php } else { ?>
 		 <div class="product-price product-price-<?php echo $product->Product_id; ?>">
 		 	<?php if($this->containsProductWithExtraPrice($product->ProductOption)){ echo 'vanaf '; } ?>
 		 	€ <?php echo $this->formatMoney($product->productPrice); ?>
 		 </div>
+		 <?php } ?>
 		 <?php if($this->renderDetailOnOverview) { 
 				 	$v = new ProductDetailView($productModel);
-				 	echo $v->renderOptionForm($product);
+					echo $v->renderOptionForm($product); 
 			 	}
 		 ?>
 		 <div class="product-detail-button product-detail-button-<?php echo $product->Product_id; ?>">

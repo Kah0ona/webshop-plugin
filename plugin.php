@@ -74,9 +74,7 @@ class SytematicWebshop {
 		register_activation_hook( __FILE__, array( $this, 'activate' ) );
 		register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
 		register_uninstall_hook( __FILE__, array( $this, 'uninstall' ) );
-		
-		
-		
+				
 		add_action('widgets_init', array($this, 'register_widgets' ));
 				
 		add_action('admin_menu', array($this, 'settings_menu' ));
@@ -89,10 +87,24 @@ class SytematicWebshop {
 		//this must be inside is_admin, see: http://codex.wordpress.org/AJAX_in_Plugins#Ajax_on_the_Viewer-Facing_Side	
 		if(is_admin()){
 			add_action('wp_ajax_nopriv_place_order',array($this,'process_order'));			
-			add_action('wp_ajax_place_order',array($this,'process_order'));			
+			add_action('wp_ajax_place_order',array($this,'process_order'));		
+			add_action('wp_ajax_price_quote', array($this, 'process_price_quote_submit'));	
 		}
 	} // end constructor
 	
+	
+	public function process_price_quote_submit(){
+		include_once('models/GenericModel.php');
+		include_once('models/EstimateSubmitModel.php');
+		
+		$this->load_options();
+		$process = new EstimateSubmitModel($this->options);
+
+		header('Content-Type: application/json; charset=UTF8');
+		
+		echo $process->execute($_POST);
+		exit;
+	}
 	
 		
 	/**

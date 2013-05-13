@@ -49,9 +49,15 @@ class ProductDetailView extends GenericView {
 						</div><!-- /row-fluid -->
 						<div class="row-fluid">
 							<div class="span12 product-data">
-								<?php echo $this->renderOptionForm($data); ?>
-								 
-													
+								<?php 
+									if($data->priceOnDemand){ 								
+										echo $this->renderPriceOnDemandForm($data);
+									}
+									else {
+										echo $this->renderOptionForm($data); 
+									}
+									
+								 ?>
 							</div><!-- /span12 -->
 						</div><!-- /row-fluid -->
 					</div><!-- /span4 -->
@@ -69,12 +75,12 @@ class ProductDetailView extends GenericView {
 	*/
 	public function renderOptionForm($data){ ?>
 		<div style="clear:both"></div>
-		<form class="form">
+		<form class="form <?php echo $data->priceOnDemand ? 'hidden' : ''; ?>">
 		    <div class="control-group" style="margin-top: 15px;">
 				<label class="control-label control-label-<?php echo $data->Product_id; ?>" for="surname">Aantal: *</label>
 				
 				<div class="controls">		
-					<input class="input-large product-amount-<?php echo $data->Product_id; ?>" name="product-amount" id="product-amount-<?php echo $data->Product_id; ?>" value="1" type="text" /> 
+					<input class="input-large product-amount-<?php echo $data->Product_id; ?>  " name="product-amount" id="product-amount-<?php echo $data->Product_id; ?>" value="1" type="text" /> 
 				</div>
 			</div>
 			<!-- Product options, if any -->
@@ -107,8 +113,125 @@ class ProductDetailView extends GenericView {
 			</div>	
 			<? } ?>														    
 		  </form>	
-		  <span product-type="product" product-index='0' product-id='<?php echo $data->Product_id; ?>' class="addtocart">
+		  <span product-type="product" product-index='0' product-id='<?php echo $data->Product_id; ?>' class="addtocart <?php echo $data->priceOnDemand ? 'hidden' : ''; ?>">
 			<a href="#" class="btn" ><i class="icon-shopping-cart icon-white"></i> Toevoegen</a>
 		  </span>			
-	<?php }
+	<?php 
+	}
+	
+	
+	public function renderPriceOnDemandForm($data){ 
+		wp_enqueue_script('form.js', plugins_url('/webshop-plugin/js/jquery.form.js'), array('jquery'));
+		wp_enqueue_script('validation.js', plugins_url('/webshop-plugin/js/jquery.validate.js'), array('jquery', 'form.js'));
+	?>
+	
+		<script type="text/javascript" >
+		
+		var reqMsg = "Dit veld is verplicht.";
+		var emailMsg = "Vul een geldig e-mailadres in. ";
+
+		jQuery(document).ready(function($) {
+			var submitOptions = {
+				beforeSubmit : function(arr, form, options){
+					return true;	
+				},
+				data : { 
+					"action": 'price_quote',
+				},
+				success : function(data, textStatus, jqXHR) {
+					//console.log(data);
+					$('#order-form').addClass('hidden');
+					$('.successmsg').html('Bedankt voor uw aanvraag. We nemen z.s.m. contact met u op.').addClass('alert').addClass('alert-success');
+				}
+			};
+			
+			var validationOptions = {
+					rules : {
+						name : {
+							required: true
+						},
+						email : {
+							required: true
+						},
+						phone : {
+							required: true
+						},
+						orderComment : {
+							required: true
+						}
+					},
+				
+					messages : {
+						name: {
+						   required: reqMsg
+					    },
+						email: {
+						   required: reqMsg
+					    },
+						phone: {
+						   required: reqMsg
+					    },
+						orderComment: {
+						   required: reqMsg
+					    }
+					},
+				    errorPlacement: function(error, element) {
+					   error.insertAfter(element);
+					}
+					,
+					submitHandler : function(){
+						$('#order-form').ajaxSubmit(submitOptions);	//does some extra validation.		
+					},
+					invalidHandler: function(form, validator) {
+						//alert('invalid');
+					}
+			}; 
+					
+		    $('#order-form').validate(validationOptions);
+
+		});
+		</script>	
+	
+		<div style="clear:both"></div>
+		<div class="successmsg"></div>
+		<form id="order-form" name="order-form_" class="form" action="<?php echo site_url(); ?>/wp-admin/admin-ajax.php" method="post">
+			<div class="control-group" style="margin-top: 15px;">
+				<label class="control-label control-label-ondemand" for="name">Naam: *</label>
+				<div class="controls">		
+					<input class="input-large " name="name" id="name" type="text" /> 
+				</div>
+			</div>
+			<div class="control-group" style="margin-top: 15px;">
+				<label class="control-label control-label-ondemand" for="email">Email: *</label>
+				<div class="controls">		
+					<input class="input-large " name="email" id="email" type="text" /> 
+				</div>
+			</div>
+			<div class="control-group" style="margin-top: 15px;">
+				<label class="control-label control-label-ondemand" for="phone">Telefoon: *</label>
+				<div class="controls">		
+					<input class="input-large " name="phone" id="phone" type="text" /> 
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="orderComment">Bericht:</label>			
+				<div class="controls">	
+					<textarea id="orderComment" name="orderComment" class="input-large" rows="10">Graag vraag ik een offerte aan voor: '<?php echo $data->productName; ?>'. 
+						[Type hier uw verdere wensen]
+					</textarea>
+				</div>		
+			</div>
+			<div class="controls">	
+				<input type="hidden" name="productName" value="<?php echo $data->productName; ?>" />
+				<input type="hidden" name="Product_id" value="<?php echo $data->Product_id; ?>" />
+				<input type="submit" name="submit" class="submit-controls btn btn-primary " id="invoice" value="Vraag offerte op" style="width: 130px;" />
+			</div>
+			
+		</form>
+		
+	
+	
+		
+	<?php 
+	}
 }
