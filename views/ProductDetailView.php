@@ -25,6 +25,66 @@ class ProductDetailView extends GenericView {
 		if($data != null){  ?>
 			<script type="text/javascript">
 				webshopProduct = <?php echo $this->model->encodeProductToJson($data); ?>;
+				
+			</script>
+			<script type="text/javascript">
+				jQuery(document).ready(function($){
+				function nl2br (str, is_xhtml) {
+				  // http://kevin.vanzonneveld.net
+				  // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+				  // +   improved by: Philip Peterson
+				  // +   improved by: Onno Marsman
+				  // +   improved by: Atli Þór
+				  // +   bugfixed by: Onno Marsman
+				  // +      input by: Brett Zamir (http://brett-zamir.me)
+				  // +   bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+				  // +   improved by: Brett Zamir (http://brett-zamir.me)
+				  // +   improved by: Maximusya
+				  // *     example 1: nl2br('Kevin\nvan\nZonneveld');
+				  // *     returns 1: 'Kevin<br />\nvan<br />\nZonneveld'
+				  // *     example 2: nl2br("\nOne\nTwo\n\nThree\n", false);
+				  // *     returns 2: '<br>\nOne<br>\nTwo<br>\n<br>\nThree<br>\n'
+				  // *     example 3: nl2br("\nOne\nTwo\n\nThree\n", true);
+				  // *     returns 3: '<br />\nOne<br />\nTwo<br />\n<br />\nThree<br />\n'
+				  var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br ' + '/>' : '<br>'; // Adjust comment to avoid issue on phpjs.org display
+				
+				  return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+				}
+				
+					function findProductTextByOptionValue(optionValue){
+						if(webshopProduct.ProductOption == null){ return null; }
+						
+						for(var i = 0 ; i < webshopProduct.ProductOption.length ; i++){
+							var cur = webshopProduct.ProductOption[i];
+							for(var j = 0 ; j < cur.ProductOptionValue.length ; j++){
+								var cur2 = cur.ProductOptionValue[j];
+								if(parseInt(cur2.ProductOptionValue_id) == parseInt(optionValue)){
+									if(cur2.optionValueDescription == null || cur2.optionValueDescription == undefined){
+										return "";
+									}
+									else {
+										return nl2br(cur2.optionValueDescription);
+									}
+								}
+							}
+						}
+						return "";
+					}
+					$('.ProductOptionSelector').change(function(evt){
+						var selector = '#productoptionvalueinfo-'+$(evt.target).attr('option_id');
+					
+						$(selector).html(findProductTextByOptionValue($(evt.target).val()));
+					});
+					
+					
+					//init
+					$('.ProductOptionSelector').each(function(){
+						var evt = $(this);
+						var selector = '#productoptionvalueinfo-'+evt.attr('option_id');
+						$(selector).html(findProductTextByOptionValue(evt.val()));
+					});
+
+				});
 			</script>
 		
 		
@@ -89,7 +149,7 @@ class ProductDetailView extends GenericView {
 				<label class="control-label control-label-<?php echo $data->Product_id; ?>" id="ProductOptionName_<?php echo $p->ProductOption_id; ?>" for="<?php echo $p->optionName; ?>"><?php echo $p->optionName; ?>:</label>
 				
 				<div class="controls controls-<?php echo $data->Product_id; ?>">		
-					<select name="size" class="input-large " id="ProductOption_<?php echo $p->ProductOption_id; ?>">
+					<select name="size" class="input-large ProductOptionSelector" id="ProductOption_<?php echo $p->ProductOption_id; ?>" option_id="<?php echo $p->ProductOption_id; ?>">
 						<?php foreach($p->ProductOptionValue as $v ) {?>
 							<?php if((count($data->ProductOption) == 1 &&
 							         $this->model->productIsInStockSimple($data, $v->ProductOptionValue_id)
@@ -109,6 +169,7 @@ class ProductDetailView extends GenericView {
 							<?php } ?>
 						<? } ?>										
 					</select>
+					<p id="productoptionvalueinfo-<?php echo $p->ProductOption_id; ?>"></p>
 				</div>
 			</div>	
 			<? } ?>														    
