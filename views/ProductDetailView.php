@@ -24,7 +24,7 @@ class ProductDetailView extends GenericView {
 
 		if($data != null){  ?>
 			<script type="text/javascript">
-				webshopProduct = <?php echo $this->model->encodeProductToJson($data); ?>;
+				webshopProducts = <?php echo $this->model->encodeProductToJson($data); ?>;
 				
 			</script>
 			<script type="text/javascript">
@@ -35,10 +35,10 @@ class ProductDetailView extends GenericView {
 					}
 				
 					function findProductTextByOptionValue(optionValue){
-						if(webshopProduct.ProductOption == null){ return null; }
+						if(webshopProducts.ProductOption == null){ return null; }
 						
-						for(var i = 0 ; i < webshopProduct.ProductOption.length ; i++){
-							var cur = webshopProduct.ProductOption[i];
+						for(var i = 0 ; i < webshopProducts.ProductOption.length ; i++){
+							var cur = webshopProducts.ProductOption[i];
 							for(var j = 0 ; j < cur.ProductOptionValue.length ; j++){
 								var cur2 = cur.ProductOptionValue[j];
 								if(parseInt(cur2.ProductOptionValue_id) == parseInt(optionValue)){
