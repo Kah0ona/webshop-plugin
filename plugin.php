@@ -26,7 +26,7 @@ License:
   
 */
 
-define('SYSTEM_URL_WEBSHOP', 'http://webshop.sytematic.nl');
+define('SYSTEM_URL_WEBSHOP', 'http://webshop.lokaalgevonden.nl');
 define('BASE_URL_WEBSHOP', SYSTEM_URL_WEBSHOP.'/public');
 define('EURO_FORMAT', '%.2n');
 define('WEBSHOP_PLUGIN_PATH', plugin_dir_path(__FILE__) );

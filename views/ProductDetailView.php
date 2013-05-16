@@ -202,7 +202,15 @@ class ProductDetailView extends GenericView {
 						},
 						orderComment : {
 							required: true
-						}
+						},
+						street: {
+						   required: true
+
+					    },
+					    city: {
+						   required: true
+
+					    },
 					},
 				
 					messages : {
@@ -217,7 +225,13 @@ class ProductDetailView extends GenericView {
 					    },
 						orderComment: {
 						   required: reqMsg
-					    }
+					    },
+					    street: {
+						   required: reqMsg
+					    },
+					    city: {
+						   required: reqMsg
+					    },
 					},
 				    errorPlacement: function(error, element) {
 					   error.insertAfter(element);
@@ -252,9 +266,15 @@ class ProductDetailView extends GenericView {
 				</div>
 			</div>
 			<div class="control-group" style="margin-top: 15px;">
-				<label class="control-label control-label-ondemand" for="phone">Telefoon: *</label>
+				<label class="control-label control-label-ondemand" for="street">Adres: *</label>
 				<div class="controls">		
-					<input class="input-large " name="phone" id="phone" type="text" /> 
+					<input class="input-large " name="street" id="street" type="text" /> 
+				</div>
+			</div>
+			<div class="control-group" style="margin-top: 15px;">
+				<label class="control-label control-label-ondemand" for="city">Plaats: *</label>
+				<div class="controls">		
+					<input class="input-large " name="city" id="city" type="text" /> 
 				</div>
 			</div>
 			<div class="control-group">

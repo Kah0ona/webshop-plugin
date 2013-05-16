@@ -1202,3 +1202,83 @@
 
 2013-04-10 15:59:50: Inserted person id: 68
 2013-04-10 15:59:50: Inserted Order id: 58
+2013-05-13 18:06:54: -------
+2013-05-13 18:06:54: Processing cart: 
+2013-05-13 18:06:54: [{"Product_id":"34","title":"3m3","desc":"","thumb":"http:\/\/webshop.sytematic.nl\/Product_imageDish_34_1366365259287.jpg","quantity":"1","price":"89","VAT":"0.21","ProductOption":[{"ProductOption_id":"8","ProductOptionValue_id":"41","optionName":"Type:","extraPrice":"75","optionValueName":"Grofvuil"}]}]
+2013-05-13 18:06:54: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Lokaalgevonden
+    [firstname] => Marten
+    [surname] => Sytema
+    [street] => Koninginnegracht 
+    [number] => 19
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Nederland
+    [email] => marten@lokaalgevonden.nl
+    [phone] => 0649343492
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => Dit is een TEST bestelling. 
+    [coupon] => 
+    [payment-method] => ideal
+    [issuerid] => 99
+    [invoice] => Plaats bestelling
+    [hostname] => euromilieu
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"34","title":"3m3","desc":"","thumb":"http:\/\/webshop.sytematic.nl\/Product_imageDish_34_1366365259287.jpg","quantity":"1","price":"89","VAT":"0.21","ProductOption":[{"ProductOption_id":"8","ProductOptionValue_id":"41","optionName":"Type:","extraPrice":"75","optionValueName":"Grofvuil"}]}]
+    [orderStatus] => nieuw
+)
+
+2013-05-13 18:06:54: Inserted person id: 70
+2013-05-13 18:06:55: Error sending post to /orders: Internal service error
+2013-05-13 20:25:09: -------
+2013-05-13 20:25:09: Processing cart: 
+2013-05-13 20:25:09: [{"Product_id":"34","title":"3m3","desc":"","thumb":"http:\/\/webshop.sytematic.nl\/Product_imageDish_34_1366365259287.jpg","quantity":"1","price":"89","VAT":"0.21","ProductOption":[{"ProductOption_id":"8","ProductOptionValue_id":"41","optionName":"Type:","extraPrice":"75","optionValueName":"Grofvuil"}]}]
+2013-05-13 20:25:09: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => MArten
+    [firstname] => Marten
+    [surname] => Sytema
+    [street] => Hugo de Grootstraat
+    [number] => 62
+    [postcode] => 2518ee
+    [city] => Den Haag
+    [country] => bla
+    [email] => marten@lokaalgevonden.nl
+    [phone] => 02351241
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => tset
+    [coupon] => 
+    [payment-method] => ideal
+    [issuerid] => 99
+    [invoice] => Plaats bestelling
+    [hostname] => euromilieu
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"34","title":"3m3","desc":"","thumb":"http:\/\/webshop.sytematic.nl\/Product_imageDish_34_1366365259287.jpg","quantity":"1","price":"89","VAT":"0.21","ProductOption":[{"ProductOption_id":"8","ProductOptionValue_id":"41","optionName":"Type:","extraPrice":"75","optionValueName":"Grofvuil"}]}]
+    [orderStatus] => nieuw
+)
+
+2013-05-13 20:25:09: Inserted person id: 77
+2013-05-13 20:25:10: Inserted Order id: 66
+2013-05-13 20:25:10: Creating iDeal transaction
+2013-05-13 20:25:10: Adding price: 89 1
+2013-05-13 20:25:10: Adding optionsprices
+2013-05-13 20:25:10: adding 75
+2013-05-13 20:25:10: total options price 75
+2013-05-13 20:25:10: purchaseId: 66
+2013-05-13 20:25:10: description: ABC Webshop bestelling
+2013-05-13 20:25:10: amount: 164
+2013-05-13 20:25:10: issuerId: 99
+2013-05-13 20:25:10: returnUrl: http://localhost/~marten/wordpress/success
+2013-05-13 20:25:10: notifyUrl: http://webshop.sytematic.nl/public/sisow_notifications
+2013-05-13 20:25:12: Setting redirect url: https://www.sisow.nl/Sisow/iDeal/Simulator.aspx?merchantid=2537507457&txid=TEST080487385820&sha1=7eb3915c61af9446cb67a221692f98fcc399eb9c

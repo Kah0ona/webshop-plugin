@@ -11,14 +11,19 @@ class EstimateSubmitModel extends GenericModel {
 		$name = $post['name'];
 		$productName = $post['productName'];
 		$productId = $post['Product_id'];
-		$result =  $this->sendToBackend($hostname,$name,$sender,$phone,$productName,$productId,$msg);
 		$phone = $post['phone'];		
+		$street  = $post['street'];
+		$city = $post['city'];
+		
+		
+		$result =  $this->sendToBackend($hostname,$name,$sender,$phone,$productName,$productId,$msg, $street, $city);
+		
 		
 		return json_encode($result);
 	}
 	
 	
-	private function sendToBackend($hostname,$name,$sender,$phone, $productName,$productId, $msg){
+	private function sendToBackend($hostname,$name,$sender,$phone, $productName,$productId, $msg, $street, $city){
 		$arr = array(
 			'hostname'=>$hostname,
 			'email'=>$sender,
@@ -26,7 +31,9 @@ class EstimateSubmitModel extends GenericModel {
 			'Product_id'=>$productId,
 			'name'=>$name,
 			'pricequoteMessage'=>nl2br($msg),
-			'phone'=>$phone
+			'phone'=>$phone,
+			'street'=>$street,
+			'city'=>$city
 		);
 				
 		return $this->curl_post(BASE_URL_WEBSHOP.'/pricequotes', $arr );	

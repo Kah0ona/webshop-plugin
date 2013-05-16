@@ -30,7 +30,12 @@ jQuery(document).ready(function($){
 			orderType : submitType*/
 		},
 		success : function(data, textStatus, jqXHR) {
-			window.location = data.redirectUrl;
+			if(data.error != null){
+				$('#order-form').replaceWith('<div class="alert alert-error span12"><strong>Fout:</strong> Er ging iets mis met het versturen van de bestelling: '+data.error+'</div>');
+			}
+			else {
+				window.location = data.redirectUrl;
+			}
 		}
 	};
 	
