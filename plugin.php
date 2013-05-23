@@ -89,6 +89,7 @@ class SytematicWebshop {
 			add_action('wp_ajax_nopriv_place_order',array($this,'process_order'));			
 			add_action('wp_ajax_place_order',array($this,'process_order'));		
 			add_action('wp_ajax_price_quote', array($this, 'process_price_quote_submit'));	
+			add_action('wp_ajax_nopriv_price_quote', array($this, 'process_price_quote_submit'));	
 		}
 	} // end constructor
 	
@@ -96,7 +97,6 @@ class SytematicWebshop {
 	public function process_price_quote_submit(){
 		include_once('models/GenericModel.php');
 		include_once('models/EstimateSubmitModel.php');
-		
 		$this->load_options();
 		$process = new EstimateSubmitModel($this->options);
 

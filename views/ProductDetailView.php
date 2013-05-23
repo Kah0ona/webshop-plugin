@@ -281,7 +281,7 @@ class ProductDetailView extends GenericView {
 				<label class="control-label" for="orderComment">Bericht:</label>			
 				<div class="controls">	
 					<textarea id="orderComment" name="orderComment" class="input-large" rows="10">Graag vraag ik een offerte aan voor: '<?php echo $data->productName; ?>'. 
-						[Type hier uw verdere wensen]
+[Type hier uw verdere wensen]
 					</textarea>
 				</div>		
 			</div>

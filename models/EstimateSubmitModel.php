@@ -64,13 +64,12 @@ class EstimateSubmitModel extends GenericModel {
 	    curl_setopt_array($ch, ($options + $defaults));
 	    if( !$result = curl_exec($ch))
 	    {    
-	    //    trigger_error(curl_error($ch));
 	    	$this->curlError = curl_error($ch);
 	    	return false;
 	    }
 	    else {
+
 	    	return $result;
-	   
 	   	} 	
 	}
 
