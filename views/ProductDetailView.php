@@ -133,6 +133,21 @@ class ProductDetailView extends GenericView {
 				
 				<div class="controls controls-<?php echo $data->Product_id; ?>">		
 					<select name="size" class="input-large ProductOptionSelector" id="ProductOption_<?php echo $p->ProductOption_id; ?>" option_id="<?php echo $p->ProductOption_id; ?>">
+						<?php
+							$lowestValueId = 0;
+							$lowestValue = 999999;
+							foreach($p->ProductOptionValue as $v){
+								$o = $v->extraPrice;
+								if($v->extraPrice == null)
+									$o = 0;
+								
+								if($o < $lowestValue) {
+									$lowestValueId = $v->ProductOptionValue_id;
+									$lowestValue = $o;
+								}	
+							}
+						?>
+					
 						<?php foreach($p->ProductOptionValue as $v ) {?>
 							<?php if((count($data->ProductOption) == 1 &&
 							         $this->model->productIsInStockSimple($data, $v->ProductOptionValue_id)
@@ -143,6 +158,7 @@ class ProductDetailView extends GenericView {
 								<option extraPrice="<?php echo $v->extraPrice; ?>" 
 										value="<?php echo $v->ProductOptionValue_id; ?>" 
 										valueName="<?php echo $v->optionValue;?>" 
+										<?php if($v->ProductOptionValue_id == $lowestValueId) { echo ' selected '; } ?>
 										id="ProductOptionValueName_<?php echo $v->ProductOptionValue_id; ?>">
 											<?php echo $v->optionValue; ?>
 									<?php if($v->extraPrice !== null) { ?>
