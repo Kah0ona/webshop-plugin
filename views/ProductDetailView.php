@@ -145,8 +145,8 @@ class ProductDetailView extends GenericView {
 										valueName="<?php echo $v->optionValue;?>" 
 										id="ProductOptionValueName_<?php echo $v->ProductOptionValue_id; ?>">
 											<?php echo $v->optionValue; ?>
-									<?php if($v->extraPrice != null && $v->extraPrice > 0) { ?>
-										(€ <?php echo $this->formatMoney($data->productPrice+ $v->extraPrice); ?>)
+									<?php if($v->extraPrice !== null) { ?>
+										(€ <?php echo $this->formatMoney($data->productPrice+$v->extraPrice); ?>)
 									<?php } ?>
 								</option>
 							<?php } ?>
