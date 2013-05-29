@@ -384,6 +384,7 @@ class CheckoutView extends GenericView {
 						<div class="span12">
 							<h3>Bestellingsgegevens</h3>
 							<div class="control-group">
+								<p class="infotextordercomment"></p>
 								<label class="control-label" for="orderComment">Opmerkingen:</label>			
 								<div class="controls">	
 									<textarea id="orderComment" name="orderComment" class="input-large" rows="4"></textarea>

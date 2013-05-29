@@ -163,10 +163,12 @@ class CheckoutModel extends GenericModel {
 	
 	private function calculateOptionsPrices($product){
 		$ret = 0;
-		foreach($product['ProductOption'] as $option){
-			if($option['extraPrice'] != null) {
-				$ret += (double) $option['extraPrice'];
-				$this->logMessage('adding '.$option['extraPrice']);	
+		if($product['ProductOption'] != null) {
+			foreach($product['ProductOption'] as $option){
+				if($option['extraPrice'] != null) {
+					$ret += (double) $option['extraPrice'];
+					$this->logMessage('adding '.$option['extraPrice']);	
+				}
 			}
 		}
     	$this->logMessage('total options price '.$ret);		

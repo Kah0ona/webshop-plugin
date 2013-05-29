@@ -53,10 +53,18 @@ class ProductDetailView extends GenericView {
 						}
 						return "";
 					}
+					
+					function replaceSomeWords(str){
+						str = str.replace(/Geaccepteerd wordt:/g, '<span class="greenaccept">Geaccepteerd wordt:</span>');
+						str = str.replace(/Niet geaccepteerd wordt:/g, '<span class="redaccept">Niet geaccepteerd wordt:</span>');
+
+						return str;
+					}
+					
 					$('.ProductOptionSelector').change(function(evt){
 						var selector = '#productoptionvalueinfo-'+$(evt.target).attr('option_id');
 					
-						$(selector).html(findProductTextByOptionValue($(evt.target).val()));
+						$(selector).html(replaceSomeWords(findProductTextByOptionValue($(evt.target).val())));
 					});
 					
 					
@@ -64,7 +72,7 @@ class ProductDetailView extends GenericView {
 					$('.ProductOptionSelector').each(function(){
 						var evt = $(this);
 						var selector = '#productoptionvalueinfo-'+evt.attr('option_id');
-						$(selector).html(findProductTextByOptionValue(evt.val()));
+						$(selector).html(replaceSomeWords(findProductTextByOptionValue(evt.val())));
 					});
 
 				});
@@ -168,7 +176,7 @@ class ProductDetailView extends GenericView {
 							<?php } ?>
 						<? } ?>										
 					</select>
-					<p id="productoptionvalueinfo-<?php echo $p->ProductOption_id; ?>"></p>
+					<p class="productoptionvalueinfo" id="productoptionvalueinfo-<?php echo $p->ProductOption_id; ?>"></p>
 				</div>
 			</div>	
 			<? } ?>														    
