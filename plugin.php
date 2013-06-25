@@ -231,8 +231,10 @@ class SytematicWebshop {
 	
 	public function register_widgets(){
 		include_once('widgets/CategoryWidget.php');
-
 		register_widget('CategoryWidget');
+		
+		include_once('widgets/DeliveryCheckWidget.php');
+		register_widget('DeliveryCheckWidget');
 	}
 	
 	public function load_options(){
@@ -382,9 +384,10 @@ class SytematicWebshop {
 	
 		if($this->categoryModel->isDetailPage()) {
 			include_once('views/CategoryDetailView.php');
+			include_once('models/ProductModel.php');
+
 			$renderOptions = $render_options_on_overview === 'true';
 			if($renderOptions){
-				include_once('models/ProductModel.php');
 				include_once('views/ProductDetailView.php');
 			}
 			$v = new CategoryDetailView($this->categoryModel);
