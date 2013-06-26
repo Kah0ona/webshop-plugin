@@ -44,11 +44,12 @@ class CheckoutView extends GenericView {
 	}
 	
 	private function renderDeliveryMethod() {
-		$m = new DeliveryCostModel($this->model->getHostname(), $this->model->getOptions());
-		$data = $m->fetchDeliveryCostsDefault();
+		$m = $this->model->getDeliveryCostModel();
+		$data = $m->getData();
 		
-		$del = new DeliveryMethodModel($this->model->getHostname(), $this->model->getOptions());
-		$deliveryData = $del->fetchDeliveryMethodsDefault();
+		$del = $this->model->getDeliveryMethodModel();
+		$deliveryData = $del->getData();
+		
 		if(($data == null || count($data) == 0) && ($deliveryData==null || count($deliveryData) == 0)){
 			return;
 		}
@@ -58,7 +59,12 @@ class CheckoutView extends GenericView {
 			var deliveryMethods = <?php echo json_encode($deliveryData); ?>;
 		
 			jQuery(document).ready(function($){
-				jQuery('#deliveryMethods').change()					
+				jQuery('#deliveryMethods').change(function(elt){
+					var sel = $('#deliveryMethods option').filter(':selected');
+					var price = sel.attr('methodprice');
+					var id = sel.attr("value");
+					
+				});				
 			});
 		</script>
 
@@ -67,7 +73,7 @@ class CheckoutView extends GenericView {
 		if($deliveryData != null && count($deliveryData) > 0){
 			//render select item with the options, and the prices and a javascript that makes sure the checkout form sum is added
 			foreach($deliveryData as $method){
-				echo '<option value="'.$method->DeliveryMethod_id.'" method-price="'.$method->deliveryMethodPrice.'">'.$method->deliveryMethodName.' ('.money_format('%.2n',$method->deliveryMethodPrice()).')</option>';
+				echo '<option value="'.$method->DeliveryMethod_id.'" methodprice="'.$method->deliveryMethodPrice.'">'.$method->deliveryMethodName.' ('.money_format('%.2n',$method->deliveryMethodPrice).')</option>';
 			}
 		}
 		
@@ -483,6 +489,7 @@ class CheckoutView extends GenericView {
 							<div class="control-group">
 								<p>Kies uw verzend-/bezorgmethode</p>						
 							    <div id="deliverymethod-text" class="alert hidden"></div>
+							    <div id="not-enough-ordered" class="alert hidden"></div>							    
 								<div class="controls">	
 										<?php echo $this->renderDeliveryMethod();?>									
 								</div>		

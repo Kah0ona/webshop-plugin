@@ -22,4 +22,9 @@ class DeliveryMethodModel extends GenericModel {
 	function isDetailPage() {
 		return false;
 	}
+	
+	//TODO REMOVE ME!
+	public function getData(){
+		return json_decode('[{"DeliveryMethod_id":1,"deliveryMethodName":"Hard coded delivery method", "deliveryMethodDesc":"Hard coded delivery desc","deliveryMethodPrice":7.50}]');
+	}
 }

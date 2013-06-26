@@ -6,7 +6,7 @@
 * Version: 0.6
 */
 ;(function( $, window, document, undefined ) {
-
+	var deliveryCosts = {"price": 0}; //object with details about the delivery costs. based on address user filled out in checkout form.
 	var methods = {
 		init : function( options ) { 
 			return this.each(function(){
@@ -89,8 +89,11 @@
 			var $this = $(elt);
 			var settings = $this.data('shoppingCart').settings;
 	    
+			$('body').on('change.shoppingCart', "#deliveryMethods", function(event){
+				methods.updatePrices(elt);
+			});
 	    	$('body').on("change.shoppingCart",".deliveryType", function(event){
-	    	     methods.updatePrices(elt);
+	    	    methods.updatePrices(elt);
 	    	});
 	    	$("body").on("click.shoppingCart","a.removefromcart", function(event){
 		    	event.preventDefault();
@@ -384,6 +387,12 @@
 	    		
 	    	}
 	    	
+	    	methods.renderDeliveryMethodAndCostsOnCheckout(vatMap, totalInclVat);
+			
+			vatMap["x0.21"] += parseFloat(deliveryCosts.price);
+	    	totalInclVat    += parseFloat(deliveryCosts.price);
+
+			
 	    	var totalExclVat = methods.renderVatRowsOnCheckout(vatMap, totalInclVat);
 	    	methods.renderExclPriceOnCheckout(totalExclVat);
     	
@@ -394,23 +403,25 @@
 	    	$('.total-field').html("<strong>&euro; "+methods.formatEuro(totalInclVat)+"</strong>");
 
 	    },
-	    checkDeliveryConstraints : function(elt) {
-	    	var doNotDeliver = true;
-	    	var notEnoughOrdered = false;
+	    renderDeliveryMethodAndCostsOnCheckout : function(vatMap, totalInclVat) {
+	    	//fetch #delivery
+	    	var deliveryMethodElt = $('#deliveryMethods option').filter(':selected');
+
+	    	if(deliveryMethodElt.attr('value') == 0){ //use settings.deliveryCostTable
+		    	var doNotDeliver = true;
+		    	var notEnoughOrdered = false;
 	    	
-	    	if(deliveryMethodIs0){
-	    	
-				for(var i = 0; i < settings.deliveryCosts.length; i++){
-					var min = parseInt(settings.deliveryCosts[i].minKm);
-					var max = parseInt(settings.deliveryCosts[i].maxKm);	
+				for(var i = 0; i < settings.deliveryCostsTable.length; i++){
+					var min = parseInt(settings.deliveryCostsTable[i].minKm);
+					var max = parseInt(settings.deliveryCostsTable[i].maxKm);	
 					methods.logger(min+" "+max+" "+distance);
 					if(min <= distance && distance < max) { //if distance is within this range
-						if(totalInclVat < parseFloat(settings.deliveryCosts[i].minimumOrderPrice)){
+						if(totalInclVat < parseFloat(settings.deliveryCostsTable[i].minimumOrderPrice)){
 							if(distance > 0){
 								$('#not-enough-ordered').removeClass('hidden').html(
 								'We bezorgen op deze afstand ('+ 
 												methods.formatEuro(distance)+' km) vanaf een bedrag van €'+
-												methods.formatEuro(parseFloat(settings.deliveryCosts[i].minimumOrderPrice)));
+												methods.formatEuro(parseFloat(settings.deliveryCostsTable[i].minimumOrderPrice)));
 								doNotDeliver=true;
 								notEnoughOrdered = true;
 							    //hide submit buttons
@@ -420,15 +431,32 @@
 						}
 						else {
 							//update the table of the checkout 
-							deliveryCosts.price = parseFloat(settings.deliveryCosts[i].price);
+							deliveryCosts.price = parseFloat(settings.deliveryCostsTable[i].price);
 							$('.submit-controls').removeClass('disabled');
 							$('#not-enough-ordered').addClass('hidden');
-							$('.deliverycosts-field').html("<strong>€ "+methods.formatEuro(delPrice)+"</strong>");
+							$('.deliverycosts-field').html("<strong>€ "+methods.formatEuro(deliveryCosts.price)+"</strong>");
 							doNotDeliver = false;						
 						}
 					}
 				}
-			}    
+				
+				/*
+				if(doNotDeliver && !notEnoughOrdered){
+					methods.logger("DO NOT DELIVER, OUT OF RANGE");
+					$('#not-enough-ordered').removeClass('hidden').html(
+						'We bezorgen helaas niet op deze afstand.');
+					doNotDeliver=true;
+				    //hide submit buttons
+					$('.submit-controls').addClass('disabled');
+				}				
+				*/
+						    	
+	    	}
+	    	else { //use settings.deliveryMethodPrice
+		    	deliveryCosts.price = parseFloat(deliveryMethodElt.attr('methodprice'));
+		    	$('.deliverycosts-field').html("<strong>€ "+methods.formatEuro(deliveryCosts.price)+"</strong>");
+	    	}
+	    	
 	    },
 	    renderExclPriceOnCheckout : function(totalExclVat){
 		   $('.subtotal-field').html('&euro; '+methods.formatEuro(totalExclVat));

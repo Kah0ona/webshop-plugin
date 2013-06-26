@@ -15,7 +15,7 @@ class CartInitializerView extends GenericView {
 				'session_url' : '<?php echo  get_site_url(); ?>/wp-content/plugins/webshop-plugin/models/CartStore.php'	,		
 				'checkout_page' : '<?php echo  get_site_url(); ?>/checkout',
 				'deliveryCostsTable' : <?php echo $deliveryCostsTable; ?>,
-				'deliveryMethods' : <?php echo $deliveryMethods; ?>
+				'deliveryMethods' : <?php echo "[{'DeliveryMethod_id':1,'deliveryMethodName':'Hard coded delivery method', 'deliveryMethodDesc':'Hard coded delivery desc','deliveryMethodPrice':7.50}]"; //$deliveryMethods; ?>
 			});
 		});
 		</script> 		

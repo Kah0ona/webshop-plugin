@@ -443,11 +443,12 @@ class SytematicWebshop {
 		include_once('models/CheckoutModel.php');
 		include_once('models/PaymentMethodModel.php');
 		include_once('views/CheckoutView.php');
-		include_once('models/DeliveryMethodModel.php');
 		ob_start();
 
 		$this->checkoutModel = new CheckoutModel($this->options);
-	
+		$this->checkoutModel->setDeliveryCostModel($this->deliveryCostModel);
+		$this->checkoutModel->setDeliveryMethodModel($this->deliveryMethodModel);	
+		
 		$this->paymentMethodModel = new PaymentMethodModel($this->options->getOption('hostname'));
 		$this->paymentMethodModel->fetchPaymentMethods();
 		$this->paymentMethodModel->storeDataInSession();

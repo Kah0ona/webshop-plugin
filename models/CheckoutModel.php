@@ -12,6 +12,9 @@ class CheckoutModel extends GenericModel {
 	protected $curlError=0;
 	protected $insertedOrderId=null;
 	protected $redirectUrl = '';
+	protected $deliveryMethodModel = null;
+	protected $deliveryCostModel = null;
+	
 	public function __construct($options) {
 		$this->options=$options;
 		$this->hostname=$options->getOption('hostname');
@@ -31,6 +34,23 @@ class CheckoutModel extends GenericModel {
 	public function getCart(){
 		$this->getCartFromSession();
 		return $this->cart;
+	}
+	
+	public function setDeliveryCostModel($m) {
+		$this->deliveryCostModel = $m;
+	}
+	
+	
+	public function getDeliveryCostModel(){
+		return $this->deliveryCostModel;
+	}
+	
+	public function setDeliveryMethodModel($m) {
+		$this->deliveryMethodModel = $m;
+	}
+	
+	public function getDeliveryMethodModel() {
+		return $this->deliveryMethodModel;
 	}
 	
 	public function sendOrderToBackend(){
