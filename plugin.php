@@ -41,6 +41,8 @@ class SytematicWebshop {
 	protected $checkoutModel = null;
 	protected $resultModel = null;
 	protected $paymentMethodModel=null;
+	protected $deliveryMethodModel=null;
+	protected $deliveryCostModel=null;	
 	/**
 	 * Initializes the plugin by setting localization, filters, and administration functions.
 	 */
@@ -115,7 +117,7 @@ class SytematicWebshop {
 		include_once('models/GenericModel.php');
 		include_once('lib/ideal/sisow.cls5.php');
 		include_once('models/CheckoutModel.php');
-		
+		include_once('models/DeliveryCostModel.php');
 		$this->load_options();
 		
 		$checkout = new CheckoutModel($this->options);
@@ -182,8 +184,15 @@ class SytematicWebshop {
 	
 	public function init_cart(){
 		include_once('views/CartInitializerView.php');
+		include_once('models/DeliveryCostModel.php');
+		include_once('models/DeliveryMethodModel.php');		
+		$this->deliveryMethodModel = new DeliveryMethodModel($this->options->getOption('hostname'), $this->options);
+		$this->deliveryCostModel = new DeliveryCostModel($this->options->getOption('hostname'), $this->options);
+		
 		$init = new CartInitializerView($this->options);
-		$init->render($this->options);
+		$deliveryMethods = $this->deliveryMethodModel->fetchDeliveryMethodsDefault();
+		$deliveryCostTable = $this->deliveryCostModel->fetchDeliveryCostsDefault();
+		$init->render($this->options, $deliveryMethods, $deliveryCostTable);
 	}
 	
 	public function modify_title($title){
@@ -434,7 +443,7 @@ class SytematicWebshop {
 		include_once('models/CheckoutModel.php');
 		include_once('models/PaymentMethodModel.php');
 		include_once('views/CheckoutView.php');
-
+		include_once('models/DeliveryMethodModel.php');
 		ob_start();
 
 		$this->checkoutModel = new CheckoutModel($this->options);

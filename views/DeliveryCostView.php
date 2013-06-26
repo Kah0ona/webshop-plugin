@@ -3,7 +3,7 @@
 * Overview, showing a list of categories
 */
 class DeliveryCostView extends GenericView {
-	public function render($args = null) { 
+	public function render($args = null, $deliveryCosts=null) { 
 		$deliveryText = $args['delivery_text'];
 		$deliveryText = str_replace('_total_', "&euro;'+formatEuro(minOrderPrice)+'", $deliveryText);
 		$deliveryText = str_replace('_deliverycosts_', "&euro;'+formatEuro(delCosts)+'", $deliveryText);

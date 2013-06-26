@@ -43,6 +43,42 @@ class CheckoutView extends GenericView {
 		return $product->price + $optionPrice;
 	}
 	
+	private function renderDeliveryMethod() {
+		$m = new DeliveryCostModel($this->model->getHostname(), $this->model->getOptions());
+		$data = $m->fetchDeliveryCostsDefault();
+		
+		$del = new DeliveryMethodModel($this->model->getHostname(), $this->model->getOptions());
+		$deliveryData = $del->fetchDeliveryMethodsDefault();
+		if(($data == null || count($data) == 0) && ($deliveryData==null || count($deliveryData) == 0)){
+			return;
+		}
+		?>
+
+		<script type="text/javascript">
+			var deliveryMethods = <?php echo json_encode($deliveryData); ?>;
+		
+			jQuery(document).ready(function($){
+				jQuery('#deliveryMethods').change()					
+			});
+		</script>
+
+		<?php
+		echo '<select id="deliveryMethods">';
+		if($deliveryData != null && count($deliveryData) > 0){
+			//render select item with the options, and the prices and a javascript that makes sure the checkout form sum is added
+			foreach($deliveryData as $method){
+				echo '<option value="'.$method->DeliveryMethod_id.'" method-price="'.$method->deliveryMethodPrice.'">'.$method->deliveryMethodName.' ('.money_format('%.2n',$method->deliveryMethodPrice()).')</option>';
+			}
+		}
+		
+		if($data != null) {
+			//add an entry called 'Door ons bezorgd', using the price of the delivery cost model
+			echo '<option value="0">Door ons bezorgd</option>';		
+		}
+		
+		echo '</select>';
+	}
+	
 	
 	private function renderPaymentMethodForm() {
 		$paymentMethods = $this->paymentMethodModel->getData();
@@ -424,6 +460,9 @@ class CheckoutView extends GenericView {
 									
 								</div>		
 							</div>	
+							
+							
+							
 
 							<div class="control-group ideal-group">
 								<p>Kies uw bank om direct via iDeal te betalen</p>						
@@ -436,7 +475,20 @@ class CheckoutView extends GenericView {
 								</div>		
 							</div>	
 						</div>
-					</div>							
+					</div>	
+					
+					<div class="row-fluid">
+						<div class="span12">
+							<h3>Verzending</h3>
+							<div class="control-group">
+								<p>Kies uw verzend-/bezorgmethode</p>						
+							    <div id="deliverymethod-text" class="alert hidden"></div>
+								<div class="controls">	
+										<?php echo $this->renderDeliveryMethod();?>									
+								</div>		
+							</div>	
+						</div>
+					</div>	
 							
 					<div class="row-fluid">
 						<div class="span12">

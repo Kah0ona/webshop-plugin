@@ -29,7 +29,9 @@
 				      'checkout_link' : 'Afrekenen',
 				      'cart_text' : 'Mijn bestelling',
 				      'session_url' : '/wordpress/wp-content/plugins/webshop-plugin/models/CartStore.php',
-				      'cartDataStore' : []
+				      'cartDataStore' : [],
+				      'deliveryMethods' : [],
+				      'deliveryCostsTable' : []
 				};
 				
 				//if not yet initialized 
@@ -369,7 +371,7 @@
 	    		var optionsPrice = methods.addOptionPrices(obj);
 	    			    		
 	    		totalInclVat += currentPrice;
-	    		totalInclVat += optionsPrice
+	    		totalInclVat += optionsPrice;
 	    		
 	    		//update vatMap
     			if(vatMap["x"+obj.VAT] == null || vatMap["x"+obj.VAT] == undefined){
@@ -384,12 +386,49 @@
 	    	
 	    	var totalExclVat = methods.renderVatRowsOnCheckout(vatMap, totalInclVat);
 	    	methods.renderExclPriceOnCheckout(totalExclVat);
+    	
 
 	    	settings.vatMap = vatMap;
 
 	    	$('.total-price').html(methods.formatEuro(totalInclVat));
 	    	$('.total-field').html("<strong>&euro; "+methods.formatEuro(totalInclVat)+"</strong>");
 
+	    },
+	    checkDeliveryConstraints : function(elt) {
+	    	var doNotDeliver = true;
+	    	var notEnoughOrdered = false;
+	    	
+	    	if(deliveryMethodIs0){
+	    	
+				for(var i = 0; i < settings.deliveryCosts.length; i++){
+					var min = parseInt(settings.deliveryCosts[i].minKm);
+					var max = parseInt(settings.deliveryCosts[i].maxKm);	
+					methods.logger(min+" "+max+" "+distance);
+					if(min <= distance && distance < max) { //if distance is within this range
+						if(totalInclVat < parseFloat(settings.deliveryCosts[i].minimumOrderPrice)){
+							if(distance > 0){
+								$('#not-enough-ordered').removeClass('hidden').html(
+								'We bezorgen op deze afstand ('+ 
+												methods.formatEuro(distance)+' km) vanaf een bedrag van €'+
+												methods.formatEuro(parseFloat(settings.deliveryCosts[i].minimumOrderPrice)));
+								doNotDeliver=true;
+								notEnoughOrdered = true;
+							    //hide submit buttons
+								$('.submit-controls').addClass('disabled');
+							}
+							break;
+						}
+						else {
+							//update the table of the checkout 
+							deliveryCosts.price = parseFloat(settings.deliveryCosts[i].price);
+							$('.submit-controls').removeClass('disabled');
+							$('#not-enough-ordered').addClass('hidden');
+							$('.deliverycosts-field').html("<strong>€ "+methods.formatEuro(delPrice)+"</strong>");
+							doNotDeliver = false;						
+						}
+					}
+				}
+			}    
 	    },
 	    renderExclPriceOnCheckout : function(totalExclVat){
 		   $('.subtotal-field').html('&euro; '+methods.formatEuro(totalExclVat));
