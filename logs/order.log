@@ -1497,3 +1497,154 @@
 2013-07-01 10:26:11: Inserted person id: 7
 2013-07-01 10:26:11: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat&number=62b&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=1234566&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=test+koerier+etc.&coupon=&payment-method=1&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%224%22%2C%22title%22%3A%22AEROTRENO+%22%2C%22desc%22%3A%22%5Cr%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2F%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22359%22%2C%22VAT%22%3A%220.21%22%7D%5D&orderStatus=nieuw&PaymentMethod_id=1&orderType=invoice&Person_id=7&viaSite=1
 2013-07-01 10:26:12: Inserted Order id: 29
+2013-07-01 11:59:32: -------
+2013-07-01 11:59:32: Processing cart: 
+2013-07-01 11:59:32: [{"Product_id":"4","title":"AEROTRENO ","desc":"\r\n","thumb":"http:\/\/webshopdev.sytematic.nl\/","quantity":"1","price":"359","VAT":"0.21"}]
+2013-07-01 11:59:32: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 
+    [number] => 62b
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 0649343492
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => 1
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"4","title":"AEROTRENO ","desc":"\r\n","thumb":"http:\/\/webshopdev.sytematic.nl\/","quantity":"1","price":"359","VAT":"0.21"}]
+    [orderStatus] => nieuw
+    [PaymentMethod_id] => 1
+)
+
+2013-07-01 11:59:32: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+&number=62b&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=0649343492&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=1&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%224%22%2C%22title%22%3A%22AEROTRENO+%22%2C%22desc%22%3A%22%5Cr%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2F%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22359%22%2C%22VAT%22%3A%220.21%22%7D%5D&orderStatus=nieuw&PaymentMethod_id=1&orderType=invoice
+2013-07-01 11:59:36: Inserted person id: 8
+2013-07-01 11:59:36: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+&number=62b&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=0649343492&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=1&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%224%22%2C%22title%22%3A%22AEROTRENO+%22%2C%22desc%22%3A%22%5Cr%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2F%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22359%22%2C%22VAT%22%3A%220.21%22%7D%5D&orderStatus=nieuw&PaymentMethod_id=1&orderType=invoice&Person_id=8&viaSite=1
+2013-07-01 11:59:38: Inserted Order id: 30
+2013-07-01 12:05:04: -------
+2013-07-01 12:05:04: Processing cart: 
+2013-07-01 12:05:04: [{"Product_id":"4","title":"AEROTRENO ","desc":"\r\n","thumb":"http:\/\/webshopdev.sytematic.nl\/","quantity":"1","price":"359","VAT":"0.21"}]
+2013-07-01 12:05:04: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 62
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 0649343492
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => 1
+    [issuerid] => 99
+    [DeliveryMethod_id] => 0
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"4","title":"AEROTRENO ","desc":"\r\n","thumb":"http:\/\/webshopdev.sytematic.nl\/","quantity":"1","price":"359","VAT":"0.21"}]
+    [orderStatus] => nieuw
+    [PaymentMethod_id] => 1
+)
+
+2013-07-01 12:05:04: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=62&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=0649343492&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=1&issuerid=99&DeliveryMethod_id=0&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%224%22%2C%22title%22%3A%22AEROTRENO+%22%2C%22desc%22%3A%22%5Cr%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2F%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22359%22%2C%22VAT%22%3A%220.21%22%7D%5D&orderStatus=nieuw&PaymentMethod_id=1&orderType=invoice
+2013-07-01 12:05:04: Inserted person id: 9
+2013-07-01 12:05:04: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=62&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=0649343492&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=1&issuerid=99&DeliveryMethod_id=0&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%224%22%2C%22title%22%3A%22AEROTRENO+%22%2C%22desc%22%3A%22%5Cr%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2F%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22359%22%2C%22VAT%22%3A%220.21%22%7D%5D&orderStatus=nieuw&PaymentMethod_id=1&orderType=invoice&Person_id=9&viaSite=1
+2013-07-01 12:05:05: Error sending post to /orders: Internal service error
+2013-07-01 12:07:22: -------
+2013-07-01 12:07:22: Processing cart: 
+2013-07-01 12:07:22: [{"Product_id":"4","title":"AEROTRENO ","desc":"\r\n","thumb":"http:\/\/webshopdev.sytematic.nl\/","quantity":"1","price":"359","VAT":"0.21"}]
+2013-07-01 12:07:22: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 62
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 06
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => 1
+    [issuerid] => 99
+    [DeliveryMethod_id] => 
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"4","title":"AEROTRENO ","desc":"\r\n","thumb":"http:\/\/webshopdev.sytematic.nl\/","quantity":"1","price":"359","VAT":"0.21"}]
+    [orderStatus] => nieuw
+    [PaymentMethod_id] => 1
+)
+
+2013-07-01 12:07:22: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=62&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=06&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=1&issuerid=99&DeliveryMethod_id=&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%224%22%2C%22title%22%3A%22AEROTRENO+%22%2C%22desc%22%3A%22%5Cr%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2F%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22359%22%2C%22VAT%22%3A%220.21%22%7D%5D&orderStatus=nieuw&PaymentMethod_id=1&orderType=invoice
+2013-07-01 12:07:22: Inserted person id: 10
+2013-07-01 12:07:22: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=62&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=06&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=1&issuerid=99&DeliveryMethod_id=&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%224%22%2C%22title%22%3A%22AEROTRENO+%22%2C%22desc%22%3A%22%5Cr%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2F%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22359%22%2C%22VAT%22%3A%220.21%22%7D%5D&orderStatus=nieuw&PaymentMethod_id=1&orderType=invoice&Person_id=10&viaSite=1
+2013-07-01 12:07:22: Error sending post to /orders: 
+2013-07-01 12:08:25: -------
+2013-07-01 12:08:25: Processing cart: 
+2013-07-01 12:08:25: [{"Product_id":"4","title":"AEROTRENO ","desc":"\r\n","thumb":"http:\/\/webshopdev.sytematic.nl\/","quantity":"1","price":"359","VAT":"0.21"}]
+2013-07-01 12:08:25: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 62b
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 32
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => 1
+    [issuerid] => 99
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"4","title":"AEROTRENO ","desc":"\r\n","thumb":"http:\/\/webshopdev.sytematic.nl\/","quantity":"1","price":"359","VAT":"0.21"}]
+    [orderStatus] => nieuw
+    [PaymentMethod_id] => 1
+)
+
+2013-07-01 12:08:25: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=62b&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=32&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=1&issuerid=99&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%224%22%2C%22title%22%3A%22AEROTRENO+%22%2C%22desc%22%3A%22%5Cr%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2F%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22359%22%2C%22VAT%22%3A%220.21%22%7D%5D&orderStatus=nieuw&PaymentMethod_id=1&orderType=invoice
+2013-07-01 12:08:25: Inserted person id: 11
+2013-07-01 12:08:25: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=62b&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=32&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=1&issuerid=99&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%224%22%2C%22title%22%3A%22AEROTRENO+%22%2C%22desc%22%3A%22%5Cr%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2F%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22359%22%2C%22VAT%22%3A%220.21%22%7D%5D&orderStatus=nieuw&PaymentMethod_id=1&orderType=invoice&Person_id=11&viaSite=1
+2013-07-01 12:08:26: Inserted Order id: 31
