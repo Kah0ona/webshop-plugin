@@ -60,6 +60,10 @@ class CheckoutModel extends GenericModel {
 		$post['shoppingCart'] = json_encode($this->cart);
 		$post['orderStatus'] = 'nieuw';
 		$post['PaymentMethod_id'] = $post['payment-method'];
+		if($post['DeliveryMethod_id'] == 0){
+			$post['DeliveryMethod_id'] = null;
+			unset($post['DeliveryMethod_id']);
+		}
 		$this->logMessage("-------");
 		$this->logMessage("Processing cart: ");
 		$this->logMessage($post['shoppingCart']);
