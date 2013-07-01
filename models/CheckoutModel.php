@@ -14,6 +14,7 @@ class CheckoutModel extends GenericModel {
 	protected $redirectUrl = '';
 	protected $deliveryMethodModel = null;
 	protected $deliveryCostModel = null;
+	protected $totalPrice = 0;
 	
 	public function __construct($options) {
 		$this->options=$options;
@@ -109,10 +110,16 @@ class CheckoutModel extends GenericModel {
 					else {
 						if($obj->Order__id != null) {
 							$this->logMessage("Inserted Order id: ".$obj->Order__id);			
-						
-							$this->status = ORDER_SUCCESS;
-							$this->statusMessage = "De bestelling is succesvol verstuurd.";
-							$this->insertedOrderId= $obj->Order__id;
+							if($obj->totalPrice == null) {
+								$this->status = ORDER_FAILED;
+								$this->statusMessage = "Er ging iets mis met de verwerking."
+							}
+							else {
+								$this->totalPrice = $obj->totalPrice;						
+								$this->status = ORDER_SUCCESS;
+								$this->statusMessage = "De bestelling is succesvol verstuurd.";
+								$this->insertedOrderId= $obj->Order__id;
+							}
 						}
 						else {
 							$this->logMessage("Error sending post to /orders without an error message!");			
@@ -134,11 +141,11 @@ class CheckoutModel extends GenericModel {
 		$this->logMessage("Creating iDeal transaction");
 		
 		$sisow = new Sisow($this->options->getOption('SisowMerchantId'), $this->options->getOption('SisowMerchantKey'));
-		$total = $this->calculateTotalPrice();
+		
 		$sisow->returnUrl = site_url().'/success';
 		$sisow->purchaseId = $this->insertedOrderId;
 		$sisow->description = $this->options->getOption('SisowDescription');
-		$sisow->amount = $total;
+		$sisow->amount = $this->totalPrice;
 		$sisow->issuerId = $_POST["issuerid"];
 		$sisow->notifyUrl = SISOW_NOTIFY_URL;
 
@@ -148,8 +155,6 @@ class CheckoutModel extends GenericModel {
 		$this->logMessage("issuerId: ".$_POST["issuerid"]);
 		$this->logMessage("returnUrl: ".site_url().'/success');
 		$this->logMessage("notifyUrl: ".SISOW_NOTIFY_URL);
-
-
 		
 		if (($ex = $sisow->TransactionRequest()) < 0) {
 			$this->logMessage('De iDeal betaling is mislukt, foutmelding: '.$sisow->errorCode.", ".$sisow->errorMessage);
@@ -160,7 +165,9 @@ class CheckoutModel extends GenericModel {
 		$this->redirectUrl = $sisow->issuerUrl;
 		$this->logMessage("Setting redirect url: ".$this->redirectUrl);
 	}
-	
+	/**
+	* @depracated, !!! now we use the return value from the Order post request. it now features the total price in the result
+	*/
 	private function calculateTotalPrice() {
 		$total = 0;
 		foreach($this->cart as $product){
@@ -171,7 +178,8 @@ class CheckoutModel extends GenericModel {
 			
 			$total += $this->calculateOptionsPrices($product) * $product['quantity'];
 		}
-		$total += (double) $this->options->getOption('ShippingCosts');
+		$total += $this->calculateShippingCosts();
+
 		$discount = 0;
 		if(isset($_POST['coupon']) && $_POST['coupon'] != "" &&  $_POST['coupon'] != null){
 			$discount = $this->getCouponPercentage($_POST['coupon']);		
@@ -180,7 +188,11 @@ class CheckoutModel extends GenericModel {
 		
 		return $total;
 	}
+
 	
+	/**
+	* @depracated, !!! now we use the return value from the Order post request. it now features the total price in the result
+	*/
 	private function calculateOptionsPrices($product){
 		$ret = 0;
 		if($product['ProductOption'] != null) {
@@ -236,7 +248,9 @@ class CheckoutModel extends GenericModel {
 	        CURLOPT_POSTFIELDS => $this->decodeParamsIntoGetString($post),
 			CURLOPT_USERAGENT => $_SERVER['HTTP_USER_AGENT']
 	    );
-	
+	    
+	    print_R($this->decodeParamsIntoGetString($post));
+		
 	    $ch = curl_init();
 	    curl_setopt_array($ch, ($options + $defaults));
 	    if( !$result = curl_exec($ch))

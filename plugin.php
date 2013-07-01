@@ -25,8 +25,11 @@ License:
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
   
 */
-
-define('SYSTEM_URL_WEBSHOP', 'http://webshop.lokaalgevonden.nl');
+//print_r($_SERVER);
+if($_SERVER['SERVER_NAME'] != 'localhost')
+	define('SYSTEM_URL_WEBSHOP', 'http://webshop.lokaalgevonden.nl');
+else
+	define('SYSTEM_URL_WEBSHOP', 'http://webshopdev.sytematic.nl');
 define('BASE_URL_WEBSHOP', SYSTEM_URL_WEBSHOP.'/public');
 define('EURO_FORMAT', '%.2n');
 define('WEBSHOP_PLUGIN_PATH', plugin_dir_path(__FILE__) );
@@ -348,12 +351,16 @@ class SytematicWebshop {
 		wp_enqueue_script('bootstrap-js', plugins_url('/webshop-plugin/js/bootstrap.min.js'), array('jquery') );		
 		wp_enqueue_script('jquery.json', plugins_url('/webshop-plugin/js/jquery.json.min.js'), array('jquery') );		
 		
+		$gmaps = 'http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyCPR76T3otWlBnPh1fK0Pe2bNgIJOBjVwc';
+		$handle = 'google-maps';
+		wp_register_script($handle,$gmaps,array());
+		wp_enqueue_script($handle);			
 		
 		if($this->isCheckoutPage()){
 			wp_enqueue_script('form.js', plugins_url('/webshop-plugin/js/jquery.form.js'), array('jquery'));
 			wp_enqueue_script('validation.js', plugins_url('/webshop-plugin/js/jquery.validate.js'), array('jquery', 'form.js'));
 			wp_enqueue_script('sytematic-webshop-shopping-cart-order', plugins_url('/webshop-plugin/js/order-form.js' ), array('jquery','jquery.json') );
-			
+
 			wp_localize_script( 'sytematic-webshop-shopping-cart-order', 'SubmitFormUrl', array( 
 						'ajaxurl' => plugins_url('/webshop-plugin/models/SubmitOrder.php'),
 					//	'cart_nonce'=>wp_create_nonce('cart_nonce')

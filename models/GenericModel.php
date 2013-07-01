@@ -148,6 +148,7 @@ class GenericModel {
 	    $params['hostname'] = $this->hostname;
 	    
 	 	$url = $url.'?'.$this->decodeParamsIntoGetString($params);
+
 		$jsonString = $this->curl_fetch($url);
 		$this->rawData = $jsonString;		
 

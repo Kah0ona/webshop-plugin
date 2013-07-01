@@ -7,6 +7,7 @@
 */
 ;(function( $, window, document, undefined ) {
 	var deliveryCosts = {"price": 0}; //object with details about the delivery costs. based on address user filled out in checkout form.
+	var distance = -1;
 	var methods = {
 		init : function( options ) { 
 			return this.each(function(){
@@ -28,6 +29,7 @@
 				      'checkout_page' : '/checkout',
 				      'checkout_link' : 'Afrekenen',
 				      'cart_text' : 'Mijn bestelling',
+				      'address' : '',
 				      'session_url' : '/wordpress/wp-content/plugins/webshop-plugin/models/CartStore.php',
 				      'cartDataStore' : [],
 				      'deliveryMethods' : [],
@@ -102,6 +104,39 @@
     			methods.updatePrices(elt);
 				event.stopPropagation();
 		    });
+		    
+			$('.address-line, .address-line-elsewhere').bind('change.shoppingCart', function(){
+		    	var compareToAddress = '';
+		    	var compareToAddress2="";
+		    	
+		    	$('.address-line').each(function(){
+		    		compareToAddress += " "+$(this).val();
+		    	});
+		    	$('.address-line-elsewhere').each(function(){
+		    		if($(this).val() != ""){
+				    	compareToAddress2 += " "+$(this).val();	
+			    	}
+		    	})
+
+		    	if(compareToAddress2.length > 0 && $('#deliveryElsewhere').is(':checked')){
+			    	compareToAddress = compareToAddress2;
+			    	methods.logger("Distance calc: Using address 'elsewhere'");
+			    }
+			    else {
+				    methods.logger("Distance calc: Using normal delivery address");
+			    }
+			    if(methods.allAddressFieldsFilledOut()){
+			    	methods.calculateDistance(compareToAddress, function(){
+			   			methods.updatePrices(elt);		    	
+			    	});
+		    	}
+		    	else {
+					distance = -1;
+					methods.updatePrices(elt);							    
+				}
+		    });	   		    
+		    
+		    
 		    $("body").on('click.shoppingCart', 'a.removefromcart-checkout', function(event){
 		    	methods.removeProduct(elt,event);
 		    	methods.removeProductFromCheckoutPage(elt,event);
@@ -403,14 +438,52 @@
 	    	$('.total-field').html("<strong>&euro; "+methods.formatEuro(totalInclVat)+"</strong>");
 
 	    },
+		allAddressFieldsFilledOut : function() {
+ 	        var ret = true;
+ 	        var deliveryElseWhere = $('#deliveryElsewhere').is(':checked');
+		    $('.address-line').each(function(){
+		    	var x = $(this).val();
+		    	if(deliveryElseWhere){
+			    	if($(this).attr('id').indexOf("delivery") !== -1){
+				    	if(x === undefined || x === null || x == "") {
+				    		methods.logger("Not all address fields set");
+					    	ret = false;
+				    	}
+			    	}
+		    	}
+		    	else {
+		    		if($(this).attr('id').indexOf("delivery") === -1){
+				    	if(x === undefined || x === null || x == "") {
+				    		methods.logger("Not all address fields set");
+					    	ret = false;
+				    	}
+			    	}
+		    	}
+			});
+			
+			if(ret){
+	    		methods.logger("All address fields set");			 
+			}
+			return ret;
+	    },	    
 	    renderDeliveryMethodAndCostsOnCheckout : function(vatMap, totalInclVat) {
 	    	//fetch #delivery
 	    	var deliveryMethodElt = $('#deliveryMethods option').filter(':selected');
+			$('#not-enough-ordered').addClass('hidden').removeClass('alert-error');
+			$('.submit-controls').removeClass('disabled');
+			$('.deliverycosts-field').html("<strong>€ "+methods.formatEuro(0.0)+"</strong>");
 
 	    	if(deliveryMethodElt.attr('value') == 0){ //use settings.deliveryCostTable
 		    	var doNotDeliver = true;
 		    	var notEnoughOrdered = false;
-	    	
+		    	$('#not-enough-ordered').addClass('hidden').html('');
+				if(distance > settings.deliveryCostsTable[settings.deliveryCostsTable.length -1].maxKm){
+					$('#not-enough-ordered').removeClass('hidden').addClass('alert-error').html('Wij bezorgen helaas niet op deze afstand. Kies een andere verzendmethode.');
+					deliveryCosts.price = 0.0;
+					$('.deliverycosts-field').html("<strong>€ "+methods.formatEuro(deliveryCosts.price)+"</strong>");
+
+					return;
+				}
 				for(var i = 0; i < settings.deliveryCostsTable.length; i++){
 					var min = parseInt(settings.deliveryCostsTable[i].minKm);
 					var max = parseInt(settings.deliveryCostsTable[i].maxKm);	
@@ -418,7 +491,7 @@
 					if(min <= distance && distance < max) { //if distance is within this range
 						if(totalInclVat < parseFloat(settings.deliveryCostsTable[i].minimumOrderPrice)){
 							if(distance > 0){
-								$('#not-enough-ordered').removeClass('hidden').html(
+								$('#not-enough-ordered').removeClass('hidden').addClass('alert-error').html(
 								'We bezorgen op deze afstand ('+ 
 												methods.formatEuro(distance)+' km) vanaf een bedrag van €'+
 												methods.formatEuro(parseFloat(settings.deliveryCostsTable[i].minimumOrderPrice)));
@@ -457,7 +530,33 @@
 		    	$('.deliverycosts-field').html("<strong>€ "+methods.formatEuro(deliveryCosts.price)+"</strong>");
 	    	}
 	    	
+
 	    },
+		calculateDistance : function(cptaddr, callback) {
+	    	//calc distance between store and cptaddr (compare to address)
+	    	var queryData = {
+			  origin: settings.address,
+			  destination: cptaddr,
+			  travelMode: google.maps.TravelMode.DRIVING,
+			  unitSystem: google.maps.UnitSystem.METRIC,
+			  region: settings.region
+			}
+					
+			var directionsService = new google.maps.DirectionsService();
+			distance = -1;
+	        directionsService.route(queryData, function(response, status) {
+	            if (status == google.maps.DirectionsStatus.OK) {
+	            	distance = parseInt(response.routes[0].legs[0].distance.value) / 1000;
+	            	methods.logger("Distance found: "+distance+" km");
+	            }
+				else {
+					methods.logger("Something went wrong, or address not found: "+status)
+					methods.logger(response);
+				}            
+   	           	if(callback != null && callback != undefined)
+	            	callback.call(distance);
+			});			
+	    },	    
 	    renderExclPriceOnCheckout : function(totalExclVat){
 		   $('.subtotal-field').html('&euro; '+methods.formatEuro(totalExclVat));
 	    },
