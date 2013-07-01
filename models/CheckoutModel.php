@@ -59,6 +59,7 @@ class CheckoutModel extends GenericModel {
 		$post = $_POST;
 		$post['shoppingCart'] = json_encode($this->cart);
 		$post['orderStatus'] = 'nieuw';
+		$post['PaymentMethod_id'] = $post['payment-method'];
 		$this->logMessage("-------");
 		$this->logMessage("Processing cart: ");
 		$this->logMessage($post['shoppingCart']);
@@ -112,7 +113,7 @@ class CheckoutModel extends GenericModel {
 							$this->logMessage("Inserted Order id: ".$obj->Order__id);			
 							if($obj->totalPrice == null) {
 								$this->status = ORDER_FAILED;
-								$this->statusMessage = "Er ging iets mis met de verwerking."
+								$this->statusMessage = "Er ging iets mis met de verwerking.";
 							}
 							else {
 								$this->totalPrice = $obj->totalPrice;						
@@ -249,7 +250,7 @@ class CheckoutModel extends GenericModel {
 			CURLOPT_USERAGENT => $_SERVER['HTTP_USER_AGENT']
 	    );
 	    
-	    print_R($this->decodeParamsIntoGetString($post));
+	    $this->logMessage("Posting to: ".$this->decodeParamsIntoGetString($post));
 		
 	    $ch = curl_init();
 	    curl_setopt_array($ch, ($options + $defaults));

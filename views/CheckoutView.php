@@ -46,17 +46,18 @@ class CheckoutView extends GenericView {
 	private function renderDeliveryMethod() {
 		$m = $this->model->getDeliveryCostModel();
 		$data = $m->getData();
+		$data = json_decode($data);
 		
 		$del = $this->model->getDeliveryMethodModel();
-		$deliveryData = $del->getData();
-		
+		$delDataRaw = $del->getData();
+		$deliveryData = json_decode($delDataRaw);
 		if(($data == null || count($data) == 0) && ($deliveryData==null || count($deliveryData) == 0)){
 			return;
 		}
 		?>
 
 		<script type="text/javascript">
-			var deliveryMethods = <?php echo json_encode($deliveryData); ?>;
+			var deliveryMethods = <?php echo $delDataRaw; ?>;
 		
 			jQuery(document).ready(function($){
 				jQuery('#deliveryMethods').change(function(elt){
@@ -69,15 +70,15 @@ class CheckoutView extends GenericView {
 		</script>
 
 		<?php
-		echo '<select id="deliveryMethods">';
+		echo '<select id="deliveryMethods" name="DeliveryMethod_id">';
 		if($deliveryData != null && count($deliveryData) > 0){
 			//render select item with the options, and the prices and a javascript that makes sure the checkout form sum is added
 			foreach($deliveryData as $method){
 				echo '<option value="'.$method->DeliveryMethod_id.'" methodprice="'.$method->deliveryMethodPrice.'">'.$method->deliveryMethodName.' ('.money_format('%.2n',$method->deliveryMethodPrice).')</option>';
 			}
 		}
-		
-		if($data != null) {
+
+		if($data != null && count($data) > 0) {
 			//add an entry called 'Door ons bezorgd', using the price of the delivery cost model
 			echo '<option value="0">Door ons bezorgd</option>';		
 		}
@@ -501,7 +502,7 @@ class CheckoutView extends GenericView {
 						<div class="span12">
 							<h3 class="payment-options">Verzenden</h3>
 							<div class="control-group">
-								<p>Als u op de knop hieronder drukt, wordt uw bestelling opgeslagen, en wordt u naar de beveiligde omgeving van uw bank gestuurd, om de betaling te doen via iDeal.</p>
+								<p>Als u op de knop hieronder drukt, wordt uw bestelling opgeslagen. Indien u voor iDeal heeft gekozen als betaalmethode, wordt u naar de beveiligde omgeving van uw bank doorgestuurd.</p>
 								<div class="controls">	
 									<input type="submit" name="invoice" class="submit-controls btn btn-primary " id="invoice" value="Plaats bestelling" style="width: 130px;" />
 								</div>		

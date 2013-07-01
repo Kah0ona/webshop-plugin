@@ -481,6 +481,7 @@
 					$('#not-enough-ordered').removeClass('hidden').addClass('alert-error').html('Wij bezorgen helaas niet op deze afstand. Kies een andere verzendmethode.');
 					deliveryCosts.price = 0.0;
 					$('.deliverycosts-field').html("<strong>€ "+methods.formatEuro(deliveryCosts.price)+"</strong>");
+					$('.submit-controls').addClass('disabled');
 
 					return;
 				}
@@ -526,7 +527,11 @@
 						    	
 	    	}
 	    	else { //use settings.deliveryMethodPrice
-		    	deliveryCosts.price = parseFloat(deliveryMethodElt.attr('methodprice'));
+	    		var x = deliveryMethodElt.attr('methodprice');
+	    		if(x == undefined || x == null){
+		    		x = 0;
+	    		}
+		    	deliveryCosts.price = parseFloat(x);
 		    	$('.deliverycosts-field').html("<strong>€ "+methods.formatEuro(deliveryCosts.price)+"</strong>");
 	    	}
 	    	
