@@ -91,7 +91,7 @@ class CheckoutView extends GenericView {
 		$paymentMethods = $this->paymentMethodModel->getData();
 		$ret .= '<select name="payment-method" class="payment-methods-form" id="payment-methods-form">';	
 		if($this->model->getOptions()->getOption('UseSisow') == "true") {
-			$ret .= '<option value="ideal">iDeal</option>';	
+			$ret .= '<option value="0">iDeal</option>';	
 		}
 		if($paymentMethods != null){
 			foreach($paymentMethods as $method){ 

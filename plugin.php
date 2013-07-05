@@ -129,7 +129,7 @@ class SytematicWebshop {
 		
 		header('Content-Type: application/json; charset=UTF8');
 
-		if($_POST['payment-method'] != "ideal") {
+		if($_POST['payment-method'] != "0") { // if not ideal
 			echo json_encode(array('redirectUrl' => site_url('/success')));
 			exit;
 		}
