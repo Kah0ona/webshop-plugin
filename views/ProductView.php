@@ -82,12 +82,12 @@ class ProductView extends GenericView {
 	}
 
 
-	protected function shouldRenderRowHtmlStart($i){
-		return $i%$this->numCols == 1;
+	protected function shouldRenderRowHtmlStart($i, $product){
+		return $i%$this->numCols == 1 || $product->productFeatured;
 	}
 	
 	protected function shouldRenderRowHtmlEnd($i){
-		return $i%$this->numCols == 0;
+		return $i%$this->numCols == 0 || $product->productFeatured;
 	}
 	
 	protected function getDetailLink($product){
@@ -98,20 +98,22 @@ class ProductView extends GenericView {
 		$productModel = new ProductModel($this->model->getHostname());
 
 		$span = $this->calculateSpan();
+
 		$i = 1;
 	?>	
 		<!-- Start rendering ProductView -->
 		<div class="product-overview <?php echo $categoryId != null ? 'product-category-'.$categoryId : ""; ?>">
 			<?php foreach($this->data as $k=>$v) : ?>
+				<?php if($v->productFeatured) { $span = 'span12'; } ?>
 				<?php if($productModel->shouldShowProductBasedOnSku($v)) : ?>
 			
-				<?php if($this->shouldRenderRowHtmlStart($i)) :?>
+				<?php if($this->shouldRenderRowHtmlStart($i, $v)) :?>
 					<div class="row-fluid product-row">
 				<?php endif; ?>	
 						<div class="<?php echo $span; ?> product product-<?php echo $v->Product_id; ?> <?php echo $this->shouldRenderRowHtmlEnd($i) ? 'last' : ''; ?>">
 							<?php $this->renderProduct($v, $productModel); ?>
 						</div>
-				<?php if($this->shouldRenderRowHtmlEnd($i)) :?>
+				<?php if($this->shouldRenderRowHtmlEnd($i, $v)) :?>
 					</div><!-- end row-fluid -->
 				<?php endif; ?>
 				<?php $i++; ?>

@@ -4,19 +4,22 @@
 */
 class CategoryView extends GenericView {
 	protected $numCols = 2;
+	protected $maxNestingLevels = 4;
 
-	public function render($data=null, $renderMode='list') { 
+	public function render($data=null, $renderMode='list', $recursive=true) { 
 		if($data == null)
 			$data = $this->model->getSortedMap();
-
-		if($renderMode == 'list'){
+			
+		if($renderMode == 'list' && !$recursive){
 			$this->renderList($data);
 		}	
+		elseif($renderMode == 'list' && $recursive){
+			$this->renderListRecursive($data);
+		}
 		else {
 			$this->renderGrid($data);
 		}
 	}
-	
 	
 	public function setNumCols($num){
 		$this->numCols = $num;
@@ -117,6 +120,104 @@ class CategoryView extends GenericView {
 	<?php 
 	}
 	
+	/**
+	* $data should contain a nested list (with subcategories), they should have the key 'categories'
+	*/
+	public function renderListRecursive($data=null, $level = 0){ ?>
+		<!-- Start rendering CategoryView -->
+		<ul class="categories">
+		<?php
+			if($data == null):
+		?>
+			<div><p>Er zijn geen categorie&euml;n gevonden.</p></div>
+		<?php else: ?>
+			<?php foreach ($data as $group=>$cats) : ?>
+				<?php if($group == 'nogroup') : ?>
+					<?php foreach($cats as $cat) : ?>
+						
+						<li class="category-item category-package">
+							<a href="<?php echo site_url(); ?>/categories/<?php echo $cat->Category_id; ?>#<?php echo $cat->categoryName; ?>">
+								<?php echo $cat->categoryName; ?>
+							</a>
+						</li>
+						<?php 
+							if($cat->children != null && count($cat->children) > 0 && $level < $this->maxNestingLevels){
+						?>
+						<li class="category-item category-package category-subcategory">
+						<?php
+							echo $this->renderListRecursiveNoGroupTitles($cat->children, $level+1);
+						?>
+						</li>						
+						<?php
+							}
+						?>
+					<?php endforeach; ?>
+				<?php else : ?>
+						<li class="category-title"><?php echo $group; ?></li>
+						<li class="category dropdown-wrap">
+						<ul class="category-level-<?php echo $level; ?>">
+						<?php foreach($cats as $cat) : ?>
+							<li class="category-item category-package ">
+								<a href="<?php echo site_url(); ?>/categories/<?php echo $cat->Category_id; ?>#<?php echo $cat->categoryName; ?>">
+									<?php echo $cat->categoryName; ?>
+								</a>
+								
+							</li>
+							<?php 
+								if($cat->children != null && count($cat->children) > 0 && $level < $this->maxNestingLevels){
+							?>
+							<li class="category-item category-package category-subcategory">
+							<?php
+								echo $this->renderListRecursiveNoGroupTitles($cat->children, $level+1);
+							?>
+							</li>
+							<?php
+								}
+							?>
+						<?php endforeach; ?>
+						</ul>
+					</li>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		<?php endif; ?>
+
+		</ul>
+		<!-- End CategoryView -->
+
+
+	<?php	
+	}
+	/**
+	* $data should contain a nested list (with subcategories), they should have the key 'categories'
+	*/
+	public function renderListRecursiveNoGroupTitles($data=null, $level){ ?>
+	
+		<!-- Start rendering CategoryView -->
+		<ul class="categories  category-level-<?php echo $level; ?>">
+			<?php foreach($data as $cat) : ?>
+				<li class="category-item category-package">
+					<a href="<?php echo site_url(); ?>/categories/<?php echo $cat->Category_id; ?>#<?php echo $cat->categoryName; ?>">
+						<?php echo $cat->categoryName; ?>
+					</a>
+				</li>
+				<?php 
+					if($cat->children != null && count($cat->children) > 0 && $level < $this->maxNestingLevels){
+				?>
+				<li class="category-item category-package category-subcategory">
+				<?php
+					echo $this->renderListRecursiveNoGroupTitles($cat->children, $level+1);
+				?>
+				</li>
+				<?php
+				}
+				?>
+			<?php endforeach; ?>
+		</ul>
+		<!-- End CategoryView -->
+	<?php	
+	}
+	
+	
 	public function renderList($data=null){ ?>
 		<!-- Start rendering CategoryView -->
 		<ul class="categories">
@@ -139,7 +240,7 @@ class CategoryView extends GenericView {
 						<li class="category dropdown-wrap">
 						<ul>
 						<?php foreach($cats as $cat) : ?>
-							<li class="category-item category-package">
+							<li class="category-item category-package ">
 								<a href="<?php echo site_url(); ?>/categories/<?php echo $cat->Category_id; ?>#<?php echo $cat->categoryName; ?>">
 									<?php echo $cat->categoryName; ?>
 								</a>
@@ -157,5 +258,6 @@ class CategoryView extends GenericView {
 
 	<?php	
 	}
+
 }
 ?>

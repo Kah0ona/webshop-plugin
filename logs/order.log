@@ -1648,3 +1648,86 @@
 2013-07-01 12:08:25: Inserted person id: 11
 2013-07-01 12:08:25: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=62b&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=32&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=1&issuerid=99&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%224%22%2C%22title%22%3A%22AEROTRENO+%22%2C%22desc%22%3A%22%5Cr%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2F%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22359%22%2C%22VAT%22%3A%220.21%22%7D%5D&orderStatus=nieuw&PaymentMethod_id=1&orderType=invoice&Person_id=11&viaSite=1
 2013-07-01 12:08:26: Inserted Order id: 31
+2013-07-05 14:20:42: -------
+2013-07-05 14:20:42: Processing cart: 
+2013-07-05 14:20:42: [{"Product_id":"9","title":"CORDON TREFLE","desc":"\r\n","thumb":"http:\/\/webshopdev.sytematic.nl\/","quantity":"1","price":"55","VAT":"0.21","ProductOption":[{"ProductOption_id":"5","ProductOptionValue_id":"24","optionName":"Maat:","extraPrice":"","optionValueName":"ACCESSOIRE"}]}]
+2013-07-05 14:20:42: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 62b
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 06132456789
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => 0
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"9","title":"CORDON TREFLE","desc":"\r\n","thumb":"http:\/\/webshopdev.sytematic.nl\/","quantity":"1","price":"55","VAT":"0.21","ProductOption":[{"ProductOption_id":"5","ProductOptionValue_id":"24","optionName":"Maat:","extraPrice":"","optionValueName":"ACCESSOIRE"}]}]
+    [orderStatus] => nieuw
+    [PaymentMethod_id] => 0
+)
+
+2013-07-05 14:20:42: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=62b&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=06132456789&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=0&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%229%22%2C%22title%22%3A%22CORDON+TREFLE%22%2C%22desc%22%3A%22%5Cr%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2F%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2255%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%225%22%2C%22ProductOptionValue_id%22%3A%2224%22%2C%22optionName%22%3A%22Maat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%22ACCESSOIRE%22%7D%5D%7D%5D&orderStatus=nieuw&PaymentMethod_id=0&orderType=invoice
+2013-07-05 14:20:42: Inserted person id: 12
+2013-07-05 14:20:42: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=62b&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=06132456789&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=0&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%229%22%2C%22title%22%3A%22CORDON+TREFLE%22%2C%22desc%22%3A%22%5Cr%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2F%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2255%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%225%22%2C%22ProductOptionValue_id%22%3A%2224%22%2C%22optionName%22%3A%22Maat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%22ACCESSOIRE%22%7D%5D%7D%5D&orderStatus=nieuw&PaymentMethod_id=0&orderType=invoice&Person_id=12&viaSite=1
+2013-07-05 14:20:43: Error sending post to /orders: Internal service error
+2013-07-05 14:28:33: -------
+2013-07-05 14:28:33: Processing cart: 
+2013-07-05 14:28:33: [{"Product_id":"9","title":"CORDON TREFLE","desc":"\r\n","thumb":"http:\/\/webshopdev.sytematic.nl\/","quantity":"1","price":"55","VAT":"0.21","ProductOption":[{"ProductOption_id":"5","ProductOptionValue_id":"24","optionName":"Maat:","extraPrice":"","optionValueName":"ACCESSOIRE"}]}]
+2013-07-05 14:28:33: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 62b
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 06493435
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => ideal
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"9","title":"CORDON TREFLE","desc":"\r\n","thumb":"http:\/\/webshopdev.sytematic.nl\/","quantity":"1","price":"55","VAT":"0.21","ProductOption":[{"ProductOption_id":"5","ProductOptionValue_id":"24","optionName":"Maat:","extraPrice":"","optionValueName":"ACCESSOIRE"}]}]
+    [orderStatus] => nieuw
+)
+
+2013-07-05 14:28:33: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=62b&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=06493435&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=ideal&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%229%22%2C%22title%22%3A%22CORDON+TREFLE%22%2C%22desc%22%3A%22%5Cr%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2F%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2255%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%225%22%2C%22ProductOptionValue_id%22%3A%2224%22%2C%22optionName%22%3A%22Maat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%22ACCESSOIRE%22%7D%5D%7D%5D&orderStatus=nieuw&orderType=invoice
+2013-07-05 14:28:33: Inserted person id: 13
+2013-07-05 14:28:33: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=62b&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=06493435&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=ideal&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%229%22%2C%22title%22%3A%22CORDON+TREFLE%22%2C%22desc%22%3A%22%5Cr%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2F%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2255%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%225%22%2C%22ProductOptionValue_id%22%3A%2224%22%2C%22optionName%22%3A%22Maat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%22ACCESSOIRE%22%7D%5D%7D%5D&orderStatus=nieuw&orderType=invoice&Person_id=13&viaSite=1
+2013-07-05 14:28:34: Inserted Order id: 32
+2013-07-05 14:28:34: Creating iDeal transaction
+2013-07-05 14:28:34: purchaseId: 32
+2013-07-05 14:28:34: description: ABC Webshop bestelling
+2013-07-05 14:28:34: amount: 
+2013-07-05 14:28:34: issuerId: 99
+2013-07-05 14:28:34: returnUrl: http://localhost/~marten/wordpress/success
+2013-07-05 14:28:34: notifyUrl: http://webshopdev.sytematic.nl/public/sisow_notifications
+2013-07-05 14:28:45: Setting redirect url: https://www.sisow.nl/Sisow/iDeal/Simulator.aspx?merchantid=2537507457&txid=TEST080488201445&sha1=60a5d442327e861c36c340943b9d595997b764ab

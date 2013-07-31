@@ -55,11 +55,19 @@ class CheckoutModel extends GenericModel {
 	}
 	
 	public function sendOrderToBackend(){
+
 		$_POST['hostname'] = $this->options->getOption('hostname');
 		$post = $_POST;
+		
+
 		$post['shoppingCart'] = json_encode($this->cart);
 		$post['orderStatus'] = 'nieuw';
 		$post['PaymentMethod_id'] = $post['payment-method'];
+		if($post['PaymentMethod_id'] == "ideal"){
+			$post['PaymentMethod_id'] = null;
+			unset($post['PaymentMethod_id']);
+		}		
+		
 		if($post['DeliveryMethod_id'] == 0){
 			$post['DeliveryMethod_id'] = null;
 			unset($post['DeliveryMethod_id']);

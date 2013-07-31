@@ -68,7 +68,63 @@ class CategoryModel extends GenericModel {
 		return $this->sortedMap;
 	}
 	
+	public function fetchNestedCategories($useNesting = false){
+		$arr = array(
+			'hostname'=>$this->hostname,
+			'useNesting'=>$useNesting
+		);
+		
+		$cats = $this->fetchCategories($arr);
+		
+		//order by group title, and remap
+		
+		foreach($cats as $cat){
+			if($cat->Parent_id == null)
+				$cat->Parent_id = 0;
+		}
+		$tree = $this->buildTree($cats);	
+
+
+		//now, for all root categories, re-map into same group-titles, to achieve backwards compatibility.
+		$map = array();
+		foreach($tree as $c){ //walk top level only.
+			if($c->groupTitle != null){
+				$t = trim($c->groupTitle);
+				if($map[$t] == null)
+					$map[$t] = Array();
+					
+				$map[$t][] = $c;
+			}
+			else {
+				if($map['nogroup'] == null)
+					$map['nogroup'] = Array();
+									
+				$map['nogroup'][] = $c;
+			}
+		}
+		$this->sortedMap = $map;
+		return $this->sortedMap;
+
+	}
 	
+	private function buildTree(array &$elements, $parentId = 0) {
+       $branch = array();
+
+       foreach ($elements as $element) {
+       	
+           if ($element->Parent_id === $parentId) {
+               $children = $this->buildTree($elements, $element->Category_id);
+
+               if (count($children) > 0) {
+                   $element->children = $children;
+               }
+               $branch[$element->Category_id] = $element;
+                          }
+       }
+       return $branch;
+    }
+    
+    
 	/**
 	* Is null, unless fetchSortedCategories has been called before. This returns the in-memory version
 	*/
