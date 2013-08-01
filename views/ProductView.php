@@ -110,7 +110,9 @@ class ProductView extends GenericView {
 				<?php if($this->shouldRenderRowHtmlStart($i, $v)) :?>
 					<div class="row-fluid product-row">
 				<?php endif; ?>	
-						<div class="<?php echo $span; ?> product product-<?php echo $v->Product_id; ?> <?php echo $this->shouldRenderRowHtmlEnd($i) ? 'last' : ''; ?>">
+						<div class="<?php echo $span; ?> product product-<?php echo $v->Product_id; ?> <?php echo $this->shouldRenderRowHtmlEnd($i) ? 'last' : ''; ?>"
+							itemscope itemtype="http://schema.org/Product"
+						>
 							<?php $this->renderProduct($v, $productModel); ?>
 						</div>
 				<?php if($this->shouldRenderRowHtmlEnd($i, $v)) :?>
@@ -131,25 +133,33 @@ class ProductView extends GenericView {
 			 	<img src="<?php echo SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$product->imageDish; ?>" />
 		 	</a>
 		 </div>
-		 <div class="product-title product-title-<?php echo $product->Product_id; ?>">
+		 <div class="product-title product-title-<?php echo $product->Product_id; ?>" itemprop="name">
 		 	<?php echo $product->productName; ?>
 		 </div>
-		 <?php if($product->priceOnDemand) {  ?>
-			 <div class="product-price product-price-<?php echo $product->Product_id; ?> price-on-demand">Prijs op aanvraag, <br/>zie details.</div>
-		 <?php } else { ?>
-		 <div class="product-price product-price-<?php echo $product->Product_id; ?>">
-		 	<?php if($this->containsProductWithExtraPrice($product->ProductOption)){ echo 'vanaf '; } ?>
-		 	€ <?php echo $this->formatMoney($product->productPrice); ?>
-		 </div>
-		 <?php } ?>
-		 <?php if($this->renderDetailOnOverview) { 
-				 	$v = new ProductDetailView($productModel);
-					echo $v->renderOptionForm($product); 
-			 	}
-		 ?>
-		 <div class="product-detail-button product-detail-button-<?php echo $product->Product_id; ?>">
-		 	<a href="<?php echo $this->getDetailLink($product); ?>" class="product-detail-link">details</a>
-		 </div>
+		 
+		 <div itemprop="offers" itemscope itemtyp="http://schema.org/Offer">
+			 <?php if($product->priceOnDemand) {  ?>
+				 <div class="product-price product-price-<?php echo $product->Product_id; ?> price-on-demand">Prijs op aanvraag, <br/>zie details.</div>
+			 <?php } else { ?>
+	
+			 <div class="product-price product-price-<?php echo $product->Product_id; ?>" itemprop="price">
+			 	<?php if($this->containsProductWithExtraPrice($product->ProductOption)){ echo 'vanaf '; } ?>
+			 	
+			 	€ <?php echo $this->formatMoney($product->productPrice); ?>
+			 </div>
+			 <meta itemprop="priceCurrency" content="EUR" />
+			 <link itemprop="availability" href="http://schema.org/InStock" />
+			 <?php } ?>
+			 <?php if($this->renderDetailOnOverview) { 
+					 	$v = new ProductDetailView($productModel);
+						echo $v->renderOptionForm($product); 
+				 	}
+			 ?>
+			 <div class="product-detail-button product-detail-button-<?php echo $product->Product_id; ?>">
+			 	<a href="<?php echo $this->getDetailLink($product); ?>" class="product-detail-link">details</a>
+			 </div>
+ 		 </div>
+
 		 <!-- End Rendering single product -->
 	 <?php 
 	 }

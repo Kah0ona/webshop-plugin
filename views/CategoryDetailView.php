@@ -25,8 +25,12 @@ class CategoryDetailView extends GenericView {
 		}
 	
 	
-		if($data != null && count($data->Product) > 0) 
+		if($data != null && count($data->Product) > 0){
+			if($subCategories != null && count($subCategories) > 0){
+				echo '<h3>Producten</h3>';
+			}
 			echo $productView->render($data->Product, $renderDetailOnOverview, $data->Category_id); 
+		}
 		elseif ($subCategories == null || count($subCategories) == 0)
 			echo '<div>Deze categorie bevat momenteel geen producten.</div>';
 		
