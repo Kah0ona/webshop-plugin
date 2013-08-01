@@ -78,11 +78,10 @@ class ProductDetailView extends GenericView {
 				});
 			</script>
 		
-		
 			<div class="single-product"  itemscope itemtype="http://schema.org/Product">
 				<div class="row-fluid">
 					<div class="span8 product-image">
-						<img src="<?php echo SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$data->imageDish; ?>" />
+						<img itemprop="image" alt="<?php echo $data->productName; ?>" src="<?php echo SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$data->imageDish; ?>"  />
 					</div>
 					
 					<div class="span4">
@@ -92,12 +91,15 @@ class ProductDetailView extends GenericView {
 								<p class="product-description" itemprop="description">
 									<?php echo nl2br($data->productDesc); ?>
 								</p>
-								<p class="product-price" itemprop="price">
-								<?php if($this->containsProductWithExtraPrice($data->ProductOption)) { echo 'vanaf '; } ?>
-									€ <?php echo $this->formatMoney($data->productPrice); ?>
-								</p>
-								<meta itemprop="priceCurrency" content="EUR" />
-								<link itemprop="availability" href="http://schema.org/InStock" />
+								<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+									<p class="product-price" itemprop="price">
+									<?php if($this->containsProductWithExtraPrice($data->ProductOption)) { echo 'vanaf '; } ?>
+										€ <?php echo $this->formatMoney($data->productPrice); ?>
+									</p>
+									<meta itemprop="priceCurrency" content="EUR" />
+									<link itemprop="availability" href="http://schema.org/InStock" />
+								</div>
+
 							</div><!-- /span12 -->
 						</div><!-- /row-fluid -->
 						<div class="row-fluid">
