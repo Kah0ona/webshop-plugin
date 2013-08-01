@@ -28,6 +28,13 @@ class CategoryModel extends GenericModel {
 		$this->categoryTitleOrder = $map;
 	}
 	
+	public function getSubcategories($parentId){
+		if($parentId == null){
+			return null;
+		}
+		return $this->fetch($this->serviceUrl, array('Parent_id'=>$parentId), false);
+	}
+	
 	public function fetchSortedCategories($useNesting = false){
 		$arr = array(
 			'hostname'=>$this->hostname,
@@ -111,7 +118,6 @@ class CategoryModel extends GenericModel {
        $branch = array();
 
        foreach ($elements as $element) {
-       	
            if ($element->Parent_id === $parentId) {
                $children = $this->buildTree($elements, $element->Category_id);
 

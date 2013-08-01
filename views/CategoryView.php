@@ -54,12 +54,12 @@ class CategoryView extends GenericView {
 	}
 
 
-	protected function shouldRenderRowHtmlStart($i){
+	protected function shouldRenderRowHtmlStart($i, $total){
 		return $i%$this->numCols == 1;
 	}
 	
-	protected function shouldRenderRowHtmlEnd($i){
-		return $i%$this->numCols == 0;
+	protected function shouldRenderRowHtmlEnd($i, $total){
+		return $i%$this->numCols == 0 || $i >= $total;
 	}
 	
 	protected function getDetailLink($category){
@@ -71,20 +71,23 @@ class CategoryView extends GenericView {
 			$data = $this->model->getSortedMap();
 			
 		$span = $this->calculateSpan();
+		//print_r($data);
 	?>
 				
 		<!-- Start rendering CategoryView -->
 		<div class="category-overview-grid">
-			<?php foreach($data as $k=>$v) : $i = 1; ?>
-				<h3><?php echo $k; ?></h3>
-				<?php foreach($v as $category) : ?>
-				<?php if($this->shouldRenderRowHtmlStart($i)) :?>
+			<?php foreach($data as $group=>$categories) : $i = 1; $c = count($categories); ?>
+				<?php if($group != 'nogroup'): ?>
+				<h3><?php echo $group; ?></h3>
+				<?php endif; ?>
+				<?php foreach($categories as $category) : ?>
+				<?php if($this->shouldRenderRowHtmlStart($i, $c)) :?>
 					<div class="row-fluid category-row">
 				<?php endif; ?>	
-						<div class="<?php echo $span; ?> category category-<?php echo $category->Category_id; ?> <?php echo $this->shouldRenderRowHtmlEnd($i) ? 'last' : ''; ?>">
+						<div class="<?php echo $span; ?> category category-<?php echo $category->Category_id; ?> <?php echo $this->shouldRenderRowHtmlEnd($i, $c) ? 'last' : ''; ?>">
 							<?php $this->renderCategory($category); ?>
 						</div>
-				<?php if($this->shouldRenderRowHtmlEnd($i)) :?>
+				<?php if($this->shouldRenderRowHtmlEnd($i, $c)) :?>
 					</div><!-- end row-fluid -->
 				<?php endif; ?>
 				<?php $i++; ?>
