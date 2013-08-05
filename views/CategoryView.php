@@ -4,7 +4,7 @@
 */
 class CategoryView extends GenericView {
 	protected $numCols = 2;
-	protected $maxNestingLevels = 4;
+	protected $maxNestingLevels = 2;
 
 	public function render($data=null, $renderMode='list', $recursive=true) { 
 		if($data == null)

@@ -35,6 +35,8 @@ class AdminView extends GenericView {
 		  $this->add_cs_field('hostname','Hostname:');
 		  $this->add_cs_field('address','Adres van uw zaak (formaat: Kalverstraat 12 1234AB Amsterdam):');
 		  $this->add_cs_field('cart_class', 'CSS-class van het winkelwagentje:');
+		  $this->add_cs_field_boolean('show_brand', 'Toon merk van product (indien ingevuld)');		  
+		  $this->add_cs_field_boolean('show_article_number', 'Toon artikelnummer van product (indien ingevuld)');		  
 		  $this->add_cs_field_boolean('UseSisow', 'Gebruik iDeal via Sisow?:');		  
 		  $this->add_cs_field('SisowMerchantId', 'Sisow Merchant ID:');
  		  $this->add_cs_field('SisowMerchantKey', 'Sisow Merchant Key:');		  

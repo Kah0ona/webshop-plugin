@@ -25,7 +25,9 @@ class GenericModel {
 	public function setId($id){
 		$this->id = $id;
 	}
-	
+	public function setOptions($options){
+		$this->options = $options;
+	}
 	protected function decodeParamsIntoGetString($params){
 		$ret = "";
 		$c = 0;

@@ -160,6 +160,7 @@ class SytematicWebshop {
 		if($this->containsShortCode($posts, 'products')){
 			include_once('models/ProductModel.php');
 			$this->productModel = new ProductModel($this->hostname);
+			$this->productModel->setOptions($this->options);
 			$this->productModel->isDetailPage('products') ? $this->productModel->fetchProduct() : 
 															$this->productModel->fetchProductsDefault();
 		}

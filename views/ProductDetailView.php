@@ -15,6 +15,14 @@ class ProductDetailView extends GenericView {
 		}
 		return $ret;
 	}
+	
+	public function shouldDisplayBrand($brand = null) {
+		return $this->model->getOptions()->getOption('show_brand') == true && $brand !== null;
+	}
+
+	public function shouldDisplayProductNumber($nr = null) {
+		return $this->model->getOptions()->getOption('show_article_number') == true && $nr !== null;
+	}	
 
 	public function render($data=null) { 
 		if($data == null)
@@ -88,6 +96,12 @@ class ProductDetailView extends GenericView {
 						<div class="row-fluid">
 							<div class="span12">
 								<h3 itemprop="name"><?php echo $data->productName; ?></h3>
+								<?php if($this->shouldDisplayBrand($data->brand)) : ?>
+								<p class="product-brand"><strong>Merk:</strong> <?php echo $data->brand; ?></p>
+								<?php endif; ?>
+								<?php if($this->shouldDisplayProductNumber($data->productNumber)) : ?>
+								<p class="product-productnr"><strong>Artikelnummer:</strong> <?php echo $data->productNumber; ?></p>
+								<?php endif; ?>
 								<p class="product-description" itemprop="description">
 									<?php echo nl2br($data->productDesc); ?>
 								</p>
