@@ -4,9 +4,13 @@
 */
 class CategoryView extends GenericView {
 	protected $numCols = 2;
-	protected $maxNestingLevels = 2;
+	protected $maxNestingLevels = 1;
 
 	public function render($data=null, $renderMode='list', $recursive=true) { 
+		$nest = $this->model->getOptions()->getOption('nested_category_level');
+		if($nest !== null && is_numeric($nest)) {
+			$this->maxNestingLevels = $nest-1;
+		}
 		if($data == null)
 			$data = $this->model->getSortedMap();
 			

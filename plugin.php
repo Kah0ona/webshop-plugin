@@ -168,6 +168,7 @@ class SytematicWebshop {
 		if($this->containsShortCode($posts, 'categories')){
 			include_once('models/CategoryModel.php');		
 			$this->categoryModel = new CategoryModel($this->hostname);
+			$this->categoryModel->setOptions($this->options);
 			$this->categoryModel->isDetailPage('categories') ? 	$this->categoryModel->fetchCategory() : $this->categoryModel->fetchNestedCategories(true);
 		}
 			

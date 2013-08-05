@@ -48,6 +48,7 @@ class CategoryWidget extends WP_Widget {
 		$options = new WebshopOptions();
 		$hostname = $options->getOption('hostname');
 		$m = new CategoryModel($hostname, null);
+		$m->setOptions($options);
 		$m->fetchNestedCategories();
 		$v = new CategoryView($m);
 		
