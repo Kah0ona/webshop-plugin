@@ -114,7 +114,7 @@ class ProductView extends GenericView {
 						<div class="row-fluid product-row">
 					<?php endif; ?>	
 
-							<div class="<?php echo $span; ?> product product-<?php echo $v->Product_id; ?> <?php echo $this->shouldRenderRowHtmlEnd($i, $v, $total) ? 'last' : ''; ?>"
+							<div class="<?php echo $span; ?> product product-<?php echo $v->Product_id; ?> <?php echo $this->shouldRenderRowHtmlEnd($i, $v) ? 'last' : ''; ?>"
 								itemscope 
 								itemtype="http://schema.org/Product">
 								<?php $this->renderProduct($v, $productModel); ?>
@@ -133,9 +133,11 @@ class ProductView extends GenericView {
 	 public function renderProduct($product, $productModel=null){  ?>
 		 <!-- Rendering single product -->
 		 <div class="product-image">
+			<?php if($product->imageDish != null && $product->imageDish != "/uploads/Product" && $product->imageDish != '') { ?>
 		 	<a href="<?php echo $this->getDetailLink($product); ?>">
 			 	<img src="<?php echo SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$product->imageDish; ?>" />
 		 	</a>
+		 	<?php } ?>
 		 </div>
 		 <div class="product-title product-title-<?php echo $product->Product_id; ?>" itemprop="name">
 		 	<?php echo $product->productName; ?>

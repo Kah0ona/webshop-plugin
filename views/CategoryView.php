@@ -59,11 +59,11 @@ class CategoryView extends GenericView {
 
 
 	protected function shouldRenderRowHtmlStart($i, $total){
-		return $i%$this->numCols == 1;
+		return $i%$this->numCols == 1 || $this->numCols == 1;
 	}
 	
 	protected function shouldRenderRowHtmlEnd($i, $total){
-		return $i%$this->numCols == 0 || $i >= $total;
+		return $i%$this->numCols == 0 || $i >= $total  || $this->numCols == 1;
 	}
 	
 	protected function getDetailLink($category){
