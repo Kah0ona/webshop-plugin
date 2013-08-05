@@ -5,6 +5,7 @@
 class CategoryView extends GenericView {
 	protected $numCols = 2;
 	protected $maxNestingLevels = 1;
+	protected $parentId=null;
 
 	public function render($data=null, $renderMode='list', $recursive=true) { 
 		$nest = $this->model->getOptions()->getOption('nested_category_level');
@@ -56,7 +57,9 @@ class CategoryView extends GenericView {
 		}
 		return $numColName;
 	}
-
+	public function setParentId($id){
+		$this->parentId = $id;
+	}
 
 	protected function shouldRenderRowHtmlStart($i, $total){
 		return $i%$this->numCols == 1 || $this->numCols == 1;
@@ -79,7 +82,7 @@ class CategoryView extends GenericView {
 	?>
 				
 		<!-- Start rendering CategoryView -->
-		<div class="category-overview-grid">
+		<div class="category-overview-grid" id="category-overview-grid-<?php echo $this->parentId; ?>">
 			<?php foreach($data as $group=>$categories) : $i = 1; $c = count($categories); ?>
 				<?php if($group != 'nogroup'): ?>
 				<h3><?php echo $group; ?></h3>
@@ -132,7 +135,7 @@ class CategoryView extends GenericView {
 	*/
 	public function renderListRecursive($data=null, $level = 0){ ?>
 		<!-- Start rendering CategoryView -->
-		<ul class="categories">
+		<ul class="categories product-categories">
 		<?php
 			if($data == null):
 		?>
