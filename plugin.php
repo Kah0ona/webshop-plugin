@@ -409,6 +409,7 @@ class SytematicWebshop {
 				include_once('views/ProductDetailView.php');
 			}
 			$v = new CategoryDetailView($this->categoryModel);
+			$v->setNumCols($numcols);
 			$v->render(null, $renderOptions);
 		}
 		else {
