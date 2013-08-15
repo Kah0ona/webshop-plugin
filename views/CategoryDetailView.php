@@ -22,14 +22,7 @@ class CategoryDetailView extends GenericView {
 
 		//if it has subcategories, render those. 
 		$subCategories = $this->model->getSubcategories($data->Category_id);
-		if($subCategories != null && count($subCategories) > 0) {
-			$catView = new CategoryView($this->model);
-			$catView->setNumCols($this->numCols);
-	
-			echo '<h3>Subcategorieën</h3>';
-			$catView->renderGrid(array('nogroup'=>$subCategories));
-		}
-	
+			
 	
 		if($data != null && count($data->Product) > 0){
 			if($subCategories != null && count($subCategories) > 0){
@@ -39,6 +32,15 @@ class CategoryDetailView extends GenericView {
 		}
 		elseif ($subCategories == null || count($subCategories) == 0)
 			echo '<div>Deze categorie bevat momenteel geen producten.</div>';
+		
+		if($subCategories != null && count($subCategories) > 0) {
+			$catView = new CategoryView($this->model);
+			$catView->setNumCols($this->numCols);
+			$catView->setParentId($data->Category_id);
+			echo '<h3>Subcategorieën</h3>';
+			$catView->renderGrid(array('nogroup'=>$subCategories));
+		}
+
 		
 	}
 }

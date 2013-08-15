@@ -3,7 +3,8 @@ class CategoryModel extends GenericModel {
 	protected $sortedMap=null;
 	protected $categoryTitleOrder=null;
 	protected $serviceUrl = null;
-	
+	public $maxNestingLevels = 1;
+
 	function __construct($hostname) {
 		$this->hostname=$hostname;
 		$this->serviceUrl = BASE_URL_WEBSHOP.'/categories';
@@ -38,8 +39,13 @@ class CategoryModel extends GenericModel {
 	public function fetchSortedCategories($useNesting = false){
 		$arr = array(
 			'hostname'=>$this->hostname,
-			'useNesting'=>$useNesting
+			'useNesting'=>$useNesting,
+			
 		);
+		
+		if($this->maxNestingLevels == 1){
+			$arr['Parent_id'] = 'NULL';
+		}
 		
 		$cats = $this->fetchCategories($arr);
 		//print_r($cats);
@@ -80,6 +86,12 @@ class CategoryModel extends GenericModel {
 			'hostname'=>$this->hostname,
 			'useNesting'=>$useNesting
 		);
+		
+		if($this->maxNestingLevels == 1){
+			$arr['Parent_id'] = 'NULL';
+		}
+
+		
 		
 		$cats = $this->fetchCategories($arr);
 		

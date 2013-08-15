@@ -4,13 +4,13 @@
 */
 class CategoryView extends GenericView {
 	protected $numCols = 2;
-	protected $maxNestingLevels = 1;
+//	protected $maxNestingLevels = 1;
 	protected $parentId=null;
 
 	public function render($data=null, $renderMode='list', $recursive=true) { 
 		$nest = $this->model->getOptions()->getOption('nested_category_level');
 		if($nest !== null && is_numeric($nest)) {
-			$this->maxNestingLevels = $nest-1;
+			$this->model->maxNestingLevels = $nest-1;
 		}
 		if($data == null)
 			$data = $this->model->getSortedMap();
@@ -151,7 +151,7 @@ class CategoryView extends GenericView {
 							</a>
 						</li>
 						<?php 
-							if($cat->children != null && count($cat->children) > 0 && $level < $this->maxNestingLevels){
+							if($cat->children != null && count($cat->children) > 0 && $level < $this->model->maxNestingLevels){
 						?>
 						<li class="category-item category-package category-subcategory">
 						<?php
@@ -174,7 +174,7 @@ class CategoryView extends GenericView {
 								
 							</li>
 							<?php 
-								if($cat->children != null && count($cat->children) > 0 && $level < $this->maxNestingLevels){
+								if($cat->children != null && count($cat->children) > 0 && $level < $this->model->maxNestingLevels){
 							?>
 							<li class="category-item category-package category-subcategory">
 							<?php
@@ -211,7 +211,7 @@ class CategoryView extends GenericView {
 					</a>
 				</li>
 				<?php 
-					if($cat->children != null && count($cat->children) > 0 && $level < $this->maxNestingLevels){
+					if($cat->children != null && count($cat->children) > 0 && $level < $this->model->maxNestingLevels){
 				?>
 				<li class="category-item category-package category-subcategory">
 				<?php

@@ -89,8 +89,8 @@ class ProductDetailView extends GenericView {
 			<div class="single-product"  itemscope itemtype="http://schema.org/Product">
 				<div class="row-fluid">
 					<div class="span8 product-image">
-						<?php if($w->imageDish != null && $w->imageDish != "/uploads/Product" && $w->imageDish != '') { ?>
-						<img itemprop="image" alt="<?php echo $data->productName; ?>" src="< ?php echo SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$data->imageDish; ?>"  />
+						<?php if($data->imageDish != null && $data->imageDish != "/uploads/Product" && $data->imageDish != '') { ?>
+						<img itemprop="image" alt="<?php echo $data->productName; ?>" src="<?php echo SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$data->imageDish; ?>"  />
 						<?php } ?>
 					</div>
 					
