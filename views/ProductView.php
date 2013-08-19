@@ -143,7 +143,7 @@ class ProductView extends GenericView {
 		 	<?php echo $product->productName; ?>
 		 </div>
 		 
-		 <div itemprop="offers" itemscope itemtyp="http://schema.org/Offer">
+		 <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 			 <?php if($product->priceOnDemand) {  ?>
 				 <div class="product-price product-price-<?php echo $product->Product_id; ?> price-on-demand">Prijs op aanvraag, <br/>zie details.</div>
 			 <?php } else { ?>
