@@ -22,7 +22,10 @@ class CategoryDetailView extends GenericView {
 
 		//if it has subcategories, render those. 
 		$subCategories = $this->model->getSubcategories($data->Category_id);
-			
+
+		if($data->categoryDesc != null && $data->categoryDesc != ''){
+			echo '<p class="category-description">'.nl2br($data->categoryDesc).'</p>';
+		}				
 	
 		if($data != null && count($data->Product) > 0){
 			if($subCategories != null && count($subCategories) > 0){
@@ -38,6 +41,7 @@ class CategoryDetailView extends GenericView {
 			$catView->setNumCols($this->numCols);
 			$catView->setParentId($data->Category_id);
 			echo '<h3>Subcategorieën</h3>';
+		
 			$catView->renderGrid(array('nogroup'=>$subCategories));
 		}
 
