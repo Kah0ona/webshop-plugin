@@ -237,7 +237,7 @@
 
 	    	if(cartDataStore.length == 0){
    		    	methods.logger("Empty cart");
-	    		str=methods.getTemplate(elt, "<li><p style='margin-left: 10px;'>Het winkelwagentje is leeg.<p></li>");
+	    		str=methods.getTemplate(elt, "<li><p style='margin-left: 10px;float: right;' class='emptycart'>Het winkelwagentje is leeg.<p></li>");
 	    	
 	    	}
 	    	else {
