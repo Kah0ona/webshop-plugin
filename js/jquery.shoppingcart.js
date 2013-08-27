@@ -116,8 +116,8 @@
 				    self.logger("Distance calc: Using normal delivery address");
 			    }
 			    if(self.allAddressFieldsFilledOut()){
-			    	self.calculateDistance(compareToAddress, function(){
-			   			self.updatePrices();		    	
+			    	self.calculateDistance(compareToAddress, function(dist){
+			   			self.updatePrices();		    					    		
 			    	});
 		    	}
 		    	else {
@@ -487,18 +487,6 @@
 						}
 					}
 				}
-				
-				/*
-				if(doNotDeliver && !notEnoughOrdered){
-					this.logger("DO NOT DELIVER, OUT OF RANGE");
-					$('#not-enough-ordered').removeClass('hidden').html(
-						'We bezorgen helaas niet op deze afstand.');
-					doNotDeliver=true;
-				    //hide submit buttons
-					$('.submit-controls').addClass('disabled');
-				}				
-				*/
-						    	
 	    	}
 	    	else { //use settings.deliveryMethodPrice
 	    		var x = deliveryMethod.attr('methodprice');
@@ -512,6 +500,7 @@
 
 	    },
 		calculateDistance : function(cptaddr, callback) {
+			this.logger("Calculating distance between: "+cptaddr+" AND "+this.settings.address);
 	    	//calc distance between store and cptaddr (compare to address)
 	    	var queryData = {
 			  origin: this.settings.address,
@@ -523,14 +512,15 @@
 					
 			var directionsService = new google.maps.DirectionsService();
 			distance = -1;
+			var self = this;
 	        directionsService.route(queryData, function(response, status) {
 	            if (status == google.maps.DirectionsStatus.OK) {
 	            	distance = parseInt(response.routes[0].legs[0].distance.value) / 1000;
-	            	this.logger("Distance found: "+distance+" km");
+	            	self.logger("Distance found: "+distance+" km");
 	            }
 				else {
-					this.logger("Something went wrong, or address not found: "+status)
-					this.logger(response);
+					self.logger("Something went wrong, or address not found: "+status)
+					self.logger(response);
 				}            
    	           	if(callback != null && callback != undefined)
 	            	callback.call(distance);
