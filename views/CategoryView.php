@@ -76,7 +76,9 @@ class CategoryView extends GenericView {
 	public function renderGrid($data=null){ 
 		if($data == null)
 			$data = $this->model->getSortedMap();
-			
+		if($data == null){
+			$data = array();
+		}
 		$span = $this->calculateSpan();
 		//print_r($data);
 	?>

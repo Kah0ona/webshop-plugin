@@ -96,11 +96,15 @@ class CategoryModel extends GenericModel {
 		$cats = $this->fetchCategories($arr);
 		
 		//order by group title, and remap
+		if($cats == null){
+			return array();
+		}
 		
 		foreach($cats as $cat){
 			if($cat->Parent_id == null)
 				$cat->Parent_id = 0;
 		}
+	
 		$tree = $this->buildTree($cats);	
 
 
@@ -137,7 +141,7 @@ class CategoryModel extends GenericModel {
                    $element->children = $children;
                }
                $branch[$element->Category_id] = $element;
-                          }
+           }
        }
        return $branch;
     }
