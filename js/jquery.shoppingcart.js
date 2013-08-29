@@ -103,7 +103,7 @@
 		    		compareToAddress += " "+$(this).val();
 		    	});
 		    	$('.address-line-elsewhere').each(function(){
-		    		if($(this).val() != ""){
+		    		if($(this).val() != "" && $(this).attr('id') != 'deliveryElsewhere'){
 				    	compareToAddress2 += " "+$(this).val();	
 			    	}
 		    	})
@@ -412,26 +412,21 @@
 
 	    },
 		allAddressFieldsFilledOut : function() {
- 	        var ret = true;
+			var ret = true;
  	        var deliveryElseWhere = $('#deliveryElsewhere').is(':checked');
  	        var self = this;
-		    $('.address-line').each(function(){
+ 	        var selector = '';
+ 	        if(deliveryElseWhere) {
+	 	        selector = '.address-line-elsewhere';
+ 	        }
+ 	        else {
+	 	        selector = '.address-line';	 	        
+ 	        }
+		    $(selector).each(function(){
 		    	var x = $(this).val();
-		    	if(deliveryElseWhere){
-			    	if($(this).attr('id').indexOf("delivery") !== -1){
-				    	if(x === undefined || x === null || x == "") {
-				    		this.logger("Not all address fields set");
-					    	ret = false;
-				    	}
-			    	}
-		    	}
-		    	else {
-		    		if($(this).attr('id').indexOf("delivery") === -1){
-				    	if(x === undefined || x === null || x == "") {
-				    		self.logger("Not all address fields set");
-					    	ret = false;
-				    	}
-			    	}
+		    	if(x === undefined || x === null || x == "") {
+		    		self.logger("Not all address fields set");
+			    	ret = false;
 		    	}
 			});
 			
@@ -451,14 +446,7 @@
 		    	var doNotDeliver = true;
 		    	var notEnoughOrdered = false;
 		    	$('#not-enough-ordered').addClass('hidden').html('');
-				if(distance > this.settings.deliveryCostsTable[this.settings.deliveryCostsTable.length -1].maxKm){
-					$('#not-enough-ordered').removeClass('hidden').addClass('alert-error').html('Wij bezorgen helaas niet op deze afstand. Kies een andere verzendmethode.');
-					deliveryCosts.price = 0.0;
-					$('.deliverycosts-field').html("<strong>€ "+this.formatEuro(deliveryCosts.price)+"</strong>");
-					$('.submit-controls').addClass('disabled');
-
-					return;
-				}
+				
 				for(var i = 0; i < this.settings.deliveryCostsTable.length; i++){
 					var min = parseInt(this.settings.deliveryCostsTable[i].minKm);
 					var max = parseInt(this.settings.deliveryCostsTable[i].maxKm);	
@@ -487,6 +475,15 @@
 						}
 					}
 				}
+				
+				console.log('out of reach?');
+				if(this.distanceIsOutOfReach(distance)){
+					this.logger("Address out of reach!");
+					$('.submit-controls').addClass('disabled');
+					$('#not-enough-ordered').removeClass('hidden').html('Wij bezorgen helaas niet op deze afstand. Kies een andere verzendmethode.');
+					doNotDeliver = true;						
+
+				}
 	    	}
 	    	else { //use settings.deliveryMethodPrice
 	    		var x = deliveryMethod.attr('methodprice');
@@ -498,6 +495,17 @@
 	    	}
 	    	
 
+	    },
+	    distanceIsOutOfReach : function(dist){
+			this.logger('checking if it is out of reach');
+	    	var max = 0;
+			for(var i = 0; i < this.settings.deliveryCostsTable.length; i++){
+				var cur = this.settings.deliveryCostsTable[i].maxKm;
+				if(cur > max) {
+					max = cur;
+				}
+			}
+			return dist > max;
 	    },
 		calculateDistance : function(cptaddr, callback) {
 			this.logger("Calculating distance between: "+cptaddr+" AND "+this.settings.address);
