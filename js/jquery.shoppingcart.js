@@ -476,7 +476,6 @@
 					}
 				}
 				
-				console.log('out of reach?');
 				if(this.distanceIsOutOfReach(distance)){
 					this.logger("Address out of reach!");
 					$('.submit-controls').addClass('disabled');
