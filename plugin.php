@@ -429,7 +429,16 @@ class SytematicWebshop {
 		return $output;	
 	}
 	
-	public function render_products(){
+	public function render_products($atts){
+		extract(shortcode_atts(
+			array(
+				'render_options_on_overview'=>'false',
+				'numcols'=>'3'
+			), $atts)
+		);
+		
+		$renderOptions = $render_options_on_overview === 'true';
+
 		ob_start();
 	
 		if($this->productModel->isDetailPage()) {
@@ -438,9 +447,13 @@ class SytematicWebshop {
 			$v->render();
 		}
 		else {
+			if($renderOptions){
+					include_once('views/ProductDetailView.php');
+			}		
+		
 			include_once('views/ProductView.php');
 			$v = new ProductView($this->productModel);
-			$v->render();
+			$v->render(null, $renderOptions);
 		}	
 			
 		$output = ob_get_contents();
