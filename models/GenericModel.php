@@ -109,7 +109,7 @@ class GenericModel {
 		$id = $pro->Product_id;
 		$title = addslashes($pro->productName);	
 		$desc = $pro->productDesc;
-		$thumb = SYSTEM_URL_WEBSHOP.'/'.$pro->imageDish;
+		$thumb = SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$pro->imageDish;
 		$quantity = $pro->amount;
 		$price = $pro->productPrice;
 		$VAT = $pro->productVAT;

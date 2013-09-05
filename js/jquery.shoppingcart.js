@@ -392,7 +392,7 @@
 	    			vatMap["x"+obj.VAT] = 0;
 	    		}
 
-	    		this.logger("updating vatMap with: "+ parseFloat(obj.price+optionsPrice));
+	    		this.logger("updating vatMap with: "+ parseFloat(currentPrice+optionsPrice));
 	    		vatMap["x"+obj.VAT] += parseFloat(currentPrice+optionsPrice);
 	    		
 	    		
@@ -544,9 +544,11 @@
 			  	var perc = parseFloat(vatKey.substring(1));
 
 			  	var x = vatKey.replace(".", "_");
-			  	var val = vatMap[vatKey];
+			  	var val = parseFloat(vatMap[vatKey]);
 
-			  	$('.vat-value-'+x).html(this.formatEuro(perc*parseFloat(val)));
+			  	var vat = val - (val / (1+perc));
+
+			  	$('.vat-value-'+x).html(this.formatEuro(vat));
 			  	totalExclVat -= (perc * parseFloat(val));
 		  	}  
 		  	return totalExclVat;
