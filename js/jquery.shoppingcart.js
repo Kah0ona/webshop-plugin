@@ -549,7 +549,8 @@
 			  	var vat = val - (val / (1+perc));
 
 			  	$('.vat-value-'+x).html(this.formatEuro(vat));
-			  	totalExclVat -= (perc * parseFloat(val));
+			  	
+			  	totalExclVat -= vat;
 		  	}  
 		  	return totalExclVat;
 	    },	    

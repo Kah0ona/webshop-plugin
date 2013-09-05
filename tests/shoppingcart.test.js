@@ -249,8 +249,9 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 		it('should calculate the VAT correctly on the checkout table.', function(){
 			$('<div id="wrap"></div>').appendTo('body');	
 
-			$('<td class="text-right vat-field-x0_21"><strong>€ <span class="vat-value-x0_21">20,99</span></strong></td>').appendTo('#wrap');
-		
+			$('<td class="text-right subtotal-field"></td>').appendTo('#wrap');
+			$('<td class="text-right vat-field-x0_21"><strong>€ <span class="vat-value-x0_21"></span></strong></td>').appendTo('#wrap');
+
 			webshopProducts = {};
 			webshopProducts = [{"Product_id":163, "title": "Product 1", "quantity" : 1, "ProductOption": [], "price" : 12, "VAT" : 0.21}];	
 			$('#shoppingcart').shoppingCart({ detail : true });
@@ -261,11 +262,11 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 			expect($.ajax.mostRecentCall.args[0].data.shoppingCart[0].price).toBe(12);
 
 			var result = $('.vat-value-x0_21').html();
-			
+			var resultTotalExclVat = $('.subtotal-field').html();
 			//vat should be:
 			// 8 * 12 = 96; 96/1.21 = 79.34; 96-79.34 = 16.66
 			expect(result).toBe('16,66');
-			
+			expect(resultTotalExclVat.substring(2)).toBe('79,34');
 			$('#wrap').remove();
 
 		});
