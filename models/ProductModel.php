@@ -20,6 +20,10 @@ class ProductModel extends GenericModel {
 			return count($product->ProductOption);
 	}
 	
+	public function productsOverviewEnabled(){
+		return !($this->options->getOption('productoverview_disabled') === 'true');
+	}
+	
 	/**
 	* This method returns _false_ iff the following criteria are met:
 	* - The product has exactly 0 or 1 ProductOption set

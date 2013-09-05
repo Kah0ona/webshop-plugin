@@ -161,8 +161,12 @@ class SytematicWebshop {
 			include_once('models/ProductModel.php');
 			$this->productModel = new ProductModel($this->hostname);
 			$this->productModel->setOptions($this->options);
-			$this->productModel->isDetailPage('products') ? $this->productModel->fetchProduct() : 
-															$this->productModel->fetchProductsDefault();
+			if($this->productModel->isDetailPage('products')) {
+				$this->productModel->fetchProduct();
+			}
+			elseif($this->productModel->productsOverviewEnabled()) {
+				$this->productModel->fetchProductsDefault();
+			}
 		}
 		
 		if($this->containsShortCode($posts, 'categories')){
@@ -433,13 +437,12 @@ class SytematicWebshop {
 		extract(shortcode_atts(
 			array(
 				'render_options_on_overview'=>'false',
-				'numcols'=>'3',
-				'disable_overview'=>'false'
+				'numcols'=>'3'
 			), $atts)
 		);
 		
 		$renderOptions = $render_options_on_overview === 'true';
-		$disableOverview = $disable_overview === 'true';
+		$disableOverview = $this->options->getOption('productoverview_disabled') === 'true';
 		ob_start();
 	
 		if($this->productModel->isDetailPage()) {
