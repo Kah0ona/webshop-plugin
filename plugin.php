@@ -433,12 +433,13 @@ class SytematicWebshop {
 		extract(shortcode_atts(
 			array(
 				'render_options_on_overview'=>'false',
-				'numcols'=>'3'
+				'numcols'=>'3',
+				'disable_overview'=>'false'
 			), $atts)
 		);
 		
 		$renderOptions = $render_options_on_overview === 'true';
-
+		$disableOverview = $disable_overview === 'true';
 		ob_start();
 	
 		if($this->productModel->isDetailPage()) {
@@ -447,13 +448,18 @@ class SytematicWebshop {
 			$v->render();
 		}
 		else {
-			if($renderOptions){
-					include_once('views/ProductDetailView.php');
-			}		
-		
-			include_once('views/ProductView.php');
-			$v = new ProductView($this->productModel);
-			$v->render(null, $renderOptions);
+			if(!$disableOverview){
+				if($renderOptions){
+						include_once('views/ProductDetailView.php');
+				}		
+			
+				include_once('views/ProductView.php');
+				$v = new ProductView($this->productModel);
+				$v->render(null, $renderOptions);
+			}
+			else {
+				echo '';
+			}
 		}	
 			
 		$output = ob_get_contents();
