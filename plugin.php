@@ -52,8 +52,8 @@ class SytematicWebshop {
 	function __construct() {
 		include_once('views/GenericView.php');	
 		include_once('models/GenericModel.php');		
-
-
+		include_once('lib/PHP_Markdown_Lib_1.2.7/Michelf/Markdown.php');
+		
 		add_shortcode('webshop_categories', array($this, 'render_categories'));
 		add_shortcode('webshop_products', array($this, 'render_products'));
 		add_shortcode('webshop_checkout', array($this, 'render_checkout'));

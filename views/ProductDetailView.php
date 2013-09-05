@@ -23,6 +23,14 @@ class ProductDetailView extends GenericView {
 	public function shouldDisplayProductNumber($nr = null) {
 		return $this->model->getOptions()->getOption('show_article_number') == true && $nr !== null;
 	}	
+	
+	
+	public function doMarkdown($text) {
+
+ //       $parser->no_markup = true;
+   //     $parser->no_entities = true;
+	    return \Michelf\Markdown::defaultTransform($text);
+	}
 
 	public function render($data=null) { 
 		if($data == null)
@@ -105,7 +113,7 @@ class ProductDetailView extends GenericView {
 								<p class="product-productnr"><strong>Artikelnummer:</strong> <?php echo $data->productNumber; ?></p>
 								<?php endif; ?>
 								<p class="product-description" itemprop="description">
-									<?php echo nl2br($data->productDesc); ?>
+									<?php echo $this->doMarkdown($data->productDesc); ?>
 								</p>
 								<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 									<p class="product-price" itemprop="price">
