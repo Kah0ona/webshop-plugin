@@ -29,7 +29,7 @@ class ProductDetailView extends GenericView {
 
  //       $parser->no_markup = true;
    //     $parser->no_entities = true;
-	    return \Michelf\Markdown::defaultTransform($text);
+	    return Markdown($text);
 	}
 
 	public function render($data=null) { 
