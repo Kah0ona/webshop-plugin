@@ -179,8 +179,6 @@ class SytematicWebshop {
 		return $posts;
 	}
 	
-	
-	
 	private function containsShortcode($posts, $type='products'){
 		foreach($posts as $post){
 			if(stripos($post->post_content, '[webshop_'.$type) !== false ) {
