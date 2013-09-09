@@ -9,6 +9,7 @@
 	var deliveryCosts = {"price": 0}; //object with details about the delivery costs. based on address user filled out in checkout form.
 	var distance = -1;
 	var vatMap = {};
+	var discount = undefined;
 	var pluginName = "shoppingCart";
 	var defaults =  {
 				      'detail' : false, //is this a detail page?
@@ -27,6 +28,8 @@
 		this.settings = $.extend({}, defaults, options);
 		this._defaults = defaults;
 		this._name = pluginName;
+		this.couponUrl = options.couponUrl;
+		this.hostname = options.hostname;
 		this.init();
 	}
 	
@@ -144,6 +147,12 @@
 				    $('.product-added').removeClass('hidden');
 			    }
 		   });
+		   
+		   $('#coupon').bind('change.shoppingCart', function(){
+		    	self.checkCoupon(function(){
+		    		self.updatePrices();
+		    	});
+		    });
 	    },
 	    lookupProduct: function(productId){
 	    	if(webshopProducts instanceof Array) {
@@ -406,11 +415,37 @@
 			
 	    	var totalExclVat = this.renderVatRowsOnCheckout(vatMap, totalInclVat);
 	    	this.renderExclPriceOnCheckout(totalExclVat);
-
+			this.renderDiscountOnCheckout();
+			
 	    	$('.total-price').html(this.formatEuro(totalInclVat));
 	    	$('.total-field').html("<strong>&euro; "+this.formatEuro(totalInclVat)+"</strong>");
 
 	    },
+	    renderDiscountOnCheckout : function(){
+			if(discount == undefined){
+				$('#discount-text').addClass('hidden');
+				$('.discount-field').html('');
+			}
+			else if(discount == 0){
+				$('#discount-text')
+					.removeClass('hidden')
+					.html('Dit is geen geldige couponcode.')
+					.addClass('alert-error');
+
+				$('.discount-field').html('');				
+	
+			}
+			else {
+				$('#discount-text').html('Couponcode geldig, u krijgt '+discount+'% korting.');
+				
+				$('#discount-text').removeClass('alert-error')
+									.addClass('alert-success')
+									.removeClass('hidden');
+									
+				$('.discount-field').html(discount+'%');													
+			}
+	    },
+	    
 		allAddressFieldsFilledOut : function() {
 			var ret = true;
  	        var deliveryElseWhere = $('#deliveryElsewhere').is(':checked');
@@ -629,31 +664,21 @@
 			if($('#coupon').val() == null || $('#coupon').val() == "" || $('#coupon').val() == undefined)
 				return;
 	
+			var self = this;
 			$('#discount-text').html('Controleren couponcode…').removeClass('hidden');
-			
+
 			$.ajax({
-				url: couponUrl,
-				data: { "hostname" : hostname , "couponCode" : $('#coupon').val()},
+				url: this.couponUrl,
+				data: { "hostname" : this.hostname , "couponCode" : $('#coupon').val()},
+				type: 'GET',
+
 				success: function (jsonObj, textStatus, jqXHR){
 
 					discount = jsonObj.discount;
-					couponType = jsonObj.couponType;
-					if(discount == 0){
-						$('#discount-text')
-							.removeClass('hidden')
-							.html('Dit is geen geldige couponcode.')
-							.addClass('alert-error');
-					}
-					else {
-						$('#discount-text').html('Couponcode geldig, u krijgt '+discount+'% korting.');
-						
-						$('#discount-text').removeClass('alert-error')
-											.addClass('alert-success')
-											.removeClass('hidden');
-					}
+
 					
 					if(callback!=null && callback!=undefined)
-						callback(discount, couponType);
+						callback(discount);
 				},
 				dataType: 'jsonp'
 			});		

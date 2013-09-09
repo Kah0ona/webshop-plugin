@@ -120,7 +120,7 @@ class CheckoutView extends GenericView {
 		?>
 		<script type="text/javascript">
 		 	var thisPageUrl = '<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>';
-		 	var couponUrl = '<?php echo $couponUrl; ?>';
+
 		 	var hostname ='<?php echo $this->model->getHostname(); ?>';
 			var baseUrl = '<?php echo $_SERVER['HTTP_HOST']; ?>';
 			var deliveryCostUrl = '<?php echo $deliveryCostUrl; ?>';

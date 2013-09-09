@@ -30,12 +30,13 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 			'</span></div>';
 
 	    $(detailForm).appendTo('body');
-	    spyOn($, 'ajax');
 	    
 	});
 
 	describe('Loading and initializing the shoppingcart plugin.', function(){
 		it("Should load data from the server upon initialization, via an AJAX call.", function() {
+		    spyOn($, 'ajax');
+
 			$('#shoppingcart').shoppingCart({});
 			expect($.ajax).toHaveBeenCalled();
 		});
@@ -43,6 +44,8 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 	
 	describe('Adding products test suite.', function(){
 		it('Should persist a quantity of 8 added products when the add product is clicked on a detail page.', function(){
+		    spyOn($, 'ajax');
+			
 			webshopProducts = {};
 			webshopProducts = [{"Product_id":163, "title": "Product 1", "quantity" : 8, "ProductOption": [], "price" : 12, "VAT" : 0.21}];	
 			$('#shoppingcart').shoppingCart({ detail : true });
@@ -52,6 +55,8 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 		});
 		
 		it('When adding a product twice, the cart only has 1 entry for the product, but the quantity has to be 2.', function(){
+		    spyOn($, 'ajax');
+
 			webshopProducts = {};
 			webshopProducts = [{"Product_id":163, "title": "Product 1", "quantity" : 8, "ProductOption": [], "price" : 12, "VAT" : 0.21}];	
 			$('#shoppingcart').shoppingCart({ detail : true });
@@ -72,6 +77,8 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 	
 	describe('Removing products testsuite.', function(){
 		it('Should yield an empty cart, when the X is clicked in a cart with a single product.', function(){
+		    spyOn($, 'ajax');
+
 			$('#shoppingcart').shoppingCart({cartDisplayMode: 'block', detail: false});
 			
 			webshopProducts = {};
@@ -247,6 +254,8 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 		});
 		
 		it('should calculate the VAT correctly on the checkout table.', function(){
+		    spyOn($, 'ajax');
+
 			$('<div id="wrap"></div>').appendTo('body');	
 
 			$('<td class="text-right subtotal-field"></td>').appendTo('#wrap');
@@ -271,7 +280,32 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 
 		});
 		
-		
+		it('should check if a coupon is valid, and render 13% discount on the checkout page',function(){
+
+
+			$('<div id="wrap"></div>').appendTo('body');	
+			initAddressLinesInDom();
+			$('<input id="coupon" type="text" />').appendTo('#wrap');
+			$('<div id="discount-text"></div>').appendTo('#wrap');
+			$('<td class="discount-field"></td>').appendTo('#wrap');
+
+			$('#shoppingcart').shoppingCart({ detail : true });
+
+			spyOn($, 'ajax').andCallFake(function(opts){
+								
+				opts.success.call(this, {'discount':13}, 'success',null);
+
+			});
+						
+			$('#coupon').val('123');
+
+			$('#coupon').change();
+
+			var ret = $('.discount-field').html();
+			expect(ret).toBe('13%');
+			$('#wrap').remove();
+			
+		});
 	});
 	
 		

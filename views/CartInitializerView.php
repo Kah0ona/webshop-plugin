@@ -16,6 +16,8 @@ class CartInitializerView extends GenericView {
 				'checkout_page' : '<?php echo  get_site_url(); ?>/checkout',
 				'address' : '<?php echo $options->getOption('address'); ?>',
 				'deliveryCostsTable' : <?php echo $deliveryCostsTable; ?>,
+				'couponUrl': '<?php echo SYSTEM_URL_WEBSHOP?>/public/coupons',
+				'hostname' : '<?php echo $options->getOption('hostname'); ?>',
 				'deliveryMethods' : <?php echo $deliveryMethods; ?>
 			});
 		});
