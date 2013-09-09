@@ -288,9 +288,9 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 			$('<input id="coupon" type="text" />').appendTo('#wrap');
 			$('<div id="discount-text"></div>').appendTo('#wrap');
 			$('<td class="discount-field"></td>').appendTo('#wrap');
-
+			$('<td id="discount-row" class="hidden"></td>').appendTo('#wrap');
 			$('#shoppingcart').shoppingCart({ detail : true });
-
+			expect($('#discount-row').hasClass('hidden')).toBe(true);
 			spyOn($, 'ajax').andCallFake(function(opts){
 								
 				opts.success.call(this, {'discount':13}, 'success',null);
@@ -303,6 +303,7 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 
 			var ret = $('.discount-field').html();
 			expect(ret).toBe('13%');
+			expect($('#discount-row').hasClass('hidden')).toBe(false);
 			$('#wrap').remove();
 			
 		});

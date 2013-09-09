@@ -422,6 +422,7 @@
 
 	    },
 	    renderDiscountOnCheckout : function(){
+	    	$('#discount-row').addClass('hidden');
 			if(discount == undefined){
 				$('#discount-text').addClass('hidden');
 				$('.discount-field').html('');
@@ -436,6 +437,7 @@
 	
 			}
 			else {
+				$('#discount-row').removeClass('hidden');
 				$('#discount-text').html('Couponcode geldig, u krijgt '+discount+'% korting.');
 				
 				$('#discount-text').removeClass('alert-error')
