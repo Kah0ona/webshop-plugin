@@ -332,10 +332,9 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 			$('#coupon').val('123');
 			$('#coupon').change();
 
-			//verify the total is 9euro (10% discount on the total)
-//			total-field
+			//verify the total is 72euro (10% discount on the total)
 			var res = $('.total-field').html()
-			expect(res).toMatch(/73,00/g);
+			expect(res).toMatch(/72,00/g);
 
 			$('#wrap').remove();
 
