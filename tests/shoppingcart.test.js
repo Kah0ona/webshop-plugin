@@ -20,6 +20,7 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 	});
 	
 	beforeEach(function () {
+		
 	    $('<div id="shoppingcart"></div>').appendTo('body');
    		var detailForm = 
    			'<div id="detailform"><input class="input-small" name="product-amount" id="product-amount-163" value="8" type="text"> '+
@@ -280,11 +281,10 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 
 		});
 		
-		it('should check if a coupon is valid, and render 13% discount on the checkout page',function(){
+		it('Should check if a coupon is valid, and render 13% discount on the checkout page',function(){
 
 
 			$('<div id="wrap"></div>').appendTo('body');	
-			initAddressLinesInDom();
 			$('<input id="coupon" type="text" />').appendTo('#wrap');
 			$('<div id="discount-text"></div>').appendTo('#wrap');
 			$('<td class="discount-field"></td>').appendTo('#wrap');
@@ -306,6 +306,39 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 			expect($('#discount-row').hasClass('hidden')).toBe(false);
 			$('#wrap').remove();
 			
+		});
+		
+		it('Should give a discount of 10 percent, and it should be reflected in the total field on the checkout page', function(){
+			//add two products to cart, with total price of 10e
+			$('<div id="wrap"></div>').appendTo('body');	
+			$('<input id="coupon" type="text" />').appendTo('#wrap');
+			$('<div id="discount-text"></div>').appendTo('#wrap');
+			$('<td class="discount-field"></td>').appendTo('#wrap');
+			$('<td class="total-field" class="hidden"></td>').appendTo('#wrap');
+
+			webshopProducts = {};
+			webshopProducts = [{"Product_id":163, "title": "Product 1", "quantity" : 2, "ProductOption": [], "price" : 10, "VAT" : 0.21}];	
+			
+			$('#shoppingcart').shoppingCart({ detail : true });
+			
+			$('.addtocart').click(); //simulate click			
+						
+						
+			//add coupon giving 10% discount
+			spyOn($, 'ajax').andCallFake(function(opts){
+				opts.success.call(this, {'discount':10}, 'success',null);
+			});
+
+			$('#coupon').val('123');
+			$('#coupon').change();
+
+			//verify the total is 9euro (10% discount on the total)
+//			total-field
+			var res = $('.total-field').html()
+			expect(res).toMatch(/73,00/g);
+
+			$('#wrap').remove();
+
 		});
 	});
 	

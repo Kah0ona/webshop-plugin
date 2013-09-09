@@ -417,6 +417,8 @@
 	    	this.renderExclPriceOnCheckout(totalExclVat);
 			this.renderDiscountOnCheckout();
 			
+			totalInclVat = totalInclVat * (1 - (parseInt(discount) / 100));
+			
 	    	$('.total-price').html(this.formatEuro(totalInclVat));
 	    	$('.total-field').html("<strong>&euro; "+this.formatEuro(totalInclVat)+"</strong>");
 
