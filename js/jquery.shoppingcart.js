@@ -69,13 +69,14 @@
 				this.cartDataStore="EMPTY";
 			}
 			
+			var self = this;
 			$.ajax({
 				url : this.settings.session_url,
 				type: 'POST',
 				data: {"shoppingCart" : this.cartDataStore},
 				success: function (jsonObj, textStatus, jqXHR){
-					this.logger("Persisted: ")
-					this.logger(jsonObj);
+					self.logger("Persisted: ")
+					self.logger(jsonObj);
 				},
 				dataType: 'json'
 			});			
@@ -417,7 +418,8 @@
 	    	this.renderExclPriceOnCheckout(totalExclVat);
 			this.renderDiscountOnCheckout();
 			
-			totalInclVat = totalInclVat * (1 - (parseInt(discount) / 100));
+			if(discount != null && discount != undefined)
+				totalInclVat = totalInclVat * (1 - (parseInt(discount) / 100));
 			
 	    	$('.total-price').html(this.formatEuro(totalInclVat));
 	    	$('.total-field').html("<strong>&euro; "+this.formatEuro(totalInclVat)+"</strong>");
