@@ -88,6 +88,8 @@ class SytematicWebshop {
 		add_filter('the_title', array($this, 'modify_title'));	
 		add_filter('wp_title', array($this, 'modify_title_tag'), 100);	//priority is 100, to beat Yoast SEO
 		add_action('wp_head', array($this, 'init_cart'));
+		add_action('wp_head', array($this, 'do_seo'));
+		
 	
 		//this must be inside is_admin, see: http://codex.wordpress.org/AJAX_in_Plugins#Ajax_on_the_Viewer-Facing_Side	
 		if(is_admin()){
@@ -188,6 +190,24 @@ class SytematicWebshop {
 		return false;
 	}
 	
+	public function do_seo(){
+		$cont = '';
+		if($this->isProductPage() && $this->productModel->isDetailPage()){
+			$cont =  $this->productModel->getData()->productDesc;
+		}
+		if($this->isCategoryPage() && $this->categoryModel->isDetailPage()) {
+			$cont =  $this->categoryModel->getData()->categoryDesc;
+		}
+
+		if($cont == ''){
+			$cont = get_bloginfo();
+		}
+		$cont = trim(preg_replace('/\s+/', ' ', $cont));
+		
+		$cont = preg_replace('/[*_]/', '', $cont);
+
+		echo '<meta name="description" content="'.substr($cont,0,155).'" >';
+	}
 	
 	public function init_cart(){
 		include_once('views/CartInitializerView.php');

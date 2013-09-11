@@ -51,7 +51,6 @@ class CategoryWidget extends WP_Widget {
 		$m->setOptions($options);
 		$m->fetchNestedCategories();
 		$v = new CategoryView($m);
-		
 		$v->render();
 		
 		echo $after_widget;	

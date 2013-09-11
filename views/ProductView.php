@@ -91,7 +91,7 @@ class ProductView extends GenericView {
 	}
 	
 	protected function getDetailLink($product){
-		return site_url().'/products/'.$product->Product_id.'#'.$product->productName;
+		return site_url().'/products/'.$product->Product_id.'/#'.$product->productName;
 	}
 	
 	protected function renderMain($categoryId = null){ 
