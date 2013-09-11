@@ -84,7 +84,7 @@ class CategoryView extends GenericView {
 	?>
 				
 		<!-- Start rendering CategoryView -->
-		<div class="category-overview-grid" id="category-overview-grid-<?php echo $this->parentId; ?>">
+		<div class="category-overview-grid nocontent" id="category-overview-grid-<?php echo $this->parentId; ?>">
 			<?php foreach($data as $group=>$categories) : $i = 1; $c = count($categories); ?>
 				<?php if($group != 'nogroup'): ?>
 				<h3><?php echo $group; ?></h3>
