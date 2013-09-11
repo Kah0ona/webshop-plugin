@@ -159,6 +159,8 @@ class SytematicWebshop {
 	}
 	
 	public function init_models($posts){
+	print_r($posts);
+	
 		if($this->containsShortCode($posts, 'products')){
 			include_once('models/ProductModel.php');
 			$this->productModel = new ProductModel($this->hostname);
@@ -274,6 +276,7 @@ class SytematicWebshop {
 	}
 	
 	public function load_options(){
+
 		include_once('models/WebshopOptions.php');
 		$w = new WebshopOptions();
 		$this->options = $w;

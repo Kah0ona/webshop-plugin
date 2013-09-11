@@ -62,6 +62,7 @@ class GenericModel {
 	*/
 	public function isDetailPage($type){
 		//explode around /
+		
 		$pieces = explode('/' , $_SERVER['REDIRECT_URL']);
 
 		$i = 0;
@@ -71,7 +72,11 @@ class GenericModel {
 				break;
 		}
 		if(isset($pieces[$i]) && is_numeric($pieces[$i])){
+			
+			
 			$this->id = $pieces[$i];
+			
+			
 			return true;
 		}
 		else {
