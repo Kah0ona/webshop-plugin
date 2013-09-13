@@ -422,7 +422,7 @@ class CheckoutView extends GenericView {
 					</div>	
 					
 			 	</div>
-				<div class="span6">
+				<div class="span6 checkout-right">
 					<div class="row-fluid">
 						<div class="span12">
 							<h3>Bestellingsgegevens</h3>

@@ -169,6 +169,7 @@ class ProductView extends GenericView {
 				 <div class="product-detail-button product-detail-button-<?php echo $product->Product_id; ?>">
 				 	<a href="<?php echo $this->getDetailLink($product); ?>" class="product-detail-link">details</a>
 				 </div>
+				 <div style="clear:both"></div>
 	 		 </div>
 		 </div>
 
