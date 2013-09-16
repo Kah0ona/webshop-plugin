@@ -1,11 +1,9 @@
 <?php
-//define('ORDER_SUCCESS', 200);
-//define('ORDER_FAILED', 400); //add other codes, if necessary
+define('ORDER_SUCCESS', 200);
+define('ORDER_FAILED', 400); //add other codes, if necessary
 define('ORDER_VALIDATION_ERROR', 400);
 define('SISOW_NOTIFY_URL', BASE_URL_WEBSHOP.'/sisow_notifications');
 class CheckoutModel extends GenericModel {
-	const ORDER_SUCCESS = 200;
-	const ORDER_FAILED = 400;
 	
 	protected $status;
 	protected $statusMessage;

@@ -1879,3 +1879,172 @@
 )
 
 2013-09-16 14:55:44: Inserted Order id: 44
+2013-09-16 15:06:28: -------
+2013-09-16 15:06:28: Processing cart: 
+2013-09-16 15:06:28: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-09-16 15:06:28: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 
+    [number] => 62b
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 0612345678
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => test 
+    [coupon] => 
+    [payment-method] => ideal
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => 1
+)
+
+2013-09-16 15:06:28: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+&number=62b&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=0612345678&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=test+&coupon=&payment-method=ideal&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=1&orderType=invoice
+2013-09-16 15:06:29: Returned value from /orders:
+2013-09-16 15:06:29: stdClass Object
+(
+    [Order__id] => 45
+    [totalPrice] => 114.95
+)
+
+2013-09-16 15:06:29: Inserted Order id: 45
+2013-09-16 15:08:29: -------
+2013-09-16 15:08:29: Processing cart: 
+2013-09-16 15:08:29: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-09-16 15:08:29: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 
+    [number] => 62b
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 0612345678
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => test2 
+    [coupon] => 
+    [payment-method] => ideal
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => 1
+)
+
+2013-09-16 15:08:29: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+&number=62b&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=0612345678&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=test2+&coupon=&payment-method=ideal&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=1&orderType=invoice
+2013-09-16 15:08:30: Returned value from /orders:
+2013-09-16 15:08:30: stdClass Object
+(
+    [Order__id] => 46
+    [totalPrice] => 114.95
+)
+
+2013-09-16 15:08:30: Inserted Order id: 46
+2013-09-16 15:10:51: -------
+2013-09-16 15:10:51: Processing cart: 
+2013-09-16 15:10:51: [{"Product_id":"3","title":"Malene Birger jurk","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+2013-09-16 15:10:51: Array
+(
+    [firstname] => Test Case Marten
+    [surname] => Test Sytema
+    [street] => Hugo de Grootstraat
+    [number] => 62b
+    [postcode] => 2518ee
+    [city] => Den Haag
+    [email] => marten@sytematic.nl
+    [companyName] => Test Company
+    [VATnumber] => 123456789
+    [phone] => 0612345678
+    [payment-method] => ideal
+    [DeliveryMethod_id] => 1
+    [hostname] => test
+    [shoppingCart] => [{"Product_id":"3","title":"Malene Birger jurk","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+    [orderStatus] => nieuw
+    [viaSite] => 1
+)
+
+2013-09-16 15:10:51: Posting to: firstname=Test+Case+Marten&surname=Test+Sytema&street=Hugo+de+Grootstraat&number=62b&postcode=2518ee&city=Den+Haag&email=marten%40sytematic.nl&companyName=Test+Company&VATnumber=123456789&phone=0612345678&payment-method=ideal&DeliveryMethod_id=1&hostname=test&shoppingCart=%5B%7B%22Product_id%22%3A%223%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22Lourena+jurkje%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshop.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_23_1358530224321.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22499.95%22%2C%22VAT%22%3A%220.21%22%7D%5D&orderStatus=nieuw&viaSite=1&orderType=invoice
+2013-09-16 15:10:51: Returned value from /orders:
+2013-09-16 15:10:51: stdClass Object
+(
+    [Order__id] => 47
+    [totalPrice] => 514.95
+)
+
+2013-09-16 15:10:51: Inserted Order id: 47
+2013-09-16 15:25:15: -------
+2013-09-16 15:25:15: Processing cart: 
+2013-09-16 15:25:15: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-09-16 15:25:15: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat
+    [number] => 62b
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 0612345678
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => test 3
+    [coupon] => 
+    [payment-method] => ideal
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => 1
+)
+
+2013-09-16 15:25:15: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat&number=62b&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=0612345678&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=test+3&coupon=&payment-method=ideal&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=1&orderType=invoice
+2013-09-16 15:25:16: Returned value from /orders:
+2013-09-16 15:25:16: stdClass Object
+(
+    [Order__id] => 48
+    [totalPrice] => 114.95
+)
+
+2013-09-16 15:25:16: Inserted Order id: 48
+2013-09-16 15:25:16: Creating iDeal transaction
+2013-09-16 15:25:16: purchaseId: 48
+2013-09-16 15:25:16: description: ABC Webshop bestelling
+2013-09-16 15:25:16: amount: 
+2013-09-16 15:25:16: issuerId: 99
+2013-09-16 15:25:16: returnUrl: http://localhost/~marten/wordpress/success
+2013-09-16 15:25:16: notifyUrl: http://webshopdev.sytematic.nl/public/sisow_notifications
+2013-09-16 15:25:17: Setting redirect url: https://www.sisow.nl/Sisow/iDeal/Simulator.aspx?merchantid=2537507457&txid=TEST080489260980&sha1=c628b8f61c4166d65800ad76d680e965d5a708f7

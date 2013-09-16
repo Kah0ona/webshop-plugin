@@ -137,13 +137,13 @@ class SytematicWebshop {
 		}
 		
 		
-		if($resultStatus == 200 ){
+		if($resultStatus == ORDER_SUCCESS ){
 			$checkout->doIDeal(); //redirects away if everything goes well, returns an error if not. 
 		}		
 
 		header('Content-Type: application/json; charset=UTF8');
 
-		if($checkout->getStatus() != 200) {
+		if($checkout->getStatus() != ORDER_SUCCESS) {
 			echo json_encode(array('error' => $checkout->getStatusMessage()));
 		}
 		else {

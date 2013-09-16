@@ -1,4 +1,6 @@
 <?php
+
+//test
 class DeliveryCostModel extends GenericModel {
 	protected $serviceUrl = null;
 	
