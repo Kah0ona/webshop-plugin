@@ -75,6 +75,9 @@ class CheckoutModel extends GenericModel {
 		$this->logMessage("-------");
 		$this->logMessage("Processing cart: ");
 		$this->logMessage($post['shoppingCart']);
+		
+		$post['viaSite'] = true;
+
 		ob_start();
 		print_r($post);	
 		$bod = ob_get_contents();
@@ -83,72 +86,41 @@ class CheckoutModel extends GenericModel {
 		$this->logMessage($bod);
 			
 		$post['orderType'] = 'invoice';
-		$savedPerson = $this->curl_post(BASE_URL_WEBSHOP.'/persons', $post); //extra fields are automatically removed.
-		if(!$savedPerson){
-			$this->logMessage("Error sending post to /persons: ".$this->curlError);			
+		$savedOrder = $this->curl_post(BASE_URL_WEBSHOP.'/orders', $post); //since we send both person data and order data, the servlet will process both.
+		if(!$savedOrder){
+			$this->logMessage("Error sending post to /orders: ".$this->curlError);			
 			$this->status = ORDER_FAILED;
-			$this->statusMessage = "De klantgegevens konden niet worden opgeslagen.";
+			$this->statusMessage = "De bestelling kon niet worden opgeslagen.";
 		}
 		else {
-			$savedPerson = utf8_encode($savedPerson);
-			$personId = null;
+			$savedOrder = utf8_encode($savedOrder);
 			$obj = json_decode($savedPerson);
 			if($obj->error != null){
-				$this->logMessage("Error sending post to /persons: ".$obj->error);			
-			
+				$this->logMessage("Error sending post to /orders: ".$obj->error);			
 				$this->status = ORDER_FAILED;
-				$this->statusMessage = "De klantgegevens konden niet worden opgeslagen: ".$obj->error;
+				$this->statusMessage = "De bestelling kon niet worden opgeslagen: ".$obj->error;
 			}
-			elseif($obj->Person_id != null) { //success continue
-				$this->logMessage("Inserted person id: ".$obj->Person_id);			
-
-				$post['Person_id'] = $obj->Person_id;
-				$post['viaSite'] = true;
-				
-				$savedOrder = $this->curl_post(BASE_URL_WEBSHOP.'/orders', $post);
-
-				if(!$savedOrder){
-					$this->logMessage("Error sending post to /orders: ".$this->curlError);			
+			elseif($obj->Order__id != null) { //success continue
+				$this->logMessage("Inserted Order id: ".$obj->Order__id);			
+				if($obj->totalPrice == null) {
 					$this->status = ORDER_FAILED;
-					$this->statusMessage = "De ordergegevens konden niet worden opgeslagen.";
+					$this->statusMessage = "Er ging iets mis met de verwerking, order niet goed verwerkt.";
 				}
 				else {
-					$savedOrder = utf8_encode($savedOrder);
-					$obj = json_decode($savedOrder);				
-					if($obj->error != null){
-						$this->logMessage("Error sending post to /orders: ".$obj->error);			
-						$this->status = ORDER_FAILED;
-						$this->statusMessage = "De bestelgegevens konden niet worden opgeslagen: ".$obj->error;
-					}
-					else {
-						if($obj->Order__id != null) {
-							$this->logMessage("Inserted Order id: ".$obj->Order__id);			
-							if($obj->totalPrice == null) {
-								$this->status = ORDER_FAILED;
-								$this->statusMessage = "Er ging iets mis met de verwerking.";
-							}
-							else {
-								$this->totalPrice = $obj->totalPrice;						
-								$this->status = ORDER_SUCCESS;
-								$this->statusMessage = "De bestelling is succesvol verstuurd.";
-								$this->insertedOrderId= $obj->Order__id;
-							}
-						}
-						else {
-							$this->logMessage("Error sending post to /orders without an error message!");			
-							$this->status = ORDER_FAILED;
-						}
-					}
-				}					
+					$this->totalPrice = $obj->totalPrice;						
+					$this->status = ORDER_SUCCESS;
+					$this->statusMessage = "De bestelling is succesvol verstuurd.";
+					$this->insertedOrderId= $obj->Order__id;
+				}
 			}
 			else { //unknown error
 				$this->logMessage("Error sending post to /persons without an error message!");			
 				$this->status = ORDER_FAILED;
+				$this->statusMessage = "Er ging iets mis met de verwerking, order niet goed verwerkt.";
 			}
 		}
 		return $this->status;
 	}
-	
 	
 	public function doIDeal(){
 		$this->logMessage("Creating iDeal transaction");
