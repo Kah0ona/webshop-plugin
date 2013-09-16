@@ -214,6 +214,7 @@ class CheckoutModel extends GenericModel {
 	
 	
 	private function logMessage($msg){
+		date_default_timezone_set('Europe/Amsterdam');
 		file_put_contents(WEBSHOP_PLUGIN_PATH.'/logs/order.log',date("Y-m-d H:i:s").': '.$msg."\n",FILE_APPEND);
 	}
 

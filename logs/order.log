@@ -1815,3 +1815,67 @@
 )
 
 2013-09-16 14:47:54: Inserted Order id: 42
+2013-09-16 14:55:07: -------
+2013-09-16 14:55:07: Processing cart: 
+2013-09-16 14:55:07: [{"Product_id":"3","title":"Malene Birger jurk","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+2013-09-16 14:55:07: Array
+(
+    [firstname] => Test Case Marten
+    [surname] => Test Sytema
+    [street] => Hugo de Grootstraat
+    [number] => 62b
+    [postcode] => 2518ee
+    [city] => Den Haag
+    [email] => marten@sytematic.nl
+    [companyName] => Test Company
+    [VATnumber] => 123456789
+    [phone] => 0612345678
+    [payment-method] => ideal
+    [DeliveryMethod_id] => 1
+    [hostname] => test
+    [shoppingCart] => [{"Product_id":"3","title":"Malene Birger jurk","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+    [orderStatus] => nieuw
+    [viaSite] => 1
+)
+
+2013-09-16 14:55:07: Posting to: firstname=Test+Case+Marten&surname=Test+Sytema&street=Hugo+de+Grootstraat&number=62b&postcode=2518ee&city=Den+Haag&email=marten%40sytematic.nl&companyName=Test+Company&VATnumber=123456789&phone=0612345678&payment-method=ideal&DeliveryMethod_id=1&hostname=test&shoppingCart=%5B%7B%22Product_id%22%3A%223%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22Lourena+jurkje%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshop.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_23_1358530224321.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22499.95%22%2C%22VAT%22%3A%220.21%22%7D%5D&orderStatus=nieuw&viaSite=1&orderType=invoice
+2013-09-16 14:55:07: Returned value from /orders:
+2013-09-16 14:55:07: stdClass Object
+(
+    [Order__id] => 43
+    [totalPrice] => 514.95
+)
+
+2013-09-16 14:55:07: Inserted Order id: 43
+2013-09-16 14:55:43: -------
+2013-09-16 14:55:43: Processing cart: 
+2013-09-16 14:55:43: [{"Product_id":"3","title":"Malene Birger jurk","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+2013-09-16 14:55:43: Array
+(
+    [firstname] => Test Case Marten
+    [surname] => Test Sytema
+    [street] => Hugo de Grootstraat
+    [number] => 62b
+    [postcode] => 2518ee
+    [city] => Den Haag
+    [email] => marten@sytematic.nl
+    [companyName] => Test Company
+    [VATnumber] => 123456789
+    [phone] => 0612345678
+    [payment-method] => ideal
+    [DeliveryMethod_id] => 1
+    [hostname] => test
+    [shoppingCart] => [{"Product_id":"3","title":"Malene Birger jurk","desc":"Lourena jurkje","thumb":"http:\/\/webshop.sytematic.nl\/uploads\/Product\/Product_imageDish_23_1358530224321.jpg","quantity":"1","price":"499.95","VAT":"0.21"}]
+    [orderStatus] => nieuw
+    [viaSite] => 1
+)
+
+2013-09-16 14:55:43: Posting to: firstname=Test+Case+Marten&surname=Test+Sytema&street=Hugo+de+Grootstraat&number=62b&postcode=2518ee&city=Den+Haag&email=marten%40sytematic.nl&companyName=Test+Company&VATnumber=123456789&phone=0612345678&payment-method=ideal&DeliveryMethod_id=1&hostname=test&shoppingCart=%5B%7B%22Product_id%22%3A%223%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22Lourena+jurkje%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshop.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_23_1358530224321.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22499.95%22%2C%22VAT%22%3A%220.21%22%7D%5D&orderStatus=nieuw&viaSite=1&orderType=invoice
+2013-09-16 14:55:44: Returned value from /orders:
+2013-09-16 14:55:44: stdClass Object
+(
+    [Order__id] => 44
+    [totalPrice] => 514.95
+)
+
+2013-09-16 14:55:44: Inserted Order id: 44
