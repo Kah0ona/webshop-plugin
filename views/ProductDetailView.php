@@ -211,7 +211,26 @@ class ProductDetailView extends GenericView {
 		  </form>	
 		  <span product-type="product" product-index='0' product-id='<?php echo $data->Product_id; ?>' class="addtocart <?php echo $data->priceOnDemand ? 'hidden' : ''; ?>">
 			<a href="#" class="btn" ><i class="icon-shopping-cart icon-white"></i> Toevoegen</a>
-		  </span>			
+		  </span>
+		  
+		  <div class="share-product" style="margin-top: 10px;">
+			<!-- AddThis Button BEGIN -->
+			<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+			<a class="addthis_button_preferred_1"></a>
+			<a class="addthis_button_preferred_2"></a>
+			<a class="addthis_button_preferred_3"></a>
+			<a class="addthis_button_preferred_4"></a>
+			<a class="addthis_button_compact"></a>
+			<a class="addthis_counter addthis_bubble_style"></a>
+			</div>
+			<script type="text/javascript">
+				var addthis_config = {"data_track_addressbar":true};
+				var addthis_share = {"url": '<?php echo site_url().'/products/'.$data->Product_id.'/#'.$product->productName; ?>'};
+			</script>
+			
+			<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52076b1967f6cd45"></script>
+			<!-- AddThis Button END -->
+		  </div>			
 	<?php 
 	}
 	

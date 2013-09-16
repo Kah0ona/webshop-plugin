@@ -71,3 +71,6 @@ td.text-right {
 }
 
 
+.product-overview .share-product {
+	display: none !important;
+}
