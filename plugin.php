@@ -126,7 +126,7 @@ class SytematicWebshop {
 		$this->load_options();
 		
 		$checkout = new CheckoutModel($this->options);
-		$resultStatus = $checkout->sendOrderToBackend();
+		$resultStatus = $checkout->sendOrderToBackend($_POST);
 		$error = null;
 		
 		header('Content-Type: application/json; charset=UTF8');
@@ -241,9 +241,6 @@ class SytematicWebshop {
 		return $title;
 	}
 	
-
-
-	
 	public function isProductPage(){
 		$url = $_SERVER['REDIRECT_URL'];
 		return stristr($url, 'products');		
@@ -259,13 +256,11 @@ class SytematicWebshop {
 		$url = $_SERVER['REDIRECT_URL'];
 		return stristr($url, 'categories') || stristr($url, 'products');
 	}
-	
-	
+		
 	public function getWebshopPageTitle(){
 				
 	}
-	
-	
+		
 	public function register_widgets(){
 		include_once('widgets/CategoryWidget.php');
 		register_widget('CategoryWidget');
@@ -278,9 +273,9 @@ class SytematicWebshop {
 	}
 	
 	public function load_options(){
-
 		include_once('models/WebshopOptions.php');
 		$w = new WebshopOptions();
+		$w->loadOptions();
 		$this->options = $w;
 		$this->hostname = $this->options->getOption('hostname');
 	}
@@ -341,12 +336,10 @@ class SytematicWebshop {
 	 * Loads the plugin text domain for translation
 	 */
 	public function plugin_textdomain() {
-	
 		$domain = 'sytematic-webshop-locale';
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
         load_textdomain( $domain, WP_LANG_DIR.'/'.$domain.'/'.$domain.'-'.$locale.'.mo' );
         load_plugin_textdomain( $domain, FALSE, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
-
 	} // end plugin_textdomain
 
 	/**

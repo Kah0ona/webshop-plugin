@@ -1,9 +1,12 @@
 <?php
-define('ORDER_SUCCESS', 200);
-define('ORDER_FAILED', 400); //add other codes, if necessary
+//define('ORDER_SUCCESS', 200);
+//define('ORDER_FAILED', 400); //add other codes, if necessary
 define('ORDER_VALIDATION_ERROR', 400);
 define('SISOW_NOTIFY_URL', BASE_URL_WEBSHOP.'/sisow_notifications');
 class CheckoutModel extends GenericModel {
+	const ORDER_SUCCESS = 200;
+	const ORDER_FAILED = 400;
+	
 	protected $status;
 	protected $statusMessage;
 	protected $cart=null;
@@ -22,7 +25,6 @@ class CheckoutModel extends GenericModel {
 		$this->getCartFromSession();
 	} 
 
-
 	private function getCartFromSession(){
 		if(!isset($_SESSION['shoppingCart'])){
 			$this->cart = json_decode('[]');
@@ -40,7 +42,7 @@ class CheckoutModel extends GenericModel {
 	public function setDeliveryCostModel($m) {
 		$this->deliveryCostModel = $m;
 	}
-	
+
 	
 	public function getDeliveryCostModel(){
 		return $this->deliveryCostModel;
@@ -54,12 +56,8 @@ class CheckoutModel extends GenericModel {
 		return $this->deliveryMethodModel;
 	}
 	
-	public function sendOrderToBackend(){
-
-		$_POST['hostname'] = $this->options->getOption('hostname');
-		$post = $_POST;
-		
-
+	public function sendOrderToBackend($post){
+		$post['hostname'] = $this->options->getOption('hostname');
 		$post['shoppingCart'] = json_encode($this->cart);
 		$post['orderStatus'] = 'nieuw';
 		$post['PaymentMethod_id'] = $post['payment-method'];
@@ -94,7 +92,13 @@ class CheckoutModel extends GenericModel {
 		}
 		else {
 			$savedOrder = utf8_encode($savedOrder);
-			$obj = json_decode($savedPerson);
+			$obj = json_decode($savedOrder);
+			ob_start();
+			print_r($obj);	
+			$bod = ob_get_contents();
+			ob_end_clean();			
+			$this->logMessage("Returned value from /orders:");
+			$this->logMessage($bod);
 			if($obj->error != null){
 				$this->logMessage("Error sending post to /orders: ".$obj->error);			
 				$this->status = ORDER_FAILED;
@@ -114,7 +118,7 @@ class CheckoutModel extends GenericModel {
 				}
 			}
 			else { //unknown error
-				$this->logMessage("Error sending post to /persons without an error message!");			
+				$this->logMessage("Error sending post to /orders without an error message!");			
 				$this->status = ORDER_FAILED;
 				$this->statusMessage = "Er ging iets mis met de verwerking, order niet goed verwerkt.";
 			}
