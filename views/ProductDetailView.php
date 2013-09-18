@@ -107,7 +107,7 @@ class ProductDetailView extends GenericView {
 							<div class="span12">
 								<h3 itemprop="name"><?php echo $data->productName; ?></h3>
 								<?php if($this->shouldDisplayBrand($data->brand)) : ?>
-								<p class="product-brand"><strong>Merk:</strong> <?php echo $data->brand; ?></p>
+								<p itemprop="brand" itemscope itemtype="http://schema.org/Brand" class="product-brand"><strong>Merk:</strong> <span itemprop="name"><?php echo $data->brand; ?></span></p>
 								<?php endif; ?>
 								<?php if($this->shouldDisplayProductNumber($data->productNumber)) : ?>
 								<p class="product-productnr"><strong>Artikelnummer:</strong> <?php echo $data->productNumber; ?></p>
