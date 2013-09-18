@@ -195,6 +195,9 @@ class SytematicWebshop {
 		$cont = '';
 		if($this->isProductPage() && $this->productModel->isDetailPage()){
 			$cont =  $this->productModel->getData()->productDesc;
+			if($cont == ''){
+				$cont = $this->productModel->getData()->productName.' '.$this->productModel->getData()->productNumber;
+			}
 		}
 		if($this->isCategoryPage() && $this->categoryModel->isDetailPage()) {
 			$cont =  $this->categoryModel->getData()->categoryDesc;
@@ -206,6 +209,7 @@ class SytematicWebshop {
 		$cont = trim(preg_replace('/\s+/', ' ', $cont));
 		
 		$cont = preg_replace('/[*_]/', '', $cont);
+		$cont = str_replace('"', "''", $cont);
 
 		echo '<meta name="description" content="'.substr($cont,0,155).'" >';
 	}

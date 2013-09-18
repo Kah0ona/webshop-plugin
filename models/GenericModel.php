@@ -7,6 +7,8 @@ class GenericModel {
 	protected $data; //any data fetched will be put in this variable
 	protected $serviceUrl = null;
 	protected $rawData = null;
+	
+	protected $breadcrumbs = array();
 	/*
 	* When we are viewing a detail page of one item, this id field will be set.
 	*/
@@ -28,6 +30,8 @@ class GenericModel {
 	public function setOptions($options){
 		$this->options = $options;
 	}
+
+	
 	protected function decodeParamsIntoGetString($params){
 		$ret = "";
 		$c = 0;

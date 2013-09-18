@@ -98,7 +98,7 @@ class ProductDetailView extends GenericView {
 				<div class="row-fluid">
 					<div class="span8 product-image">
 						<?php if($data->imageDish != null && $data->imageDish != "/uploads/Product" && $data->imageDish != '') { ?>
-						<img itemprop="image" alt="<?php echo $data->productName; ?>" src="<?php echo SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$data->imageDish; ?>"  />
+						<img itemprop="image" alt="<?php echo $data->productName; if($data->productNumber != null){ echo ' '.$data->productNumber; } if($data->brand != null){ echo ' '.$data->brand; } ?>" src="<?php echo SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$data->imageDish; ?>"  />
 						<?php } ?>
 					</div>
 					

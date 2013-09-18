@@ -36,6 +36,23 @@ class CategoryModel extends GenericModel {
 		return $this->fetch($this->serviceUrl, array('Parent_id'=>$parentId), false);
 	}
 	
+			
+	/**
+	* Reconstructs a hierarchy of the specified category, based on a list with all categories.
+	* Afterards, a call to getBreadCrumbs gives an array of assoc arrays.
+	*/
+	public function calculateBreadCrumbs($categories, $currentCatId){
+		
+	}
+	
+	public function getBreadCrumbs(){
+		return $this->breadcrumbs;
+	}
+	
+	public function setBreadCrumbs($b){
+		$this->breadcrumbs = $b;
+	}
+	
 	public function fetchSortedCategories($useNesting = false){
 		$arr = array(
 			'hostname'=>$this->hostname,
