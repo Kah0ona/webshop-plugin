@@ -72,7 +72,7 @@ class CheckoutModel extends GenericModel {
 		$this->logMessage("Processing cart: ");
 		$this->logMessage($post['shoppingCart']);
 		
-		$post['viaSite'] = true;
+		$post['viaSite'] = 'true';
 
 		ob_start();
 		print_r($post);	
