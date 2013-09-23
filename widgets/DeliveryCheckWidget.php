@@ -47,6 +47,7 @@ class DeliveryCheckWidget extends WP_Widget {
 			echo $before_title . $title . $after_title;
 
 		$options = new WebshopOptions();
+		$options->loadOptions();
 		$hostname = $options->getOption('hostname');
 		$m = new DeliveryCostModel($hostname,$options);
 		
