@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://demoshop.lokaalgevonden.nl/" />
+<title>Order Product</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Order Product</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Schoenen</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Toevoegen</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=expand-cart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Afrekenen →</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=companyName</td>
+	<td>Sytematic Software</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=firstname</td>
+	<td>Marten</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=surname</td>
+	<td>Sytema</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=street</td>
+	<td>Hugo de Grootstraat</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=number</td>
+	<td>62b</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=postcode</td>
+	<td>2518EE</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=city</td>
+	<td>Den haag</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=country</td>
+	<td>nederland</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email</td>
+	<td>marten@sytematic.nl</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phone</td>
+	<td>0649343492</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=orderComment</td>
+	<td>Test Selenium bestelling</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=invoice</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=bUitvoeren</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=bUitvoeren</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
