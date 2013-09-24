@@ -62,6 +62,7 @@ class SytematicWebshop {
 		// Load plugin text domain
 		add_action('init', array( $this, 'plugin_textdomain' ) );
 		add_action('init', array($this, 'load_options'));
+		add_action('template_redirect', array(&$this,'template_redirect'));
 
 		add_filter('the_posts', array($this, 'init_models'));
 		add_filter('plugins_loaded', array($this,'start_session')); //first code to be executed.
@@ -100,6 +101,17 @@ class SytematicWebshop {
 		}
 	} // end constructor
 	
+	
+	public function template_redirect() {
+		if($this->is_webshop_page()){
+			//todo			
+		}
+	}
+	
+	public function is_webshop_page(){
+		$url = $_SERVER['REDIRECT_URL'];
+		return strpos($url,'categories') !== false;
+	}
 	
 	public function process_price_quote_submit(){
 		include_once('models/GenericModel.php');

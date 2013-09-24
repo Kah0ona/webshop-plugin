@@ -637,7 +637,7 @@
 			var str='<ul class="nav pull-right">'+
 						'<li class="divider-vertical"></li>'+
 						'<li class="dropdown">'+
-							'<a class="dropdown-toggle" data-toggle="dropdown" href="#" >'+
+							'<a class="dropdown-toggle" data-toggle="dropdown" id="expand-cart" href="#" >'+
 							'<i class="icon-shopping-cart icon-white"></i> '+this.settings.cart_text+': € <span class="total-price"></span><b class="caret"></b></a>'+
 							'<ul class="dropdown-menu" id="shopping-cart-dropdown">'+
 								'<li><a href="'+this.settings.checkout_page+'">'+this.settings.checkout_link+' &rarr;</a></li>'+
