@@ -16,8 +16,12 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 			$('<input type="text" name="phone" class="input-large" id="phone">').appendTo('#wrap');
 												
 			$('<input type="submit" name="invoice" class="submit-controls btn btn-primary " id="invoice" value="Plaats bestelling" style="width: 130px;" />').appendTo('#wrap');		
-			$('<select id="deliveryMethods"><option selected="selected" value="0"></option></select>').appendTo('#wrap');						
-		//	$('#wrap').wrap('<form name="order-form_" id="order-form" class="form-horizontal" action="http://demoshop.lokaalgevonden.nl/wp-content/plugins/webshop-plugin/tests/mock-form-handler.php" method="post" novalidate="novalidate"></form>');
+			$('<select id="deliveryMethods"><option selected="selected" value="0"></option></select>').appendTo('#wrap');				
+
+
+			var dom = window.location.pathname.split('ShoppingcartRunner.html')[0];
+
+			$('#wrap').wrap('<form name="order-form_" id="order-form" class="form-horizontal" action="'+dom+'mock-form-handler.php" method="post" novalidate="novalidate"></form>');
 	};
 	
 	afterEach(function(){33
@@ -364,10 +368,11 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 					return true;	
 				},
 				data : { 
-					"hostname" : 'test',
+					"hostname" : 'test'
 				},
 				success : function(data, textStatus, jqXHR) {
-					expect(data.redirectUrl).toBeDefined();
+					alert(data);
+					expect(data.redirectUrl).toBe('https://www.sisow.nl/Sisow/iDeal/Simulator.aspx?merchantid=2537507457&txid=TEST080489493323&sha1=c754690982273dc5a0b7ff3f65f733a33a4d142b');
 				}
 			};
 			

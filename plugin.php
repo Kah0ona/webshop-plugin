@@ -119,7 +119,7 @@ class SytematicWebshop {
 		$this->load_options();
 		$process = new EstimateSubmitModel($this->options);
 
-		header('Content-Type: application/json; charset=UTF8');
+		header('Content-Type: application/json; charset=utf-8');
 		
 		echo $process->execute($_POST);
 		exit;
@@ -141,7 +141,7 @@ class SytematicWebshop {
 		$resultStatus = $checkout->sendOrderToBackend($_POST);
 		$error = null;
 		
-		header('Content-Type: application/json; charset=UTF8');
+		header('Content-Type: application/json; charset=utf-8');
 
 		if($_POST['payment-method'] != "ideal") {
 			echo json_encode(array('redirectUrl' => site_url('/success')));
@@ -152,8 +152,6 @@ class SytematicWebshop {
 		if($resultStatus == ORDER_SUCCESS ){
 			$checkout->doIDeal(); //redirects away if everything goes well, returns an error if not. 
 		}		
-
-		header('Content-Type: application/json; charset=UTF8');
 
 		if($checkout->getStatus() != ORDER_SUCCESS) {
 			echo json_encode(array('error' => $checkout->getStatusMessage()));
