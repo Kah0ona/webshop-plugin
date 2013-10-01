@@ -3,7 +3,7 @@ var NOT_AVAILABLE  = -2;
 var AVAILABLE      = -3;
 
 var reqMsg = "Dit veld is verplicht.";
-var emailMsg = "Vul een geldig e-mailadres in. ";
+var emailMsg = "Vul een geldig e-mailadres in.";
 var discount = 0;
 
 var submitType = "invoice";
@@ -30,11 +30,12 @@ jQuery(document).ready(function($){
 			orderType : submitType*/
 		},
 		success : function(data, textStatus, jqXHR) {
+			var tmp = data;
 			if(data.error != null){
 				$('#order-form').replaceWith('<div class="alert alert-error span12"><strong>Fout:</strong> Er ging iets mis met het versturen van de bestelling: '+data.error+'</div>');
 			}
 			else {
-				window.location = data.redirectUrl;
+				window.location.href = data.redirectUrl;
 			}
 		}
 	};

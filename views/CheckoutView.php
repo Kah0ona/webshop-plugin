@@ -111,6 +111,7 @@ class CheckoutView extends GenericView {
 	}
 
 	public function render($data=null) { 
+	
 		$cart = $this->model->getCart();
 		setlocale(LC_MONETARY, 'it_IT');
 		

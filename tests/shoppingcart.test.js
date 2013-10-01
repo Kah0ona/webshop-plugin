@@ -5,18 +5,26 @@ function endsWith(str, suffix) {
 describe("Testsuite for the shoppingcart jquery plugin.", function() {
 	var initAddressLinesInDom = function(){
 			$('<div id="wrap"></div>').appendTo('body');	
+			$('<input type="text" name="firstname" class="input-large" id="firstname">').appendTo('#wrap');
+			$('<input type="text" name="surname" class="input-large" id="surname">').appendTo('#wrap');
 			$('<input type="text" value="hugo de grootstraat" name="street" class="input-large address-line" id="street">').appendTo('#wrap');
 			$('<input type="text" name="city" class="input-large address-line" id="city">').appendTo('#wrap');
 			$('<input type="text" name="postcode" maxlength="7" class="input-large span3 address-line" id="postcode">').appendTo('#wrap');
 			$('<input type="text" name="number" maxlength="7" class="input-large span3 address-line" id="number">').appendTo('#wrap');
 			$('<input type="text" name="country" class="input-large address-line" id="country">').appendTo('#wrap');			
+			$('<input type="text" name="email" class="input-large" id="email">').appendTo('#wrap');			
+			$('<input type="text" name="phone" class="input-large" id="phone">').appendTo('#wrap');
+												
+			$('<input type="submit" name="invoice" class="submit-controls btn btn-primary " id="invoice" value="Plaats bestelling" style="width: 130px;" />').appendTo('#wrap');		
 			$('<select id="deliveryMethods"><option selected="selected" value="0"></option></select>').appendTo('#wrap');						
+		//	$('#wrap').wrap('<form name="order-form_" id="order-form" class="form-horizontal" action="http://demoshop.lokaalgevonden.nl/wp-content/plugins/webshop-plugin/tests/mock-form-handler.php" method="post" novalidate="novalidate"></form>');
 	};
 	
-	afterEach(function(){
+	afterEach(function(){33
 		$('#shoppingcart').remove();
 		$('#detailform').remove();
 		$('#wrap').remove();
+		$('#order-form').remove();
 	});
 	
 	beforeEach(function () {
@@ -247,7 +255,7 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 			
 			expect(google.maps.DirectionsService.prototype.route).toHaveBeenCalled();			
 			var resultRaw = $('.deliverycosts-field').html();
-			console.log('Result raw: '+resultRaw);			
+			//console.log('Result raw: '+resultRaw);			
 			
 			expect(endsWith(resultRaw, '12,50</strong>')).toBe(true);
 			$('#wrap').remove();
@@ -339,7 +347,44 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 			$('#wrap').remove();
 
 		});
-	});
-	
 		
+		it('test basic functioning of order-form.js', function(){
+			initAddressLinesInDom();
+			$('#firstname').val('Firstname');
+			$('#surname').val('surname');
+			$('#street').val('balistraat');
+			$('#city').val('Den Helder');
+			$('#postcode').val(' ');
+			$('#number').val('1');
+			$('#country').val('nederland');
+			
+			
+			var submitOptions = {
+				beforeSubmit : function(arr, form, options){
+					return true;	
+				},
+				data : { 
+					"hostname" : 'test',
+				},
+				success : function(data, textStatus, jqXHR) {
+					expect(data.redirectUrl).toBeDefined();
+				}
+			};
+			
+			var validationOptions = {
+					rules : {},
+					messages : {},
+					submitHandler : function(){
+						$('#order-form').ajaxSubmit(submitOptions);	//does some extra validation.		
+					},
+					invalidHandler: function(form, validator) {
+						//alert('invalid');
+					}
+			}; 
+			
+			$('#order-form').validate(validationOptions);
+			
+			$('#invoice').click();
+		});
+	});
 });
