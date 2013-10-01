@@ -383,7 +383,7 @@ class CheckoutView extends GenericView {
 					
 					<!-- delivery costs, only show if checkbox is set -->
 					<div class="control-group">
-						<label class="control-label" for="deliveryElsewhere">Ergens anders bezorgen?</label>			
+						<label class="control-label delivery-elsewhere" for="deliveryElsewhere">Ergens anders bezorgen?</label>			
 			
 						<div class="controls">	
 							<input type="checkbox" name="deliveryElsewhere" class="input-large address-line-elsewhere" id="deliveryElsewhere" />
@@ -424,17 +424,29 @@ class CheckoutView extends GenericView {
 					
 			 	</div>
 				<div class="span6 checkout-right">
+
 					<div class="row-fluid">
 						<div class="span12">
 							<h3>Bestellingsgegevens</h3>
-							<div class="control-group">
+							<div class="control-group order-comment-control">
 								<p class="infotextordercomment"></p>
-								<label class="control-label" for="orderComment">Opmerkingen:</label>			
+								<label class="control-label order-comment" for="orderComment">Opmerkingen:</label>			
 								<div class="controls">	
 									<textarea id="orderComment" name="orderComment" class="input-large" rows="4"></textarea>
 								</div>		
 							</div>				
-							
+							<?php 
+							if($this->model->allowDeliveryDate()) {
+							?>
+							<div class="control-group">
+						   		<label class="control-label delivery-date-label" for="deliveryDate">Bezorg/leverdatum (formaat: dd-mm-jjjj): *</label>			
+								<div class="controls">	
+									<input type="text" name="deliveryDate" class="span4 input-large" id="deliveryDate" />
+								</div>		
+							</div>					
+							<?php 
+							}
+							?>
 						</div><!-- span12 -->	
 					</div><!-- /row -->		
 					<div class="row-fluid">

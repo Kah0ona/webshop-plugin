@@ -42,6 +42,15 @@
 				self.render();
 				self.updatePrices();
 			});
+			
+			if($.datepicker !== undefined){
+				$.datepicker.setDefaults( $.datepicker.regional[ "nl" ] )		
+				$("#deliveryDate").datepicker({
+					onSelect: function(dateText, inst){
+						self.logger('Selected date: '+dateText);
+					}
+				});
+			}
 
 		},
 		load : function(callback){

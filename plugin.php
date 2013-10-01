@@ -412,6 +412,21 @@ class SytematicWebshop {
 		wp_enqueue_script($handle);			
 		
 		if($this->isCheckoutPage()){
+			$jqueryUiCss = 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/base/jquery-ui.css';
+			$handle = 'jquery-ui-css';
+			wp_register_style($handle,$jqueryUiCss, array());
+			wp_enqueue_style($handle);
+			
+			$jqueryui = 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js';
+			$handle='jquery-ui';
+			wp_register_script($handle,$jqueryui, array('jquery'));
+			wp_enqueue_script($handle);	
+			$jqueryui_i18n = 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/i18n/jquery-ui-i18n.min.js';
+			$handle = 'jquery-ui-i18n';
+			wp_register_script($handle,$jqueryui_i18n, array('jquery-ui'));
+			wp_enqueue_script($handle);				
+			
+		
 			wp_enqueue_script('form.js', plugins_url('/webshop-plugin/js/jquery.form.js'), array('jquery'));
 			wp_enqueue_script('validation.js', plugins_url('/webshop-plugin/js/jquery.validate.js'), array('jquery', 'form.js'));
 			wp_enqueue_script('sytematic-webshop-shopping-cart-order', plugins_url('/webshop-plugin/js/order-form.js' ), array('jquery','jquery.json') );

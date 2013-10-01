@@ -108,6 +108,11 @@
 </tr>
 <tr>
 	<td>type</td>
+	<td>id=deliveryDate</td>
+	<td>31-10-2013</td>
+</tr>
+<tr>
+	<td>type</td>
 	<td>id=orderComment</td>
 	<td>Test Selenium bestelling</td>
 </tr>

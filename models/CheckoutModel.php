@@ -54,6 +54,11 @@ class CheckoutModel extends GenericModel {
 		return $this->deliveryMethodModel;
 	}
 	
+	
+	public function allowDeliveryDate(){
+		return $this->options->getOption('use_delivery_date');
+	}
+	
 	public function sendOrderToBackend($post){
 		$post['hostname'] = $this->options->getOption('hostname');
 		$post['shoppingCart'] = json_encode($this->cart);
@@ -73,6 +78,16 @@ class CheckoutModel extends GenericModel {
 		$this->logMessage($post['shoppingCart']);
 		
 		$post['viaSite'] = 'true';
+
+		if($post['deliveryDate'] != null && "" != trim($post['deliveryDate']) && isset($post['deliveryDate'])){
+			$pieces = explode('-', $post['deliveryDate']);
+			$post['deliveryDate']= $pieces[1].'-'.$pieces[0].'-'.$pieces[2].' 00:00:00';
+		}
+		
+		if($post['deliveryDate'] == ''){
+			unset($post['deliveryDate']);
+		}
+
 
 		ob_start();
 		print_r($post);	
