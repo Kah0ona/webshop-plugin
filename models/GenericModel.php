@@ -97,7 +97,7 @@ class GenericModel {
 		$arr = Array();
 		if($this->id == null)
 			throw new Exception('No ID set, make sure you use setId($id) to set an id');
-		
+	
 		$arr[$idKeyName] = $this->id;
 		
 		
@@ -170,7 +170,7 @@ class GenericModel {
 		}
 		else {
 			$obj = json_decode($jsonString);
-			if($this->isDetailPage()){
+			if($this->isDetailPage() || ($this->id!=null && is_numeric($this->id))){
 				if($obj != null && count($obj) > 0)
 					$this->data = $obj[0];
 			}

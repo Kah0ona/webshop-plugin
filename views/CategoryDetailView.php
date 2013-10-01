@@ -26,11 +26,13 @@ class CategoryDetailView extends GenericView {
 		if($data->categoryDesc != null && $data->categoryDesc != ''){
 			echo '<p class="category-description">'.nl2br($data->categoryDesc).'</p>';
 		}				
+
 	
 		if($data != null && count($data->Product) > 0){
 			if($subCategories != null && count($subCategories) > 0){
 				echo '<h3>Producten</h3>';
 			}
+		
 			echo $productView->render($data->Product, $renderDetailOnOverview, $data->Category_id); 
 		}
 		elseif ($subCategories == null || count($subCategories) == 0)

@@ -186,10 +186,29 @@ class SytematicWebshop {
 			include_once('models/CategoryModel.php');		
 			$this->categoryModel = new CategoryModel($this->hostname);
 			$this->categoryModel->setOptions($this->options);
-			$this->categoryModel->isDetailPage('categories') ? 	$this->categoryModel->fetchCategory() : $this->categoryModel->fetchNestedCategories(true);
+			
+			
+			//see if the shortcode contains id="123", and get 123 in the $catId variable.
+			$catId = $this->extractIdFromShortCode($posts);
+			if($catId != null && is_numeric($catId) && $catId > 0){
+				$this->categoryModel->setId($catId);
+			}
+			
+			$detail = $this->categoryModel->isDetailPage('categories') || ($catId != null && is_numeric($catId) && $catId > 0);
+			$detail ? $this->categoryModel->fetchCategory() : $this->categoryModel->fetchNestedCategories(true);
 		}
 			
 		return $posts;
+	}
+	
+	private function extractIdFromShortCode($posts){
+		foreach($posts as $post){
+	       $ret = preg_match("/\[webshop_categories[\s\S]*id=\"([0-9]+)\"[\s\S]*\]/", $post->post_content, $output_array);
+	       if($ret === 1){
+			   return($output_array[1]);
+	       }
+		}
+		return null;
 	}
 	
 	private function containsShortcode($posts, $type='products'){
@@ -428,13 +447,20 @@ class SytematicWebshop {
 			array(
 				'render_options_on_overview'=>'false',
 				'style'=>'list',
-				'numcols'=>'3'
+				'numcols'=>'3',
+				'id'=>null
 			), $atts)
 		);
 		ob_start();
 
-	
-		if($this->categoryModel->isDetailPage()) {
+		$catId = null;
+		
+		if($id !=null && is_numeric($id)) {
+			$catId = $id;			
+		}
+
+		//if $catId is indeed a numeric value, it is already set into the model, since the queries to the backend have already been performed by $this->init_models();
+		if($this->categoryModel->isDetailPage() || ($catId != null && is_numeric($catId) && $catId > 0)) {
 			include_once('views/CategoryDetailView.php');
 			include_once('models/ProductModel.php');
 
