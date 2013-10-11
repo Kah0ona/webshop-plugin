@@ -439,7 +439,7 @@ class CheckoutView extends GenericView {
 							if($this->model->allowDeliveryDate()) {
 							?>
 							<div class="control-group">
-						   		<label class="control-label delivery-date-label" for="deliveryDate">Bezorg/leverdatum (formaat: dd-mm-jjjj): *</label>			
+						   		<label class="control-label delivery-date-label" for="deliveryDate">Bezorg-/leverdatum (formaat: dd-mm-jjjj): *</label>			
 								<div class="controls">	
 									<input type="text" name="deliveryDate" class="span4 input-large" id="deliveryDate" />
 								</div>		

@@ -66,6 +66,7 @@ class SytematicWebshop {
 
 		add_filter('the_posts', array($this, 'init_models'));
 		add_filter('plugins_loaded', array($this,'start_session')); //first code to be executed.
+		add_filter( 'wpseo_canonical', array($this,'wpseo_product_canonical' ));
 
 
 		// Register admin styles and scripts
@@ -90,6 +91,7 @@ class SytematicWebshop {
 		add_filter('wp_title', array($this, 'modify_title_tag'), 100);	//priority is 100, to beat Yoast SEO
 		add_action('wp_head', array($this, 'init_cart'));
 		add_action('wp_head', array($this, 'do_seo'));
+		add_action('wp_head', array($this, 'add_facebook_seo'));		
 		
 	
 		//this must be inside is_admin, see: http://codex.wordpress.org/AJAX_in_Plugins#Ajax_on_the_Viewer-Facing_Side	
@@ -101,7 +103,7 @@ class SytematicWebshop {
 		}
 	} // end constructor
 	
-	
+
 	public function template_redirect() {
 		if($this->is_webshop_page()){
 			//todo			
@@ -240,7 +242,74 @@ class SytematicWebshop {
 		$cont = preg_replace('/[*_]/', '', $cont);
 		$cont = str_replace('"', "''", $cont);
 
-		echo '<meta name="description" content="'.substr($cont,0,155).'" >';
+		echo "<meta name=\"description\" content=\"".substr($cont,0,155)."\" >\n";
+	}
+	
+	function wpseo_product_canonical( $canonical ) {
+		if($this->isProductPage() && $this->productModel->isDetailPage()){
+			$product =  $this->productModel->getData();
+			$canonical = get_site_url()."/products/".$product->Product_id."/#".$product->productName;
+		}
+		
+		if($this->isCategoryPage() && $this->categoryModel->isDetailPage()) {
+			$cat =  $this->categoryModel->getData();
+			$canonical = get_site_url()."/products/".$cat->Category_id."/#".$cat->categoryName;
+		}
+		
+		return $canonical;
+	}	
+		
+	private function cleanUpText($cont){
+		$cont = trim(preg_replace('/\s+/', ' ', $cont));
+		
+		$cont = preg_replace('/[*_]/', '', $cont);
+		$cont = str_replace('"', "''", $cont);
+		return $cont;
+
+	}
+	
+	public function add_facebook_seo(){
+		$ret = '';
+		if($this->isProductPage() && $this->productModel->isDetailPage()){
+			$product =  $this->productModel->getData();
+			$p = $product->productName;
+			if($product->brand != null){
+				$p.= ' '.$product->brand;
+			}
+
+			$ret .= "<meta property=\"og:type\" content=\"og:product\"/>\n";
+			$ret .="<meta property=\"og:title\" content=\"".$this->cleanUpText($p)."\" />\n";
+			$ret .="<meta property=\"og:description\" content=\"".$this->cleanUpText($product->productDesc)."\" />\n";
+			$ret .="<meta property=\"og:image\" content=\"".SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$product->imageDish."\" />\n";
+			$ret .= "<meta property=\"og:url\" content=\"".get_site_url()."/products/".$product->Product_id."/#".$product->productName."\"/>\n";
+			$ret .= "<meta property=\"og:site_name\" content=\"".get_bloginfo()."\"/>\n";
+			$ret .= "<meta property=\"product:price:amount\" content=\"".$product->productPrice."\"/>\n";
+			$ret .= "<meta property=\"product:price:currency\" content=\"EUR\"/>\n";
+			
+		}
+		if($this->isCategoryPage() && $this->categoryModel->isDetailPage()) {
+			$cont =  $this->categoryModel->getData()->categoryDesc;
+		}
+
+		if($cont == ''){
+			$cont = get_bloginfo();
+		}
+		$cont = trim(preg_replace('/\s+/', ' ', $cont));
+		
+		$cont = preg_replace('/[*_]/', '', $cont);
+		$cont = str_replace('"', "''", $cont);
+
+		/*
+<meta property="og:description" content="Watch the AddThis Tour video." />  
+<meta property="og:image" content="http://i2.ytimg.com/vi/1F7DKyFt5pY/default.jpg" /> 
+<meta property="og:video" content="http://www.youtube.com/v/1F7DKyFt5pY&fs=1" /> 
+<meta property="og:video:width" content="560" />  
+<meta property="og:video:height" content="340" />  
+<meta property="og:video:type" content="application/x-shockwave-flash" /> 		
+		*/
+
+		echo $ret;
+
 	}
 	
 	public function init_cart(){

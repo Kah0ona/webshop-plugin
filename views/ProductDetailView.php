@@ -20,6 +20,12 @@ class ProductDetailView extends GenericView {
 		return $this->model->getOptions()->getOption('show_brand') == true && $brand !== null;
 	}
 
+	public function shouldDisplayColor($color = null) {
+		return $this->model->getOptions()->getOption('show_color') == true && $color !== null;
+	}
+
+
+
 	public function shouldDisplayProductNumber($nr = null) {
 		return $this->model->getOptions()->getOption('show_article_number') == true && $nr !== null;
 	}	
@@ -109,6 +115,8 @@ class ProductDetailView extends GenericView {
 								<?php if($this->shouldDisplayBrand($data->brand)) : ?>
 								<p itemprop="brand" itemscope itemtype="http://schema.org/Brand" class="product-brand"><strong>Merk:</strong> <span itemprop="name"><?php echo $data->brand; ?></span></p>
 								<?php endif; ?>
+								<?php if($this->shouldDisplayColor($data->productColor)) : ?>
+								<p itemprop="color" itemscope itemtype="http://schema.org/Color" class="product-color"><strong>Kleur:</strong> <span itemprop="name"><?php echo $data->productColor; ?></span></p>												<?php endif; ?>
 								<?php if($this->shouldDisplayProductNumber($data->productNumber)) : ?>
 								<p class="product-productnr"><strong>Artikelnummer:</strong> <?php echo $data->productNumber; ?></p>
 								<?php endif; ?>
