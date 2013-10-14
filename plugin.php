@@ -253,7 +253,7 @@ class SytematicWebshop {
 		
 		if($this->isCategoryPage() && $this->categoryModel->isDetailPage()) {
 			$cat =  $this->categoryModel->getData();
-			$canonical = get_site_url()."/products/".$cat->Category_id."/#".$cat->categoryName;
+			$canonical = get_site_url()."/categories/".$cat->Category_id."/#".$cat->categoryName;
 		}
 		
 		return $canonical;
