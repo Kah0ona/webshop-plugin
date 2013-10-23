@@ -144,25 +144,33 @@ class SytematicWebshop {
 		$error = null;
 		
 		header('Content-Type: application/json; charset=utf-8');
-
-		if($_POST['payment-method'] != "ideal") {
+				
+		if($_POST['payment-method'] == "ideal"){
+			if($resultStatus == ORDER_SUCCESS ){
+				$checkout->doIDeal(); //redirects away if everything goes well, returns an error if not. 
+			}		
+			if($checkout->getStatus() != ORDER_SUCCESS) {
+				echo json_encode(array('error' => $checkout->getStatusMessage()));
+			} else {
+				$redirect = $checkout->getRedirectUrl();
+				echo json_encode(array('redirectUrl' => $redirect));			
+			}
+		}
+		elseif($_POST['payment-method'] == "ogone"){
+			if($checkout->getStatus() != ORDER_SUCCESS){
+				echo json_encode(array('error' => $checkout->getStatusMessage()));
+				exit;
+			} else {
+				$result = $checkout->getOgoneReply();
+				echo $result;
+				exit;
+			}			
+		}
+		else{
+			header('Content-Type: application/json; charset=utf-8');		
 			echo json_encode(array('redirectUrl' => site_url('/success')));
 			exit;
 		}
-		
-		
-		if($resultStatus == ORDER_SUCCESS ){
-			$checkout->doIDeal(); //redirects away if everything goes well, returns an error if not. 
-		}		
-
-		if($checkout->getStatus() != ORDER_SUCCESS) {
-			echo json_encode(array('error' => $checkout->getStatusMessage()));
-		}
-		else {
-			$redirect = $checkout->getRedirectUrl();
-			echo json_encode(array('redirectUrl' => $redirect));			
-		}
-
 		exit;
 	}
 	

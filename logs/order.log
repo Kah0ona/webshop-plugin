@@ -2163,3 +2163,802 @@
 2013-09-17 09:33:48: returnUrl: http://localhost/~marten/wordpress/success
 2013-09-17 09:33:48: notifyUrl: http://webshopdev.sytematic.nl/public/sisow_notifications
 2013-09-17 09:35:04: De iDeal betaling is mislukt, foutmelding: , 
+2013-10-22 16:35:09: -------
+2013-10-22 16:35:09: Processing cart: 
+2013-10-22 16:35:09: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-10-22 16:35:09: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 34
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 34
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => 1
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [PaymentMethod_id] => 1
+    [viaSite] => true
+)
+
+2013-10-22 16:35:09: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=34&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=34&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=1&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&PaymentMethod_id=1&viaSite=true&orderType=invoice
+2013-10-22 16:35:09: Returned value from /orders:
+2013-10-22 16:35:09: stdClass Object
+(
+    [Order__id] => 57
+    [totalPrice] => 114.95
+)
+
+2013-10-22 16:35:09: Inserted Order id: 57
+2013-10-22 16:38:40: -------
+2013-10-22 16:38:40: Processing cart: 
+2013-10-22 16:38:40: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-10-22 16:38:40: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 12
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 061234
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => ideal
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => true
+)
+
+2013-10-22 16:38:40: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=12&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=061234&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=ideal&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=true&orderType=invoice
+2013-10-22 16:38:41: Returned value from /orders:
+2013-10-22 16:38:41: stdClass Object
+(
+    [Order__id] => 58
+    [totalPrice] => 114.95
+)
+
+2013-10-22 16:38:41: Inserted Order id: 58
+2013-10-22 16:38:41: Creating iDeal transaction
+2013-10-22 16:38:41: purchaseId: 58
+2013-10-22 16:38:41: description: ABC Webshop bestelling
+2013-10-22 16:38:41: amount: 114.95
+2013-10-22 16:38:41: issuerId: 99
+2013-10-22 16:38:41: returnUrl: http://localhost/~marten/wordpress/success
+2013-10-22 16:38:41: notifyUrl: http://webshopdev.sytematic.nl/public/sisow_notifications
+2013-10-22 16:38:41: Setting redirect url: https://www.sisow.nl/Sisow/iDeal/Simulator.aspx?merchantid=2537507457&txid=TEST080489839831&sha1=6a8ab6338ef50d54dbc02e36830bd0948b63f97c
+2013-10-22 16:53:23: -------
+2013-10-22 16:53:23: Processing cart: 
+2013-10-22 16:53:23: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-10-22 16:53:23: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 32
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 32
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => ogone
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => true
+)
+
+2013-10-22 16:53:23: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=32&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=32&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=ogone&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=true&orderType=invoice
+2013-10-22 16:53:24: Returned value from /orders:
+2013-10-22 16:53:24: stdClass Object
+(
+    [Order__id] => 59
+    [totalPrice] => 114.95
+)
+
+2013-10-22 16:53:24: Inserted Order id: 59
+2013-10-22 16:53:24: Creating Ogone reply, as a json string
+2013-10-22 16:53:24: to Hash: ACCEPTURL=http://localhost/~marten/wordpress/success?status=Success123testAMOUNT=11495123testCANCELURL=http://localhost/~marten/wordpress/success?status=Cancelled123testCURRENCY=EUR123testDECLINEURL=http://localhost/~marten/wordpress/success?status=Declined123testEMAIL=marten@sytematic.nl123testEXCEPTIONURL=http://localhost/~marten/wordpress/success?status=Exception123testLANGUAGE=nl_NL123testORDERID=59123testOWNERADDRESS=Hugo de Grootstraat 62b123testOWNERCTY=Den Haag123testOWNERTELNO=32123testOWNERTOWN=Den Haag123testOWNERZIP=2518EE123testPSPID=test123test
+2013-10-22 16:53:24: calculated hash: 6BE5DAAF5C77A316E63DE4EC0804C962083D2321
+2013-10-22 16:55:14: -------
+2013-10-22 16:55:14: Processing cart: 
+2013-10-22 16:55:14: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-10-22 16:55:14: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 562
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 06
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => ogone
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => true
+)
+
+2013-10-22 16:55:14: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=562&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=06&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=ogone&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=true&orderType=invoice
+2013-10-22 16:55:15: Returned value from /orders:
+2013-10-22 16:55:15: stdClass Object
+(
+    [Order__id] => 60
+    [totalPrice] => 114.95
+)
+
+2013-10-22 16:55:15: Inserted Order id: 60
+2013-10-22 16:55:15: Creating Ogone reply, as a json string
+2013-10-22 16:55:15: to Hash: ACCEPTURL=http://localhost/~marten/wordpress/success?status=Success123testAMOUNT=11495123testCANCELURL=http://localhost/~marten/wordpress/success?status=Cancelled123testCURRENCY=EUR123testDECLINEURL=http://localhost/~marten/wordpress/success?status=Declined123testEMAIL=marten@sytematic.nl123testEXCEPTIONURL=http://localhost/~marten/wordpress/success?status=Exception123testLANGUAGE=nl_NL123testORDERID=60123testOWNERADDRESS=Hugo de Grootstraat 62b123testOWNERCTY=Den Haag123testOWNERTELNO=06123testOWNERTOWN=Den Haag123testOWNERZIP=2518EE123testPSPID=test123test
+2013-10-22 16:55:15: calculated hash: B9F874CA4AC25FD4AEBE600C266798D62F8DAF92
+2013-10-22 16:55:15: Returning oGone reply: {"form":null}
+2013-10-22 16:59:03: -------
+2013-10-22 16:59:03: Processing cart: 
+2013-10-22 16:59:03: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-10-22 16:59:03: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 23
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 23
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => ogone
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => true
+)
+
+2013-10-22 16:59:03: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=23&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=23&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=ogone&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=true&orderType=invoice
+2013-10-22 16:59:04: Returned value from /orders:
+2013-10-22 16:59:04: stdClass Object
+(
+    [Order__id] => 61
+    [totalPrice] => 114.95
+)
+
+2013-10-22 16:59:04: Inserted Order id: 61
+2013-10-22 16:59:04: Creating Ogone reply, as a json string
+2013-10-22 16:59:04: to Hash: ACCEPTURL=http://localhost/~marten/wordpress/success?status=Success123testAMOUNT=11495123testCANCELURL=http://localhost/~marten/wordpress/success?status=Cancelled123testCURRENCY=EUR123testDECLINEURL=http://localhost/~marten/wordpress/success?status=Declined123testEMAIL=marten@sytematic.nl123testEXCEPTIONURL=http://localhost/~marten/wordpress/success?status=Exception123testLANGUAGE=nl_NL123testORDERID=61123testOWNERADDRESS=Hugo de Grootstraat 62b123testOWNERCTY=Den Haag123testOWNERTELNO=23123testOWNERTOWN=Den Haag123testOWNERZIP=2518EE123testPSPID=test123test
+2013-10-22 16:59:04: calculated hash: 294F63F4F4E8F98E18121BDE65B6390FFF48249B
+2013-10-22 16:59:04: Returning oGone reply: {"form":null}
+2013-10-22 17:00:39: -------
+2013-10-22 17:00:39: Processing cart: 
+2013-10-22 17:00:39: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-10-22 17:00:39: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 2
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 2
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => ogone
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => true
+)
+
+2013-10-22 17:00:39: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=2&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=2&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=ogone&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=true&orderType=invoice
+2013-10-22 17:00:39: Returned value from /orders:
+2013-10-22 17:00:39: stdClass Object
+(
+    [Order__id] => 62
+    [totalPrice] => 114.95
+)
+
+2013-10-22 17:00:39: Inserted Order id: 62
+2013-10-22 17:00:39: Creating Ogone reply, as a json string
+2013-10-22 17:00:39: to Hash: ACCEPTURL=http://localhost/~marten/wordpress/success?status=Success123testAMOUNT=11495123testCANCELURL=http://localhost/~marten/wordpress/success?status=Cancelled123testCURRENCY=EUR123testDECLINEURL=http://localhost/~marten/wordpress/success?status=Declined123testEMAIL=marten@sytematic.nl123testEXCEPTIONURL=http://localhost/~marten/wordpress/success?status=Exception123testLANGUAGE=nl_NL123testORDERID=62123testOWNERADDRESS=Hugo de Grootstraat 62b123testOWNERCTY=Den Haag123testOWNERTELNO=2123testOWNERTOWN=Den Haag123testOWNERZIP=2518EE123testPSPID=test123test
+2013-10-22 17:00:39: calculated hash: 594AF31AC3283CF5020C67F8893CF27B5C68393D
+2013-10-22 17:00:39: Returning oGone reply: {"type":"ogone","form":null}
+2013-10-22 17:04:11: -------
+2013-10-22 17:04:11: Processing cart: 
+2013-10-22 17:04:11: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-10-22 17:04:11: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 12
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 12
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => ogone
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => true
+)
+
+2013-10-22 17:04:11: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=12&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=12&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=ogone&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=true&orderType=invoice
+2013-10-22 17:04:12: Returned value from /orders:
+2013-10-22 17:04:12: stdClass Object
+(
+    [Order__id] => 63
+    [totalPrice] => 114.95
+)
+
+2013-10-22 17:04:12: Inserted Order id: 63
+2013-10-22 17:04:12: Creating Ogone reply, as a json string
+2013-10-22 17:04:12: to Hash: ACCEPTURL=http://localhost/~marten/wordpress/success?status=SuccessaXtWevN!m#l@VaQVAMOUNT=11495aXtWevN!m#l@VaQVCANCELURL=http://localhost/~marten/wordpress/success?status=CancelledaXtWevN!m#l@VaQVCURRENCY=EURaXtWevN!m#l@VaQVDECLINEURL=http://localhost/~marten/wordpress/success?status=DeclinedaXtWevN!m#l@VaQVEMAIL=marten@sytematic.nlaXtWevN!m#l@VaQVEXCEPTIONURL=http://localhost/~marten/wordpress/success?status=ExceptionaXtWevN!m#l@VaQVLANGUAGE=nl_NLaXtWevN!m#l@VaQVORDERID=63aXtWevN!m#l@VaQVOWNERADDRESS=Hugo de Grootstraat 62baXtWevN!m#l@VaQVOWNERCTY=Den HaagaXtWevN!m#l@VaQVOWNERTELNO=12aXtWevN!m#l@VaQVOWNERTOWN=Den HaagaXtWevN!m#l@VaQVOWNERZIP=2518EEaXtWevN!m#l@VaQVPSPID=testaXtWevN!m#l@VaQV
+2013-10-22 17:04:12: calculated hash: A29CFD4612C99F8C550365188FA6031A166DC07B
+2013-10-22 17:04:12: Returning oGone reply: {"type":"ogone","form":null}
+2013-10-22 17:06:05: -------
+2013-10-22 17:06:05: Processing cart: 
+2013-10-22 17:06:05: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-10-22 17:06:05: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 12
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 12
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => ogone
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => true
+)
+
+2013-10-22 17:06:05: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=12&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=12&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=ogone&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=true&orderType=invoice
+2013-10-22 17:06:06: Returned value from /orders:
+2013-10-22 17:06:06: stdClass Object
+(
+    [Order__id] => 64
+    [totalPrice] => 114.95
+)
+
+2013-10-22 17:06:06: Inserted Order id: 64
+2013-10-22 17:06:06: Creating Ogone reply, as a json string
+2013-10-22 17:06:06: to Hash: ACCEPTURL=http://localhost/~marten/wordpress/success?status=SuccessaXtWevN!m#l@VaQVAMOUNT=11495aXtWevN!m#l@VaQVCANCELURL=http://localhost/~marten/wordpress/success?status=CancelledaXtWevN!m#l@VaQVCURRENCY=EURaXtWevN!m#l@VaQVDECLINEURL=http://localhost/~marten/wordpress/success?status=DeclinedaXtWevN!m#l@VaQVEMAIL=marten@sytematic.nlaXtWevN!m#l@VaQVEXCEPTIONURL=http://localhost/~marten/wordpress/success?status=ExceptionaXtWevN!m#l@VaQVLANGUAGE=nl_NLaXtWevN!m#l@VaQVORDERID=64aXtWevN!m#l@VaQVOWNERADDRESS=Hugo de Grootstraat 62baXtWevN!m#l@VaQVOWNERCTY=Den HaagaXtWevN!m#l@VaQVOWNERTELNO=12aXtWevN!m#l@VaQVOWNERTOWN=Den HaagaXtWevN!m#l@VaQVOWNERZIP=2518EEaXtWevN!m#l@VaQVPSPID=testaXtWevN!m#l@VaQV
+2013-10-22 17:06:06: calculated hash: C4371E308DD3DEE32C8D3D379348BE0E25DE5147
+2013-10-22 17:06:06: Returning oGone reply: {"type":"ogone","form":"<form method=\"post\" action=\"https:\/\/secure.ogone.com\/ncol\/test\/orderstandard.asp\" id=\"ogone-form\" name=\"ogoneform\">\n\t\t\t\t<!-- Algemene parameters -->\n\t\t\t\t<input type=\"hidden\" name=\"PSPID\" value=\"test\" \/>\n\t\t\t\t<input type=\"hidden\" name=\"orderID\" value=\"64\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"amount\" value=\"11495\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"currency\" value=\"EUR\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"language\" value=\"nl_NL\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"CN\" value=\"Marten Sijtema\"\/>\t\t\t\t\n\t\t\t\t<input type=\"hidden\" name=\"EMAIL\" value=\"marten@sytematic.nl\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownerZIP\" value=\"2518EE\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"owneraddress\" value=\"Hugo de Grootstraat 62b\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownercty\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertown\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertelno\" value=\"12\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"SHASign\" value=\"C4371E308DD3DEE32C8D3D379348BE0E25DE5147\"\/>\n\t\t\t\t\n\t\t\t\t<!-- feedback na de betaling: zie Transactie feedback naar de klant --> \n\t\t\t\t<input type=\"hidden\" name=\"accepturl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Success\">\n\t\t\t\t<input type=\"hidden\" name=\"declineurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Declined\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"exceptionurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Exception\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"cancelurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Cancelled\"\/>\n\t\t\t<\/form>"}
+2013-10-22 17:08:26: -------
+2013-10-22 17:08:26: Processing cart: 
+2013-10-22 17:08:26: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-10-22 17:08:26: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 23
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 31649343492
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => ogone
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => true
+)
+
+2013-10-22 17:08:26: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=23&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=31649343492&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=ogone&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=true&orderType=invoice
+2013-10-22 17:08:27: Returned value from /orders:
+2013-10-22 17:08:27: stdClass Object
+(
+    [Order__id] => 65
+    [totalPrice] => 114.95
+)
+
+2013-10-22 17:08:27: Inserted Order id: 65
+2013-10-22 17:08:27: Creating Ogone reply, as a json string
+2013-10-22 17:08:27: to Hash: ACCEPTURL=http://localhost/~marten/wordpress/success?status=SuccessaXtWevN!m#l@VaQVAMOUNT=11495aXtWevN!m#l@VaQVCANCELURL=http://localhost/~marten/wordpress/success?status=CancelledaXtWevN!m#l@VaQVCURRENCY=EURaXtWevN!m#l@VaQVDECLINEURL=http://localhost/~marten/wordpress/success?status=DeclinedaXtWevN!m#l@VaQVEMAIL=marten@sytematic.nlaXtWevN!m#l@VaQVEXCEPTIONURL=http://localhost/~marten/wordpress/success?status=ExceptionaXtWevN!m#l@VaQVLANGUAGE=nl_NLaXtWevN!m#l@VaQVORDERID=65aXtWevN!m#l@VaQVOWNERADDRESS=Hugo de Grootstraat 62baXtWevN!m#l@VaQVOWNERCTY=Den HaagaXtWevN!m#l@VaQVOWNERTELNO=31649343492aXtWevN!m#l@VaQVOWNERTOWN=Den HaagaXtWevN!m#l@VaQVOWNERZIP=2518EEaXtWevN!m#l@VaQVPSPID=testaXtWevN!m#l@VaQV
+2013-10-22 17:08:27: calculated hash: AD5D9550E7036AB4C55AB11748BA116F5C27302B
+2013-10-22 17:08:27: Returning oGone reply: {"type":"ogone","form":"<form method=\"post\" action=\"https:\/\/secure.ogone.com\/ncol\/test\/orderstandard.asp\" id=\"ogone-form\" name=\"ogoneform\">\n\t\t\t\t<!-- Algemene parameters -->\n\t\t\t\t<input type=\"hidden\" name=\"PSPID\" value=\"test\" \/>\n\t\t\t\t<input type=\"hidden\" name=\"orderID\" value=\"65\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"amount\" value=\"11495\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"currency\" value=\"EUR\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"language\" value=\"nl_NL\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"CN\" value=\"Marten Sijtema\"\/>\t\t\t\t\n\t\t\t\t<input type=\"hidden\" name=\"EMAIL\" value=\"marten@sytematic.nl\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownerZIP\" value=\"2518EE\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"owneraddress\" value=\"Hugo de Grootstraat 62b\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownercty\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertown\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertelno\" value=\"31649343492\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"SHASign\" value=\"AD5D9550E7036AB4C55AB11748BA116F5C27302B\"\/>\n\t\t\t\t\n\t\t\t\t<!-- feedback na de betaling: zie Transactie feedback naar de klant --> \n\t\t\t\t<input type=\"hidden\" name=\"accepturl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Success\">\n\t\t\t\t<input type=\"hidden\" name=\"declineurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Declined\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"exceptionurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Exception\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"cancelurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Cancelled\"\/>\n\t\t\t<\/form>"}
+2013-10-22 17:09:09: -------
+2013-10-22 17:09:09: Processing cart: 
+2013-10-22 17:09:09: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-10-22 17:09:09: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 23
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 31649343492
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => ogone
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => true
+)
+
+2013-10-22 17:09:09: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=23&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=31649343492&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=ogone&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=true&orderType=invoice
+2013-10-22 17:09:10: Returned value from /orders:
+2013-10-22 17:09:10: stdClass Object
+(
+    [Order__id] => 66
+    [totalPrice] => 114.95
+)
+
+2013-10-22 17:09:10: Inserted Order id: 66
+2013-10-22 17:09:10: Creating Ogone reply, as a json string
+2013-10-22 17:09:10: to Hash: ACCEPTURL=http://localhost/~marten/wordpress/success?status=SuccessaXtWevN!m#l@VaQVAMOUNT=11495aXtWevN!m#l@VaQVCANCELURL=http://localhost/~marten/wordpress/success?status=CancelledaXtWevN!m#l@VaQVCURRENCY=EURaXtWevN!m#l@VaQVDECLINEURL=http://localhost/~marten/wordpress/success?status=DeclinedaXtWevN!m#l@VaQVEMAIL=marten@sytematic.nlaXtWevN!m#l@VaQVEXCEPTIONURL=http://localhost/~marten/wordpress/success?status=ExceptionaXtWevN!m#l@VaQVLANGUAGE=nl_NLaXtWevN!m#l@VaQVORDERID=66aXtWevN!m#l@VaQVOWNERADDRESS=Hugo de Grootstraat 62baXtWevN!m#l@VaQVOWNERCTY=Den HaagaXtWevN!m#l@VaQVOWNERTELNO=31649343492aXtWevN!m#l@VaQVOWNERTOWN=Den HaagaXtWevN!m#l@VaQVOWNERZIP=2518EEaXtWevN!m#l@VaQVPSPID=testaXtWevN!m#l@VaQV
+2013-10-22 17:09:10: calculated hash: 2369F007BC6BA85295D6A3425E40FF1717304A4A
+2013-10-22 17:09:10: Returning oGone reply: {"type":"ogone","form":"<form method=\"post\" action=\"https:\/\/secure.ogone.com\/ncol\/test\/orderstandard.asp\" id=\"ogone-form\" name=\"ogoneform\">\n\t\t\t\t<!-- Algemene parameters -->\n\t\t\t\t<input type=\"hidden\" name=\"PSPID\" value=\"test\" \/>\n\t\t\t\t<input type=\"hidden\" name=\"orderID\" value=\"66\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"amount\" value=\"11495\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"currency\" value=\"EUR\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"language\" value=\"nl_NL\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"CN\" value=\"Marten Sijtema\"\/>\t\t\t\t\n\t\t\t\t<input type=\"hidden\" name=\"EMAIL\" value=\"marten@sytematic.nl\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownerZIP\" value=\"2518EE\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"owneraddress\" value=\"Hugo de Grootstraat 62b\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownercty\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertown\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertelno\" value=\"31649343492\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"SHASign\" value=\"2369F007BC6BA85295D6A3425E40FF1717304A4A\"\/>\n\t\t\t\t\n\t\t\t\t<!-- feedback na de betaling: zie Transactie feedback naar de klant --> \n\t\t\t\t<input type=\"hidden\" name=\"accepturl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Success\">\n\t\t\t\t<input type=\"hidden\" name=\"declineurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Declined\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"exceptionurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Exception\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"cancelurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Cancelled\"\/>\n\t\t\t<\/form>"}
+2013-10-22 17:09:35: -------
+2013-10-22 17:09:35: Processing cart: 
+2013-10-22 17:09:35: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-10-22 17:09:35: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 1
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 31649343492
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => ogone
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => true
+)
+
+2013-10-22 17:09:35: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=1&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=31649343492&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=ogone&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=true&orderType=invoice
+2013-10-22 17:09:35: Returned value from /orders:
+2013-10-22 17:09:35: stdClass Object
+(
+    [Order__id] => 67
+    [totalPrice] => 114.95
+)
+
+2013-10-22 17:09:35: Inserted Order id: 67
+2013-10-22 17:09:35: Creating Ogone reply, as a json string
+2013-10-22 17:09:35: to Hash: ACCEPTURL=http://localhost/~marten/wordpress/success?status=SuccessaXtWevN!m#l@VaQVAMOUNT=11495aXtWevN!m#l@VaQVCANCELURL=http://localhost/~marten/wordpress/success?status=CancelledaXtWevN!m#l@VaQVCURRENCY=EURaXtWevN!m#l@VaQVDECLINEURL=http://localhost/~marten/wordpress/success?status=DeclinedaXtWevN!m#l@VaQVEMAIL=marten@sytematic.nlaXtWevN!m#l@VaQVEXCEPTIONURL=http://localhost/~marten/wordpress/success?status=ExceptionaXtWevN!m#l@VaQVLANGUAGE=nl_NLaXtWevN!m#l@VaQVORDERID=67aXtWevN!m#l@VaQVOWNERADDRESS=Hugo de Grootstraat 62baXtWevN!m#l@VaQVOWNERCTY=Den HaagaXtWevN!m#l@VaQVOWNERTELNO=31649343492aXtWevN!m#l@VaQVOWNERTOWN=Den HaagaXtWevN!m#l@VaQVOWNERZIP=2518EEaXtWevN!m#l@VaQVPSPID=testaXtWevN!m#l@VaQV
+2013-10-22 17:09:35: calculated hash: 4A544928A8FFB6E224616DC3D660AF75985C268F
+2013-10-22 17:09:35: Returning oGone reply: {"type":"ogone","form":"<form method=\"post\" action=\"https:\/\/secure.ogone.com\/ncol\/test\/orderstandard.asp\" id=\"ogone-form\" name=\"ogoneform\">\n\t\t\t\t<!-- Algemene parameters -->\n\t\t\t\t<input type=\"hidden\" name=\"PSPID\" value=\"test\" \/>\n\t\t\t\t<input type=\"hidden\" name=\"orderID\" value=\"67\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"amount\" value=\"11495\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"currency\" value=\"EUR\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"language\" value=\"nl_NL\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"CN\" value=\"Marten Sijtema\"\/>\t\t\t\t\n\t\t\t\t<input type=\"hidden\" name=\"EMAIL\" value=\"marten@sytematic.nl\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownerZIP\" value=\"2518EE\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"owneraddress\" value=\"Hugo de Grootstraat 62b\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownercty\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertown\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertelno\" value=\"31649343492\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"SHASign\" value=\"4A544928A8FFB6E224616DC3D660AF75985C268F\"\/>\n\t\t\t\t\n\t\t\t\t<!-- feedback na de betaling: zie Transactie feedback naar de klant --> \n\t\t\t\t<input type=\"hidden\" name=\"accepturl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Success\">\n\t\t\t\t<input type=\"hidden\" name=\"declineurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Declined\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"exceptionurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Exception\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"cancelurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Cancelled\"\/>\n\t\t\t<\/form>"}
+2013-10-22 17:10:39: -------
+2013-10-22 17:10:39: Processing cart: 
+2013-10-22 17:10:39: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-10-22 17:10:39: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 23
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 31649343492
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => ogone
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => true
+)
+
+2013-10-22 17:10:39: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=23&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=31649343492&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=ogone&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=true&orderType=invoice
+2013-10-22 17:10:40: Returned value from /orders:
+2013-10-22 17:10:40: stdClass Object
+(
+    [Order__id] => 68
+    [totalPrice] => 114.95
+)
+
+2013-10-22 17:10:40: Inserted Order id: 68
+2013-10-22 17:10:40: Creating Ogone reply, as a json string
+2013-10-22 17:10:40: to Hash: ACCEPTURL=http://localhost/~marten/wordpress/success?status=SuccessaXtWevN!m#l@VaQVAMOUNT=11495aXtWevN!m#l@VaQVCANCELURL=http://localhost/~marten/wordpress/success?status=CancelledaXtWevN!m#l@VaQVCURRENCY=EURaXtWevN!m#l@VaQVDECLINEURL=http://localhost/~marten/wordpress/success?status=DeclinedaXtWevN!m#l@VaQVEMAIL=marten@sytematic.nlaXtWevN!m#l@VaQVEXCEPTIONURL=http://localhost/~marten/wordpress/success?status=ExceptionaXtWevN!m#l@VaQVLANGUAGE=nl_NLaXtWevN!m#l@VaQVORDERID=68aXtWevN!m#l@VaQVOWNERADDRESS=Hugo de Grootstraat 62baXtWevN!m#l@VaQVOWNERCTY=Den HaagaXtWevN!m#l@VaQVOWNERTELNO=31649343492aXtWevN!m#l@VaQVOWNERTOWN=Den HaagaXtWevN!m#l@VaQVOWNERZIP=2518EEaXtWevN!m#l@VaQVPSPID=testaXtWevN!m#l@VaQV
+2013-10-22 17:10:40: calculated hash: 4D2083FEF72385114FA5DC51B4803C1647F53299
+2013-10-22 17:10:40: Returning oGone reply: {"type":"ogone","form":"<form method=\"post\" action=\"https:\/\/secure.ogone.com\/ncol\/test\/orderstandard.asp\" id=\"ogone-form\" name=\"ogoneform\">\n\t\t\t\t<!-- Algemene parameters -->\n\t\t\t\t<input type=\"hidden\" name=\"PSPID\" value=\"test\" \/>\n\t\t\t\t<input type=\"hidden\" name=\"orderID\" value=\"68\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"amount\" value=\"11495\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"currency\" value=\"EUR\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"language\" value=\"nl_NL\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"CN\" value=\"Marten Sijtema\"\/>\t\t\t\t\n\t\t\t\t<input type=\"hidden\" name=\"EMAIL\" value=\"marten@sytematic.nl\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownerZIP\" value=\"2518EE\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"owneraddress\" value=\"Hugo de Grootstraat 62b\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownercty\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertown\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertelno\" value=\"31649343492\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"SHASign\" value=\"4D2083FEF72385114FA5DC51B4803C1647F53299\"\/>\n\t\t\t\t\n\t\t\t\t<!-- feedback na de betaling: zie Transactie feedback naar de klant --> \n\t\t\t\t<input type=\"hidden\" name=\"accepturl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Success\">\n\t\t\t\t<input type=\"hidden\" name=\"declineurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Declined\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"exceptionurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Exception\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"cancelurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Cancelled\"\/>\n\t\t\t<\/form>"}
+2013-10-22 17:17:15: -------
+2013-10-22 17:17:15: Processing cart: 
+2013-10-22 17:17:15: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-10-22 17:17:15: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 32
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 31649343492
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => ogone
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => true
+)
+
+2013-10-22 17:17:15: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=32&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=31649343492&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=ogone&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=true&orderType=invoice
+2013-10-22 17:17:16: Returned value from /orders:
+2013-10-22 17:17:16: stdClass Object
+(
+    [Order__id] => 69
+    [totalPrice] => 114.95
+)
+
+2013-10-22 17:17:16: Inserted Order id: 69
+2013-10-22 17:17:16: Creating Ogone reply, as a json string
+2013-10-22 17:17:16: to Hash: ACCEPTURL=http://localhost/~marten/wordpress/success?status=SuccessaXtWevN!m#l@VaQVAMOUNT=11495aXtWevN!m#l@VaQVCANCELURL=http://localhost/~marten/wordpress/success?status=CancelledaXtWevN!m#l@VaQVCURRENCY=EURaXtWevN!m#l@VaQVDECLINEURL=http://localhost/~marten/wordpress/success?status=DeclinedaXtWevN!m#l@VaQVEMAIL=marten@sytematic.nlaXtWevN!m#l@VaQVEXCEPTIONURL=http://localhost/~marten/wordpress/success?status=ExceptionaXtWevN!m#l@VaQVLANGUAGE=nl_NLaXtWevN!m#l@VaQVORDERID=69aXtWevN!m#l@VaQVOWNERADDRESS=Hugo de Grootstraat 62baXtWevN!m#l@VaQVOWNERCTY=Den HaagaXtWevN!m#l@VaQVOWNERTELNO=31649343492aXtWevN!m#l@VaQVOWNERTOWN=Den HaagaXtWevN!m#l@VaQVOWNERZIP=2518EEaXtWevN!m#l@VaQVPSPID=testaXtWevN!m#l@VaQV
+2013-10-22 17:17:16: calculated hash: EA41568AD6FA59F285D6D96BA0DFF827417C4823
+2013-10-22 17:17:16: Returning oGone reply: {"type":"ogone","form":"<form method=\"post\" action=\"https:\/\/secure.ogone.com\/ncol\/test\/orderstandard.asp\" id=\"ogone-form\" name=\"ogoneform\">\n\t\t\t\t<input type=\"hidden\" name=\"PSPID\" value=\"test\" \/>\n\t\t\t\t<input type=\"hidden\" name=\"orderID\" value=\"69\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"amount\" value=\"11495\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"currency\" value=\"EUR\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"language\" value=\"nl_NL\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"CN\" value=\"Marten Sijtema\"\/>\t\t\t\t\n\t\t\t\t<input type=\"hidden\" name=\"EMAIL\" value=\"marten@sytematic.nl\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownerZIP\" value=\"2518EE\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"owneraddress\" value=\"Hugo de Grootstraat 62b\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownercty\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertown\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertelno\" value=\"31649343492\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"SHASign\" value=\"EA41568AD6FA59F285D6D96BA0DFF827417C4823\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"accepturl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Success\">\n\t\t\t\t<input type=\"hidden\" name=\"declineurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Declined\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"exceptionurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Exception\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"cancelurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Cancelled\"\/>\n\t\t\t<\/form>"}
+2013-10-22 17:18:48: -------
+2013-10-22 17:18:48: Processing cart: 
+2013-10-22 17:18:48: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-10-22 17:18:48: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 23
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 31649343492
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => ogone
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => true
+)
+
+2013-10-22 17:18:48: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=23&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=31649343492&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=ogone&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=true&orderType=invoice
+2013-10-22 17:18:49: Returned value from /orders:
+2013-10-22 17:18:49: stdClass Object
+(
+    [Order__id] => 70
+    [totalPrice] => 114.95
+)
+
+2013-10-22 17:18:49: Inserted Order id: 70
+2013-10-22 17:18:49: Creating Ogone reply, as a json string
+2013-10-22 17:18:49: to Hash: ACCEPTURL=http://localhost/~marten/wordpress/success?status=SuccessaXtWevN!m#l@VaQVAMOUNT=11495aXtWevN!m#l@VaQVCANCELURL=http://localhost/~marten/wordpress/success?status=CancelledaXtWevN!m#l@VaQVCURRENCY=EURaXtWevN!m#l@VaQVDECLINEURL=http://localhost/~marten/wordpress/success?status=DeclinedaXtWevN!m#l@VaQVEMAIL=marten@sytematic.nlaXtWevN!m#l@VaQVEXCEPTIONURL=http://localhost/~marten/wordpress/success?status=ExceptionaXtWevN!m#l@VaQVLANGUAGE=nl_NLaXtWevN!m#l@VaQVORDERID=70aXtWevN!m#l@VaQVOWNERADDRESS=Hugo de Grootstraat 62baXtWevN!m#l@VaQVOWNERCTY=Den HaagaXtWevN!m#l@VaQVOWNERTELNO=31649343492aXtWevN!m#l@VaQVOWNERTOWN=Den HaagaXtWevN!m#l@VaQVOWNERZIP=2518EEaXtWevN!m#l@VaQVPSPID=testaXtWevN!m#l@VaQV
+2013-10-22 17:18:49: calculated hash: C819B090A04102648C22FB5E0C193F77765576B6
+2013-10-22 17:18:49: Returning oGone reply: {"type":"ogone","form":"<form method=\"post\" action=\"https:\/\/secure.ogone.com\/ncol\/test\/orderstandard.asp\" id=\"ogone-form\" name=\"ogoneform\">\n\t\t\t\t<input type=\"hidden\" name=\"PSPID\" value=\"test\" \/>\n\t\t\t\t<input type=\"hidden\" name=\"orderID\" value=\"70\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"amount\" value=\"11495\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"currency\" value=\"EUR\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"language\" value=\"nl_NL\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"CN\" value=\"Marten Sijtema\"\/>\t\t\t\t\n\t\t\t\t<input type=\"hidden\" name=\"EMAIL\" value=\"marten@sytematic.nl\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownerZIP\" value=\"2518EE\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"owneraddress\" value=\"Hugo de Grootstraat 62b\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownercty\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertown\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertelno\" value=\"31649343492\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"SHASign\" value=\"C819B090A04102648C22FB5E0C193F77765576B6\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"accepturl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Success\">\n\t\t\t\t<input type=\"hidden\" name=\"declineurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Declined\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"exceptionurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Exception\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"cancelurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Cancelled\"\/>\n\t\t\t<\/form>"}
+2013-10-22 20:40:24: -------
+2013-10-22 20:40:24: Processing cart: 
+2013-10-22 20:40:24: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-10-22 20:40:24: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 12
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 31649343492
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => ogone
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => true
+)
+
+2013-10-22 20:40:24: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=12&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=31649343492&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=ogone&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=true&orderType=invoice
+2013-10-22 20:40:25: Returned value from /orders:
+2013-10-22 20:40:25: stdClass Object
+(
+    [Order__id] => 71
+    [totalPrice] => 114.95
+)
+
+2013-10-22 20:40:25: Inserted Order id: 71
+2013-10-22 20:40:25: Creating Ogone reply, as a json string
+2013-10-22 20:40:25: to Hash: ACCEPTURL=http://localhost/~marten/wordpress/success?status=SuccessaXtWevN!m#l@VaQVAMOUNT=11495aXtWevN!m#l@VaQVCANCELURL=http://localhost/~marten/wordpress/success?status=CancelledaXtWevN!m#l@VaQVCURRENCY=EURaXtWevN!m#l@VaQVDECLINEURL=http://localhost/~marten/wordpress/success?status=DeclinedaXtWevN!m#l@VaQVEMAIL=marten@sytematic.nlaXtWevN!m#l@VaQVEXCEPTIONURL=http://localhost/~marten/wordpress/success?status=ExceptionaXtWevN!m#l@VaQVLANGUAGE=nl_NLaXtWevN!m#l@VaQVORDERID=71aXtWevN!m#l@VaQVOWNERADDRESS=Hugo de Grootstraat 62baXtWevN!m#l@VaQVOWNERCTY=Den HaagaXtWevN!m#l@VaQVOWNERTELNO=31649343492aXtWevN!m#l@VaQVOWNERTOWN=Den HaagaXtWevN!m#l@VaQVOWNERZIP=2518EEaXtWevN!m#l@VaQVPSPID=testaXtWevN!m#l@VaQV
+2013-10-22 20:40:25: calculated hash: 534DF5488C9D831E09F6432785EAF8114D049A9D
+2013-10-22 20:40:25: Returning oGone reply: {"type":"ogone","form":"<form method=\"post\" action=\"https:\/\/secure.ogone.com\/ncol\/test\/orderstandard.asp\" id=\"ogone-form\" name=\"ogoneform\">\n\t\t\t\t<input type=\"hidden\" name=\"PSPID\" value=\"test\" \/>\n\t\t\t\t<input type=\"hidden\" name=\"orderID\" value=\"71\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"amount\" value=\"11495\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"currency\" value=\"EUR\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"language\" value=\"nl_NL\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"CN\" value=\"Marten Sijtema\"\/>\t\t\t\t\n\t\t\t\t<input type=\"hidden\" name=\"EMAIL\" value=\"marten@sytematic.nl\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownerZIP\" value=\"2518EE\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"owneraddress\" value=\"Hugo de Grootstraat 62b\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownercty\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertown\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertelno\" value=\"31649343492\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"SHASign\" value=\"534DF5488C9D831E09F6432785EAF8114D049A9D\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"accepturl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Success\">\n\t\t\t\t<input type=\"hidden\" name=\"declineurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Declined\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"exceptionurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Exception\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"cancelurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Cancelled\"\/>\n\t\t\t<\/form>"}
+2013-10-23 09:11:07: -------
+2013-10-23 09:11:07: Processing cart: 
+2013-10-23 09:11:07: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-10-23 09:11:07: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 1
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 31649343492
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => ogone
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => true
+)
+
+2013-10-23 09:11:07: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=1&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=31649343492&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=ogone&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=true&orderType=invoice
+2013-10-23 09:11:08: Returned value from /orders:
+2013-10-23 09:11:08: stdClass Object
+(
+    [Order__id] => 72
+    [totalPrice] => 114.95
+)
+
+2013-10-23 09:11:08: Inserted Order id: 72
+2013-10-23 09:11:08: Creating Ogone reply, as a json string
+2013-10-23 09:11:08: to Hash: ACCEPTURL=http://localhost/~marten/wordpress/success?status=SuccessaXtWevN!m#l@VaQVAMOUNT=11495aXtWevN!m#l@VaQVCANCELURL=http://localhost/~marten/wordpress/success?status=CancelledaXtWevN!m#l@VaQVCURRENCY=EURaXtWevN!m#l@VaQVDECLINEURL=http://localhost/~marten/wordpress/success?status=DeclinedaXtWevN!m#l@VaQVEMAIL=marten@sytematic.nlaXtWevN!m#l@VaQVEXCEPTIONURL=http://localhost/~marten/wordpress/success?status=ExceptionaXtWevN!m#l@VaQVLANGUAGE=nl_NLaXtWevN!m#l@VaQVORDERID=72aXtWevN!m#l@VaQVOWNERADDRESS=Hugo de Grootstraat 62baXtWevN!m#l@VaQVOWNERCTY=Den HaagaXtWevN!m#l@VaQVOWNERTELNO=31649343492aXtWevN!m#l@VaQVOWNERTOWN=Den HaagaXtWevN!m#l@VaQVOWNERZIP=2518EEaXtWevN!m#l@VaQVPSPID=testaXtWevN!m#l@VaQV
+2013-10-23 09:11:08: calculated hash: 0E5FE28C54A57F613B04812E44066FD2337C1675
+2013-10-23 09:11:08: Returning oGone reply: {"type":"ogone","form":"<form method=\"post\" action=\"https:\/\/secure.ogone.com\/ncol\/test\/orderstandard.asp\" id=\"ogone-form\" name=\"ogoneform\">\n\t\t\t\t<input type=\"hidden\" name=\"PSPID\" value=\"test\" \/>\n\t\t\t\t<input type=\"hidden\" name=\"orderID\" value=\"72\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"amount\" value=\"11495\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"currency\" value=\"EUR\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"language\" value=\"nl_NL\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"CN\" value=\"Marten Sijtema\"\/>\t\t\t\t\n\t\t\t\t<input type=\"hidden\" name=\"EMAIL\" value=\"marten@sytematic.nl\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownerZIP\" value=\"2518EE\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"owneraddress\" value=\"Hugo de Grootstraat 62b\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownercty\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertown\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertelno\" value=\"31649343492\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"SHASign\" value=\"0E5FE28C54A57F613B04812E44066FD2337C1675\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"accepturl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Success\">\n\t\t\t\t<input type=\"hidden\" name=\"declineurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Declined\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"exceptionurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Exception\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"cancelurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Cancelled\"\/>\n\t\t\t<\/form>"}
+2013-10-23 09:12:34: -------
+2013-10-23 09:12:34: Processing cart: 
+2013-10-23 09:12:34: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-10-23 09:12:34: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 12
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 31649343492
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => 
+    [coupon] => 
+    [payment-method] => ogone
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => true
+)
+
+2013-10-23 09:12:34: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=12&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=31649343492&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=&coupon=&payment-method=ogone&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=true&orderType=invoice
+2013-10-23 09:12:34: Returned value from /orders:
+2013-10-23 09:12:34: stdClass Object
+(
+    [Order__id] => 73
+    [totalPrice] => 114.95
+)
+
+2013-10-23 09:12:34: Inserted Order id: 73
+2013-10-23 09:12:34: Creating Ogone reply, as a json string
+2013-10-23 09:12:34: to Hash: ACCEPTURL=http://localhost/~marten/wordpress/success?status=SuccessaXtWevN!m#l@VaQVAMOUNT=11495aXtWevN!m#l@VaQVCANCELURL=http://localhost/~marten/wordpress/success?status=CancelledaXtWevN!m#l@VaQVCURRENCY=EURaXtWevN!m#l@VaQVDECLINEURL=http://localhost/~marten/wordpress/success?status=DeclinedaXtWevN!m#l@VaQVEMAIL=marten@sytematic.nlaXtWevN!m#l@VaQVEXCEPTIONURL=http://localhost/~marten/wordpress/success?status=ExceptionaXtWevN!m#l@VaQVLANGUAGE=nl_NLaXtWevN!m#l@VaQVORDERID=73aXtWevN!m#l@VaQVOWNERADDRESS=Hugo de Grootstraat 62baXtWevN!m#l@VaQVOWNERCTY=Den HaagaXtWevN!m#l@VaQVOWNERTELNO=31649343492aXtWevN!m#l@VaQVOWNERTOWN=Den HaagaXtWevN!m#l@VaQVOWNERZIP=2518EEaXtWevN!m#l@VaQVPSPID=testaXtWevN!m#l@VaQV
+2013-10-23 09:12:34: calculated hash: 21BD58A0E43EA9C66FCD1BBB434B5575B9D77488
+2013-10-23 09:12:34: Returning oGone reply: {"type":"ogone","form":"<form method=\"post\" action=\"https:\/\/secure.ogone.com\/ncol\/test\/orderstandard.asp\" id=\"ogone-form\" name=\"ogoneform\">\n\t\t\t\t<input type=\"hidden\" name=\"PSPID\" value=\"test\" \/>\n\t\t\t\t<input type=\"hidden\" name=\"orderID\" value=\"73\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"amount\" value=\"11495\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"currency\" value=\"EUR\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"language\" value=\"nl_NL\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"CN\" value=\"Marten Sijtema\"\/>\t\t\t\t\n\t\t\t\t<input type=\"hidden\" name=\"EMAIL\" value=\"marten@sytematic.nl\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownerZIP\" value=\"2518EE\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"owneraddress\" value=\"Hugo de Grootstraat 62b\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownercty\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertown\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertelno\" value=\"31649343492\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"SHASign\" value=\"21BD58A0E43EA9C66FCD1BBB434B5575B9D77488\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"accepturl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Success\">\n\t\t\t\t<input type=\"hidden\" name=\"declineurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Declined\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"exceptionurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Exception\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"cancelurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Cancelled\"\/>\n\t\t\t<\/form>"}

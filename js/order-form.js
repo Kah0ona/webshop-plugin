@@ -33,9 +33,20 @@ jQuery(document).ready(function($){
 			var tmp = data;
 			if(data.error != null){
 				$('#order-form').replaceWith('<div class="alert alert-error span12"><strong>Fout:</strong> Er ging iets mis met het versturen van de bestelling: '+data.error+'</div>');
-			}
-			else {
-				window.location.href = data.redirectUrl;
+			} else {
+				if(data.type != null && data.type == 'ogone'){ // ogone, populate and vanilla-submit the hidden form #ogone-form
+					var formString = data.form;
+					$(formString).appendTo('body'); //add the form to the dom
+					
+					var form = $('#ogone-form'); //get it with jquery and submit it.
+					form.submit();
+					
+
+				} else {
+					window.location.href = data.redirectUrl;				
+				}
+			
+
 			}
 		}
 	};
@@ -142,3 +153,4 @@ function showSuccesMessage(ret){
 	//just redirect to the success page
 	window.location.href = baseUrl+"/success/";
 }
+

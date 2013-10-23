@@ -64,7 +64,7 @@ class CheckoutModel extends GenericModel {
 		$post['shoppingCart'] = json_encode($this->cart);
 		$post['orderStatus'] = 'nieuw';
 		$post['PaymentMethod_id'] = $post['payment-method'];
-		if($post['PaymentMethod_id'] == "ideal"){
+		if($post['PaymentMethod_id'] == "ideal" || $post['PaymentMethod_id'] == "ogone"){
 			$post['PaymentMethod_id'] = null;
 			unset($post['PaymentMethod_id']);
 		}		
@@ -154,7 +154,7 @@ class CheckoutModel extends GenericModel {
 
 		$this->logMessage("purchaseId: ".$this->insertedOrderId);
 		$this->logMessage("description: ".$this->options->getOption('SisowDescription'));
-		$this->logMessage("amount: ".$total);
+		$this->logMessage("amount: ".$this->totalPrice);
 		$this->logMessage("issuerId: ".$_POST["issuerid"]);
 		$this->logMessage("returnUrl: ".site_url().'/success');
 		$this->logMessage("notifyUrl: ".SISOW_NOTIFY_URL);
@@ -168,48 +168,83 @@ class CheckoutModel extends GenericModel {
 		$this->redirectUrl = $sisow->issuerUrl;
 		$this->logMessage("Setting redirect url: ".$this->redirectUrl);
 	}
-	/**
-	* @depracated, !!! now we use the return value from the Order post request. it now features the total price in the result
-	*/
-	private function calculateTotalPrice() {
-		$total = 0;
-		foreach($this->cart as $product){
-			$this->logMessage('Adding price: '.$product['price'].' '.$product['quantity']);
-			
-			$total += ($product['price'] * $product['quantity']);	
-			$this->logMessage('Adding optionsprices');
-			
-			$total += $this->calculateOptionsPrices($product) * $product['quantity'];
-		}
-		$total += $this->calculateShippingCosts();
-
-		$discount = 0;
-		if(isset($_POST['coupon']) && $_POST['coupon'] != "" &&  $_POST['coupon'] != null){
-			$discount = $this->getCouponPercentage($_POST['coupon']);		
-		}
-		$total = $total * (1-($discount/100));
-		
-		return $total;
-	}
-
 	
-	/**
-	* @depracated, !!! now we use the return value from the Order post request. it now features the total price in the result
-	*/
-	private function calculateOptionsPrices($product){
-		$ret = 0;
-		if($product['ProductOption'] != null) {
-			foreach($product['ProductOption'] as $option){
-				if($option['extraPrice'] != null) {
-					$ret += (double) $option['extraPrice'];
-					$this->logMessage('adding '.$option['extraPrice']);	
-				}
-			}
-		}
-    	$this->logMessage('total options price '.$ret);		
+	
+	public function getOgoneReply(){
+		$this->logMessage("Creating Ogone reply, as a json string");
+		
+		$ret = (object) array(
+			'type' => 'ogone',
+			'form' => $this->buildOgoneForm($this->calculateSHASignForOgone())
+		);
+		
+		$ret = json_encode($ret);
+		$this->logMessage('Returning oGone reply: '.$ret);
 		return $ret;
 	}
 	
+	private function buildOgoneForm($sha){
+		$env = ($this->options->getOption('OgoneTestMode') == 'true') ? 'test' : 'prod';
+	
+		$ret = '<form method="post" action="https://secure.ogone.com/ncol/'.$env.'/orderstandard.asp" id="ogone-form" name="ogoneform">
+				<input type="hidden" name="PSPID" value="'.$this->hostname.'" />
+				<input type="hidden" name="orderID" value="'.$this->insertedOrderId.'"/>
+				<input type="hidden" name="amount" value="'.round($this->totalPrice * 100).'"/>
+				<input type="hidden" name="currency" value="EUR"/>
+				<input type="hidden" name="language" value="nl_NL"/>
+				<input type="hidden" name="CN" value="'.$_POST['firstname'].' '.$_POST['surname'].'"/>				
+				<input type="hidden" name="EMAIL" value="'.$_POST['email'].'"/>
+				<input type="hidden" name="ownerZIP" value="'.$_POST['postcode'].'"/>
+				<input type="hidden" name="owneraddress" value="'.$_POST['street'].'"/>
+				<input type="hidden" name="ownercty" value="'.$_POST['city'].'"/>
+				<input type="hidden" name="ownertown" value="'.$_POST['city'].'"/>
+				<input type="hidden" name="ownertelno" value="'.$_POST['phone'].'"/>
+				<input type="hidden" name="SHASign" value="'.$sha.'"/>
+				<input type="hidden" name="accepturl" value="'.site_url().'/success?status=Success">
+				<input type="hidden" name="declineurl" value="'.site_url().'/success?status=Declined"/>
+				<input type="hidden" name="exceptionurl" value="'.site_url().'/success?status=Exception"/>
+				<input type="hidden" name="cancelurl" value="'.site_url().'/success?status=Cancelled"/>
+			</form>';
+		return $ret;
+	}
+	
+	private function calculateSHASignForOgone(){
+		$passPhrase = $this->options->getOption('OgonePassPhrase');
+
+		$ret = array();
+		$ret[] = 'AMOUNT='.round($this->totalPrice*100);
+		$ret[] = 'CURRENCY=EUR';
+		$ret[] = 'LANGUAGE=nl_NL';
+		$ret[] = 'ORDERID='.$this->insertedOrderId;
+		$ret[] = 'PSPID='.$this->options->getOption('hostname');
+		$ret[] = 'EMAIL='.$_POST['email'];
+		$ret[] = 'OWNERZIP='.$_POST['postcode'];
+		$ret[] = 'OWNERADDRESS='.$_POST['street'];
+		$ret[] = 'OWNERCTY='.$_POST['city'];
+		$ret[] = 'OWNERTOWN='.$_POST['city'];
+		$ret[] = 'OWNERTELNO='.$_POST['phone'];
+		$ret[] = 'ACCEPTURL='.site_url().'/success?status=Success';
+		$ret[] = 'DECLINEURL='.site_url().'/success?status=Declined';
+		$ret[] = 'EXCEPTIONURL='.site_url().'/success?status=Exception';				
+		$ret[] = 'CANCELURL='.site_url().'/success?status=Cancelled';
+				
+		sort($ret); //sort alphabetically
+		
+			//interleave with passphrase
+		for($i = 0; $i < count($ret); $i++){
+			$ret[$i]=$ret[$i].$passPhrase;
+		}
+		
+		$toHash = implode("",$ret);
+
+		
+		$this->logMessage('to Hash: '.$toHash);
+		$hash = sha1($toHash);
+		$hash = strtoupper($hash);
+		$this->logMessage('calculated hash: '.$hash);
+		return $hash;
+	}
+
 	private function getCouponPercentage($coupon){
 		$couponResult = $this->curl_post(BASE_URL_WEBSHOP.'/coupons', array('couponCode'=>$coupon, 'hostname'=>$this->options->getOption('hostname')));
 		if(!$couponResult){
@@ -225,7 +260,6 @@ class CheckoutModel extends GenericModel {
 			} 
 		}
 	}
-	
 	
 	private function logMessage($msg){
 		date_default_timezone_set('Europe/Amsterdam');

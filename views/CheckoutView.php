@@ -93,6 +93,11 @@ class CheckoutView extends GenericView {
 		if($this->model->getOptions()->getOption('UseSisow') == "true") {
 			$ret .= '<option value="ideal">iDeal</option>';	
 		}
+		
+		if($this->usesOgoneCreditcard()){
+			$ret .= '<option value="ogone">Creditcard</option>';
+		}
+		
 		if($paymentMethods != null){
 			foreach($paymentMethods as $method){ 
 				$ret .= '<option value="'.$method->PaymentMethod_id.'">'.$method->paymentMethodName.'</option>';
@@ -108,6 +113,10 @@ class CheckoutView extends GenericView {
 	
 	private function getSelectedOptionIdAttr($product){
 		return '';
+	}
+	
+	private function usesOgoneCreditcard(){
+		return $this->model->getOptions()->getOption('UseOgoneEcommmerce') == 'true';
 	}
 
 	public function render($data=null) { 
@@ -515,7 +524,7 @@ class CheckoutView extends GenericView {
 						<div class="span12">
 							<h3 class="payment-options">Verzenden</h3>
 							<div class="control-group">
-								<p>Als u op de knop hieronder drukt, wordt uw bestelling opgeslagen. Indien u voor iDeal heeft gekozen als betaalmethode, wordt u naar de beveiligde omgeving van uw bank doorgestuurd.</p>
+								<p>Als u op de knop hieronder drukt, wordt uw bestelling opgeslagen. Indien u voor iDeal of creditcard heeft gekozen als betaalmethode, wordt u naar een beveiligde omgeving doorgestuurd.</p>
 								<div class="controls">	
 									<input type="submit" name="invoice" class="submit-controls btn btn-primary " id="invoice" value="Plaats bestelling" style="width: 130px;" />
 								</div>		
@@ -526,8 +535,9 @@ class CheckoutView extends GenericView {
 			  </fieldset>
 			</div>
 		 </form>			
-			
-			
-		<?php	
+	
+	<?php
+	
+		
 	}
 }

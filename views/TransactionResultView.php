@@ -21,13 +21,27 @@ class TransactionResultView extends GenericView {
 			$class = 'success'; 
 		}
 		elseif($this->status == 'Cancelled'){
-			$msg = 'Uw bestelling is geannuleerd. '; 
+			$msg = 'Uw bestelling is geannuleerd.'; 
 			$class = 'info';
+		}
+		elseif($this->status == 'Declined'){
+			$msg = 'Uw bestelling is niet geaccepteerd. Neem contact met ons op als u denkt dat dit niet klopt. We hebben uw bestelling al wel vast opgeslagen, maar aangemerkt als onbetaald.';
+			$class='error';
 		}
 		elseif($this->status == 'Failure'){
 			$msg = 'Er is  iets misgegaan met de betaling. We hebben de bestelling opgeslagen, maar aangemerkt als onbetaald. Neem contact met ons op als u denkt dat dit niet klopt.'; 
 			$class = 'error';
 		}
+		elseif($this->status == 'Exception'){
+			$msg = 'Er is hoogstwaarschijnlijk iets misgegaan met de betaling. Onze creditcard provider heeft niet kunnen verifiëren of de betaling is geaccepteerd. We hebben uw bestelling wel opgeslagen, maar aangemerkt als onbetaald. Neem a.u.b. contact met ons op.'; 
+			$class = 'error';
+		}
+		elseif($this->status == 'Exception'){
+			$msg = 'Er is hoogstwaarschijnlijk iets misgegaan met de betaling. Onze creditcard provider heeft niet kunnen verifiëren of de betaling is geaccepteerd. We hebben uw bestelling wel opgeslagen, maar aangemerkt als onbetaald. Neem a.u.b. contact met ons op.'; 
+			$class = 'error';
+		}
+				
+		
 		elseif($this->status == 'Expired'){
 			$msg = 'Uw sessie is verlopen. De betaling is niet gelukt. We hebben uw bestelling wel opgeslagen, maar aangemerkt als onbetaald. Neem contact met ons op als u denkt dat dit niet klopt.'; 
 			$class = 'error';

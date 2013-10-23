@@ -90,6 +90,11 @@ class ProductView extends GenericView {
 		return $i%$this->numCols == 0 || $product->productFeatured  || $this->numCols == 1;
 	}
 	
+	public function shouldDisplayBrand($brand = null) {
+		return $this->model->getOptions()->getOption('show_brand') == true && $brand !== null;
+	}
+	
+	
 	protected function getDetailLink($product){
 		return site_url().'/products/'.$product->Product_id.'/#'.$product->productName;
 	}
@@ -145,7 +150,7 @@ class ProductView extends GenericView {
 		 </div>
 		 <div class="product-data-container">
 			 <div class="product-title product-title-<?php echo $product->Product_id; ?>" itemprop="name">
-			 	<?php echo $product->productName; ?>
+			 	<?php echo $product->productName; ?> <?php if($this->shouldDisplayBrand($product->brand)) { echo ' - '.$product->brand; }?>
 			 </div>
 		 
 			 <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" >

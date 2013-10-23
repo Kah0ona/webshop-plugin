@@ -43,13 +43,17 @@ class AdminView extends GenericView {
 		  $this->add_cs_field_boolean('show_article_number', 'Toon artikelnummer van product (indien ingevuld)');		  
 		  $this->add_cs_field_boolean('productoverview_disabled', 'Deactiveer /products/ overzicht (nodig indien google search gebruikt wordt)');
 		  $this->add_cs_field_boolean('use_delivery_date', 'Kunnen klanten een leverdatum aangeven?');		  
-
 		  $this->add_cs_field_boolean('UseSisow', 'Gebruik iDeal via Sisow?:');		  
-		  
 		  $this->add_cs_field('SisowMerchantId', 'Sisow Merchant ID:');
  		  $this->add_cs_field('SisowMerchantKey', 'Sisow Merchant Key:');		  
 		  $this->add_cs_field('SisowDescription', 'Omschrijving iDeal betaling (max 32. tekens):');		  
-		  $this->add_cs_field_select('SisowTestModus', 'Sisow Test Modus:', array('true'=>'Aan', 'false'=>'Uit'));
+		  $this->add_cs_field_select('SisowTestModus', 'Sisow Testmodus:', array('true'=>'Aan', 'false'=>'Uit'));
+
+		  $this->add_cs_field_boolean('UseOgoneEcommmerce', 'Gebruik Ogone e-Commerce creditcard gateway?:');		  
+		  $this->add_cs_field_select('OgoneTestMode', 'Ogone Testmodus:', array('true'=>'Aan', 'false'=>'Uit'));
+		  $this->add_cs_field('OgonePassPhrase', 'Ogone Passphrase voor authenticatie:');
+		  
+		  
 		  $this->add_cs_field_select('region','Land:', array('nl'=>'Nederland','be'=>'Belgi&euml;'));
 	}
 	
