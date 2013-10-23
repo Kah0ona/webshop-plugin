@@ -200,7 +200,7 @@ class CheckoutModel extends GenericModel {
 				<input type="hidden" name="ownertown" value="'.$_POST['city'].'"/>
 				<input type="hidden" name="ownertelno" value="'.$_POST['phone'].'"/>
 				<input type="hidden" name="SHASign" value="'.$sha.'"/>
-				<input type="hidden" name="accepturl" value="'.site_url().'/success?status=Success">
+				<input type="hidden" name="accepturl" value="'.site_url().'/success?status=Success" />
 				<input type="hidden" name="declineurl" value="'.site_url().'/success?status=Declined"/>
 				<input type="hidden" name="exceptionurl" value="'.site_url().'/success?status=Exception"/>
 				<input type="hidden" name="cancelurl" value="'.site_url().'/success?status=Cancelled"/>

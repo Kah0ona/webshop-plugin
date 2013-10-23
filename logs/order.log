@@ -2962,3 +2962,54 @@
 2013-10-23 09:12:34: to Hash: ACCEPTURL=http://localhost/~marten/wordpress/success?status=SuccessaXtWevN!m#l@VaQVAMOUNT=11495aXtWevN!m#l@VaQVCANCELURL=http://localhost/~marten/wordpress/success?status=CancelledaXtWevN!m#l@VaQVCURRENCY=EURaXtWevN!m#l@VaQVDECLINEURL=http://localhost/~marten/wordpress/success?status=DeclinedaXtWevN!m#l@VaQVEMAIL=marten@sytematic.nlaXtWevN!m#l@VaQVEXCEPTIONURL=http://localhost/~marten/wordpress/success?status=ExceptionaXtWevN!m#l@VaQVLANGUAGE=nl_NLaXtWevN!m#l@VaQVORDERID=73aXtWevN!m#l@VaQVOWNERADDRESS=Hugo de Grootstraat 62baXtWevN!m#l@VaQVOWNERCTY=Den HaagaXtWevN!m#l@VaQVOWNERTELNO=31649343492aXtWevN!m#l@VaQVOWNERTOWN=Den HaagaXtWevN!m#l@VaQVOWNERZIP=2518EEaXtWevN!m#l@VaQVPSPID=testaXtWevN!m#l@VaQV
 2013-10-23 09:12:34: calculated hash: 21BD58A0E43EA9C66FCD1BBB434B5575B9D77488
 2013-10-23 09:12:34: Returning oGone reply: {"type":"ogone","form":"<form method=\"post\" action=\"https:\/\/secure.ogone.com\/ncol\/test\/orderstandard.asp\" id=\"ogone-form\" name=\"ogoneform\">\n\t\t\t\t<input type=\"hidden\" name=\"PSPID\" value=\"test\" \/>\n\t\t\t\t<input type=\"hidden\" name=\"orderID\" value=\"73\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"amount\" value=\"11495\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"currency\" value=\"EUR\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"language\" value=\"nl_NL\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"CN\" value=\"Marten Sijtema\"\/>\t\t\t\t\n\t\t\t\t<input type=\"hidden\" name=\"EMAIL\" value=\"marten@sytematic.nl\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownerZIP\" value=\"2518EE\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"owneraddress\" value=\"Hugo de Grootstraat 62b\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownercty\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertown\" value=\"Den Haag\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"ownertelno\" value=\"31649343492\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"SHASign\" value=\"21BD58A0E43EA9C66FCD1BBB434B5575B9D77488\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"accepturl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Success\">\n\t\t\t\t<input type=\"hidden\" name=\"declineurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Declined\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"exceptionurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Exception\"\/>\n\t\t\t\t<input type=\"hidden\" name=\"cancelurl\" value=\"http:\/\/localhost\/~marten\/wordpress\/success?status=Cancelled\"\/>\n\t\t\t<\/form>"}
+2013-10-23 09:20:33: -------
+2013-10-23 09:20:33: Processing cart: 
+2013-10-23 09:20:33: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+2013-10-23 09:20:33: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 2
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 31649343492
+    [VATnumber] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => test
+    [coupon] => 
+    [payment-method] => ideal
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"1","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"40"}]}]
+    [orderStatus] => nieuw
+    [viaSite] => true
+)
+
+2013-10-23 09:20:33: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=2&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=31649343492&VATnumber=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=test&coupon=&payment-method=ideal&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%221%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2240%22%7D%5D%7D%5D&orderStatus=nieuw&viaSite=true&orderType=invoice
+2013-10-23 09:20:34: Returned value from /orders:
+2013-10-23 09:20:34: stdClass Object
+(
+    [Order__id] => 74
+    [totalPrice] => 114.95
+)
+
+2013-10-23 09:20:34: Inserted Order id: 74
+2013-10-23 09:20:34: Creating iDeal transaction
+2013-10-23 09:20:34: purchaseId: 74
+2013-10-23 09:20:34: description: ABC Webshop bestelling
+2013-10-23 09:20:34: amount: 114.95
+2013-10-23 09:20:34: issuerId: 99
+2013-10-23 09:20:34: returnUrl: http://localhost/~marten/wordpress/success
+2013-10-23 09:20:34: notifyUrl: http://webshopdev.sytematic.nl/public/sisow_notifications
+2013-10-23 09:20:36: Setting redirect url: https://www.sisow.nl/Sisow/iDeal/Simulator.aspx?merchantid=2537507457&txid=TEST080489848946&sha1=ba05b0d02dbdaedb7b6c8097d5f57ae6c56b80ee
