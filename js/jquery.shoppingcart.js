@@ -108,6 +108,18 @@
 				event.stopPropagation();
 		    });
 
+			$('.ProductOptionSelector').bind('change.shoppingCart', function(event){
+				self.updateInStockMessage(event);
+			});
+			
+			$(document).ready(function(){
+				$('.product, .single-product').each(function(){
+					var elt = $(this);
+					var prodId = parseInt(elt.attr('data-productid'));
+					self.updateInStockMessage(null, prodId);
+				});
+			});
+
 			$('.address-line, .address-line-elsewhere').bind('change.shoppingCart', function(){
 		    	var compareToAddress = '';
 		    	var compareToAddress2="";
@@ -180,6 +192,121 @@
 		    	return webshopProducts;
 	    	}
 
+	   	},
+	   	updateInStockMessage : function(event, productId){
+	   		this.logger('updateInStockMessage');
+	   		var optionValue = null;
+	   		var elt = null;
+	   		
+	   		this.logger('optionValue: '+optionValue);
+			var prods;
+	   		
+	   		if(event != null) {
+	   			elt = $(event.currentTarget);
+	   			optionValue = parseInt(elt.val());
+	   		}
+
+			if(webshopProducts instanceof Array){
+				prods = webshopProducts;
+			} else {
+				prods = [];
+				prods.push(webshopProducts);
+			}
+
+			for(var i = 0; i < prods.length; i++){
+				var prod = prods[i];
+				if(productId != null && prod.Product_id != productId) {
+					continue;
+				} //if productId == null, it means event is not null, and therefore we can deduct which product it is.
+				
+				if(this.productHasOptionValue(optionValue,prod)){ //if true, this is our product we have to check SKU's for
+					// check all the other selected options for this product, and their values
+					var otherSelectedOptionValues = this.getOtherSelectedOptionsForThisProduct(prod);
+					var sku = this.lookupSkuBySelectedOptionValues(prod, otherSelectedOptionValues);
+					var skuElt = $('.skuInfo-'+prod.Product_id);
+					skuElt.html('');
+					if(sku == null){ //user doesnt use stock info, so do nothing.
+						this.logger('No sku found');
+						skuElt.attr('skuNumber', '').attr('inStock', "true");
+					} else { //sku row found, check quantity, and encode skuNumber in the DOM for easy retrieval after adding.
+						skuElt.attr('skuNumber', sku.skuNumber).attr('inStock', "true");
+						this.logger("SKU FOUND: ",sku);
+						if(sku.skuQuantity < 1){
+							skuElt.html('Dit product is niet meer op voorraad.').attr('inStock','false');
+						}
+					}
+				}
+			}
+
+			
+			//look up if this combination has anything in stock, by looking at the SKU numbers
+			
+			//if a sku row is found display instock or not
+			
+			//if no sku row is found, assume in stock, don't display anything, since this shop owner doesn't use the sku rows (yet)
+	   	},
+	   	lookupSkuBySelectedOptionValues : function(product, optionValues){
+	   		if(product.SKU != null) {
+				for(var i = 0; i < product.SKU.length; i++){
+					var sku = product.SKU[i];
+					var values = [];
+					for(var j = 0; j < sku.ProductOptionValue.length; j++){
+						values.push(sku.ProductOptionValue[j].ProductOptionValue_id);
+					}
+					if(this.skuValuesAreEqual(values, optionValues)){
+						return sku;
+					}
+				}
+			}
+			return null;
+	   	},
+	   	skuValuesAreEqual : function(valSet1, valSet2){
+		   	if(valSet1.length != valSet2.length) { 
+		   		return false; 
+		   	}
+		   	
+		   	//sort both arrays numerically
+		   	var sortNumber = function(a,b){
+			   	return parseInt(a) - parseInt(b);
+		   	}
+		   	
+		   	valSet1.sort(sortNumber);
+		   	valSet2.sort(sortNumber);
+
+			for(var i = 0; i < valSet1.length; i++){
+				if(valSet1[i] != valSet2[i]){
+					return false;
+				}
+			}		   		
+			return true;
+		   		
+	   	},
+	   	productHasOptionValue : function(optionValue,prod){
+	   		if(optionValue == null && (prod.ProductOption == null || prod.ProductOption.length == 0)){
+		   		return true; //optionValue is null, and prod is an option-less product, ie. return true
+	   		}
+		   	if(prod.ProductOption != null){
+				for(var i = 0; i < prod.ProductOption.length; i++){
+					var opt = prod.ProductOption[i];
+					if(opt.ProductOptionValue != null){
+						for(var j = 0; j < opt.ProductOptionValue.length; j++){
+							var val = opt.ProductOptionValue[j];
+							if(val.ProductOptionValue_id == optionValue){
+								return true;
+							}
+						}
+					}
+				}
+		   	}
+		   	return false;
+	   	},
+	   	getOtherSelectedOptionsForThisProduct : function(product){
+	   		var ret = [];
+	   		$('.product-'+product.Product_id+' .ProductOptionSelector').each(function(){
+		   		var val = $(this).val();
+		   		ret.push(parseInt(val));
+	   		});
+	   		return ret;
 	   	},
 	    addProduct : function (event, productData) {
 				    	

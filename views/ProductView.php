@@ -123,7 +123,7 @@ class ProductView extends GenericView {
 						<div class="row-fluid product-row">
 					<?php endif; ?>	
 
-							<div class="<?php echo $span; ?> product product-<?php echo $v->Product_id; ?> <?php echo $this->shouldRenderRowHtmlEnd($i, $v) ? 'last' : ''; ?>"
+							<div data-productid="<?php echo $v->Product_id; ?>"  class="<?php echo $span; ?> product product-<?php echo $v->Product_id; ?> <?php echo $this->shouldRenderRowHtmlEnd($i, $v) ? 'last' : ''; ?>"
 								itemscope 
 								itemtype="http://schema.org/Product">
 								<?php $this->renderProduct($v, $productModel); ?>

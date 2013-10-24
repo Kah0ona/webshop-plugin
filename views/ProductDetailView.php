@@ -100,7 +100,7 @@ class ProductDetailView extends GenericView {
 				});
 			</script>
 		
-			<div class="single-product"  itemscope itemtype="http://schema.org/Product">
+			<div class="single-product product-<?php echo $data->Product_id; ?>" data-productid="<?php echo $data->Product_id; ?>" itemscope itemtype="http://schema.org/Product">
 				<div class="row-fluid">
 					<div class="span8 product-image">
 						<?php if($data->imageDish != null && $data->imageDish != "/uploads/Product" && $data->imageDish != '') { ?>
@@ -162,6 +162,7 @@ class ProductDetailView extends GenericView {
 	*/
 	public function renderOptionForm($data){ ?>
 		<div style="clear:both"></div>
+		<div class="skuInfo skuInfo-<?php echo $data->Product_id; ?>"></div>
 		<form class="form <?php echo $data->priceOnDemand ? 'hidden' : ''; ?>">
 		    <div class="control-group" style="margin-top: 15px;">
 				<label class="control-label control-label-<?php echo $data->Product_id; ?>" for="surname">Aantal: *</label>

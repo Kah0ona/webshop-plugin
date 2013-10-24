@@ -88,6 +88,9 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 		
 	});
 	
+	
+	
+	
 	describe('Removing products testsuite.', function(){
 		it('Should yield an empty cart, when the X is clicked in a cart with a single product.', function(){
 		    spyOn($, 'ajax');
@@ -109,6 +112,109 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 
 			expect($.ajax.calls[1].args[0].data.shoppingCart.length).toBe(0);
 		});
+	});
+	
+	
+	describe('SKU related testcases', function(){
+		it('should say "product niet op voorraad", when out of stock, on the detail page', function(){
+			webshopProducts = {"Product_id":1,"title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":1,"price":99.95,"VAT":0.21,"ProductOption":[{"ProductOption_id":1,"optionName":"Schoenmaat","influencesSKU":true,"ProductOptionValue":[{"ProductOptionValue_id":1,"optionValue":"40","ProductOption_id":1},{"ProductOptionValue_id":2,"optionValue":"41","ProductOption_id":1},{"ProductOptionValue_id":3,"optionValue":"42","ProductOption_id":1},{"ProductOptionValue_id":4,"optionValue":"43","ProductOption_id":1},{"ProductOptionValue_id":5,"optionValue":"44","ProductOption_id":1}]}],"SKU":[{"SKU_id":14,"skuNumber":"123456-40","skuQuantity":1,"ProductOptionValue":[{"ProductOptionValue_id":1,"optionValue":"40","ProductOption_id":1}],"Product_id":1},{"SKU_id":15,"skuNumber":"123456-41","skuQuantity":1,"ProductOptionValue":[{"ProductOptionValue_id":2,"optionValue":"41","ProductOption_id":1}],"Product_id":1},{"SKU_id":16,"skuNumber":"123456-42","skuQuantity":2,"ProductOptionValue":[{"ProductOptionValue_id":3,"optionValue":"42","ProductOption_id":1}],"Product_id":1},{"SKU_id":17,"skuNumber":"123456-43","skuQuantity":4,"ProductOptionValue":[{"ProductOptionValue_id":4,"optionValue":"43","ProductOption_id":1}],"Product_id":1},{"SKU_id":18,"skuNumber":"123456-44","skuQuantity":0,"ProductOptionValue":[{"ProductOptionValue_id":5,"optionValue":"44","ProductOption_id":1}],"Product_id":1}]};
+
+			var detailForm2 = '<div class="single-product product-1" data-productid="1" itemscope itemtype="http://schema.org/Product">'+
+				'	<div class="skuInfo skuInfo-1"></div>'+
+				'	<form class="form ">'+
+				'		<input class="input-large product-amount-1  " name="product-amount" id="product-amount-1" value="1" type="text" /> '+
+				'		<select name="size" class="input-large ProductOptionSelector" id="ProductOption_1" option_id="1">'+
+				'			<option extraPrice="" value="1" valueName="40" selected 	 id="ProductOptionValueName_1"> 40</option> '+
+				'			<option extraPrice="" value="2" valueName="41" id="ProductOptionValueName_2"> 41	</option> '+
+				'			<option extraPrice="" value="3" valueName="42" id="ProductOptionValueName_3"> 42</option>'+
+				'			<option extraPrice="" value="4" valueName="43" id="ProductOptionValueName_4">43</option> '+
+				'			<option extraPrice="" value="5" valueName="44" id="ProductOptionValueName_5"> 44</option>'+
+				'		</select>'+
+				'	</form>	'+
+				'	<span product-type="product" product-index="0" product-id="1" class="addtocart ">'+
+				'	<a href="#" class="btn" ><i class="icon-shopping-cart icon-white"></i> Toevoegen</a>'+
+				'	</span>'+
+				'</div>   	';
+			$(detailForm2).appendTo('body');
+			
+			$('#shoppingcart').shoppingCart({cartDisplayMode: 'block', detail: false});
+
+			
+			//size 44 is out of stock (optionvalue selection is ProductOptionValue_id=5;
+			$('.product-1 .ProductOptionSelector').val('5');
+			$('.product-1 .ProductOptionSelector').change(); //triggers the calculation
+			
+			//expected sku number is 123456-44
+			expect($('.product-1 .skuInfo-1').attr('inStock')).toBe('false');
+			expect($('.product-1 .skuInfo-1').attr('skuNumber')).toBe('123456-44');
+			expect($('.product-1 .skuInfo-1').html()).toBe('Dit product is niet meer op voorraad.');
+			
+			$('.product-1').remove();
+		});
+		
+		it('should have an attr instock=true, when there are enough products, on the detail page', function(){
+			webshopProducts = {"Product_id":1,"title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":1,"price":99.95,"VAT":0.21,"ProductOption":[{"ProductOption_id":1,"optionName":"Schoenmaat","influencesSKU":true,"ProductOptionValue":[{"ProductOptionValue_id":1,"optionValue":"40","ProductOption_id":1},{"ProductOptionValue_id":2,"optionValue":"41","ProductOption_id":1},{"ProductOptionValue_id":3,"optionValue":"42","ProductOption_id":1},{"ProductOptionValue_id":4,"optionValue":"43","ProductOption_id":1},{"ProductOptionValue_id":5,"optionValue":"44","ProductOption_id":1}]}],"SKU":[{"SKU_id":14,"skuNumber":"123456-40","skuQuantity":1,"ProductOptionValue":[{"ProductOptionValue_id":1,"optionValue":"40","ProductOption_id":1}],"Product_id":1},{"SKU_id":15,"skuNumber":"123456-41","skuQuantity":1,"ProductOptionValue":[{"ProductOptionValue_id":2,"optionValue":"41","ProductOption_id":1}],"Product_id":1},{"SKU_id":16,"skuNumber":"123456-42","skuQuantity":2,"ProductOptionValue":[{"ProductOptionValue_id":3,"optionValue":"42","ProductOption_id":1}],"Product_id":1},{"SKU_id":17,"skuNumber":"123456-43","skuQuantity":4,"ProductOptionValue":[{"ProductOptionValue_id":4,"optionValue":"43","ProductOption_id":1}],"Product_id":1},{"SKU_id":18,"skuNumber":"123456-44","skuQuantity":3,"ProductOptionValue":[{"ProductOptionValue_id":5,"optionValue":"44","ProductOption_id":1}],"Product_id":1}]};
+
+			var detailForm2 = '<div class="single-product product-1" data-productid="1"  itemscope itemtype="http://schema.org/Product">'+
+				'	<div class="skuInfo skuInfo-1"></div>'+
+				'	<form class="form ">'+
+				'		<input class="input-large product-amount-1  " name="product-amount" id="product-amount-1" value="1" type="text" /> '+
+				'		<select name="size" class="input-large ProductOptionSelector" id="ProductOption_1" option_id="1">'+
+				'			<option extraPrice="" value="1" valueName="40" selected 	 id="ProductOptionValueName_1"> 40</option> '+
+				'			<option extraPrice="" value="2" valueName="41" id="ProductOptionValueName_2"> 41	</option> '+
+				'			<option extraPrice="" value="3" valueName="42" id="ProductOptionValueName_3"> 42</option>'+
+				'			<option extraPrice="" value="4" valueName="43" id="ProductOptionValueName_4">43</option> '+
+				'			<option extraPrice="" value="5" valueName="44" id="ProductOptionValueName_5"> 44</option>'+
+				'		</select>'+
+				'	</form>	'+
+				'	<span product-type="product" product-index="0" product-id="1" class="addtocart ">'+
+				'	<a href="#" class="btn" ><i class="icon-shopping-cart icon-white"></i> Toevoegen</a>'+
+				'	</span>'+
+				'</div>   	';
+			$(detailForm2).appendTo('body');
+			
+			$('#shoppingcart').shoppingCart({cartDisplayMode: 'block', detail: false});
+
+			
+			//size 44 is out of stock (optionvalue selection is ProductOptionValue_id=5;
+			$('.product-1 .ProductOptionSelector').val('5');
+			$('.product-1 .ProductOptionSelector').change(); //triggers the calculation
+			
+			//expected sku number is 123456-44
+			expect($('.product-1 .skuInfo-1').attr('inStock')).toBe('true');
+			expect($('.product-1 .skuInfo-1').attr('skuNumber')).toBe('123456-44');
+			expect($('.product-1 .skuInfo-1').html()).toBe('');
+			
+			$('.product-1').remove();
+		});
+		
+		
+		it('Option-less product: should say "product niet op voorraad", when out of stock, on the detail page', function(){
+			webshopProducts = {"Product_id":1,"title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":1,"price":99.95,"VAT":0.21,"ProductOption":[],"SKU":[{"SKU_id":14,"skuNumber":"123456-40","skuQuantity":0,"ProductOptionValue":[],"Product_id":1},{"SKU_id":15,"skuNumber":"123456-41","skuQuantity":1,"ProductOptionValue":[{"ProductOptionValue_id":2,"optionValue":"41","ProductOption_id":1}],"Product_id":1},{"SKU_id":16,"skuNumber":"123456-42","skuQuantity":2,"ProductOptionValue":[{"ProductOptionValue_id":3,"optionValue":"42","ProductOption_id":1}],"Product_id":1},{"SKU_id":17,"skuNumber":"123456-43","skuQuantity":4,"ProductOptionValue":[{"ProductOptionValue_id":4,"optionValue":"43","ProductOption_id":1}],"Product_id":1},{"SKU_id":18,"skuNumber":"123456-44","skuQuantity":3,"ProductOptionValue":[{"ProductOptionValue_id":5,"optionValue":"44","ProductOption_id":1}],"Product_id":1}]};
+
+			var detailForm2 = '<div class="single-product product-1" data-productid="1"  itemscope itemtype="http://schema.org/Product">'+
+				'	<div class="skuInfo skuInfo-1"></div>'+
+				'	<form class="form ">'+
+				'		<input class="input-large product-amount-1  " name="product-amount" id="product-amount-1" value="1" type="text" /> '+
+				'	</form>	'+
+				'	<span product-type="product" product-index="0" product-id="1" class="addtocart ">'+
+				'	<a href="#" class="btn" ><i class="icon-shopping-cart icon-white"></i> Toevoegen</a>'+
+				'	</span>'+
+				'</div>   	';
+			$(detailForm2).appendTo('body');
+			
+			$('#shoppingcart').shoppingCart({cartDisplayMode: 'block', detail: false});
+
+			
+			expect($('.product-1 .skuInfo-1').attr('inStock')).toBe('false');
+			expect($('.product-1 .skuInfo-1').attr('skuNumber')).toBe('123456-40');
+			expect($('.product-1 .skuInfo-1').html()).toBe('Dit product is niet meer op voorraad.');
+			
+			$('.product-1').remove();
+		});
+
+
+		
 	});
 	
 	describe('Calculate distance.', function(){

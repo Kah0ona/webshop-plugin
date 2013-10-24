@@ -130,6 +130,11 @@ class GenericModel {
 		if($quantity === null) {
 			$quantity=1;
 		}
+		
+		$skus = array();
+		if($pro->SKU != null){
+			$skus = $pro->SKU;
+		}
 			
 		$jsonObj = array (
 			"Product_id" => $id,
@@ -139,7 +144,8 @@ class GenericModel {
 			"quantity" => $quantity,
 			"price"=> $price,
 			"VAT" => $VAT,
-			"ProductOption"=> $options
+			"ProductOption"=> $options,
+			"SKU"=> $skus
 		);
 		if($getString){
 			return json_encode($jsonObj);				

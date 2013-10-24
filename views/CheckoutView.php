@@ -398,6 +398,13 @@ class CheckoutView extends GenericView {
 							<input type="checkbox" name="deliveryElsewhere" class="input-large address-line-elsewhere" id="deliveryElsewhere" />
 						</div>		
 					</div>	
+					 <div class="control-group address-line-more hidden">
+						<label class="control-label" for="deliveryName">Naam begunstigde: </label>			
+			
+						<div class="controls">	
+							<input type="text" name="deliveryName" class="input-large address-line-elsewhere" id="deliveryName" />
+						</div>		
+					</div>			
 							
 					 <div class="control-group address-line-more hidden">
 						<label class="control-label" for="deliveryStreet">Straat: </label>			
