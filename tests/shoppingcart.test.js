@@ -88,9 +88,6 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 		
 	});
 	
-	
-	
-	
 	describe('Removing products testsuite.', function(){
 		it('Should yield an empty cart, when the X is clicked in a cart with a single product.', function(){
 		    spyOn($, 'ajax');

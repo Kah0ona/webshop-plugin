@@ -221,9 +221,9 @@
 				
 				if(this.productHasOptionValue(optionValue,prod)){ //if true, this is our product we have to check SKU's for
 					// check all the other selected options for this product, and their values
-					var otherSelectedOptionValues = this.getOtherSelectedOptionsForThisProduct(prod);
+					var otherSelectedOptionValues = this.getSelectedOptionsForThisProduct(prod);
 					var sku = this.lookupSkuBySelectedOptionValues(prod, otherSelectedOptionValues);
-					var skuElt = $('.skuInfo-'+prod.Product_id);
+					var skuElt = $('.skuInfo-'+prod.Product_id).removeClass('alert').removeClass('alert-error');
 					skuElt.html('');
 					if(sku == null){ //user doesnt use stock info, so do nothing.
 						this.logger('No sku found');
@@ -232,7 +232,7 @@
 						skuElt.attr('skuNumber', sku.skuNumber).attr('inStock', "true");
 						this.logger("SKU FOUND: ",sku);
 						if(sku.skuQuantity < 1){
-							skuElt.html('Dit product is niet meer op voorraad.').attr('inStock','false');
+							skuElt.html('Dit product is niet meer op voorraad.').attr('inStock','false').addClass('alert').addClass('alert-error');
 						}
 					}
 				}
@@ -282,7 +282,7 @@
 		   		
 	   	},
 	   	productHasOptionValue : function(optionValue,prod){
-	   		if(optionValue == null && (prod.ProductOption == null || prod.ProductOption.length == 0)){
+	   		if(optionValue == null || prod.ProductOption == null || prod.ProductOption.length == 0){
 		   		return true; //optionValue is null, and prod is an option-less product, ie. return true
 	   		}
 		   	if(prod.ProductOption != null){
@@ -300,7 +300,7 @@
 		   	}
 		   	return false;
 	   	},
-	   	getOtherSelectedOptionsForThisProduct : function(product){
+	   	getSelectedOptionsForThisProduct : function(product){
 	   		var ret = [];
 	   		$('.product-'+product.Product_id+' .ProductOptionSelector').each(function(){
 		   		var val = $(this).val();
@@ -330,7 +330,7 @@
 		    	product = jQuery.extend(true, {}, productRef);
 
 	    		product = this.addSelectedOptionsToProduct(product, productRef);
-
+				product = this.addSkuInformationToProduct(product);
 				product.quantity = quant;
 			
 			}
@@ -363,6 +363,15 @@
 
 			return true;
 
+	    },
+	    addSkuInformationToProduct : function(product){
+	    	this.logger('Add sku info to product');
+	    	var otherSelectedOptionValues = this.getSelectedOptionsForThisProduct(product);
+			var sku = this.lookupSkuBySelectedOptionValues(product, otherSelectedOptionValues);
+			this.logger('found sku: ');
+			this.logger(sku);
+			product.sku = sku;
+			return product;
 	    },
 	    removeProduct : function (event) {
 	    	this.logger("Removing product");

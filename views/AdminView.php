@@ -37,6 +37,7 @@ class AdminView extends GenericView {
 		  $this->add_cs_field('cart_class', 'CSS-class van het winkelwagentje:');
   		  $this->add_cs_field('nested_category_level','Aantal niveau\'s in categorie widget');
   		  
+  		  $this->add_cs_field_select('ShowProductsInStock', 'Producten die niet op voorraad zijn:', array('show'=>'Tonen met melding', 'hide'=>'Verbergen'));
 		  $this->add_cs_field_boolean('show_brand', 'Toon merk van product (indien ingevuld)');		 
 		  $this->add_cs_field_boolean('show_color', 'Toon kleur van product (indien ingevuld)');		  
 		   

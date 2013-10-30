@@ -16,7 +16,10 @@ class CategoryDetailView extends GenericView {
 		
 		include_once('ProductView.php');
 		//not a problem if we feed it a category model
-		$productView = new ProductView($this->model);
+
+		$productModel = new ProductModel($this->model->getOptions()->getOption('hostname'));
+		$productModel->setOptions($this->model->getOptions());
+		$productView = new ProductView($productModel);
 		//$this->renderBackLink();
 		$productView->setNumCols($this->numCols);
 
@@ -32,7 +35,6 @@ class CategoryDetailView extends GenericView {
 			if($subCategories != null && count($subCategories) > 0){
 				echo '<h3>Producten</h3>';
 			}
-		
 			echo $productView->render($data->Product, $renderDetailOnOverview, $data->Category_id); 
 		}
 		elseif ($subCategories == null || count($subCategories) == 0)

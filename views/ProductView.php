@@ -100,7 +100,6 @@ class ProductView extends GenericView {
 	}
 	
 	protected function renderMain($categoryId = null){ 
-		$productModel = new ProductModel($this->model->getHostname());
 
 		$span = $this->calculateSpan();
 
@@ -118,7 +117,7 @@ class ProductView extends GenericView {
 					$span = 'span12'; 
 				} 
 				?>
-				<?php if($productModel->shouldShowProductBasedOnSku($v)) : ?>
+				<?php if($this->model->shouldShowProductBasedOnSku($v)) : ?>
 					<?php if($this->shouldRenderRowHtmlStart($i, $v)) :?>
 						<div class="row-fluid product-row">
 					<?php endif; ?>	
@@ -126,7 +125,7 @@ class ProductView extends GenericView {
 							<div data-productid="<?php echo $v->Product_id; ?>"  class="<?php echo $span; ?> product product-<?php echo $v->Product_id; ?> <?php echo $this->shouldRenderRowHtmlEnd($i, $v) ? 'last' : ''; ?>"
 								itemscope 
 								itemtype="http://schema.org/Product">
-								<?php $this->renderProduct($v, $productModel); ?>
+								<?php $this->renderProduct($v, $this->model); ?>
 							</div>
 					<?php if($this->shouldRenderRowHtmlEnd($i, $v)) :?>
 						</div><!-- end row-fluid -->

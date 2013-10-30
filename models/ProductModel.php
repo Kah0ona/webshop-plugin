@@ -35,14 +35,21 @@ class ProductModel extends GenericModel {
 	* Returns true otherwise
 	*/
 	public function shouldShowProductBasedOnSku($product){
+		$show = false;
+		if($this->getOptions()->getOption('ShowProductsInStock') == null || 
+		   $this->getOptions()->getOption('ShowProductsInStock') == 'show' ) {
+			$show = true;
+		}
+		
+		if($show){ //show means we hand it off to javascript, which just will say 'in stock' or 'not in stock', it' not the servers job to hide it up-front
+			return true;
+		}
+		
 		if($product->ProductOption == null || count($product->ProductOption) == 0){
 			return $this->checkStockForOptionlessProduct($product);			
 		}
-		elseif(count($product->ProductOption) == 1) {
-			return $this->checkStockForProductWithOneOption($product);
-		}
-		else { // #product options > 1
-			return true;
+		else {
+			return $this->checkStockForProductWithOneOrMoreOption($product);
 		}
 	}
 	
@@ -59,56 +66,67 @@ class ProductModel extends GenericModel {
 		return true;
 	}
 	
+	/**
+    * checks if the given product / ProductOptionValue_id combination is in stock
+    * If the product option has influencesSKU set to false, it always returns true;
+    * If in the backend of wordpress, it's set that we DO show sold out items, it will return true as well
+    * @requires $product to have EXACTLY 1 ProductOption, and the SKUs of this product, 
+    * should also have one $productOptionValue_id for each SKU set.
+    */
+    public function productIsInStockSimple($product, $productOptionValue_id){
+        if($this->getNumProductOptions($product) != 1){
+           throw new Exception('Illegal argument: $product should have exactly 1 productOption');
+        }
+        
+        if($this->options->getOption('ShowProductsInStock') == null || 
+		   $this->options->getOption('ShowProductsInStock') == 'show' ) {
+		   return true;
+		}
+        
+        if(!$product->ProductOption[0]->influencesSKU ){
+           return true;
+        }
+
+        foreach($product->SKU as $k=>$sku){
+            if($sku->ProductOptionValue == null || count($sku->ProductOptionValue) != 1){
+                    //ignoring, we assume that the sku should have exactly one ProductOptionValue, in order to count
+                    continue;
+            }
+            if($sku->ProductOptionValue[0]->ProductOptionValue_id == $productOptionValue_id ) {
+                    return $sku->skuQuantity > 0;
+            }        
+        }
+        
+        return true;
+    } 
+
 	
-	private function checkStockForProductWithOneOption($product){
-		if($product->SKU == null || count($product->SKU) == 0){
+	private function checkStockForProductWithOneOrMoreOption($product){
+		if($product->SKU == null || count($product->SKU) == 0){ //no sku row means that we always show it, since the shop owner doesnt use the SKU system for this product.
 			return true;
 		}
 		$ret = true;
-		foreach($product->ProductOption[0]->ProductOptionValue as $values){
-			$exists = false;
-			foreach($product->SKU as $k=>$sku){
-				if($sku->ProductOptionValue != null && count($sku->ProductOptionValue) == 1 &&
-					$sku->ProductOptionValue[0]->ProductOptionValue_id == $values->ProductOptionValue_id
-					&& $sku->skuQuantity <= 0
-					){
-					$exists = true;
-					break;
-				}
+		
+		//is there any combination of productoptionvalues where there is no sku row ? => show product
+		$multiplier = 1;
+		foreach($product->ProductOption as $opt){
+			if($opt->influencesSku){
+				$multiplier = $multiplier * count($opt->ProductOptionValue);
 			}
-			if(!$exists) {
-				return true;
-			}
-		}
-		return false;		
-	}
-	/**
-	* checks if the given product / ProductOptionValue_id combination is in stock
-	* If the product option has influencesSKU set to false, it always returns true;
-	* @requires $product to have EXACTLY 1 ProductOption, and the SKUs of this product, 
-	* should also have one $productOptionValue_id for each SKU set.
-	*/
-	public function productIsInStockSimple($product, $productOptionValue_id){
-		if($this->getNumProductOptions($product) != 1){
-			throw new Exception('Illegal argument: $product should have exactly 1 productOption');
-		}
-		if(!$product->ProductOption[0]->influencesSKU){
-			return true;
-		}
-
-		foreach($product->SKU as $k=>$sku){
-			if($sku->ProductOptionValue == null || count($sku->ProductOptionValue) != 1){
-				//ignoring, we assume that the sku should have exactly one ProductOptionValue, in order to count
-				continue;
-			}
-			if($sku->ProductOptionValue[0]->ProductOptionValue_id == $productOptionValue_id ) {
-				return $sku->skuQuantity > 0;
-			}	
 		}
 		
-		return true;
+		if(count($product->SKU) < $multiplier) { //At least one sku row must be missing. This means we show the product anyway. 
+			return true;
+		} else { //now we just have to loop through the skus, and see if the are all qty > 0
+			foreach($product->SKU as $sku){
+				if($sku->skuQuantity > 0){
+					return true;
+				}
+			}
+			return false;
+		}
 	}
-	
+		
 		
 	/**
 	* Fetches the category with the id currently set by $this->setId(), or set by a previous call to $this->isDetailPage(); 
