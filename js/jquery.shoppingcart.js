@@ -232,7 +232,11 @@
 						skuElt.attr('skuNumber', sku.skuNumber).attr('inStock', "true");
 						this.logger("SKU FOUND: ",sku);
 						if(sku.skuQuantity < 1){
-							skuElt.html('Dit product is niet meer op voorraad.').attr('inStock','false').addClass('alert').addClass('alert-error');
+							var delTime = '';
+							if(prod.productDeliveryTime != null && prod.productDeliveryTime != undefined){
+								delTime = ' De levertijd is: '+prod.productDeliveryTime;
+							}
+							skuElt.html('Dit product is tijdelijk niet meer op voorraad.'+delTime).attr('inStock','false').addClass('alert').addClass('alert-error');
 						}
 					}
 				}

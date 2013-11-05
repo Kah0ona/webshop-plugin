@@ -149,7 +149,7 @@ class ProductView extends GenericView {
 		 </div>
 		 <div class="product-data-container">
 			 <div class="product-title product-title-<?php echo $product->Product_id; ?>" itemprop="name">
-			 	<?php echo $product->productName; ?> <?php if($this->shouldDisplayBrand($product->brand)) { echo ' - '.$product->brand; }?>
+			 	<?php if($this->shouldDisplayBrand($product->brand)) { echo $product->brand.' - '; }?><?php echo $product->productName; ?> 
 			 </div>
 		 
 			 <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" >

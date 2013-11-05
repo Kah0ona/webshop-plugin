@@ -144,7 +144,7 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 			//expected sku number is 123456-44
 			expect($('.product-1 .skuInfo-1').attr('inStock')).toBe('false');
 			expect($('.product-1 .skuInfo-1').attr('skuNumber')).toBe('123456-44');
-			expect($('.product-1 .skuInfo-1').html()).toBe('Dit product is niet meer op voorraad.');
+			expect($('.product-1 .skuInfo-1').html()).toBe('Dit product is tijdelijk niet meer op voorraad.');
 			
 			$('.product-1').remove();
 		});
@@ -205,7 +205,7 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 			
 			expect($('.product-1 .skuInfo-1').attr('inStock')).toBe('false');
 			expect($('.product-1 .skuInfo-1').attr('skuNumber')).toBe('123456-40');
-			expect($('.product-1 .skuInfo-1').html()).toBe('Dit product is niet meer op voorraad.');
+			expect($('.product-1 .skuInfo-1').html()).toBe('Dit product is tijdelijk niet meer op voorraad.');
 			
 			$('.product-1').remove();
 		});

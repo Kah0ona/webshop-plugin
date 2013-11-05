@@ -122,7 +122,8 @@ class GenericModel {
 		$quantity = $pro->amount;
 		$price = $pro->productPrice;
 		$VAT = $pro->productVAT;
-
+		$productDeliveryTime = $pro->productDeliveryTime;
+		
 		$options = array();
 		if($pro->ProductOption != null)
 			$options = $pro->ProductOption;		
@@ -145,7 +146,8 @@ class GenericModel {
 			"price"=> $price,
 			"VAT" => $VAT,
 			"ProductOption"=> $options,
-			"SKU"=> $skus
+			"SKU"=> $skus,
+			"productDeliveryTime" => $productDeliveryTime
 		);
 		if($getString){
 			return json_encode($jsonObj);				
