@@ -167,6 +167,7 @@
 				   // this.addExtraProducts(,event); //aanvullingen
 				    self.updatePrices();
 				    $('.product-added').removeClass('hidden');
+				    self.createAutoClosingAlert();
 			    }
 		   });
 		   
@@ -806,14 +807,6 @@
 	    hideValidationError : function(){
 			$('#validation-error').addClass('hidden');	    
 	    },	    
-	    createAutoClosingAlert : function(selector, delay) {
-	    	$(selector).html('<div class="the-alert alert alert-info fade in">' +
-	    						 '<button data-dismiss="alert" class="close" type="button">×</button>' +
-	    						 '<p>Product toegevoegd aan de bestelling.</p>' +
-	    					 '</div>');
-		    var alert = $('.the-alert').alert();
-		    window.setTimeout(function() { alert.alert('close') }, delay);
-   		},
 	    checkCoupon : function(callback){
 			$('#discount-text').html('Controleren couponcode…').addClass('hidden');
 			if($('#coupon').val() == null || $('#coupon').val() == "" || $('#coupon').val() == undefined)
@@ -838,7 +831,20 @@
 				dataType: 'jsonp'
 			});		
 		},   		
-   		
+   		createAutoClosingAlert : function() {
+   			var delay = 2000;
+   			var containerDiv = $('<div class="product-added-popup"></div>');
+   			containerDiv.appendTo('body');
+	    	containerDiv.html('<div class="the-alert alert alert-info fade in">' +
+	    						 '<button data-dismiss="alert" class="close" type="button">×</button>' +
+	    						 '<p>Product toegevoegd aan de bestelling.</p>' +
+	    					 '</div>');
+		    var alert = $('.the-alert').alert();
+		    window.setTimeout(function() { 
+		    	alert.alert('close'); 
+		    	$('.product-added-popup').remove(); 
+		    }, delay);
+   		},
    		
    		clearCart : function(){
 	    	this.logger("Clearing cart!");

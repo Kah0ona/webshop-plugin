@@ -74,3 +74,12 @@ td.text-right {
 .product-overview .share-product {
 	display: none !important;
 }
+
+
+.the-alert {
+	position: fixed;
+	right: 20px;
+	top: 50px;
+	width: 230px;
+	z-index: 999999;
+}

@@ -85,7 +85,7 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 			expect($.ajax.calls.length).toBe(3); //load, save, save of adding product twice.
 			
 		});
-		
+
 	});
 	
 	describe('Removing products testsuite.', function(){

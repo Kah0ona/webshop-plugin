@@ -343,7 +343,16 @@ class SytematicWebshop {
 	public function modify_title_tag($title){
 		$suffix = ' | '.get_bloginfo();
 		if($this->isProductPage() && $this->productModel->isDetailPage()){
-			return $this->productModel->getData()->productName.$suffix;
+			$product = $this->productModel->getData();
+			
+			$brand = '';
+			if($product->brand != null)
+				$brand = $product->brand.' ';
+
+		
+			$prod = $brand.$product->productName;
+		
+			return $prod.$suffix;
 		}
 		if($this->isCategoryPage() && $this->categoryModel->isDetailPage()) {
 			return $this->categoryModel->getData()->categoryName.$suffix;
