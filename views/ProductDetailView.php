@@ -4,6 +4,12 @@
 */
 class ProductDetailView extends GenericView {
 
+	protected $shouldRenderBackLink = true;
+	
+	public function setShouldRenderBackLink($b){
+		$this->shouldRenderBackLink = $b;
+	}
+
 	public function containsProductWithExtraPrice($options){
 		if($options == null) return false;
 		$ret = false;
@@ -42,9 +48,14 @@ class ProductDetailView extends GenericView {
 		if($data == null)
 			$data = $this->model->getData();
 			
-		$this->renderBackLink();
+		if($this->shouldRenderBackLink)
+			$this->renderBackLink();
 
-		if($data != null){  ?>
+
+		if($data != null){ ?>
+				
+
+		
 			<script type="text/javascript">
 				webshopProducts = <?php echo $this->model->encodeProductToJson($data); ?>;
 				
@@ -98,6 +109,8 @@ class ProductDetailView extends GenericView {
 					});
 
 				});
+				
+
 			</script>
 		
 			<div class="single-product product-<?php echo $data->Product_id; ?>" data-productid="<?php echo $data->Product_id; ?>" itemscope itemtype="http://schema.org/Product">
@@ -105,7 +118,13 @@ class ProductDetailView extends GenericView {
 					<div class="span8 product-image">
 						<?php if($data->imageDish != null && $data->imageDish != "/uploads/Product" && $data->imageDish != '') { ?>
 						<img itemprop="image" alt="<?php echo $data->productName; if($data->productNumber != null){ echo ' '.$data->productNumber; } if($data->brand != null){ echo ' '.$data->brand; } ?>" src="<?php echo SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$data->imageDish; ?>"  />
-						<?php } ?>
+						<?php } elseif($this->model->getOptions()->getOption('NoImage') != null) { ?>
+						<img itemprop="image" 
+							 alt="<?php echo $data->productName; if($data->productNumber != null){ echo ' '.$data->productNumber; } if($data->brand != null){ echo ' '.$data->brand; } ?>" 
+							 src="<?php echo $this->model->getOptions()->getOption('NoImage'); ?>"  />	
+							
+							
+						<?php }?>
 					</div>
 					
 					<div class="span4">

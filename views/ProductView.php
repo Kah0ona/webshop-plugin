@@ -150,7 +150,13 @@ class ProductView extends GenericView {
 		 	<a href="<?php echo $this->getDetailLink($product); ?>">
 			 	<img src="<?php echo SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$product->imageDish; ?>" />
 		 	</a>
-		 	<?php } ?>
+		 	<?php } elseif($this->model->getOptions()->getOption('NoImage') != null ) { ?>
+						<img itemprop="image" 
+							 alt="<?php echo $data->productName; if($data->productNumber != null){ echo ' '.$data->productNumber; } if($data->brand != null){ echo ' '.$data->brand; } ?>" 
+							 src="<?php echo $this->model->getOptions()->getOption('NoImage'); ?>"  />	
+							
+							
+			<?php }?>
 		 </div>
 		 <div class="product-data-container">
 			 <div class="product-title product-title-<?php echo $product->Product_id; ?>" itemprop="name">

@@ -62,7 +62,7 @@ class SytematicWebshop {
 		// Load plugin text domain
 		add_action('init', array( $this, 'plugin_textdomain' ) );
 		add_action('init', array($this, 'load_options'));
-		add_action('template_redirect', array(&$this,'template_redirect'));
+		add_action('template_redirect', array($this,'template_redirect'));
 
 		add_filter('the_posts', array($this, 'init_models'));
 		add_filter('plugins_loaded', array($this,'start_session')); //first code to be executed.
@@ -105,10 +105,23 @@ class SytematicWebshop {
 	
 
 	public function template_redirect() {
-		if($this->is_webshop_page()){
-			//todo			
-		}
-	}
+		/*global $wp_query;
+		if($wp_query->is_404){
+			 $wp_query->is_404=false;
+			 $wp_query->is_archive=false;
+			 print_r($wp_query); exit;
+		}*/
+		
+
+	   // header($_SERVER['SERVER_PROTOCOL'].' 200 OK');
+	    // now get the 'categories' page
+	    
+	    // render that using the normal flow
+	    
+	    // on some other point in the code: 
+	    // The normal url observers should now look at the last number in the url, and fetch that as a category, ie. set that in the models. 
+		//exit;
+  	}
 	
 	public function is_webshop_page(){
 		$url = $_SERVER['REDIRECT_URL'];
@@ -286,9 +299,9 @@ class SytematicWebshop {
 			}
 
 			$ret .= "<meta property=\"og:type\" content=\"og:product\"/>\n";
-			$ret .="<meta property=\"og:title\" content=\"".$this->cleanUpText($p)."\" />\n";
-			$ret .="<meta property=\"og:description\" content=\"".$this->cleanUpText($product->productDesc)."\" />\n";
-			$ret .="<meta property=\"og:image\" content=\"".SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$product->imageDish."\" />\n";
+			$ret .= "<meta property=\"og:title\" content=\"".$this->cleanUpText($p)."\" />\n";
+			$ret .= "<meta property=\"og:description\" content=\"".$this->cleanUpText($product->productDesc)."\" />\n";
+			$ret .= "<meta property=\"og:image\" content=\"".SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$product->imageDish."\" />\n";
 			$ret .= "<meta property=\"og:url\" content=\"".get_site_url()."/products/".$product->Product_id."/#".$product->productName."\"/>\n";
 			$ret .= "<meta property=\"og:site_name\" content=\"".get_bloginfo()."\"/>\n";
 			$ret .= "<meta property=\"product:price:amount\" content=\"".$product->productPrice."\"/>\n";
@@ -307,17 +320,7 @@ class SytematicWebshop {
 		$cont = preg_replace('/[*_]/', '', $cont);
 		$cont = str_replace('"', "''", $cont);
 
-		/*
-<meta property="og:description" content="Watch the AddThis Tour video." />  
-<meta property="og:image" content="http://i2.ytimg.com/vi/1F7DKyFt5pY/default.jpg" /> 
-<meta property="og:video" content="http://www.youtube.com/v/1F7DKyFt5pY&fs=1" /> 
-<meta property="og:video:width" content="560" />  
-<meta property="og:video:height" content="340" />  
-<meta property="og:video:type" content="application/x-shockwave-flash" /> 		
-		*/
-
 		echo $ret;
-
 	}
 	
 	public function init_cart(){
@@ -473,6 +476,11 @@ class SytematicWebshop {
 	 */	
 	public function register_admin_scripts() {
 		wp_enqueue_script( 'sytematic-webshop-admin-script', plugins_url( '/webshop-plugin/js/admin.js' ) );
+		if (isset($_GET['page']) && $_GET['page'] == 'sytematic-webshop') {
+	        wp_enqueue_media();
+	        wp_register_script('file-upload-js', WP_PLUGIN_URL.'/webshop-plugin/js/file.upload.js', array('jquery'));
+	        wp_enqueue_script('file-upload-js');
+		}		
 	} // end register_admin_scripts
 	
 	/**
@@ -596,7 +604,8 @@ class SytematicWebshop {
 		extract(shortcode_atts(
 			array(
 				'render_options_on_overview'=>'false',
-				'numcols'=>'3'
+				'numcols'=>'3',
+				'id'=>null
 			), $atts)
 		);
 		
@@ -604,9 +613,23 @@ class SytematicWebshop {
 		$disableOverview = $this->options->getOption('productoverview_disabled') === 'true';
 		ob_start();
 	
-		if($this->productModel->isDetailPage()) {
+		if($id !=null && is_numeric($id)) {
+			$prodId = $id;			
+			if($this->productModel == null){
+				include_once('models/ProductModel.php');
+				$this->productModel = new ProductModel($this->hostname);
+				$this->productModel->setOptions($this->options);
+			}
+			$this->productModel->setId($id);
+			$this->productModel->fetchProduct();
+		}
+
+		$idSetInShortCode = ($prodId != null && is_numeric($prodId) && $prodId > 0);
+	
+		if($this->productModel->isDetailPage() || $idSetInShortCode) {
 			include_once('views/ProductDetailView.php');
 			$v = new ProductDetailView($this->productModel);
+			$v->setShouldRenderBackLink(!$idSetInShortCode);
 			$v->render();
 		}
 		else {

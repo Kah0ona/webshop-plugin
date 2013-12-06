@@ -214,6 +214,7 @@ class CheckoutModel extends GenericModel {
 		$ret = array();
 		$ret[] = 'AMOUNT='.round($this->totalPrice*100);
 		$ret[] = 'CURRENCY=EUR';
+		$ret[] = 'CN='.$_POST['firstname'].' '.$_POST['surname'];
 		$ret[] = 'LANGUAGE=nl_NL';
 		$ret[] = 'ORDERID='.$this->insertedOrderId;
 		$ret[] = 'PSPID='.$this->options->getOption('hostname');

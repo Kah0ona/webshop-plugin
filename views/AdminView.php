@@ -36,7 +36,7 @@ class AdminView extends GenericView {
 		  $this->add_cs_field('address','Adres van uw zaak (formaat: Kalverstraat 12 1234AB Amsterdam):');
 		  $this->add_cs_field('cart_class', 'CSS-class van het winkelwagentje:');
   		  $this->add_cs_field('nested_category_level','Aantal niveau\'s in categorie widget');
-  		  
+  		  $this->add_cs_field_upload('NoImage', 'Toon dit plaatje indien er geen plaatje bij een product zit');
   		  $this->add_cs_field_select('ShowProductsInStock', 'Producten die niet op voorraad zijn:', array('show'=>'Tonen met melding', 'hide'=>'Verbergen'));
 		  $this->add_cs_field_boolean('show_brand', 'Toon merk van product (indien ingevuld)');		 
 		  $this->add_cs_field_boolean('show_color', 'Toon kleur van product (indien ingevuld)');		  
@@ -68,6 +68,12 @@ class AdminView extends GenericView {
 			array('name'=>$name, 'type'=>$type, 'size'=>$size)
 		);
 	}
+	
+	
+	public function add_cs_field_upload($name, $title){
+		add_settings_field('sytematic_webshop_'.$name, $title, array($this, 'cateringsoftware_add_setting_field_upload'), 'sytematic-webshop', 'sytematic_webshop_main_options', array('name'=>$name));	
+	}
+	
 	
 	public function add_cs_field_boolean($name,$title){
 			add_settings_field('sytematic_webshop_'.$name, $title, array($this, 'cateringsoftware_add_setting_field_boolean'), 'sytematic-webshop', 'sytematic_webshop_main_options', 
@@ -117,5 +123,15 @@ class AdminView extends GenericView {
 		echo $ret;
 	}
 
+
+	public function cateringsoftware_add_setting_field_upload($args){
+		$name = $args['name'];
+		$options = $this->model->getOptions();	  
+		
+		echo '<div class="uploader">
+				  <input type="text" name="sytematic_webshop['.$name.']" id="sytematic_webshop_'.$name.'" value="'.$options[$name].'" />
+				  <input class="button webshop-upload-button" name="sytematic_webshop_button_'.$name.'" id="sytematic_webshop_button_'.$name.'" value="Upload" />
+				</div>';	  
+	}
 }
 ?>
