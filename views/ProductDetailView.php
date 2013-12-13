@@ -41,7 +41,7 @@ class ProductDetailView extends GenericView {
 
  //       $parser->no_markup = true;
    //     $parser->no_entities = true;
-	    return Markdown($text);
+	    return nl2br(Markdown($text));
 	}
 
 	public function render($data=null) { 
@@ -57,7 +57,11 @@ class ProductDetailView extends GenericView {
 
 		
 			<script type="text/javascript">
-				webshopProducts = <?php echo $this->model->encodeProductToJson($data); ?>;
+				if(webshopProducts == null || webshopProducts == undefined){
+					webshopProducts = [];
+			    }
+						
+				webshopProducts.push(<?php echo $this->model->encodeProductToJson($data); ?>);
 				
 			</script>
 			<script type="text/javascript">
@@ -145,7 +149,7 @@ class ProductDetailView extends GenericView {
 								<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 									<p class="product-price" itemprop="price">
 									<?php if($this->containsProductWithExtraPrice($data->ProductOption)) { echo 'vanaf '; } ?>
-										€ <?php echo $this->formatMoney($data->productPrice); ?>
+										€ <?php echo $this->formatMoney($this->model->calculateProductPrice($data)); ?>
 									</p>
 									<meta itemprop="priceCurrency" content="EUR" />
 									<link itemprop="availability" href="http://schema.org/InStock" />
@@ -226,7 +230,7 @@ class ProductDetailView extends GenericView {
 										id="ProductOptionValueName_<?php echo $v->ProductOptionValue_id; ?>">
 											<?php echo $v->optionValue; ?>
 									<?php if($v->extraPrice !== null) { ?>
-										(€ <?php echo $this->formatMoney($data->productPrice+$v->extraPrice); ?>)
+										(€ <?php echo $this->formatMoney($this->model->calculatePriceWithOption($data, $v->extraPrice)); ?>)
 									<?php } ?>
 								</option>
 							<?php } ?>

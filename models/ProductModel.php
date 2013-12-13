@@ -126,7 +126,24 @@ class ProductModel extends GenericModel {
 			return false;
 		}
 	}
+	
+	public function calculateProductPrice($product){
+		$discFactor = 1;
+		if($product->productDiscount != null){
+			$discFactor = 1 - ($product->productDiscount/100);
+		}
 		
+		return $product->productPrice * $discFactor;
+	}
+	
+	public function calculatePriceWithOption($product, $extraPrice){
+		$discFactor = 1;
+		if($product->productDiscount != null){
+			$discFactor = 1 - ($product->productDiscount/100);
+		}
+		
+		return ($product->productPrice+$extraPrice) * $discFactor;
+	}
 		
 	/**
 	* Fetches the category with the id currently set by $this->setId(), or set by a previous call to $this->isDetailPage(); 

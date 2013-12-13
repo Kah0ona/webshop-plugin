@@ -67,7 +67,7 @@ class ProductView extends GenericView {
 	protected function renderScript(){
 		?>
 		<script type="text/javascript">
-			webshopProducts = 
+			var tmp = 
 			
 			<?php 
 				$ret = array();
@@ -76,7 +76,12 @@ class ProductView extends GenericView {
 				}
 				
 				echo '['.implode($ret, ',').']';
-			?>
+			?>;
+			
+			for(var i = 0; i < tmp.length; i++){
+				webshopProducts.push(tmp[i]);
+			}
+			
 		</script>
 		<?php
 	}
@@ -171,7 +176,7 @@ class ProductView extends GenericView {
 				 <div class="product-price product-price-<?php echo $product->Product_id; ?>" itemprop="price">
 				 	<?php if($this->containsProductWithExtraPrice($product->ProductOption)){ echo 'vanaf '; } ?>
 				 	
-				 	€ <?php echo $this->formatMoney($product->productPrice); ?>
+				 	€ <?php echo $this->formatMoney($this->model->calculateProductPrice($product)); ?>
 				 </div>
 				 <meta itemprop="priceCurrency" content="EUR" />
 				 <link itemprop="availability" href="http://schema.org/InStock" />

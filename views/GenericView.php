@@ -15,6 +15,8 @@ abstract class GenericView {
 		 return money_format('%.2n', $amount);
 	}
 	
+
+	
 	public function renderBackLink(){
 	
 		?>

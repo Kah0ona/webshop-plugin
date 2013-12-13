@@ -40,7 +40,13 @@ class CheckoutView extends GenericView {
 				}
 			}
 		}
-		return $product->price + $optionPrice;
+		
+		$discountFactor = 1;
+		if($product->discount != null){
+			$discountFactor = 1-($product->discount/100);
+		}
+		
+		return $discountFactor * ($product->price + $optionPrice);
 	}
 	
 	private function renderDeliveryMethod() {

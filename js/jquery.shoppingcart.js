@@ -178,21 +178,15 @@
 		    });
 	    },
 	    lookupProduct: function(productId){
-	    	if(webshopProducts instanceof Array) {
-	    		for(var i = 0; i < webshopProducts.length; i++){
-	    			var prod = webshopProducts[i];
-	    			
-		    		if(prod.Product_id == productId){
-			    		return prod;
-		    		}
+    		for(var i = 0; i < webshopProducts.length; i++){
+    			var prod = webshopProducts[i];
+    			
+	    		if(prod.Product_id == productId){
+		    		return prod;
 	    		}
-	    		
-	    		return null;
-	    	}
-	    	else { //detailpage
-		    	return webshopProducts;
-	    	}
-
+    		}
+    		
+    		return null;
 	   	},
 	   	updateInStockMessage : function(event, productId){
 	   		this.logger('updateInStockMessage');
@@ -206,14 +200,7 @@
 	   			elt = $(event.currentTarget);
 	   			optionValue = parseInt(elt.val());
 	   		}
-
-			if(webshopProducts instanceof Array){
-				prods = webshopProducts;
-			} else {
-				prods = [];
-				prods.push(webshopProducts);
-			}
-
+	   		var prods = webshopProducts;
 			for(var i = 0; i < prods.length; i++){
 				var prod = prods[i];
 				if(productId != null && prod.Product_id != productId) {
@@ -539,21 +526,27 @@
 	    		var currentPrice = 0;
 
 
-
 	    		var p = parseFloat(obj.price);
 	    		currentPrice = p * parseInt(obj.quantity);
 	    		var optionsPrice = this.addOptionPrices(obj);
-	    			    		
-	    		totalInclVat += currentPrice;
-	    		totalInclVat += optionsPrice;
+	    		
+	    		var productDiscountFactor = 1;
+	    		
+	    		if(obj.discount != null){
+		    		productDiscountFactor = 1-(parseFloat(obj.discount)/100);
+	    		}
+	    		
+	    		var prodPrice = (currentPrice + optionsPrice) * productDiscountFactor;
+	    	
+	    		totalInclVat += prodPrice;
 	    		
 	    		//update vatMap
     			if(vatMap["x"+obj.VAT] == null || vatMap["x"+obj.VAT] == undefined){
 	    			vatMap["x"+obj.VAT] = 0;
 	    		}
 
-	    		this.logger("updating vatMap with: "+ parseFloat(currentPrice+optionsPrice));
-	    		vatMap["x"+obj.VAT] += parseFloat(currentPrice+optionsPrice);
+	    		this.logger("updating vatMap with: "+ parseFloat(prodPrice));
+	    		vatMap["x"+obj.VAT] += parseFloat(prodPrice);
 	    		
 	    		
 	    	}
