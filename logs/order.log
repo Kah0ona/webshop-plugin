@@ -3013,3 +3013,48 @@
 2013-10-23 09:20:34: returnUrl: http://localhost/~marten/wordpress/success
 2013-10-23 09:20:34: notifyUrl: http://webshopdev.sytematic.nl/public/sisow_notifications
 2013-10-23 09:20:36: Setting redirect url: https://www.sisow.nl/Sisow/iDeal/Simulator.aspx?merchantid=2537507457&txid=TEST080489848946&sha1=ba05b0d02dbdaedb7b6c8097d5f57ae6c56b80ee
+2013-12-12 10:00:26: -------
+2013-12-12 10:00:26: Processing cart: 
+2013-12-12 10:00:26: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","discount":"10","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"2","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"41"}],"SKU":[{"SKU_id":"14","skuNumber":"123456-40","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"1","optionValue":"40","ProductOption_id":"1"}],"Product_id":"1"},{"SKU_id":"15","skuNumber":"123456-41","skuQuantity":"1","ProductOptionValue":[{"ProductOptionValue_id":"2","optionValue":"41","ProductOption_id":"1"}],"Product_id":"1"},{"SKU_id":"16","skuNumber":"123456-42","skuQuantity":"2","ProductOptionValue":[{"ProductOptionValue_id":"3","optionValue":"42","ProductOption_id":"1"}],"Product_id":"1"},{"SKU_id":"17","skuNumber":"123456-43","skuQuantity":"4","ProductOptionValue":[{"ProductOptionValue_id":"4","optionValue":"43","ProductOption_id":"1"}],"Product_id":"1"},{"SKU_id":"18","skuNumber":"123456-44","skuQuantity":"3","ProductOptionValue":[{"ProductOptionValue_id":"5","optionValue":"44","ProductOption_id":"1"}],"Product_id":"1"}],"productDeliveryTime":"","sku":{"SKU_id":"15","skuNumber":"123456-41","skuQuantity":"1","ProductOptionValue":[{"ProductOptionValue_id":"2","optionValue":"41","ProductOption_id":"1"}],"Product_id":"1"}}]
+2013-12-12 10:00:26: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 
+    [number] => 62b
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => Overijssel
+    [email] => marten@sytematic.nl
+    [phone] => 31649343492
+    [VATnumber] => 
+    [deliveryName] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => test met korting bestelling.
+    [coupon] => 
+    [payment-method] => 1
+    [issuerid] => 99
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","discount":"10","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"2","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"41"}],"SKU":[{"SKU_id":"14","skuNumber":"123456-40","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"1","optionValue":"40","ProductOption_id":"1"}],"Product_id":"1"},{"SKU_id":"15","skuNumber":"123456-41","skuQuantity":"1","ProductOptionValue":[{"ProductOptionValue_id":"2","optionValue":"41","ProductOption_id":"1"}],"Product_id":"1"},{"SKU_id":"16","skuNumber":"123456-42","skuQuantity":"2","ProductOptionValue":[{"ProductOptionValue_id":"3","optionValue":"42","ProductOption_id":"1"}],"Product_id":"1"},{"SKU_id":"17","skuNumber":"123456-43","skuQuantity":"4","ProductOptionValue":[{"ProductOptionValue_id":"4","optionValue":"43","ProductOption_id":"1"}],"Product_id":"1"},{"SKU_id":"18","skuNumber":"123456-44","skuQuantity":"3","ProductOptionValue":[{"ProductOptionValue_id":"5","optionValue":"44","ProductOption_id":"1"}],"Product_id":"1"}],"productDeliveryTime":"","sku":{"SKU_id":"15","skuNumber":"123456-41","skuQuantity":"1","ProductOptionValue":[{"ProductOptionValue_id":"2","optionValue":"41","ProductOption_id":"1"}],"Product_id":"1"}}]
+    [orderStatus] => nieuw
+    [PaymentMethod_id] => 1
+    [viaSite] => true
+)
+
+2013-12-12 10:00:26: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+&number=62b&postcode=2518EE&city=Den+Haag&country=Overijssel&email=marten%40sytematic.nl&phone=31649343492&VATnumber=&deliveryName=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=test+met+korting+bestelling.&coupon=&payment-method=1&issuerid=99&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22discount%22%3A%2210%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%222%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2241%22%7D%5D%2C%22SKU%22%3A%5B%7B%22SKU_id%22%3A%2214%22%2C%22skuNumber%22%3A%22123456-40%22%2C%22skuQuantity%22%3A%220%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%221%22%2C%22optionValue%22%3A%2240%22%2C%22ProductOption_id%22%3A%221%22%7D%5D%2C%22Product_id%22%3A%221%22%7D%2C%7B%22SKU_id%22%3A%2215%22%2C%22skuNumber%22%3A%22123456-41%22%2C%22skuQuantity%22%3A%221%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%222%22%2C%22optionValue%22%3A%2241%22%2C%22ProductOption_id%22%3A%221%22%7D%5D%2C%22Product_id%22%3A%221%22%7D%2C%7B%22SKU_id%22%3A%2216%22%2C%22skuNumber%22%3A%22123456-42%22%2C%22skuQuantity%22%3A%222%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%223%22%2C%22optionValue%22%3A%2242%22%2C%22ProductOption_id%22%3A%221%22%7D%5D%2C%22Product_id%22%3A%221%22%7D%2C%7B%22SKU_id%22%3A%2217%22%2C%22skuNumber%22%3A%22123456-43%22%2C%22skuQuantity%22%3A%224%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%224%22%2C%22optionValue%22%3A%2243%22%2C%22ProductOption_id%22%3A%221%22%7D%5D%2C%22Product_id%22%3A%221%22%7D%2C%7B%22SKU_id%22%3A%2218%22%2C%22skuNumber%22%3A%22123456-44%22%2C%22skuQuantity%22%3A%223%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%225%22%2C%22optionValue%22%3A%2244%22%2C%22ProductOption_id%22%3A%221%22%7D%5D%2C%22Product_id%22%3A%221%22%7D%5D%2C%22productDeliveryTime%22%3A%22%22%2C%22sku%22%3A%7B%22SKU_id%22%3A%2215%22%2C%22skuNumber%22%3A%22123456-41%22%2C%22skuQuantity%22%3A%221%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%222%22%2C%22optionValue%22%3A%2241%22%2C%22ProductOption_id%22%3A%221%22%7D%5D%2C%22Product_id%22%3A%221%22%7D%7D%5D&orderStatus=nieuw&PaymentMethod_id=1&viaSite=true&orderType=invoice
+2013-12-12 10:00:30: Returned value from /orders:
+2013-12-12 10:00:30: stdClass Object
+(
+    [Order__id] => 75
+    [totalPrice] => 114.95
+)
+
+2013-12-12 10:00:30: Inserted Order id: 75

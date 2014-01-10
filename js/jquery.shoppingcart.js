@@ -448,7 +448,7 @@
 								 '<span class="product-remove"><a href="#" '+removeclass+' '+selected_options_attr+' class="removefromcart">&times;</a></span>'+
 								 '<div style="clear: both"></div>'
 							'</li>';
-		    	} 
+		    	}    
 		    	str = this.getTemplate(productsHtml);
 	    	}
 	    	
@@ -532,7 +532,7 @@
 	    		
 	    		var productDiscountFactor = 1;
 	    		
-	    		if(obj.discount != null){
+	    		if(obj.discount != null && obj.discount != ""){
 		    		productDiscountFactor = 1-(parseFloat(obj.discount)/100);
 	    		}
 	    		
@@ -552,6 +552,10 @@
 	    	}
 	    	
 	    	this.renderDeliveryMethodAndCostsOnCheckout(vatMap, totalInclVat);
+			
+			if(vatMap["x0.21"] == undefined || vatMap["x0.21"] == null){
+				vatMap["x0.21"] = 0.0;
+			}
 			
 			vatMap["x0.21"] += parseFloat(deliveryCosts.price);
 	    	totalInclVat    += parseFloat(deliveryCosts.price);

@@ -10,6 +10,7 @@ class CartInitializerView extends GenericView {
 		if($options == null) return;
 		?>
 		<script type="text/javascript">
+		webshopProducts = [];
 		jQuery(document).ready(function($){
 			$('#shoppingcart').shoppingCart({
 				'session_url' : '<?php echo  get_site_url(); ?>/wp-content/plugins/webshop-plugin/models/CartStore.php'	,		

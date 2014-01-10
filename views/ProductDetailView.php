@@ -92,9 +92,10 @@ class ProductDetailView extends GenericView {
 					}
 					
 					function replaceSomeWords(str){
-						str = str.replace(/Geaccepteerd wordt:/g, '<span class="greenaccept">Geaccepteerd wordt:</span>');
-						str = str.replace(/Niet geaccepteerd wordt:/g, '<span class="redaccept">Niet geaccepteerd wordt:</span>');
-
+						if(str != null) {
+							str = str.replace(/Geaccepteerd wordt:/g, '<span class="greenaccept">Geaccepteerd wordt:</span>');
+							str = str.replace(/Niet geaccepteerd wordt:/g, '<span class="redaccept">Niet geaccepteerd wordt:</span>');
+						}
 						return str;
 					}
 					
