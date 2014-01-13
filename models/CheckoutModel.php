@@ -196,7 +196,6 @@ class CheckoutModel extends GenericModel {
 				<input type="hidden" name="EMAIL" value="'.$_POST['email'].'"/>
 				<input type="hidden" name="ownerZIP" value="'.$_POST['postcode'].'"/>
 				<input type="hidden" name="owneraddress" value="'.$_POST['street'].'"/>
-				<input type="hidden" name="ownercty" value="'.$_POST['city'].'"/>
 				<input type="hidden" name="ownertown" value="'.$_POST['city'].'"/>
 				<input type="hidden" name="ownertelno" value="'.$_POST['phone'].'"/>
 				<input type="hidden" name="SHASign" value="'.$sha.'"/>
@@ -205,6 +204,8 @@ class CheckoutModel extends GenericModel {
 				<input type="hidden" name="exceptionurl" value="'.site_url().'/success?status=Exception"/>
 				<input type="hidden" name="cancelurl" value="'.site_url().'/success?status=Cancelled"/>
 			</form>';
+			
+		//				<input type="hidden" name="ownercty" value="'.$_POST['city'].'"/> <-- this is probably country nog city!!!	
 		return $ret;
 	}
 	
@@ -221,7 +222,7 @@ class CheckoutModel extends GenericModel {
 		$ret[] = 'EMAIL='.$_POST['email'];
 		$ret[] = 'OWNERZIP='.$_POST['postcode'];
 		$ret[] = 'OWNERADDRESS='.$_POST['street'];
-		$ret[] = 'OWNERCTY='.$_POST['city'];
+		//$ret[] = 'OWNERCTY='.$_POST['city']; <-- this probably country, not city
 		$ret[] = 'OWNERTOWN='.$_POST['city'];
 		$ret[] = 'OWNERTELNO='.$_POST['phone'];
 		$ret[] = 'ACCEPTURL='.site_url().'/success?status=Success';
