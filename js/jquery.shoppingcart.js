@@ -120,7 +120,7 @@
 				});
 			});
 
-			$('.address-line, .address-line-elsewhere').bind('change.shoppingCart', function(){
+			$('body').on('change.shoppingCart', '.address-line, .address-line-elsewhere', function(){
 		    	var compareToAddress = '';
 		    	var compareToAddress2="";
 		    	
@@ -160,7 +160,7 @@
     			self.updatePrices();
 		    });
 		    
-		    $('.addtocart').on('click.shoppingCart', function(event){
+		    $('body').on('click.shoppingCart', '.addtocart', function(event){
 		    	event.preventDefault();
 			    var b = self.addProduct(event);
 	    		if(b){
