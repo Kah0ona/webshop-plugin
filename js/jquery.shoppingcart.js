@@ -311,7 +311,7 @@
 
 				quant = parseInt($('#product-amount-'+prodId).val());
 	  			
-		    	productRef = this.lookupProduct(prodId);
+		    	var productRef = this.lookupProduct(prodId);
 
 		    	if(productRef == null){
 			    	this.logger("FATAL: product data is not embedded in page!");
@@ -503,10 +503,10 @@
     			var cur = productInSite.ProductOption[i];
     			var optionSelectObj = {};
     			optionSelectObj.ProductOption_id = cur.ProductOption_id;
-    			optionSelectObj.ProductOptionValue_id = $('#ProductOption_'+cur.ProductOption_id).val();
-    			optionSelectObj.optionName = $('#ProductOptionName_'+cur.ProductOption_id).html();
+    			optionSelectObj.ProductOptionValue_id = $('.product-'+product.Product_id+' #ProductOption_'+cur.ProductOption_id).val();
+    			optionSelectObj.optionName = $('.product-'+product.Product_id+' #ProductOptionName_'+cur.ProductOption_id).html();
 
-    			optionSelectObj.extraPrice = $('#ProductOptionValueName_'+optionSelectObj.ProductOptionValue_id).attr('extraPrice');
+    			optionSelectObj.extraPrice = $('.product-'+product.Product_id+' #ProductOptionValueName_'+optionSelectObj.ProductOptionValue_id).attr('extraPrice');
     			var valName = $('#ProductOptionValueName_'+optionSelectObj.ProductOptionValue_id).attr('valueName');
     			optionSelectObj.optionValueName = valName;
     			this.logger("adding product option: ");
@@ -764,6 +764,7 @@
 	    	this.logger("total option price: "+ret);
 	    	return ret * parseInt(obj.quantity);
 	    },
+	    
 	    formatEuro : function(price){
 			Number.prototype.formatMoney = function(c, d, t){
 			var n = this, c = isNaN(c = Math.abs(c)) ? 2 : c, d = d == undefined ? "," : 
@@ -778,7 +779,8 @@
 			};
 		
 			return price.formatMoney(2,',','.');
-		},	    
+		},	
+		    
 	    getTemplate : function(content){
     
 			var str='<ul class="nav pull-right">'+

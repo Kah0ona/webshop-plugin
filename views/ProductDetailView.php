@@ -72,10 +72,10 @@ class ProductDetailView extends GenericView {
 					}
 				
 					function findProductTextByOptionValue(optionValue){
-						if(webshopProducts.ProductOption == null){ return null; }
+						if(webshopProducts[0].ProductOption == null){ return null; }
 						
-						for(var i = 0 ; i < webshopProducts.ProductOption.length ; i++){
-							var cur = webshopProducts.ProductOption[i];
+						for(var i = 0 ; i < webshopProducts[0].ProductOption.length ; i++){
+							var cur = webshopProducts[0].ProductOption[i];
 							for(var j = 0 ; j < cur.ProductOptionValue.length ; j++){
 								var cur2 = cur.ProductOptionValue[j];
 								if(parseInt(cur2.ProductOptionValue_id) == parseInt(optionValue)){
@@ -121,6 +121,10 @@ class ProductDetailView extends GenericView {
 			<div class="single-product product-<?php echo $data->Product_id; ?>" data-productid="<?php echo $data->Product_id; ?>" itemscope itemtype="http://schema.org/Product">
 				<div class="row-fluid">
 					<div class="span8 product-image">
+						<?php if($product->productDiscount != null){ ?>
+							<div class="product-discount-label">-<?php echo $product->productDiscount; ?>%</div>
+			 			<?php } ?>
+					
 						<?php if($data->imageDish != null && $data->imageDish != "/uploads/Product" && $data->imageDish != '') { ?>
 						<img itemprop="image" alt="<?php echo $data->productName; if($data->productNumber != null){ echo ' '.$data->productNumber; } if($data->brand != null){ echo ' '.$data->brand; } ?>" src="<?php echo SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$data->imageDish; ?>"  />
 						<?php } elseif($this->model->getOptions()->getOption('NoImage') != null) { ?>
@@ -148,6 +152,12 @@ class ProductDetailView extends GenericView {
 									<?php echo $this->doMarkdown($data->productDesc); ?>
 								</p>
 								<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+									<?php if($product->productDiscount != null){ ?>
+									<p class="product-price-from product-price-from-<?php echo $product->Product_id; ?>">
+										<del>€ <?php echo $this->formatMoney($product->productPrice); ?></del>
+									</p>
+									<?php } ?>
+								
 									<p class="product-price" itemprop="price">
 									<?php if($this->containsProductWithExtraPrice($data->ProductOption)) { echo 'vanaf '; } ?>
 										€ <?php echo $this->formatMoney($this->model->calculateProductPrice($data)); ?>

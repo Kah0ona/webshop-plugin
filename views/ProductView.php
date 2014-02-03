@@ -151,7 +151,10 @@ class ProductView extends GenericView {
 	 public function renderProduct($product, $productModel=null){  ?>
 		 <!-- Rendering single product -->
 		 <div class="product-image">
-			<?php if($product->imageDish != null && $product->imageDish != "/uploads/Product" && $product->imageDish != '') { ?>
+		 	<?php if($product->productDiscount != null){ ?>
+			 	<div class="product-discount-label">-<?php echo $product->productDiscount; ?>%</div>
+		 	<?php } ?>
+ 			<?php if($product->imageDish != null && $product->imageDish != "/uploads/Product" && $product->imageDish != '') { ?>
 		 	<a href="<?php echo $this->getDetailLink($product); ?>">
 			 	<img src="<?php echo SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$product->imageDish; ?>" />
 		 	</a>
@@ -172,6 +175,12 @@ class ProductView extends GenericView {
 				 <?php if($product->priceOnDemand) {  ?>
 					 <div class="product-price product-price-<?php echo $product->Product_id; ?> price-on-demand">Prijs op aanvraag, <br/>zie details.</div>
 				 <?php } else { ?>
+		
+				 <?php if($product->productDiscount != null){ ?>
+				 <div class="product-price-from product-price-from-<?php echo $product->Product_id; ?>">
+				 	<del>€ <?php echo $this->formatMoney($product->productPrice); ?></del>
+				 </div>
+				  <?php } ?>
 		
 				 <div class="product-price product-price-<?php echo $product->Product_id; ?>" itemprop="price">
 				 	<?php if($this->containsProductWithExtraPrice($product->ProductOption)){ echo 'vanaf '; } ?>

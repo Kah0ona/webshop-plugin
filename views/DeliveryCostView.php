@@ -198,7 +198,7 @@ class DeliveryCostView extends GenericView {
 
 <p><a data-toggle="modal" data-target="#city-modal" class="btn btn-inverse info-button">Controleren</a></p>
 
-<div class="modal hide fade" id="city-modal">
+<div class="modal hide " id="city-modal">
 	 <div class="modal-header">
 	 	<button class="close" data-dismiss="modal">×</button>
 	 	<h3>Waar bezorgen we?</h3>

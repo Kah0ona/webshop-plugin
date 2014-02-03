@@ -493,7 +493,7 @@ class CheckoutView extends GenericView {
 						<div class="span12">
 							<h3>Betaalmethode</h3>
 							<div class="control-group">
-								<p>Kies uw betaalmethode</p>						
+								<p class="payment-method-expl">Kies uw betaalmethode</p>						
 							    <div id="payment-text" class="alert hidden"></div>
 			
 <!--								<label class="control-label" for="paymentmethod">Betaalmethode:</label>					-->
@@ -537,7 +537,7 @@ class CheckoutView extends GenericView {
 						<div class="span12">
 							<h3 class="payment-options">Verzenden</h3>
 							<div class="control-group">
-								<p>Als u op de knop hieronder drukt, wordt uw bestelling opgeslagen. Indien u voor iDeal of creditcard heeft gekozen als betaalmethode, wordt u naar een beveiligde omgeving doorgestuurd.</p>
+								<p class="checkout-explanation">Als u op de knop hieronder drukt, wordt uw bestelling opgeslagen. Indien u voor iDeal of creditcard heeft gekozen als betaalmethode, wordt u naar een beveiligde omgeving doorgestuurd.</p>
 								<div class="controls">	
 									<input type="submit" name="invoice" class="submit-controls btn btn-primary " id="invoice" value="Plaats bestelling" style="width: 130px;" />
 								</div>		
