@@ -20,6 +20,10 @@ class TransactionResultView extends GenericView {
 			$msg = 'Uw bestelling is succesvol verwerkt en betaald.'; 
 			$class = 'success'; 
 		}
+		elseif($this->status == 'OK'){
+			$msg = 'Uw bestelling is succesvol verwerkt.';
+			$class = 'success';
+		}
 		elseif($this->status == 'Cancelled'){
 			$msg = 'Uw bestelling is geannuleerd.'; 
 			$class = 'info';
@@ -40,8 +44,6 @@ class TransactionResultView extends GenericView {
 			$msg = 'Er is hoogstwaarschijnlijk iets misgegaan met de betaling. Onze creditcard provider heeft niet kunnen verifiëren of de betaling is geaccepteerd. We hebben uw bestelling wel opgeslagen, maar aangemerkt als onbetaald. Neem a.u.b. contact met ons op.'; 
 			$class = 'error';
 		}
-				
-		
 		elseif($this->status == 'Expired'){
 			$msg = 'Uw sessie is verlopen. De betaling is niet gelukt. We hebben uw bestelling wel opgeslagen, maar aangemerkt als onbetaald. Neem contact met ons op als u denkt dat dit niet klopt.'; 
 			$class = 'error';
@@ -52,10 +54,11 @@ class TransactionResultView extends GenericView {
 						
 		?>
 		<div class='alert alert-<?php echo $class; ?> result_message'><?php echo $msg; ?></div>
-		<?
-		
+		<?php
 
-
+		if($this->status == 'Success' || $this->status == 'OK'){
+			echo $this->model->getTrackingPixel(); //if none avail, will echo empty string
+		}
 	}
 }
 ?>

@@ -98,6 +98,9 @@ class CheckoutModel extends GenericModel {
 			
 		$post['orderType'] = 'invoice';
 		$savedOrder = $this->curl_post(BASE_URL_WEBSHOP.'/orders', $post); //since we send both person data and order data, the servlet will process both.
+		
+		$this->resetSessionData();
+		
 		if(!$savedOrder){
 			$this->logMessage("Error sending post to /orders: ".$this->curlError);			
 			$this->status = ORDER_FAILED;
@@ -128,6 +131,7 @@ class CheckoutModel extends GenericModel {
 					$this->status = ORDER_SUCCESS;
 					$this->statusMessage = "De bestelling is succesvol verstuurd.";
 					$this->insertedOrderId= $obj->Order__id;
+					$this->storeDataInSession();
 				}
 			}
 			else { //unknown error
@@ -137,6 +141,23 @@ class CheckoutModel extends GenericModel {
 			}
 		}
 		return $this->status;
+	}
+
+	/**
+	* Resets Order__id and transactionAmount in the session to null;
+	*/
+	public function resetSessionData(){
+		$_SESSION['Order__id'] = null;
+		$_SESSION['transactionAmount'] = null;
+		
+	}
+	
+	/**
+	* Stores the orderid and the amount in the session.
+	*/
+	public function storeDataInSession() {
+		$_SESSION['Order__id'] = $this->insertedOrderId;
+		$_SESSION['transactionAmount'] = $this->totalPrice;
 	}
 	
 	public function doIDeal(){

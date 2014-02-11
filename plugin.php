@@ -181,7 +181,7 @@ class SytematicWebshop {
 		}
 		else{
 			header('Content-Type: application/json; charset=utf-8');		
-			echo json_encode(array('redirectUrl' => site_url('/success')));
+			echo json_encode(array('redirectUrl' => site_url('/success?status=OK')));
 			exit;
 		}
 		exit;
@@ -680,6 +680,7 @@ class SytematicWebshop {
 	
 	//Order result page	
 	public function render_after_order(){
+		session_start();
 		include_once('models/TransactionResultModel.php');
 		include_once('views/TransactionResultView.php');
 		ob_start();
