@@ -612,7 +612,6 @@ class SytematicWebshop {
 		$renderOptions = $render_options_on_overview === 'true';
 		$disableOverview = $this->options->getOption('productoverview_disabled') === 'true';
 		ob_start();
-	
 		if($id !=null && is_numeric($id)) {
 			$prodId = $id;			
 			if($this->productModel == null){

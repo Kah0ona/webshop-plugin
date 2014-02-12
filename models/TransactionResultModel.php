@@ -29,6 +29,7 @@ class TransactionResultModel extends GenericModel {
 			return "<!-- warning, tracking pixel not rendering because transactionAmount was not available in session. -->";
 		}
 		
+		$transactionAmount = round($transactionAmount/1.21, 2);
 		$pixelHtml = str_replace('{transactionID}', $transactionId, $pixelHtml);
 		$pixelHtml = str_replace('{transactionAmount}', $transactionAmount, $pixelHtml);				
 		
