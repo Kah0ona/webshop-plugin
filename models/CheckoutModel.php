@@ -165,7 +165,7 @@ class CheckoutModel extends GenericModel {
 		
 		$sisow = new Sisow($this->options->getOption('SisowMerchantId'), $this->options->getOption('SisowMerchantKey'));
 		
-	//	$sisow->payment = 'mistercash';
+		//$sisow->payment = 'mistercash';
 		$sisow->returnUrl = site_url().'/success';
 		$sisow->purchaseId = $this->insertedOrderId;
 		$sisow->description = $this->options->getOption('SisowDescription');
