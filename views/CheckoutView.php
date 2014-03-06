@@ -541,7 +541,7 @@ class CheckoutView extends GenericView {
 						<div class="span12">
 							<h3 class="payment-options">Verzenden</h3>
 							<div class="control-group">
-								<p class="checkout-explanation">Als u op de knop hieronder drukt, wordt uw bestelling opgeslagen. Indien u voor iDeal of creditcard heeft gekozen als betaalmethode, wordt u naar een beveiligde omgeving doorgestuurd.</p>
+								<p class="checkout-explanation">Als u op de knop hieronder drukt, wordt uw bestelling opgeslagen. Indien u voor iDeal, MisterCash, of creditcard heeft gekozen als betaalmethode, wordt u naar een beveiligde omgeving doorgestuurd.</p>
 								<div class="controls">	
 									<input type="submit" name="invoice" class="submit-controls btn btn-primary " id="invoice" value="Plaats bestelling" style="width: 130px;" />
 								</div>		
