@@ -99,11 +99,8 @@ class GenericModel {
 			throw new Exception('No ID set, make sure you use setId($id) to set an id');
 	
 		$arr[$idKeyName] = $this->id;
-		
-		
-		
-		$ret = $this->fetch($this->serviceUrl, $arr, $asString);
 
+		$ret = $this->fetch($this->serviceUrl, $arr, $asString);
 		if(!$asString && $ret != null && count($ret)> 0){
 			return $ret[0];
 		}

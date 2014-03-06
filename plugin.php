@@ -218,6 +218,7 @@ class SytematicWebshop {
 			}
 			
 			$detail = $this->categoryModel->isDetailPage('categories') || ($catId != null && is_numeric($catId) && $catId > 0);
+
 			$detail ? $this->categoryModel->fetchCategory() : $this->categoryModel->fetchNestedCategories(true);
 		}
 			

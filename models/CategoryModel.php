@@ -124,7 +124,6 @@ class CategoryModel extends GenericModel {
 	
 		$tree = $this->buildTree($cats);	
 
-
 		//now, for all root categories, re-map into same group-titles, to achieve backwards compatibility.
 		$map = array();
 		foreach($tree as $c){ //walk top level only.
