@@ -99,6 +99,10 @@ class CheckoutView extends GenericView {
 		if($this->model->getOptions()->getOption('UseSisow') == "true") {
 			$ret .= '<option value="ideal">iDeal</option>';	
 		}
+		if($this->model->getOptions()->getOption('UseMisterCash') == "true") {
+			$ret .= '<option value="mistercash">MisterCash</option>';	
+		}
+
 		
 		if($this->usesOgoneCreditcard()){
 			$ret .= '<option value="ogone">Creditcard</option>';

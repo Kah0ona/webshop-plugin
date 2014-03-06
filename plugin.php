@@ -158,9 +158,9 @@ class SytematicWebshop {
 		
 		header('Content-Type: application/json; charset=utf-8');
 				
-		if($_POST['payment-method'] == "ideal"){
+		if($_POST['payment-method'] == "ideal" || $_POST['payment-method'] == "mistercash" ){
 			if($resultStatus == ORDER_SUCCESS ){
-				$checkout->doIDeal(); //redirects away if everything goes well, returns an error if not. 
+				$checkout->doSisowTransaction($_POST['payment-method']); //redirects away if everything goes well, returns an error if not. 
 			}		
 			if($checkout->getStatus() != ORDER_SUCCESS) {
 				echo json_encode(array('error' => $checkout->getStatusMessage()));

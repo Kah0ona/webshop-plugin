@@ -47,6 +47,7 @@ class AdminView extends GenericView {
 		  $this->add_cs_field_boolean('productoverview_disabled', 'Deactiveer /products/ overzicht (nodig indien google search gebruikt wordt)');
 		  $this->add_cs_field_boolean('use_delivery_date', 'Kunnen klanten een leverdatum aangeven?');		  
 		  $this->add_cs_field_boolean('UseSisow', 'Gebruik iDeal via Sisow?:');		  
+		  $this->add_cs_field_boolean('UseMisterCash', 'Gebruik MisterCash via Sisow?:');		  		  
 		  $this->add_cs_field('SisowMerchantId', 'Sisow Merchant ID:');
  		  $this->add_cs_field('SisowMerchantKey', 'Sisow Merchant Key:');		  
 		  $this->add_cs_field('SisowDescription', 'Omschrijving iDeal betaling (max 32. tekens):');		  

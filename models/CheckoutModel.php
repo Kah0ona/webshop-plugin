@@ -64,9 +64,19 @@ class CheckoutModel extends GenericModel {
 		$post['shoppingCart'] = json_encode($this->cart);
 		$post['orderStatus'] = 'nieuw';
 		$post['PaymentMethod_id'] = $post['payment-method'];
-		if($post['PaymentMethod_id'] == "ideal" || $post['PaymentMethod_id'] == "ogone"){
+		if($post['PaymentMethod_id'] == "ideal" || $post['PaymentMethod_id'] == "ogone" || $post['PaymentMethod_id'] == 'mistercash'){
+			if($post['PaymentMethod_id'] == 'ideal'){
+				$post['thePaymentMethodName'] =  'iDeal betaling';
+			}
+			if($post['PaymentMethod_id'] == 'mistercash'){
+				$post['thePaymentMethodName'] = 'MisterCash betaling';
+			}
+			if($post['PaymentMethod_id'] == 'ogone'){
+				$post['thePaymentMethodName'] = 'CreditCard via Ogone';
+			}
 			$post['PaymentMethod_id'] = null;
 			unset($post['PaymentMethod_id']);
+
 		}		
 		
 		if($post['DeliveryMethod_id'] == 0){
@@ -160,12 +170,14 @@ class CheckoutModel extends GenericModel {
 		$_SESSION['transactionAmount'] = $this->totalPrice;
 	}
 	
-	public function doIDeal(){
-		$this->logMessage("Creating iDeal transaction");
+	public function doSisowTransaction($type='ideal'){
+		$this->logMessage("Creating ".$type." transaction");
 		
 		$sisow = new Sisow($this->options->getOption('SisowMerchantId'), $this->options->getOption('SisowMerchantKey'));
 		
-		//$sisow->payment = 'mistercash';
+		if($type != 'ideal') {
+			$sisow->payment = 'mistercash';			
+		}
 		$sisow->returnUrl = site_url().'/success';
 		$sisow->purchaseId = $this->insertedOrderId;
 		$sisow->description = $this->options->getOption('SisowDescription');
@@ -181,13 +193,22 @@ class CheckoutModel extends GenericModel {
 		$this->logMessage("notifyUrl: ".SISOW_NOTIFY_URL);
 		
 		if (($ex = $sisow->TransactionRequest()) < 0) {
-			$this->logMessage('De iDeal betaling is mislukt, foutmelding: '.$sisow->errorCode.", ".$sisow->errorMessage);
+			$this->logMessage('De '.$type.' betaling is mislukt, foutmelding: '.$sisow->errorCode.", ".$sisow->errorMessage);
 			$this->status = ORDER_FAILED;
-			$this->statusMessage = 'De iDeal betaling is mislukt, foutmelding: '.$sisow->errorCode.", ".$sisow->errorMessage;
+			$this->statusMessage = 'De '.$type.' betaling is mislukt, foutmelding: '.$sisow->errorCode.", ".$sisow->errorMessage;
 			return $sisow->errorCode;			
 		}
 		$this->redirectUrl = $sisow->issuerUrl;
 		$this->logMessage("Setting redirect url: ".$this->redirectUrl);
+	}
+	
+	
+	public function doIDeal(){
+		$this->doSisowTransaction();
+	}
+	
+	public function doMisterCash(){
+		$this->doSisowTransaction('mistercash');
 	}
 	
 	
