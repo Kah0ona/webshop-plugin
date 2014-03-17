@@ -155,7 +155,7 @@ class ProductModel extends GenericModel {
 	public function isDetailPage(){
 		return parent::isDetailPage('products');
 	}
-	
+
 	public function fetchProductsDefault(){
 		$arr = array(
 			'hostname'=>$this->hostname,
