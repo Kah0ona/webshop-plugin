@@ -50,6 +50,7 @@ class CategoryWidget extends WP_Widget {
 		$hostname = $options->getOption('hostname');
 		$m = new CategoryModel($hostname, null);
 		$m->setOptions($options);
+		$m->setMaxNestingLevels((int) $options->getOption('nested_category_level'));
 		$m->fetchNestedCategories();
 		$v = new CategoryView($m);
 		$v->render();
