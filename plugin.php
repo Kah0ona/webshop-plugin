@@ -576,6 +576,7 @@ class SytematicWebshop {
 			$catId = $id;			
 		}
 
+
 		//if $catId is indeed a numeric value, it is already set into the model, since the queries to the backend have already been performed by $this->init_models();
 		if($this->categoryModel->isDetailPage() || ($catId != null && is_numeric($catId) && $catId > 0)) {
 			include_once('views/CategoryDetailView.php');

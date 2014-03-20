@@ -21,7 +21,13 @@ class CategoryDetailView extends GenericView {
 		$productModel->setOptions($this->model->getOptions());
 		$productView = new ProductView($productModel);
 		//$this->renderBackLink();
+		//
+		if($data->numColsOnSite != null){
+			$this->numCols = $data->numColsOnSite;
+		}	
+
 		$productView->setNumCols($this->numCols);
+
 
 		//if it has subcategories, render those. 
 		$subCategories = $this->model->getSubcategories($data->Category_id);
