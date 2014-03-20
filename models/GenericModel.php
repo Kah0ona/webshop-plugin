@@ -93,12 +93,13 @@ class GenericModel {
 	}
 	
 
-	public function fetchById($idKeyName, $asString = false){
+	public function fetchById($idKeyName, $asString = false, $useNesting = true){
 		$arr = Array();
 		if($this->id == null)
 			throw new Exception('No ID set, make sure you use setId($id) to set an id');
 	
 		$arr[$idKeyName] = $this->id;
+		$arr['useNesting'] = $useNesting;
 
 		$ret = $this->fetch($this->serviceUrl, $arr, $asString);
 		if(!$asString && $ret != null && count($ret)> 0){
@@ -165,7 +166,6 @@ class GenericModel {
 	    $params['hostname'] = $this->hostname;
 	    
 	 	$url = $url.'?'.$this->decodeParamsIntoGetString($params);
-
 		$jsonString = $this->curl_fetch($url);
 		$this->rawData = $jsonString;		
 

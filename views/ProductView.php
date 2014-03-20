@@ -144,8 +144,45 @@ class ProductView extends GenericView {
 				<?php endif; ?>
 			<?php endforeach; ?>
 		</div>
+		
+		<?php 
+		
+		if($this->model->getOptions()->getOption('use_pagination') == 'true'){
+			$this->renderPagination();
+		}
+		?>		
+		
 		<!-- End ProductView -->
 	 <?php
+	 }
+	 
+	 public function renderPagination(){
+	 	 echo '<div class="pagination">';
+		 if($_GET['page'] != null && $_GET['page'] > 0){
+			 $this->renderPrev();
+		 }
+		 
+		 if(count($this->data) >= $this->model->getOptions()->getOption('num_items_per_page')){
+			$this->renderNext();		 
+		 }
+		 echo '</div>';
+	 }
+	 
+	 
+	 public function renderPrev(){ 
+		 $curPage = $_GET['page'];
+		 if($curPage == null) {
+			 $curPage = 0;
+		 }
+	 ?>
+		 <div class="prev"><a href="<?php echo $_SERVER['REDIRECT_URL']; ?>?page=<?php echo ($curPage-1); ?>">Vorige</a></div>
+		 <?php
+	 }
+	 
+	 public function renderNext(){ ?>
+	 
+		 <div class="next"><a href="<?php echo $_SERVER['REDIRECT_URL']; ?>?page=<?php echo ($curPage+1); ?>">Volgende</a></div>		 
+		 <?php
 	 }
 
 	 public function renderProduct($product, $productModel=null){  ?>

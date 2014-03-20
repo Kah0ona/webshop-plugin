@@ -27,7 +27,7 @@ class CartInitializerView extends GenericView {
 		$model = new GenericModel(null,null);
 		if($model->isDetailPage('categories') ){
 			echo 'WebshopType = "categories"; ';		
-			echo 'var WebshopItem_id = '.$model->getId().';';			
+			echo 'WebshopItem_id = '.$model->getId().';';			
 		}
 		if($model->isDetailPage('products')){
 			 echo 'WebshopType = "products"; '; 

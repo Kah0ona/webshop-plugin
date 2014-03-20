@@ -4,9 +4,13 @@
 */
 class CategoryDetailView extends GenericView {
 	protected $numCols= 2;
-	
+	protected $productModel = null;
 	public function setNumCols($num){
 		$this->numCols = $num;
+	}
+	
+	public function setProductModel($mod){
+		$this->productModel = $mod;
 	}
 
 	public function render($data=null, $renderDetailOnOverview=false) { 
@@ -17,9 +21,10 @@ class CategoryDetailView extends GenericView {
 		include_once('ProductView.php');
 		//not a problem if we feed it a category model
 
-		$productModel = new ProductModel($this->model->getOptions()->getOption('hostname'));
-		$productModel->setOptions($this->model->getOptions());
-		$productView = new ProductView($productModel);
+//		$productModel = new ProductModel($this->model->getOptions()->getOption('hostname'));
+//		$productModel->setOptions($this->model->getOptions());
+
+		$productView = new ProductView($this->productModel);
 		//$this->renderBackLink();
 		//
 		if($data->numColsOnSite != null){
@@ -37,7 +42,7 @@ class CategoryDetailView extends GenericView {
 		}				
 
 	
-		if($data != null && count($data->Product) > 0){
+		if($data != null && count($this->productModel->getData()) > 0){
 			if($subCategories != null && count($subCategories) > 0){
 				echo '<h3>Producten</h3>';
 			}
@@ -57,5 +62,7 @@ class CategoryDetailView extends GenericView {
 
 		
 	}
+	
+	
 }
 ?>

@@ -100,7 +100,22 @@ class ProductModel extends GenericModel {
         return true;
     } 
 
-	
+	public function fetchProductByCategory($catId, $useNesting=true){
+		$arr = array();
+		$arr['Category_id'] = $catId;
+		$arr['useNesting'] = $useNesting ? 'true' : 'false';
+		
+		if($this->options->getOption('use_pagination') == 'true') {
+			$page = $_GET['page'];
+			if($page == null) {
+				$page = 0;
+			}
+			$arr['start'] = $page * $this->options->getOption('num_items_per_page');
+			$arr['limit'] = $this->options->getOption('num_items_per_page');
+		}
+		return $this->fetchProducts($arr);
+		
+	}
 	private function checkStockForProductWithOneOrMoreOption($product){
 		if($product->SKU == null || count($product->SKU) == 0){ //no sku row means that we always show it, since the shop owner doesnt use the SKU system for this product.
 			return true;

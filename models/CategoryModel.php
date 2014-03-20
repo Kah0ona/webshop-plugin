@@ -17,8 +17,8 @@ class CategoryModel extends GenericModel {
 	/**
 	* Fetches the category with the id currently set by $this->setId(), or set by a previous call to $this->isDetailPage(); 
 	*/
-	public function fetchCategory(){
-		return $this->fetchByID('Category_id');
+	public function fetchCategory($useNesting = 'true'){
+		return $this->fetchByID('Category_id', false, $useNesting);
 	}
 	
 	public function isDetailPage(){

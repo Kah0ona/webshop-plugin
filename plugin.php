@@ -220,7 +220,11 @@ class SytematicWebshop {
 			$detail = $this->categoryModel->isDetailPage('categories') || ($catId != null && is_numeric($catId) && $catId > 0);
 
 			if($detail){
-				$this->categoryModel->fetchCategory();
+				include_once('models/ProductModel.php');			
+				$this->productModel = new ProductModel($this->hostname);
+				$this->productModel->setOptions($this->options);
+				$this->categoryModel->fetchCategory(false);
+				$this->productModel->fetchProductByCategory($this->categoryModel->getId());
 			} else {
 				$this->categoryModel->fetchNestedCategories(true);
 			}
@@ -588,7 +592,7 @@ class SytematicWebshop {
 			}
 
 			$v = new CategoryDetailView($this->categoryModel);
-			
+			$v->setProductModel($this->productModel);
 			$v->setNumCols($numcols);
 			$v->render(null, $renderOptions);
 		}

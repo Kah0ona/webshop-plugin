@@ -36,7 +36,12 @@ class AdminView extends GenericView {
 		  $this->add_cs_field('address','Adres van uw zaak (formaat: Kalverstraat 12 1234AB Amsterdam):');
 		  $this->add_cs_field('cart_class', 'CSS-class van het winkelwagentje:');
   		  $this->add_cs_field('nested_category_level','Aantal niveau\'s in categorie widget');
+   		  $this->add_cs_field_boolean('use_pagination', 'Verdeel producten over meerdere pagina\'s');		    		  
+   		  $this->add_cs_field('num_items_per_page', 'Aantal producten per pagina');		  
+  		  
   		  $this->add_cs_field_upload('NoImage', 'Toon dit plaatje indien er geen plaatje bij een product zit');
+
+  		  
   		  $this->add_cs_field('tracking_pixel','Trackingpixel. Vul hier de gehele img tag in. De tags {transactionID} en {transactionAmount} zullen worden vervangen door de juiste gegevens. Dit kan dus in de url gebruikt worden.');
 
   		  $this->add_cs_field_select('ShowProductsInStock', 'Producten die niet op voorraad zijn:', array('show'=>'Tonen met melding', 'hide'=>'Verbergen'));
