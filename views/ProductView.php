@@ -148,7 +148,7 @@ class ProductView extends GenericView {
 		<?php 
 		
 		if($this->model->getOptions()->getOption('use_pagination') == 'true'){
-			$this->renderPagination();
+			$this->renderPagination($categoryId);
 		}
 		?>		
 		
@@ -156,32 +156,76 @@ class ProductView extends GenericView {
 	 <?php
 	 }
 	 
-	 public function renderPagination(){
-	 	 echo '<div class="pagination">';
-		 if($_GET['page'] != null && $_GET['page'] > 0){
+	 public function renderPagination($categoryId=null){
+	 ?>
+	 	<script type="text/javascript">
+	 		<?php 
+	 		$curPage = $_GET['webshop_page'];
+	 		if($curPage == null) {
+				$curPage = 0;
+			}
+	 		?>
+	 	
+	 		//fetch the next page using ajax, after page has been loaded, and if it's empty hide the 'next' button
+	 		jQuery(document).ready(function($){
+	 		<?php
+				echo 'var current_page='.$curPage.'; ';
+				echo 'var num_per_page='.$this->model->getOptions()->getOption('num_items_per_page').'; ';
+				echo 'var hostname="'.$this->model->getOptions()->getOption('hostname').'"; ';			
+				echo 'var cat_id='.$categoryId.'; ';						
+				echo 'var backend_url="'.BASE_URL_WEBSHOP.'/products"; ';
+	 		?>
+		 		$.ajax({
+					url: backend_url,
+					data : {
+						"Category_id" : cat_id,
+						"hostname" : hostname,
+						"start" : ((current_page+1) * num_per_page),						
+						"limit" : 1									
+					},
+					type: 'GET',
+					success: function (jsonObj, textStatus, jqXHR){
+						if(jsonObj.length == 0){
+							$('.webshop_pagination .next').hide();
+						}
+					},
+					dataType: 'jsonp'
+				});
+	 		});
+	 	
+	 	</script>
+	 <?php
+	 
+	 	 echo '<div class="webshop_pagination">';
+		 if($_GET['webshop_page'] != null && $_GET['webshop_page'] > 0){
 			 $this->renderPrev();
 		 }
 		 
 		 if(count($this->data) >= $this->model->getOptions()->getOption('num_items_per_page')){
 			$this->renderNext();		 
 		 }
-		 echo '</div>';
+		 echo '</div><div style="clear:both"></div>';
 	 }
 	 
 	 
 	 public function renderPrev(){ 
-		 $curPage = $_GET['page'];
+		 $curPage = $_GET['webshop_page'];
 		 if($curPage == null) {
 			 $curPage = 0;
 		 }
 	 ?>
-		 <div class="prev"><a href="<?php echo $_SERVER['REDIRECT_URL']; ?>?page=<?php echo ($curPage-1); ?>">Vorige</a></div>
+		 <div class="prev"><a href="<?php echo $_SERVER['REDIRECT_URL']; ?>?webshop_page=<?php echo ($curPage-1); ?>">‹ Vorige</a></a></div>
 		 <?php
 	 }
 	 
-	 public function renderNext(){ ?>
+	 public function renderNext(){ 
+ 		 $curPage = $_GET['webshop_page'];
+		 if($curPage == null) {
+			 $curPage = 0;
+		 }
+	 ?>
 	 
-		 <div class="next"><a href="<?php echo $_SERVER['REDIRECT_URL']; ?>?page=<?php echo ($curPage+1); ?>">Volgende</a></div>		 
+		 <div class="next"><a href="<?php echo $_SERVER['REDIRECT_URL']; ?>?webshop_page=<?php echo ($curPage+1); ?>">Volgende ›</a></div>		 
 		 <?php
 	 }
 

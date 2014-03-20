@@ -106,7 +106,7 @@ class ProductModel extends GenericModel {
 		$arr['useNesting'] = $useNesting ? 'true' : 'false';
 		
 		if($this->options->getOption('use_pagination') == 'true') {
-			$page = $_GET['page'];
+			$page = $_GET['webshop_page'];
 			if($page == null) {
 				$page = 0;
 			}

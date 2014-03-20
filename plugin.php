@@ -62,7 +62,7 @@ class SytematicWebshop {
 		// Load plugin text domain
 		add_action('init', array( $this, 'plugin_textdomain' ) );
 		add_action('init', array($this, 'load_options'));
-		add_action('template_redirect', array($this,'template_redirect'));
+		//add_action('template_redirect', array($this,'template_redirect'));
 
 		add_filter('the_posts', array($this, 'init_models'));
 		add_filter('plugins_loaded', array($this,'start_session')); //first code to be executed.

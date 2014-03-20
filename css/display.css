@@ -104,3 +104,14 @@ td.text-right {
 #city-modal {
 	opacity: 1 !important; /* fix for IE11 */
 }
+
+.webshop_pagination {
+	width: 100%;
+}
+.webshop_pagination .prev {
+	float: left;
+}
+
+.webshop_pagination .next {
+	float: right;
+}
