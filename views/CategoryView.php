@@ -118,6 +118,10 @@ class CategoryView extends GenericView {
 					echo '<a href="'.$this->getDetailLink($category).'">';
 					echo   '<img src="'.SYSTEM_URL_WEBSHOP.'/uploads/Category/'.$category->categoryImage.'" alt="'.$category->categoryName.'" title="'.$category->categoryName.'">';
 					echo '</a>';
+				} elseif($this->model->getOptions()->getOption('NoImage') != null) {
+					echo '<a href="'.$this->getDetailLink($category).'">';
+					echo   '<img src="'.$this->model->getOptions()->getOption('NoImage').'" alt="'.$category->categoryName.'" title="'.$category->categoryName.'">';
+					echo '</a>';
 				}
 			?>		
 		</div>		

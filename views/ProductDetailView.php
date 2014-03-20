@@ -63,6 +63,63 @@ class ProductDetailView extends GenericView {
 						
 				webshopProducts.push(<?php echo $this->model->encodeProductToJson($data); ?>);
 				
+				
+				jQuery(document).ready(function($){
+					function getSizeScore(a){
+						if(a.innerHTML == 'XXS') {
+								score = 0;
+						}
+						else if(a.innerHTML == 'XS') {
+								score = 1;
+						}
+						else if(a.innerHTML == 'S') {
+								score = 2;
+
+						}
+						else if(a.innerHTML == 'M') {
+							score = 3;
+
+						}
+						else if(a.innerHTML == 'L') {
+							score = 4;
+
+						}
+						else if(a.innerHTML == 'XL') {
+							score = 5;
+
+						}
+						else if(a.innerHTML == 'XXL') {
+							score = 6;
+
+						}
+						else {
+							score = -1;
+						}
+						return score;
+					}
+				
+					function NASort(a, b) {    
+						if(isNaN(a.innerHTML) || isNaN(b.innerHTML)) {
+							//sort m l xl etc in the correct order
+							var scoreA = getSizeScore(a);
+							var scoreB = getSizeScore(b);
+							
+							if(scoreA > -1 && scoreB > -1){
+								return (scoreA > scoreB) ? 1 : -1;
+							}
+
+							return 0;
+						} else {
+							return (a.innerHTML > b.innerHTML) ? 1 : -1;
+						}
+					};
+				
+					$('.ProductOptionSelector option').sort(NASort).appendTo('.ProductOptionSelector');
+					
+					$(".ProductOptionSelector").val($(".ProductOptionSelector option:first").val());
+
+				});
+				
 			</script>
 			<script type="text/javascript">
 				jQuery(document).ready(function($){
