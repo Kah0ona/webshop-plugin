@@ -66,7 +66,7 @@ class SytematicWebshop {
 
 		add_filter('the_posts', array($this, 'init_models'));
 		add_filter('plugins_loaded', array($this,'start_session')); //first code to be executed.
-		add_filter( 'wpseo_canonical', array($this,'wpseo_product_canonical' ));
+		add_filter('wpseo_canonical', array($this,'wpseo_product_canonical' ));
 
 
 		// Register admin styles and scripts
@@ -100,6 +100,8 @@ class SytematicWebshop {
 			add_action('wp_ajax_place_order',array($this,'process_order'));		
 			add_action('wp_ajax_price_quote', array($this, 'process_price_quote_submit'));	
 			add_action('wp_ajax_nopriv_price_quote', array($this, 'process_price_quote_submit'));	
+			add_action('wp_ajax_sale_button', array($this, 'process_sale_button_click'));	
+			add_action('wp_ajax_nopriv_sale_button', array($this, 'process_sale_button_click'));				
 		}
 	} // end constructor
 	
@@ -140,7 +142,16 @@ class SytematicWebshop {
 		exit;
 	}
 	
-		
+	public function process_sale_button_click() {
+		include_once('models/GenericModel.php');
+		include_once('models/SaleModel.php');
+		$this->load_options();
+		$saleModel = new SaleModel($this->hostname, $this->options);
+		$saleModel->saveSaleModeInSession($_POST['sale_mode']);
+		print_r($_POST);
+		exit;
+	}
+	
 	/**
 	* Responds to the ajax call that submits the checkout form
 	*/
@@ -404,6 +415,9 @@ class SytematicWebshop {
 		
 		include_once('widgets/SearchWidget.php');
 		register_widget('SearchWidget');
+		
+		include_once('widgets/SaleWidget.php');
+		register_widget('SaleWidget');		
 	}
 	
 	public function load_options(){

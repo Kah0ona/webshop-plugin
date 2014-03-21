@@ -9,7 +9,29 @@ class ProductModel extends GenericModel {
 		$this->serviceUrl = BASE_URL_WEBSHOP.'/products';
 	} 
 		
+		
+	public function getSaleParam(){
+		if(isset($_SESSION['sale_mode'])){
+			$s = $_SESSION['sale_mode'];
+			if($s == 'on'){
+				return 'sale';
+			}
+			if($s == 'off'){
+				return'new';
+			}
+			
+		
+		}
+		return 'both';
+		
+	}
+	private function filterParamsSale($params){
+		$params['sale'] = $this->getSaleParam();
+		return $params;
+	}
+		
 	public function fetchProducts($params, $returnString=false){
+		$params = $this->filterParamsSale($params);
 		return $this->fetch($this->serviceUrl, $params, $returnString);
 	}
 	
@@ -104,6 +126,7 @@ class ProductModel extends GenericModel {
 		$arr = array();
 		$arr['Category_id'] = $catId;
 		$arr['useNesting'] = $useNesting ? 'true' : 'false';
+		$arr = $this->filterParamsSale($arr);
 		
 		if($this->options->getOption('use_pagination') == 'true') {
 			$page = $_GET['webshop_page'];

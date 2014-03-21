@@ -174,12 +174,14 @@ class ProductView extends GenericView {
 				echo 'var hostname="'.$this->model->getOptions()->getOption('hostname').'"; ';			
 				echo 'var cat_id='.$categoryId.'; ';						
 				echo 'var backend_url="'.BASE_URL_WEBSHOP.'/products"; ';
+				echo 'var sale="'.$this->model->getSaleParam().'"; ';
 	 		?>
 		 		$.ajax({
 					url: backend_url,
 					data : {
 						"Category_id" : cat_id,
 						"hostname" : hostname,
+						"sale" : sale,
 						"start" : ((current_page+1) * num_per_page),						
 						"limit" : 1									
 					},
