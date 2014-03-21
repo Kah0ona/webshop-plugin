@@ -164,7 +164,7 @@ class ProductModel extends GenericModel {
 	* Fetches the category with the id currently set by $this->setId(), or set by a previous call to $this->isDetailPage(); 
 	*/
 	public function fetchProduct(){
-		return $this->fetchByID('Product_id');
+		return $this->fetchByID('Product_id', false, true);
 	}
 	
 	public function isDetailPage(){

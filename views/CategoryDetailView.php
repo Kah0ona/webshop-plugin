@@ -35,7 +35,7 @@ class CategoryDetailView extends GenericView {
 
 
 		//if it has subcategories, render those. 
-		$subCategories = $this->model->getSubcategories($data->Category_id);
+		$subCategories = $this->model->getSubcategories($data->Category_id, !$data->noNestingOnSite);
 
 		if($data->categoryDesc != null && $data->categoryDesc != ''){
 			echo '<p class="category-description">'.nl2br($data->categoryDesc).'</p>';

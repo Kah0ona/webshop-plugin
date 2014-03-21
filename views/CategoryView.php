@@ -151,7 +151,7 @@ class CategoryView extends GenericView {
 				<?php if($group == 'nogroup') : ?>
 					<?php foreach($cats as $cat) : ?>
 						
-						<li class="category-item category-package">
+						<li class="category-item category-package category-id-<?php echo $cat->Category_id; ?>" data-category-id="<?php echo $cat->Category_id; ?>">
 							<a href="<?php echo site_url(); ?>/categories/<?php echo $cat->Category_id; ?>#<?php echo $cat->categoryName; ?>">
 								<?php echo $cat->categoryName; ?>
 							</a>
@@ -173,7 +173,7 @@ class CategoryView extends GenericView {
 						<li class="category dropdown-wrap">
 						<ul class="category-level-<?php echo $level; ?>">
 						<?php foreach($cats as $cat) : ?>
-							<li class="category-item category-package ">
+							<li class="category-item category-package category-id-<?php echo $cat->Category_id; ?>" data-category-id="<?php echo $cat->Category_id; ?>">
 								<a href="<?php echo site_url(); ?>/categories/<?php echo $cat->Category_id; ?>#<?php echo $cat->categoryName; ?>">
 									<?php echo $cat->categoryName; ?>
 								</a>
@@ -211,7 +211,7 @@ class CategoryView extends GenericView {
 		<!-- Start rendering CategoryView -->
 		<ul class="categories  category-level-<?php echo $level; ?>">
 			<?php foreach($data as $cat) : ?>
-				<li class="category-item category-package">
+				<li class="category-item category-package category-id-<?php echo $cat->Category_id; ?>" data-category-id="<?php echo $cat->Category_id; ?>">
 					<a href="<?php echo site_url(); ?>/categories/<?php echo $cat->Category_id; ?>#<?php echo $cat->categoryName; ?>">
 						<?php echo $cat->categoryName; ?>
 					</a>
@@ -245,7 +245,7 @@ class CategoryView extends GenericView {
 			<?php foreach ($data as $group=>$cats) : ?>
 				<?php if($group == 'nogroup') : ?>
 					<?php foreach($cats as $cat) : ?>
-						<li class="category-item category-package">
+						<li class="category-item category-package category-id-<?php echo $cat->Category_id; ?>" data-category-id="<?php echo $cat->Category_id; ?>">
 							<a href="<?php echo site_url(); ?>/categories/<?php echo $cat->Category_id; ?>#<?php echo $cat->categoryName; ?>">
 								<?php echo $cat->categoryName; ?>
 							</a>
@@ -256,7 +256,7 @@ class CategoryView extends GenericView {
 						<li class="category dropdown-wrap">
 						<ul>
 						<?php foreach($cats as $cat) : ?>
-							<li class="category-item category-package ">
+							<li class="category-item category-package category-id-<?php echo $cat->Category_id; ?>" data-category-id="<?php echo $cat->Category_id; ?>">
 								<a href="<?php echo site_url(); ?>/categories/<?php echo $cat->Category_id; ?>#<?php echo $cat->categoryName; ?>">
 									<?php echo $cat->categoryName; ?>
 								</a>

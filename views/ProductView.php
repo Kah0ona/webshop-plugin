@@ -214,7 +214,7 @@ class ProductView extends GenericView {
 			 $curPage = 0;
 		 }
 	 ?>
-		 <div class="prev"><a href="<?php echo $_SERVER['REDIRECT_URL']; ?>?webshop_page=<?php echo ($curPage-1); ?>">‹ Vorige</a></a></div>
+		 <div class="prev"><a href="<?php echo $_SERVER['REDIRECT_URL']; ?>?webshop_page=<?php echo ($curPage-1); ?>">‹ Vorige</a></div>
 		 <?php
 	 }
 	 

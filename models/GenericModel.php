@@ -99,7 +99,7 @@ class GenericModel {
 			throw new Exception('No ID set, make sure you use setId($id) to set an id');
 	
 		$arr[$idKeyName] = $this->id;
-		$arr['useNesting'] = $useNesting;
+		$arr['useNesting'] = $useNesting ? "true":"false";
 
 		$ret = $this->fetch($this->serviceUrl, $arr, $asString);
 		if(!$asString && $ret != null && count($ret)> 0){

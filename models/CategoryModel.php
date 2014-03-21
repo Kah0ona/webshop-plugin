@@ -29,11 +29,15 @@ class CategoryModel extends GenericModel {
 		$this->categoryTitleOrder = $map;
 	}
 	
-	public function getSubcategories($parentId){
+	public function getSubcategories($parentId, $useNesting=true){
 		if($parentId == null){
 			return null;
 		}
-		return $this->fetch($this->serviceUrl, array('Parent_id'=>$parentId), false);
+		$arr = array('Parent_id'=>$parentId);
+		$arr['useNesting'] = $useNesting ? 'true' : 'false';
+	
+		
+		return $this->fetch($this->serviceUrl, $arr, false);
 	}
 	
 	
