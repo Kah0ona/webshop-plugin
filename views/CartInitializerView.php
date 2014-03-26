@@ -4,8 +4,17 @@
 * The admin options is set as the model
 */
 class CartInitializerView extends GenericView {
+	protected $type=null;
+	protected $pageId = null;
 
+	public function setPageType($type){
+		$this->type = $type;
+	}
 
+	public function setDetailPageId($id){
+		$this->pageId = $id;
+	}
+	
 	public function render($options=null, $deliveryMethods = null, $deliveryCostsTable = null){
 		if($options == null) return;
 		?>
@@ -24,15 +33,11 @@ class CartInitializerView extends GenericView {
 		});
 		
 		<?php
-		$model = new GenericModel(null,null);
-		if($model->isDetailPage('categories') ){
-			echo 'WebshopType = "categories"; ';		
-			echo 'WebshopItem_id = '.$model->getId().';';			
-		}
-		if($model->isDetailPage('products')){
-			 echo 'WebshopType = "products"; '; 
-			 echo 'WebshopItem_id = '.$model->getId().';';		
-		}
+			if($this->pageId == null){
+				$this->pageId = -1;
+			}
+			echo 'WebshopType = "'.$this->type.'"; ';		
+			echo 'WebshopItem_id = '.$this->pageId.';';			
 		?>
 
 		

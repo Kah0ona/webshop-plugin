@@ -205,6 +205,7 @@ class SytematicWebshop {
 	public function init_models($posts){
 
 		if($this->containsShortCode($posts, 'products')){
+
 			include_once('models/ProductModel.php');
 			$this->productModel = new ProductModel($this->hostname);
 			$this->productModel->setOptions($this->options);
@@ -236,6 +237,7 @@ class SytematicWebshop {
 				$this->productModel->setOptions($this->options);
 				$this->categoryModel->fetchCategory(false);
 				$this->productModel->fetchProductByCategory($this->categoryModel->getId());
+
 			} else {
 				$this->categoryModel->fetchNestedCategories(true);
 			}
@@ -347,13 +349,27 @@ class SytematicWebshop {
 	}
 	
 	public function init_cart(){
+		
 		include_once('views/CartInitializerView.php');
 		include_once('models/DeliveryCostModel.php');
 		include_once('models/DeliveryMethodModel.php');		
 		$this->deliveryMethodModel = new DeliveryMethodModel($this->options->getOption('hostname'), $this->options);
 		$this->deliveryCostModel = new DeliveryCostModel($this->options->getOption('hostname'), $this->options);
 		
+
+		
 		$init = new CartInitializerView($this->options);
+
+		if($this->categoryModel != null){ 
+			$init->setPageType('categories');	
+			$init->setDetailPageId($this->categoryModel->getId());
+		}
+		elseif($this->productModel != null && $this->productModel->getId() != null){
+			$init->setPageType('products');
+			$init->setDetailPageId($this->productModel->getId());
+		}
+		
+		
 		$deliveryMethods = $this->deliveryMethodModel->fetchDeliveryMethodsDefault();
 		$deliveryCostTable = $this->deliveryCostModel->fetchDeliveryCostsDefault();
 		$init->render($this->options, $deliveryMethods, $deliveryCostTable);
