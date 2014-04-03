@@ -193,7 +193,7 @@ class ProductDetailView extends GenericView {
 						<?php }?>
 					</div>
 					
-					<div class="span4">
+					<div class="span4 product-details">
 						<div class="row-fluid">
 							<div class="span12">
 								<h3 itemprop="name"><?php echo $data->productName; ?></h3>

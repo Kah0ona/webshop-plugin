@@ -21,9 +21,13 @@ class CartInitializerView extends GenericView {
 		<script type="text/javascript">
 		webshopProducts = [];
 		jQuery(document).ready(function($){
+	
 			$('#shoppingcart').shoppingCart({
 				'session_url' : '<?php echo  get_site_url(); ?>/wp-content/plugins/webshop-plugin/models/CartStore.php'	,		
 				'checkout_page' : '<?php echo  get_site_url(); ?>/checkout',
+				<?php if($options->getOption('checkout_link') != null){ ?>
+				'checkout_link' : '<?php echo $options->getOption('checkout_link'); ?>',					
+				<?php } ?>
 				'address' : '<?php echo $options->getOption('address'); ?>',
 				'deliveryCostsTable' : <?php echo $deliveryCostsTable; ?>,
 				'couponUrl': '<?php echo SYSTEM_URL_WEBSHOP?>/public/coupons',

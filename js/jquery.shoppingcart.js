@@ -409,7 +409,7 @@
 
 	    	if(this.cartDataStore.length == 0){
    		    	this.logger("Empty cart");
-	    		str=this.getTemplate("<li><p style='margin-left: 10px;float: right;' class='emptycart'>Het winkelwagentje is leeg.<p></li>");
+	    		str=this.getTemplate("<li><p style='margin-left: 10px;' class='emptycart'>Het winkelwagentje is leeg.<p></li>");
 	    	
 	    	}
 	    	else {

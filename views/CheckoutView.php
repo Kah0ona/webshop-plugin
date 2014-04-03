@@ -85,8 +85,13 @@ class CheckoutView extends GenericView {
 		}
 
 		if($data != null && count($data) > 0) {
+			$txt = 'Door ons bezorgd';
+			if($this->model->getOptions()->getOption('delivery_by_us_text') != null) {
+				$txt = $this->model->getOptions()->getOption('delivery_by_us_text');
+			}
+		
 			//add an entry called 'Door ons bezorgd', using the price of the delivery cost model
-			echo '<option value="0">Door ons bezorgd</option>';		
+			echo '<option value="0">'.$txt.'</option>';		
 		}
 		
 		echo '</select>';
@@ -453,7 +458,7 @@ class CheckoutView extends GenericView {
 
 					<div class="row-fluid">
 						<div class="span12">
-							<h3>Bestellingsgegevens</h3>
+							<h3 class="ordercomment-title">Bestellingsgegevens</h3>
 							<div class="control-group order-comment-control">
 								<p class="infotextordercomment"></p>
 								<label class="control-label order-comment" for="orderComment">Opmerkingen:</label>			
@@ -465,9 +470,21 @@ class CheckoutView extends GenericView {
 							if($this->model->allowDeliveryDate()) {
 							?>
 							<div class="control-group">
-						   		<label class="control-label delivery-date-label" for="deliveryDate">Bezorg-/leverdatum (formaat: dd-mm-jjjj): *</label>			
+						   		<label class="control-label delivery-date-label" for="deliveryDate">Bezorg-/leverdatum (formaat: dd-mm-jjjj): </label>			
 								<div class="controls">	
-									<input type="text" name="deliveryDate" class="span4 input-large" id="deliveryDate" />
+									<input type="text" name="deliveryDate" class="span4 input-large" id="deliveryDate" /> <br/>
+									<?php
+										if($this->model->allowDeliveryTime()) {
+									?>
+	
+									<select class="span6" name="deliveryTime">
+										<?php for($i = 9; $i <= 18; $i++){ ?>
+										<option value="<?php echo $i; ?>:00-<?php echo ($i+1); ?>:00"><?php echo $i; ?>:00-<?php echo ($i+1); ?>:00</option>
+										<?php } ?>
+									</select>
+									<?php		
+										}
+									?>
 								</div>		
 							</div>					
 							<?php 
@@ -477,7 +494,7 @@ class CheckoutView extends GenericView {
 					</div><!-- /row -->		
 					<div class="row-fluid">
 						<div class="span12">
-							<h3>Kortingscode</h3>
+							<h3 class="coupon-title">Kortingscode</h3>
 							<div class="control-group">
 								<p>Heeft u een kortingscode? Vul deze dan hieronder in. Als de code geldig is, wordt de korting toegevoegd aan het prijs-overzicht.</p>						
 							    <div id="discount-text" class="alert hidden"></div>
@@ -495,7 +512,7 @@ class CheckoutView extends GenericView {
 					
 					<div class="row-fluid">
 						<div class="span12">
-							<h3>Betaalmethode</h3>
+							<h3 class="paymentmethod-title">Betaalmethode</h3>
 							<div class="control-group">
 								<p class="payment-method-expl">Kies uw betaalmethode</p>						
 							    <div id="payment-text" class="alert hidden"></div>
@@ -525,9 +542,15 @@ class CheckoutView extends GenericView {
 					
 					<div class="row-fluid">
 						<div class="span12">
-							<h3>Verzending</h3>
+							<h3 class="deliverymethod-title">Verzending</h3>
 							<div class="control-group">
-								<p>Kies uw verzend-/bezorgmethode</p>						
+								<?php
+									$delMethod = 'Kies uw verzend-/bezorgmethode:';
+									if($this->model->getOptions()->getOption('deliverymethod_text') != null){
+										$delMethod = $this->model->getOptions()->getOption('deliverymethod_text');
+									}						
+								?>
+								<p class="deliverymethod-text"><?php echo $delMethod; ?></p>						
 							    <div id="deliverymethod-text" class="alert hidden"></div>
 							    <div id="not-enough-ordered" class="alert hidden"></div>							    
 								<div class="controls">	

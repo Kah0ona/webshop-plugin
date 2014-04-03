@@ -74,7 +74,11 @@ class DeliveryCostView extends GenericView {
 		var delPrice = 0;
 		    	//check in the settings.deliveryCosts what is the delivery price
 		var max = 0;
-		
+		<?php if($this->model->getOptions()->getOption('delivered_by_us_message') != null && $this->model->getOptions()->getOption('delivered_by_us_message') != '' ){ ?>
+		var delCostsMessage = '<?php echo $this->model->getOptions()->getOption('delivered_by_us_message'); ?>';				
+		<?php } else { ?>
+		var delCostsMessage = 'We bezorgen op deze afstand ([afstand] km) vanaf een bestelbedrag van €[vanaf_bedrag]. De bezorgkosten bedragen €[bezorgkosten].';
+		<?php } ?>
 		if(!useFormula) {
 			
 			for(var i = 0; i < deliveryCosts.length; i++){
@@ -82,12 +86,12 @@ class DeliveryCostView extends GenericView {
 				max = deliveryCosts[i].maxKm;	
 				if(min <= distance && distance <= max) { //if distance is within this range
 					if(distance > 0){
+						delCostsMessage = delCostsMessage.replace('\[afstand\]', formatEuro(distance));
+						delCostsMessage = delCostsMessage.replace('\[vanaf_bedrag\]', formatEuro(deliveryCosts[i].minimumOrderPrice));
+						delCostsMessage = delCostsMessage.replace('\[bezorgkosten\]', formatEuro(deliveryCosts[i].price));											
 						jQuery('#city-result').removeClass('hidden alert alert-error')
 										 .addClass('alert alert-success')
-										 .html('We bezorgen op deze afstand ('+ 
-		formatEuro(distance)+' km) vanaf een bestelbedrag van €'+
-		formatEuro(deliveryCosts[i].minimumOrderPrice)+
-		'. De bezorgkosten bedragen €'+formatEuro(deliveryCosts[i].price)+'.');
+										 .html(delCostsMessage);
 										 
 					    //hide submit buttons
 					}
@@ -201,11 +205,30 @@ class DeliveryCostView extends GenericView {
 <div class="modal hide " id="city-modal">
 	 <div class="modal-header">
 	 	<button class="close" data-dismiss="modal">×</button>
-	 	<h3>Waar bezorgen we?</h3>
+	 	<h3><?php 
+	 	 	if(
+	 	 		$this->model->getOptions()->getOption('delivery_by_us_title') != null && 
+		 	 	$this->model->getOptions()->getOption('delivery_by_us_title') != ''
+	 	 	) {
+	 	 ?>
+	 	 	<?php echo $this->model->getOptions()->getOption('delivery_by_us_title'); ?>
+	 	 <?php } else { ?>
+	 	 	 Waar bezorgen we?
+		 <?php } ?>
+</h3>
 	 </div>
 	 <div class="modal-body">
-	 	 <p>Vul uw straatnaam en woonplaats in, en bekijk of, 
+	 	 <p><?php 
+	 	 	if(
+	 	 		$this->model->getOptions()->getOption('delivered_by_us_expl') != null && 
+		 	 	$this->model->getOptions()->getOption('delivered_by_us_expl') != ''
+	 	 	) {
+	 	 ?>
+	 	 	<?php echo $this->model->getOptions()->getOption('delivered_by_us_expl'); ?>
+	 	 <?php } else { ?>
+	 	 	 Vul uw straatnaam en woonplaats in, en bekijk of, 
 		 	en vanaf welk bedrag we bij u bezorgen.
+		 <?php } ?>
 		 </p>
 		 	 	
 		 <p>

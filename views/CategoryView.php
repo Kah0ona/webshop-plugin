@@ -171,7 +171,7 @@ class CategoryView extends GenericView {
 				<?php else : ?>
 						<li class="category-title"><?php echo $group; ?></li>
 						<li class="category dropdown-wrap">
-						<ul class="category-level-<?php echo $level; ?>">
+						<ul class="category-level-<?php echo $level; ?>"  data-category-level="<?php echo $level; ?>">
 						<?php foreach($cats as $cat) : ?>
 							<li class="category-item category-package category-id-<?php echo $cat->Category_id; ?>" data-category-id="<?php echo $cat->Category_id; ?>">
 								<a href="<?php echo site_url(); ?>/categories/<?php echo $cat->Category_id; ?>#<?php echo $cat->categoryName; ?>">
@@ -209,7 +209,7 @@ class CategoryView extends GenericView {
 	public function renderListRecursiveNoGroupTitles($data=null, $level){ ?>
 	
 		<!-- Start rendering CategoryView -->
-		<ul class="categories  category-level-<?php echo $level; ?>">
+		<ul class="categories  category-level-<?php echo $level; ?>" data-category-level="<?php echo $level; ?>">
 			<?php foreach($data as $cat) : ?>
 				<li class="category-item category-package category-id-<?php echo $cat->Category_id; ?>" data-category-id="<?php echo $cat->Category_id; ?>">
 					<a href="<?php echo site_url(); ?>/categories/<?php echo $cat->Category_id; ?>#<?php echo $cat->categoryName; ?>">

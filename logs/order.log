@@ -3254,3 +3254,236 @@
 2014-03-06 21:57:02: returnUrl: http://localhost/~marten/wordpress/success
 2014-03-06 21:57:02: notifyUrl: http://webshopdev.sytematic.nl/public/sisow_notifications
 2014-03-06 21:57:03: Setting redirect url: https://www.sisow.nl/Sisow/iDeal/RestHandler.ashx/PBStart?trxid=90500178638&sha1=1b97ee687ce9c0054bec3cbbe535bd0f7d4ed46f
+2014-04-02 18:20:50: -------
+2014-04-02 18:20:50: Processing cart: 
+2014-04-02 18:20:50: [{"Product_id":"2","title":"Leren jas","desc":"","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/","quantity":"1","price":"299.95","discount":"","VAT":"0.21","ProductOption":[{"ProductOption_id":"2","ProductOptionValue_id":"6","optionName":"Kleur:","extraPrice":"","optionValueName":"Rood"},{"ProductOption_id":"3","ProductOptionValue_id":"9","optionName":"Maat:","extraPrice":"","optionValueName":"S"}],"SKU":[{"SKU_id":"19","skuNumber":"123457-S-Rood","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"6","optionValue":"Rood","ProductOption_id":"2"},{"ProductOptionValue_id":"9","optionValue":"S","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"20","skuNumber":"123457-M-Rood","skuQuantity":"1","ProductOptionValue":[{"ProductOptionValue_id":"6","optionValue":"Rood","ProductOption_id":"2"},{"ProductOptionValue_id":"10","optionValue":"M","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"21","skuNumber":"123457-L-Rood","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"6","optionValue":"Rood","ProductOption_id":"2"},{"ProductOptionValue_id":"11","optionValue":"L","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"22","skuNumber":"123457-XL-Rood","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"6","optionValue":"Rood","ProductOption_id":"2"},{"ProductOptionValue_id":"12","optionValue":"XL","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"23","skuNumber":"123457-S-Blauw","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"7","optionValue":"Blauw","ProductOption_id":"2"},{"ProductOptionValue_id":"9","optionValue":"S","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"24","skuNumber":"123457-M-Blauw","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"7","optionValue":"Blauw","ProductOption_id":"2"},{"ProductOptionValue_id":"10","optionValue":"M","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"25","skuNumber":"123457-L-Blauw","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"7","optionValue":"Blauw","ProductOption_id":"2"},{"ProductOptionValue_id":"11","optionValue":"L","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"26","skuNumber":"123457-XL-Blauw","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"7","optionValue":"Blauw","ProductOption_id":"2"},{"ProductOptionValue_id":"12","optionValue":"XL","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"27","skuNumber":"123457-S-Zwart","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"8","optionValue":"Zwart","ProductOption_id":"2"},{"ProductOptionValue_id":"9","optionValue":"S","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"28","skuNumber":"123457-M-Zwart","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"8","optionValue":"Zwart","ProductOption_id":"2"},{"ProductOptionValue_id":"10","optionValue":"M","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"29","skuNumber":"123457-L-Zwart","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"8","optionValue":"Zwart","ProductOption_id":"2"},{"ProductOptionValue_id":"11","optionValue":"L","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"30","skuNumber":"123457-XL-Zwart","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"8","optionValue":"Zwart","ProductOption_id":"2"},{"ProductOptionValue_id":"12","optionValue":"XL","ProductOption_id":"3"}],"Product_id":"2"}],"productDeliveryTime":"","sku":{"SKU_id":"19","skuNumber":"123457-S-Rood","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"6","optionValue":"Rood","ProductOption_id":"2"},{"ProductOptionValue_id":"9","optionValue":"S","ProductOption_id":"3"}],"Product_id":"2"}}]
+2014-04-02 18:20:50: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => syt
+    [firstname] => t
+    [surname] => t
+    [street] => Hugo de grootstrat
+    [number] => 62
+    [postcode] => 2518EE
+    [city] => den haag
+    [country] => nederland
+    [email] => marten@sytematic.nl
+    [phone] => 0649343492
+    [VATnumber] => 
+    [deliveryName] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => sfda
+    [deliveryDate] => 04-19-2014 00:00:00
+    [coupon] => 
+    [payment-method] => 1
+    [issuerid] => 01
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"2","title":"Leren jas","desc":"","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/","quantity":"1","price":"299.95","discount":"","VAT":"0.21","ProductOption":[{"ProductOption_id":"2","ProductOptionValue_id":"6","optionName":"Kleur:","extraPrice":"","optionValueName":"Rood"},{"ProductOption_id":"3","ProductOptionValue_id":"9","optionName":"Maat:","extraPrice":"","optionValueName":"S"}],"SKU":[{"SKU_id":"19","skuNumber":"123457-S-Rood","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"6","optionValue":"Rood","ProductOption_id":"2"},{"ProductOptionValue_id":"9","optionValue":"S","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"20","skuNumber":"123457-M-Rood","skuQuantity":"1","ProductOptionValue":[{"ProductOptionValue_id":"6","optionValue":"Rood","ProductOption_id":"2"},{"ProductOptionValue_id":"10","optionValue":"M","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"21","skuNumber":"123457-L-Rood","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"6","optionValue":"Rood","ProductOption_id":"2"},{"ProductOptionValue_id":"11","optionValue":"L","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"22","skuNumber":"123457-XL-Rood","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"6","optionValue":"Rood","ProductOption_id":"2"},{"ProductOptionValue_id":"12","optionValue":"XL","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"23","skuNumber":"123457-S-Blauw","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"7","optionValue":"Blauw","ProductOption_id":"2"},{"ProductOptionValue_id":"9","optionValue":"S","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"24","skuNumber":"123457-M-Blauw","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"7","optionValue":"Blauw","ProductOption_id":"2"},{"ProductOptionValue_id":"10","optionValue":"M","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"25","skuNumber":"123457-L-Blauw","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"7","optionValue":"Blauw","ProductOption_id":"2"},{"ProductOptionValue_id":"11","optionValue":"L","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"26","skuNumber":"123457-XL-Blauw","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"7","optionValue":"Blauw","ProductOption_id":"2"},{"ProductOptionValue_id":"12","optionValue":"XL","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"27","skuNumber":"123457-S-Zwart","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"8","optionValue":"Zwart","ProductOption_id":"2"},{"ProductOptionValue_id":"9","optionValue":"S","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"28","skuNumber":"123457-M-Zwart","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"8","optionValue":"Zwart","ProductOption_id":"2"},{"ProductOptionValue_id":"10","optionValue":"M","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"29","skuNumber":"123457-L-Zwart","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"8","optionValue":"Zwart","ProductOption_id":"2"},{"ProductOptionValue_id":"11","optionValue":"L","ProductOption_id":"3"}],"Product_id":"2"},{"SKU_id":"30","skuNumber":"123457-XL-Zwart","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"8","optionValue":"Zwart","ProductOption_id":"2"},{"ProductOptionValue_id":"12","optionValue":"XL","ProductOption_id":"3"}],"Product_id":"2"}],"productDeliveryTime":"","sku":{"SKU_id":"19","skuNumber":"123457-S-Rood","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"6","optionValue":"Rood","ProductOption_id":"2"},{"ProductOptionValue_id":"9","optionValue":"S","ProductOption_id":"3"}],"Product_id":"2"}}]
+    [orderStatus] => nieuw
+    [PaymentMethod_id] => 1
+    [viaSite] => true
+)
+
+2014-04-02 18:20:50: Posting to: deliveryType=bezorgen&companyName=syt&firstname=t&surname=t&street=Hugo+de+grootstrat&number=62&postcode=2518EE&city=den+haag&country=nederland&email=marten%40sytematic.nl&phone=0649343492&VATnumber=&deliveryName=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=sfda&deliveryDate=04-19-2014+00%3A00%3A00&coupon=&payment-method=1&issuerid=01&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%222%22%2C%22title%22%3A%22Leren+jas%22%2C%22desc%22%3A%22%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2F%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%22299.95%22%2C%22discount%22%3A%22%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%222%22%2C%22ProductOptionValue_id%22%3A%226%22%2C%22optionName%22%3A%22Kleur%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%22Rood%22%7D%2C%7B%22ProductOption_id%22%3A%223%22%2C%22ProductOptionValue_id%22%3A%229%22%2C%22optionName%22%3A%22Maat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%22S%22%7D%5D%2C%22SKU%22%3A%5B%7B%22SKU_id%22%3A%2219%22%2C%22skuNumber%22%3A%22123457-S-Rood%22%2C%22skuQuantity%22%3A%220%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%226%22%2C%22optionValue%22%3A%22Rood%22%2C%22ProductOption_id%22%3A%222%22%7D%2C%7B%22ProductOptionValue_id%22%3A%229%22%2C%22optionValue%22%3A%22S%22%2C%22ProductOption_id%22%3A%223%22%7D%5D%2C%22Product_id%22%3A%222%22%7D%2C%7B%22SKU_id%22%3A%2220%22%2C%22skuNumber%22%3A%22123457-M-Rood%22%2C%22skuQuantity%22%3A%221%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%226%22%2C%22optionValue%22%3A%22Rood%22%2C%22ProductOption_id%22%3A%222%22%7D%2C%7B%22ProductOptionValue_id%22%3A%2210%22%2C%22optionValue%22%3A%22M%22%2C%22ProductOption_id%22%3A%223%22%7D%5D%2C%22Product_id%22%3A%222%22%7D%2C%7B%22SKU_id%22%3A%2221%22%2C%22skuNumber%22%3A%22123457-L-Rood%22%2C%22skuQuantity%22%3A%220%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%226%22%2C%22optionValue%22%3A%22Rood%22%2C%22ProductOption_id%22%3A%222%22%7D%2C%7B%22ProductOptionValue_id%22%3A%2211%22%2C%22optionValue%22%3A%22L%22%2C%22ProductOption_id%22%3A%223%22%7D%5D%2C%22Product_id%22%3A%222%22%7D%2C%7B%22SKU_id%22%3A%2222%22%2C%22skuNumber%22%3A%22123457-XL-Rood%22%2C%22skuQuantity%22%3A%220%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%226%22%2C%22optionValue%22%3A%22Rood%22%2C%22ProductOption_id%22%3A%222%22%7D%2C%7B%22ProductOptionValue_id%22%3A%2212%22%2C%22optionValue%22%3A%22XL%22%2C%22ProductOption_id%22%3A%223%22%7D%5D%2C%22Product_id%22%3A%222%22%7D%2C%7B%22SKU_id%22%3A%2223%22%2C%22skuNumber%22%3A%22123457-S-Blauw%22%2C%22skuQuantity%22%3A%220%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%227%22%2C%22optionValue%22%3A%22Blauw%22%2C%22ProductOption_id%22%3A%222%22%7D%2C%7B%22ProductOptionValue_id%22%3A%229%22%2C%22optionValue%22%3A%22S%22%2C%22ProductOption_id%22%3A%223%22%7D%5D%2C%22Product_id%22%3A%222%22%7D%2C%7B%22SKU_id%22%3A%2224%22%2C%22skuNumber%22%3A%22123457-M-Blauw%22%2C%22skuQuantity%22%3A%220%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%227%22%2C%22optionValue%22%3A%22Blauw%22%2C%22ProductOption_id%22%3A%222%22%7D%2C%7B%22ProductOptionValue_id%22%3A%2210%22%2C%22optionValue%22%3A%22M%22%2C%22ProductOption_id%22%3A%223%22%7D%5D%2C%22Product_id%22%3A%222%22%7D%2C%7B%22SKU_id%22%3A%2225%22%2C%22skuNumber%22%3A%22123457-L-Blauw%22%2C%22skuQuantity%22%3A%220%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%227%22%2C%22optionValue%22%3A%22Blauw%22%2C%22ProductOption_id%22%3A%222%22%7D%2C%7B%22ProductOptionValue_id%22%3A%2211%22%2C%22optionValue%22%3A%22L%22%2C%22ProductOption_id%22%3A%223%22%7D%5D%2C%22Product_id%22%3A%222%22%7D%2C%7B%22SKU_id%22%3A%2226%22%2C%22skuNumber%22%3A%22123457-XL-Blauw%22%2C%22skuQuantity%22%3A%220%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%227%22%2C%22optionValue%22%3A%22Blauw%22%2C%22ProductOption_id%22%3A%222%22%7D%2C%7B%22ProductOptionValue_id%22%3A%2212%22%2C%22optionValue%22%3A%22XL%22%2C%22ProductOption_id%22%3A%223%22%7D%5D%2C%22Product_id%22%3A%222%22%7D%2C%7B%22SKU_id%22%3A%2227%22%2C%22skuNumber%22%3A%22123457-S-Zwart%22%2C%22skuQuantity%22%3A%220%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%228%22%2C%22optionValue%22%3A%22Zwart%22%2C%22ProductOption_id%22%3A%222%22%7D%2C%7B%22ProductOptionValue_id%22%3A%229%22%2C%22optionValue%22%3A%22S%22%2C%22ProductOption_id%22%3A%223%22%7D%5D%2C%22Product_id%22%3A%222%22%7D%2C%7B%22SKU_id%22%3A%2228%22%2C%22skuNumber%22%3A%22123457-M-Zwart%22%2C%22skuQuantity%22%3A%220%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%228%22%2C%22optionValue%22%3A%22Zwart%22%2C%22ProductOption_id%22%3A%222%22%7D%2C%7B%22ProductOptionValue_id%22%3A%2210%22%2C%22optionValue%22%3A%22M%22%2C%22ProductOption_id%22%3A%223%22%7D%5D%2C%22Product_id%22%3A%222%22%7D%2C%7B%22SKU_id%22%3A%2229%22%2C%22skuNumber%22%3A%22123457-L-Zwart%22%2C%22skuQuantity%22%3A%220%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%228%22%2C%22optionValue%22%3A%22Zwart%22%2C%22ProductOption_id%22%3A%222%22%7D%2C%7B%22ProductOptionValue_id%22%3A%2211%22%2C%22optionValue%22%3A%22L%22%2C%22ProductOption_id%22%3A%223%22%7D%5D%2C%22Product_id%22%3A%222%22%7D%2C%7B%22SKU_id%22%3A%2230%22%2C%22skuNumber%22%3A%22123457-XL-Zwart%22%2C%22skuQuantity%22%3A%220%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%228%22%2C%22optionValue%22%3A%22Zwart%22%2C%22ProductOption_id%22%3A%222%22%7D%2C%7B%22ProductOptionValue_id%22%3A%2212%22%2C%22optionValue%22%3A%22XL%22%2C%22ProductOption_id%22%3A%223%22%7D%5D%2C%22Product_id%22%3A%222%22%7D%5D%2C%22productDeliveryTime%22%3A%22%22%2C%22sku%22%3A%7B%22SKU_id%22%3A%2219%22%2C%22skuNumber%22%3A%22123457-S-Rood%22%2C%22skuQuantity%22%3A%220%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%226%22%2C%22optionValue%22%3A%22Rood%22%2C%22ProductOption_id%22%3A%222%22%7D%2C%7B%22ProductOptionValue_id%22%3A%229%22%2C%22optionValue%22%3A%22S%22%2C%22ProductOption_id%22%3A%223%22%7D%5D%2C%22Product_id%22%3A%222%22%7D%7D%5D&orderStatus=nieuw&PaymentMethod_id=1&viaSite=true&orderType=invoice
+2014-04-02 18:20:52: Returned value from /orders:
+2014-04-02 18:20:52: stdClass Object
+(
+    [Order__id] => 87
+    [totalPrice] => 314.95
+)
+
+2014-04-02 18:20:52: Inserted Order id: 87
+2014-04-02 19:00:43: -------
+2014-04-02 19:00:43: Processing cart: 
+2014-04-02 19:00:43: []
+2014-04-02 19:00:43: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => syt
+    [firstname] => t
+    [surname] => t
+    [street] => Hugo de grootstrat
+    [number] => 62
+    [postcode] => 2518EE
+    [city] => den haag
+    [country] => nederland
+    [email] => marten@sytematic.nl
+    [phone] => 0649343492
+    [VATnumber] => 
+    [deliveryName] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => sfda
+    [deliveryDate] => 04-19-2014 00:00:00
+    [coupon] => 
+    [payment-method] => 1
+    [issuerid] => 01
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => []
+    [orderStatus] => nieuw
+    [PaymentMethod_id] => 1
+    [viaSite] => true
+)
+
+2014-04-02 19:00:43: Posting to: deliveryType=bezorgen&companyName=syt&firstname=t&surname=t&street=Hugo+de+grootstrat&number=62&postcode=2518EE&city=den+haag&country=nederland&email=marten%40sytematic.nl&phone=0649343492&VATnumber=&deliveryName=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=sfda&deliveryDate=04-19-2014+00%3A00%3A00&coupon=&payment-method=1&issuerid=01&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%5D&orderStatus=nieuw&PaymentMethod_id=1&viaSite=true&orderType=invoice
+2014-04-02 19:00:46: Returned value from /orders:
+2014-04-02 19:00:46: stdClass Object
+(
+    [Order__id] => 88
+    [totalPrice] => 0
+)
+
+2014-04-02 19:00:46: Inserted Order id: 88
+2014-04-02 19:02:02: -------
+2014-04-02 19:02:02: Processing cart: 
+2014-04-02 19:02:02: []
+2014-04-02 19:02:02: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => syt
+    [firstname] => t
+    [surname] => t
+    [street] => Hugo de grootstrat
+    [number] => 62
+    [postcode] => 2518EE
+    [city] => den haag
+    [country] => nederland
+    [email] => marten@sytematic.nl
+    [phone] => 0649343492
+    [VATnumber] => 
+    [deliveryName] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => sfda
+    [deliveryDate] => 04-19-2014 19:00
+    [deliveryTime] => 12:00-13:00
+    [coupon] => 
+    [payment-method] => 1
+    [issuerid] => 01
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => []
+    [orderStatus] => nieuw
+    [PaymentMethod_id] => 1
+    [viaSite] => true
+)
+
+2014-04-02 19:02:02: Posting to: deliveryType=bezorgen&companyName=syt&firstname=t&surname=t&street=Hugo+de+grootstrat&number=62&postcode=2518EE&city=den+haag&country=nederland&email=marten%40sytematic.nl&phone=0649343492&VATnumber=&deliveryName=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=sfda&deliveryDate=04-19-2014+19%3A00&deliveryTime=12%3A00-13%3A00&coupon=&payment-method=1&issuerid=01&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%5D&orderStatus=nieuw&PaymentMethod_id=1&viaSite=true&orderType=invoice
+2014-04-02 19:02:02: Returned value from /orders:
+2014-04-02 19:02:02: stdClass Object
+(
+    [Order__id] => 89
+    [totalPrice] => 0
+)
+
+2014-04-02 19:02:02: Inserted Order id: 89
+2014-04-02 19:05:27: -------
+2014-04-02 19:05:27: Processing cart: 
+2014-04-02 19:05:27: []
+2014-04-02 19:05:27: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => syt
+    [firstname] => t
+    [surname] => t
+    [street] => Hugo de grootstrat
+    [number] => 62
+    [postcode] => 2518EE
+    [city] => den haag
+    [country] => nederland
+    [email] => marten@sytematic.nl
+    [phone] => 0649343492
+    [VATnumber] => 
+    [deliveryName] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => sfda
+    [deliveryDate] => 04-19-2014 12:00:00
+    [deliveryTime] => 12:00-13:00
+    [coupon] => 
+    [payment-method] => 1
+    [issuerid] => 01
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => []
+    [orderStatus] => nieuw
+    [PaymentMethod_id] => 1
+    [viaSite] => true
+)
+
+2014-04-02 19:05:27: Posting to: deliveryType=bezorgen&companyName=syt&firstname=t&surname=t&street=Hugo+de+grootstrat&number=62&postcode=2518EE&city=den+haag&country=nederland&email=marten%40sytematic.nl&phone=0649343492&VATnumber=&deliveryName=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=sfda&deliveryDate=04-19-2014+12%3A00%3A00&deliveryTime=12%3A00-13%3A00&coupon=&payment-method=1&issuerid=01&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%5D&orderStatus=nieuw&PaymentMethod_id=1&viaSite=true&orderType=invoice
+2014-04-02 19:05:28: Returned value from /orders:
+2014-04-02 19:05:28: stdClass Object
+(
+    [Order__id] => 90
+    [totalPrice] => 0
+)
+
+2014-04-02 19:05:28: Inserted Order id: 90
+2014-04-03 07:31:59: -------
+2014-04-03 07:31:59: Processing cart: 
+2014-04-03 07:31:59: [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","discount":"10","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"3","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"39"}],"SKU":[{"SKU_id":"14","skuNumber":"123456-40","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"1","optionValue":"40","ProductOption_id":"1"}],"Product_id":"1"},{"SKU_id":"15","skuNumber":"123456-41","skuQuantity":"1","ProductOptionValue":[{"ProductOptionValue_id":"2","optionValue":"41","ProductOption_id":"1"}],"Product_id":"1"},{"SKU_id":"16","skuNumber":"123456-42","skuQuantity":"2","ProductOptionValue":[{"ProductOptionValue_id":"3","optionValue":"39","ProductOption_id":"1"}],"Product_id":"1"},{"SKU_id":"17","skuNumber":"123456-43","skuQuantity":"4","ProductOptionValue":[{"ProductOptionValue_id":"4","optionValue":"43","ProductOption_id":"1"}],"Product_id":"1"},{"SKU_id":"18","skuNumber":"123456-44","skuQuantity":"3","ProductOptionValue":[{"ProductOptionValue_id":"5","optionValue":"44","ProductOption_id":"1"}],"Product_id":"1"}],"productDeliveryTime":"","sku":{"SKU_id":"16","skuNumber":"123456-42","skuQuantity":"2","ProductOptionValue":[{"ProductOptionValue_id":"3","optionValue":"39","ProductOption_id":"1"}],"Product_id":"1"}}]
+2014-04-03 07:31:59: Array
+(
+    [deliveryType] => bezorgen
+    [companyName] => Sytematic Software
+    [firstname] => Marten
+    [surname] => Sijtema
+    [street] => Hugo de Grootstraat 62b
+    [number] => 12
+    [postcode] => 2518EE
+    [city] => Den Haag
+    [country] => NL
+    [email] => marten@sytematic.nl
+    [phone] => 31649343492
+    [VATnumber] => 
+    [deliveryName] => 
+    [deliveryStreet] => 
+    [deliveryNumber] => 
+    [deliveryZipcode] => 
+    [deliveryCity] => 
+    [orderComment] => test bezorgTIJD
+    [deliveryDate] => 04-04-2014 14:00:00
+    [deliveryTime] => 14:00-15:00
+    [coupon] => 
+    [payment-method] => 1
+    [issuerid] => 01
+    [DeliveryMethod_id] => 1
+    [invoice] => Plaats bestelling
+    [hostname] => test
+    [action] => place_order
+    [shoppingCart] => [{"Product_id":"1","title":"Malene Birger jurk","desc":"*test*\n\n- markdown\n- list\n- bla\n- bla\n\n__underscore__\n*asterisk*\n","thumb":"http:\/\/webshopdev.sytematic.nl\/uploads\/Product\/Product_imageDish_1_1379072509780.jpg","quantity":"1","price":"99.95","discount":"10","VAT":"0.21","ProductOption":[{"ProductOption_id":"1","ProductOptionValue_id":"3","optionName":"Schoenmaat:","extraPrice":"","optionValueName":"39"}],"SKU":[{"SKU_id":"14","skuNumber":"123456-40","skuQuantity":"0","ProductOptionValue":[{"ProductOptionValue_id":"1","optionValue":"40","ProductOption_id":"1"}],"Product_id":"1"},{"SKU_id":"15","skuNumber":"123456-41","skuQuantity":"1","ProductOptionValue":[{"ProductOptionValue_id":"2","optionValue":"41","ProductOption_id":"1"}],"Product_id":"1"},{"SKU_id":"16","skuNumber":"123456-42","skuQuantity":"2","ProductOptionValue":[{"ProductOptionValue_id":"3","optionValue":"39","ProductOption_id":"1"}],"Product_id":"1"},{"SKU_id":"17","skuNumber":"123456-43","skuQuantity":"4","ProductOptionValue":[{"ProductOptionValue_id":"4","optionValue":"43","ProductOption_id":"1"}],"Product_id":"1"},{"SKU_id":"18","skuNumber":"123456-44","skuQuantity":"3","ProductOptionValue":[{"ProductOptionValue_id":"5","optionValue":"44","ProductOption_id":"1"}],"Product_id":"1"}],"productDeliveryTime":"","sku":{"SKU_id":"16","skuNumber":"123456-42","skuQuantity":"2","ProductOptionValue":[{"ProductOptionValue_id":"3","optionValue":"39","ProductOption_id":"1"}],"Product_id":"1"}}]
+    [orderStatus] => nieuw
+    [PaymentMethod_id] => 1
+    [viaSite] => true
+)
+
+2014-04-03 07:31:59: Posting to: deliveryType=bezorgen&companyName=Sytematic+Software&firstname=Marten&surname=Sijtema&street=Hugo+de+Grootstraat+62b&number=12&postcode=2518EE&city=Den+Haag&country=NL&email=marten%40sytematic.nl&phone=31649343492&VATnumber=&deliveryName=&deliveryStreet=&deliveryNumber=&deliveryZipcode=&deliveryCity=&orderComment=test+bezorgTIJD&deliveryDate=04-04-2014+14%3A00%3A00&deliveryTime=14%3A00-15%3A00&coupon=&payment-method=1&issuerid=01&DeliveryMethod_id=1&invoice=Plaats+bestelling&hostname=test&action=place_order&shoppingCart=%5B%7B%22Product_id%22%3A%221%22%2C%22title%22%3A%22Malene+Birger+jurk%22%2C%22desc%22%3A%22%2Atest%2A%5Cn%5Cn-+markdown%5Cn-+list%5Cn-+bla%5Cn-+bla%5Cn%5Cn__underscore__%5Cn%2Aasterisk%2A%5Cn%22%2C%22thumb%22%3A%22http%3A%5C%2F%5C%2Fwebshopdev.sytematic.nl%5C%2Fuploads%5C%2FProduct%5C%2FProduct_imageDish_1_1379072509780.jpg%22%2C%22quantity%22%3A%221%22%2C%22price%22%3A%2299.95%22%2C%22discount%22%3A%2210%22%2C%22VAT%22%3A%220.21%22%2C%22ProductOption%22%3A%5B%7B%22ProductOption_id%22%3A%221%22%2C%22ProductOptionValue_id%22%3A%223%22%2C%22optionName%22%3A%22Schoenmaat%3A%22%2C%22extraPrice%22%3A%22%22%2C%22optionValueName%22%3A%2239%22%7D%5D%2C%22SKU%22%3A%5B%7B%22SKU_id%22%3A%2214%22%2C%22skuNumber%22%3A%22123456-40%22%2C%22skuQuantity%22%3A%220%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%221%22%2C%22optionValue%22%3A%2240%22%2C%22ProductOption_id%22%3A%221%22%7D%5D%2C%22Product_id%22%3A%221%22%7D%2C%7B%22SKU_id%22%3A%2215%22%2C%22skuNumber%22%3A%22123456-41%22%2C%22skuQuantity%22%3A%221%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%222%22%2C%22optionValue%22%3A%2241%22%2C%22ProductOption_id%22%3A%221%22%7D%5D%2C%22Product_id%22%3A%221%22%7D%2C%7B%22SKU_id%22%3A%2216%22%2C%22skuNumber%22%3A%22123456-42%22%2C%22skuQuantity%22%3A%222%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%223%22%2C%22optionValue%22%3A%2239%22%2C%22ProductOption_id%22%3A%221%22%7D%5D%2C%22Product_id%22%3A%221%22%7D%2C%7B%22SKU_id%22%3A%2217%22%2C%22skuNumber%22%3A%22123456-43%22%2C%22skuQuantity%22%3A%224%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%224%22%2C%22optionValue%22%3A%2243%22%2C%22ProductOption_id%22%3A%221%22%7D%5D%2C%22Product_id%22%3A%221%22%7D%2C%7B%22SKU_id%22%3A%2218%22%2C%22skuNumber%22%3A%22123456-44%22%2C%22skuQuantity%22%3A%223%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%225%22%2C%22optionValue%22%3A%2244%22%2C%22ProductOption_id%22%3A%221%22%7D%5D%2C%22Product_id%22%3A%221%22%7D%5D%2C%22productDeliveryTime%22%3A%22%22%2C%22sku%22%3A%7B%22SKU_id%22%3A%2216%22%2C%22skuNumber%22%3A%22123456-42%22%2C%22skuQuantity%22%3A%222%22%2C%22ProductOptionValue%22%3A%5B%7B%22ProductOptionValue_id%22%3A%223%22%2C%22optionValue%22%3A%2239%22%2C%22ProductOption_id%22%3A%221%22%7D%5D%2C%22Product_id%22%3A%221%22%7D%7D%5D&orderStatus=nieuw&PaymentMethod_id=1&viaSite=true&orderType=invoice
+2014-04-03 07:32:01: Returned value from /orders:
+2014-04-03 07:32:01: stdClass Object
+(
+    [Order__id] => 91
+    [totalPrice] => 104.95
+)
+
+2014-04-03 07:32:01: Inserted Order id: 91

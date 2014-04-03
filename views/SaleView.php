@@ -11,19 +11,21 @@ class SaleView extends GenericView {
 		?>
 
 		<script type="text/javascript">
+			WebshopSaleModus = '<?php echo $saleMode; ?>';
 			jQuery(document).ready(function($){
 				var posturl = '<?php echo site_url(); ?>/wp-admin/admin-ajax.php';
 			
-				$('#sale-light span').click(function(){
-					var e = $(this);
-					$('#sale-light span').removeClass('active');
-					e.addClass('active');
-					$('#sale-status').html(e.attr('data-status'));
-					//make update to the session, and reload the page
+				$('#webshop-sale').click(function(){
+					var s = 'on';
+					if($(this).children('a').first().html() == 'NEW'){
+						s = 'off';
+					} else {
+						s = 'on';
+					}
 					$.post(posturl,
 			 			{ 
 			 				'action' : 'sale_button',
-	 				   		'sale_mode' : e.attr('data-mode') 
+	 				   		'sale_mode' : s 
 			 			},
 						function(result){ 
 							location.reload();
@@ -31,23 +33,29 @@ class SaleView extends GenericView {
 					);				
 				});
 				
-				$('#sale-light span').hover(function(){
-					var e = $(this);
-					
-					$('#sale-hover').html(e.attr('data-hover')).show();
-				}, function(){
-					$('#sale-hover').hide();
+				$('#navigationbar a').click(function(evt){
+					if($(this).html().toUpperCase() == 'HOME'){
+						evt.preventDefault();
+						$.post(posturl,
+				 			{ 
+				 				'action' : 'sale_button',
+		 				   		'sale_mode' : 'off' 
+				 			},
+							function(result){ 
+								window.location.href= '/';
+							}
+						);				
+					}
 				});
 			});
-		
 		</script>
-		<div id="sale-showing">Showing:</div>
-		<div id="sale-light">
-			<span class="<?php echo $saleMode == 'off' ? 'active' : ''?>" id="light-off" data-mode="off" data-status="NEW COLLECTION!" data-hover="Toon de nieuwe collectie"></span>
-			<span class="<?php echo $saleMode == 'both' ? 'active' : ''?>" id="light-both"  data-mode="both" data-status="NEW+SALE" data-hover="Toon alles"></span>
-			<span class="<?php echo $saleMode == 'on' ? 'active' : ''?>" id="light-on"  data-mode="on" data-status="SALE!" data-hover="Toon de producten in SALE!"></span>
+		<div id="webshop-sale">
+		<?php if($saleMode == 'on') { ?>
+		<a href="#">NEW</a>
+		<?php } else { ?>
+		<a href="#">SALE</a>		
+		<?php } ?>
 		</div>
-		<div id='sale-status'><?php echo $saleStatus; ?></div>
 		<?php
 	}
 }

@@ -35,10 +35,21 @@ class AdminView extends GenericView {
 		  $this->add_cs_field('hostname','Hostname:');
 		  $this->add_cs_field('address','Adres van uw zaak (formaat: Kalverstraat 12 1234AB Amsterdam):');
 		  $this->add_cs_field('cart_class', 'CSS-class van het winkelwagentje:');
+  		  $this->add_cs_field('checkout_link', 'Tekst voor winkelmandje afreken knop:');
+   		  $this->add_cs_field('delivery_by_us_text', 'Door ons bezorgd label');	
+  		  $this->add_cs_field('delivery_by_us_title', 'Door ons bezorgd titel');		  
+   		  $this->add_cs_field('delivered_by_us_expl', 'Door ons bezorgd uitleg');		  
+   		  $this->add_cs_field('delivered_by_us_message', 'Bezorgtekst. Gebruik [afstand], [vanaf_bedrag], [bezorgkosten]');		  
+   		  $this->add_cs_field('deliverymethod_text', 'Uitleg verzendmethode');		  
+
+
+
+  		  		  		  
   		  $this->add_cs_field('nested_category_level','Aantal niveau\'s in categorie widget');
    		  $this->add_cs_field_boolean('use_pagination', 'Verdeel producten over meerdere pagina\'s');		    		  
    		  $this->add_cs_field('num_items_per_page', 'Aantal producten per pagina');		  
-  		  
+
+
   		  $this->add_cs_field_upload('NoImage', 'Toon dit plaatje indien er geen plaatje bij een product zit');
 
   		  
@@ -50,7 +61,9 @@ class AdminView extends GenericView {
 		   
 		  $this->add_cs_field_boolean('show_article_number', 'Toon artikelnummer van product (indien ingevuld)');		  
 		  $this->add_cs_field_boolean('productoverview_disabled', 'Deactiveer /products/ overzicht (nodig indien google search gebruikt wordt)');
-		  $this->add_cs_field_boolean('use_delivery_date', 'Kunnen klanten een leverdatum aangeven?');		  
+		  $this->add_cs_field_boolean('use_delivery_date', 'Kunnen klanten een leverdatum aangeven?');		
+		  $this->add_cs_field_boolean('use_delivery_time', 'Kunnen klanten een levertijd aangeven?');		    		  
+		    
 		  $this->add_cs_field_boolean('UseSisow', 'Gebruik iDeal via Sisow?:');		  
 		  $this->add_cs_field_boolean('UseMisterCash', 'Gebruik MisterCash via Sisow?:');		  		  
 		  $this->add_cs_field('SisowMerchantId', 'Sisow Merchant ID:');

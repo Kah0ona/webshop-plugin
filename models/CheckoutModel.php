@@ -58,6 +58,9 @@ class CheckoutModel extends GenericModel {
 	public function allowDeliveryDate(){
 		return $this->options->getOption('use_delivery_date');
 	}
+	public function allowDeliveryTime(){
+		return $this->options->getOption('use_delivery_time');
+	}
 	
 	public function sendOrderToBackend($post){
 		$post['hostname'] = $this->options->getOption('hostname');
@@ -91,12 +94,24 @@ class CheckoutModel extends GenericModel {
 
 		if($post['deliveryDate'] != null && "" != trim($post['deliveryDate']) && isset($post['deliveryDate'])){
 			$pieces = explode('-', $post['deliveryDate']);
-			$post['deliveryDate']= $pieces[1].'-'.$pieces[0].'-'.$pieces[2].' 00:00:00';
+			
+			$time = '00:00';
+			if($post['deliveryTime'] != null && "" != trim($post['deliveryTime']) && isset($post['deliveryTime'])){
+				$piecesTime = explode('-', $post['deliveryTime']);
+				$time = $piecesTime[0];
+			}
+			
+			$post['deliveryDate']= $pieces[1].'-'.$pieces[0].'-'.$pieces[2].' '.$time.':00';
 		}
 		
 		if($post['deliveryDate'] == ''){
 			unset($post['deliveryDate']);
 		}
+		
+		if($post['deliveryTime'] == ''){
+			unset($post['deliveryTime']);
+		}
+
 
 
 		ob_start();
