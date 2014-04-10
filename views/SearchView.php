@@ -55,7 +55,10 @@ class SearchView extends GenericView {
 				 		<div class="span10">
 				 			<a href="<?php echo get_bloginfo('url'); ?>/products/{{Product_id}}/#{{productName}}" target="_blank">{{productName | truncate 50 }}</a> €{{productPrice}}<br/>
 				 			<span class="search-result-description">
-								{{productDesc | truncate 140}}	
+								<strong>Merk:</strong> {{brand | default '-' }} <br/>
+								<strong>Art. nr.:</strong> {{productNumber | default  '-'}} <br/>
+								{{productDesc | truncate 140}}
+								
 				 			</span>
 				 		</div>
 				 	</div>

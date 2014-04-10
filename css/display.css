@@ -116,3 +116,7 @@ td.text-right {
 	float: right;
 }
 
+
+.clear-block {
+	clear: both;
+}

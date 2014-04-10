@@ -420,8 +420,15 @@
 		    		var obj = this.cartDataStore[i];
 					var removeclass = 'productid="'+obj.Product_id+'"';
 										
-					var title = obj.title;					
+					var title = obj.title;		
+								
+					if(obj.brand != null && obj.brand != "") {
+						title = obj.brand + " - " + title;
+					}
+					
+					
 					var selected_options_attr =''; 
+					
 
 					if(obj.ProductOption != null && obj.ProductOption != undefined && obj.ProductOption.length > 0){
 						title += " (";
@@ -674,7 +681,7 @@
 	    	}
 	    	else { //use settings.deliveryMethodPrice
 	    		var x = deliveryMethod.attr('methodprice');
-	    		if(x == undefined || x == null){
+	    		if(x == undefined || x == null || x == ""){
 		    		x = 0;
 	    		}
 		    	deliveryCosts.price = parseFloat(x);
@@ -836,7 +843,7 @@
    			containerDiv.appendTo('body');
 	    	containerDiv.html('<div class="the-alert alert alert-info fade in">' +
 	    						 '<button data-dismiss="alert" class="close" type="button">×</button>' +
-	    						 '<p>Product toegevoegd aan de bestelling.</p>' +
+	    						 '<p>Product toegevoegd aan de bestelling. U kunt meteen <a href="'+this.settings.checkout_page+'">afrekenen</a> of verder winkelen.</p>' +
 	    					 '</div>');
 		    var alert = $('.the-alert').alert();
 		    window.setTimeout(function() { 

@@ -120,6 +120,8 @@ class GenericModel {
 		$quantity = $pro->amount;
 		$price = $pro->productPrice;
 		$VAT = $pro->productVAT;
+		$brand = $pro->brand;
+		$productNumber = $pro->productNumber;
 		$productDeliveryTime = $pro->productDeliveryTime;
 		$discount = $pro->productDiscount;
 		$options = array();
@@ -143,6 +145,8 @@ class GenericModel {
 			"quantity" => $quantity,
 			"price"=> $price,
 			"discount"=> $discount,
+			"brand" => $brand,
+			"productNumber" => $productNumber,
 			"VAT" => $VAT,
 			"ProductOption"=> $options,
 			"SKU"=> $skus,

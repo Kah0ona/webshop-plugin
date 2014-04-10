@@ -214,7 +214,12 @@ class CheckoutView extends GenericView {
 									 		   href="#" 
 								 		   
 								 		   data-original-title="<?php echo $p->title; ?>">info</a>
-									
+								 <?php if($p->brand != null) { ?>
+								<br/>- <strong>Merk/type:</strong> <?php echo $p->brand; ?>	 
+								 <?php } ?>
+								 <?php if($p->productNumber != null) { ?>
+								<br/>- <strong>Productnummer:</strong> <?php echo $p->productNumber; ?>	 
+								 <?php } ?>									
 							</td>
 							<td class="text-right">€ <?php echo money_format('%.2n', $this->calculateProductPrice($p)); ?></td>
 							<td class="text-center">

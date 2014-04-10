@@ -252,7 +252,7 @@ class ProductDetailView extends GenericView {
 	* @param $data contains data of one product
 	*/
 	public function renderOptionForm($data){ ?>
-		<div style="clear:both"></div>
+		<div class="clear-block"></div>
 		<div class="skuInfo alert alert-error skuInfo-<?php echo $data->Product_id; ?>"></div>
 		<form class="form <?php echo $data->priceOnDemand ? 'hidden' : ''; ?>">
 		    <div class="control-group" style="margin-top: 15px;">
