@@ -75,7 +75,6 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 		
 		it('When adding a product twice, the cart only has 1 entry for the product, but the quantity has to be 2.', function(){
 		    spyOn($, 'ajax');
-
 			webshopProducts = {};
 			webshopProducts = [{"Product_id":163, "title": "Product 1", "quantity" : 8, "ProductOption": [], "price" : 12, "VAT" : 0.21}];	
 			$('#shoppingcart').shoppingCart({ detail : true });

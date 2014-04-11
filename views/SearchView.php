@@ -48,12 +48,12 @@ class SearchView extends GenericView {
 			 	<div id="search-results">
 				 	<div class="search-result row-fluid" data-template>
 				 		<div class="span2">
-				 			<a href="<?php echo get_bloginfo('url'); ?>/products/{{Product_id}}/#{{productName}}" target="_blank">
+				 			<a href="<?php echo get_bloginfo('url'); ?>/products/{{Product_id}}/#{{productName}}" >
 					 			<img src="http://placehold.it/200x200&text=&nbsp;" data-src="{{imageDish | prepend '<?php echo SYSTEM_URL_WEBSHOP; ?>/uploads/Product/'}}" />
 				 			</a>
 				 		</div>
 				 		<div class="span10">
-				 			<a href="<?php echo get_bloginfo('url'); ?>/products/{{Product_id}}/#{{productName}}" target="_blank">{{productName | truncate 50 }}</a> €{{productPrice}}<br/>
+				 			<a href="<?php echo get_bloginfo('url'); ?>/products/{{Product_id}}/#{{productName}}" >{{productName | truncate 50 }}</a> €{{productPrice}}<br/>
 				 			<span class="search-result-description">
 								<strong>Merk:</strong> {{brand | default '-' }} <br/>
 								<strong>Art. nr.:</strong> {{productNumber | default  '-'}} <br/>
