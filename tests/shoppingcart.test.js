@@ -24,6 +24,12 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 			$('#wrap').wrap('<form name="order-form_" id="order-form" class="form-horizontal" action="'+dom+'mock-form-handler.php" method="post" novalidate="novalidate"></form>');
 	};
 	
+	
+	var initCheckoutProductAmountInputField = function(){
+		$('<div id="wrap"></div>').appendTo('body');	
+		$('<input type="text" class="checkout-amount check-amount-163 span2" data-productid="163" value="2" />').appendTo('#wrap');
+	}
+	
 	afterEach(function(){33
 		$('#shoppingcart').remove();
 		$('#detailform').remove();
@@ -238,7 +244,7 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 			
 		});
 		
-		
+				
 		var fakeGoogleMapsReply = function(x,y){
 				//console.log(y);
 				y.call(this, { routes : [{ legs: [{distance : {value: 10000000}}]}]}, google.maps.DirectionsStatus.OK);
@@ -331,6 +337,38 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 	});
 	
 	describe('Checkout page testsuite.', function(){
+		it('should update the cart, and recalculate prices when the amount field on the checkout page is changed', function(){
+			webshopProducts = {};
+			webshopProducts = [{"Product_id":163, "title": "Product 1", "quantity" : 1, "ProductOption": [], "price" : 12, "VAT" : 0.21}];	
+
+			initCheckoutProductAmountInputField();
+			initAddressLinesInDom();
+
+			$('#shoppingcart').shoppingCart({
+				cartDisplayMode : 'block', 
+				address : 'Wassenaar',
+				deliveryCostsTable : [{"DeliveryCost_id":46,"price":12.5,"minKm":0,"maxKm":1000,"minimumOrderPrice":0}]
+			});
+			
+			$('.addtocart').click(); //simulate click 
+
+			spyOn($, 'ajax');
+
+			
+			//change the field
+			$('.check-amount-163').val('2'); //increase amount by 1
+			expect($.ajax).not.toHaveBeenCalled();
+			
+			$('.check-amount-163').change();
+
+			expect($.ajax).toHaveBeenCalled();
+
+			expect($.ajax.mostRecentCall.args[0].data.shoppingCart[0].quantity).toBe(2);
+
+
+			$('#wrap').remove();
+		});
+		
 
 		it('Should calculate delivery costs (when the \'deliver ourselves\' option is selected, and charge according to distance), and show it in the total of the checkout page.', function(){
 			//response.routes[0].legs[0].distance.value
@@ -341,6 +379,10 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 			
 			initAddressLinesInDom();
 			$('<div class="deliverycosts-field"></div>').appendTo('#wrap');
+		/*
+	webshopProducts = {};
+			webshopProducts = [{"Product_id":163, "title": "Product 1", "quantity" : 1, "ProductOption": [], "price" : 12, "VAT" : 0.21}];	
+*/
 
 			$('#shoppingcart').shoppingCart({
 				cartDisplayMode : 'block', 

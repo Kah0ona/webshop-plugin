@@ -149,7 +149,12 @@
 					distance = -1;
 					self.updatePrices();							    
 				}
-		    });	   		    
+		    });	 
+		    
+		    $("body").on('change.shoppingCart', '.checkout-amount', function(event){
+				self.updateQuantityOfProduct(event);
+    			self.updatePrices();
+		    });
 		    
 		    
 		    $("body").on('click.shoppingCart', 'a.removefromcart-checkout', function(event){
@@ -187,6 +192,25 @@
     		}
     		
     		return null;
+	   	},
+	   	updateQuantityOfProduct: function(event){
+			var elt = $(event.currentTarget);
+			var productId = parseInt(elt.attr('data-productid'));
+			var qty = parseInt(elt.val());
+			
+	   	
+			if(qty == null || qty == ""){
+				qty = 0; 
+			}
+			
+	    	for(var i = 0; i < this.cartDataStore.length; i++){
+				var p = this.cartDataStore[i];
+				if(p.Product_id == productId){ //found
+					p.quantity = qty;
+				}
+			}
+			
+			this.persist();
 	   	},
 	   	updateInStockMessage : function(event, productId){
 	   		this.logger('updateInStockMessage');
@@ -450,7 +474,7 @@
 					
 		    		productsHtml += 
 		    				'<li class="product-row">'+
-								 '<span class="quantity">'+obj.quantity+'x</span>'+
+								 '<span class="quantity quantity-'+obj.Product_id+'">'+obj.quantity+'x</span>'+
 								 '<span class="product-name">'+title+'</span>'+
 								 '<span class="product-remove"><a href="#" '+removeclass+' '+selected_options_attr+' class="removefromcart">&times;</a></span>'+
 								 '<div style="clear: both"></div>'
@@ -555,7 +579,7 @@
 	    		this.logger("updating vatMap with: "+ parseFloat(prodPrice));
 	    		vatMap["x"+obj.VAT] += parseFloat(prodPrice);
 	    		
-	    		
+	    		$('.quantity-'+obj.Product_id).html(obj.quantity+'x');
 	    	}
 	    	
 	    	this.renderDeliveryMethodAndCostsOnCheckout(vatMap, totalInclVat);

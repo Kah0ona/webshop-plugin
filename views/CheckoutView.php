@@ -205,7 +205,7 @@ class CheckoutView extends GenericView {
 								$p = (object) $p; 
 					?>
 					<tr class="product-row-<?php echo $p->Product_id; ?>">
-							<td><?php echo $p->quantity; ?> x</td>
+							<td><input type="text" class="checkout-amount span2" data-productid="<?php echo $p->Product_id; ?>" value="<?php echo $p->quantity; ?>" />x</td>
 							<td><?php echo $p->title.' '.$this->getProductOptionString($p); ?>
 								<a data-content="<p class=' '><?php echo htmlspecialchars($p->desc); ?></p><img src='<?php echo $p->thumb; ?>' />" 
 									 		   rel="popover" 

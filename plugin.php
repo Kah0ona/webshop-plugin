@@ -202,6 +202,49 @@ class SytematicWebshop {
 		session_start();
 	}
 	
+	/**
+	* If during the execution of the shortcode somehow the models were not inited yet,
+	* Because it came from a do_shortcode('[..]'); call, in a template, this will do that
+	*/
+	public function init_models_directly($type = 'products', $id = null){ 
+		if($type == 'products'){
+			include_once('models/ProductModel.php');
+			$this->productModel = new ProductModel($this->hostname);
+			$this->productModel->setOptions($this->options);
+			if($this->productModel->isDetailPage('products')) {
+				$this->productModel->fetchProduct();
+			}
+			elseif($this->productModel->productsOverviewEnabled()) {
+				$this->productModel->fetchProductsDefault();
+			}
+		} else {
+			include_once('models/CategoryModel.php');		
+			$this->categoryModel = new CategoryModel($this->hostname);
+			$this->categoryModel->setOptions($this->options);
+			
+			
+			//see if the shortcode contains id="123", and get 123 in the $catId variable.
+			$catId = $id;
+			if($catId != null && is_numeric($catId) && $catId > 0){
+				$this->categoryModel->setId($catId);
+			}
+			
+			$detail = $this->categoryModel->isDetailPage('categories') || ($catId != null && is_numeric($catId) && $catId > 0);
+
+			if($detail){
+				include_once('models/ProductModel.php');			
+				$this->productModel = new ProductModel($this->hostname);
+				$this->productModel->setOptions($this->options);
+				$this->categoryModel->fetchCategory(false);
+				$this->productModel->fetchProductByCategory($this->categoryModel->getId());
+
+			} else {
+				$this->categoryModel->fetchNestedCategories(true);
+			}
+		}
+	}
+	
+	
 	public function init_models($posts){
 
 		if($this->containsShortCode($posts, 'products')){
@@ -602,6 +645,7 @@ class SytematicWebshop {
 				'id'=>null
 			), $atts)
 		);
+
 		ob_start();
 
 		$catId = null;
@@ -609,7 +653,10 @@ class SytematicWebshop {
 		if($id !=null && is_numeric($id)) {
 			$catId = $id;			
 		}
-
+		
+		if($this->categoryModel == null){
+			$this->init_models_directly('categories', $catId);
+		}
 
 		//if $catId is indeed a numeric value, it is already set into the model, since the queries to the backend have already been performed by $this->init_models();
 		if($this->categoryModel->isDetailPage() || ($catId != null && is_numeric($catId) && $catId > 0)) {

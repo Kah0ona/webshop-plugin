@@ -124,3 +124,8 @@ td.text-right {
 .search-result  {
 	margin-bottom: 5px;
 }
+
+input.checkout-amount {
+	display: inline !important;
+	margin-right: 5px;
+}
