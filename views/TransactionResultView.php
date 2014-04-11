@@ -58,6 +58,12 @@ class TransactionResultView extends GenericView {
 
 		if($this->status == 'Success' || $this->status == 'OK'){
 			echo $this->model->getTrackingPixel(); //if none avail, will echo empty string
+			
+			
+			//reset the shoppingcart:
+			$_SESSION['shoppingCart'] = 'EMPTY';
+			
+
 		}
 	}
 }

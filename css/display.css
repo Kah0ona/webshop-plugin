@@ -120,3 +120,7 @@ td.text-right {
 .clear-block {
 	clear: both;
 }
+
+.search-result  {
+	margin-bottom: 5px;
+}
