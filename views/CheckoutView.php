@@ -76,7 +76,7 @@ class CheckoutView extends GenericView {
 		</script>
 
 		<?php
-		echo '<select id="deliveryMethods" name="DeliveryMethod_id">';
+		echo '<select id="deliveryMethods" name="DeliveryMethod_id"><option value="">-- Maak uw keuze -- </option>';
 		if($deliveryData != null && count($deliveryData) > 0){
 			//render select item with the options, and the prices and a javascript that makes sure the checkout form sum is added
 			foreach($deliveryData as $method){
@@ -100,7 +100,7 @@ class CheckoutView extends GenericView {
 	
 	private function renderPaymentMethodForm() {
 		$paymentMethods = $this->paymentMethodModel->getData();
-		$ret .= '<select name="payment-method" class="payment-methods-form" id="payment-methods-form">';	
+		$ret .= '<select name="payment-method" class="payment-methods-form" id="payment-methods-form"><option value="">-- Maak uw keuze -- </option>';	
 		if($this->model->getOptions()->getOption('UseSisow') == "true") {
 			$ret .= '<option value="ideal">iDeal</option>';	
 		}
@@ -564,6 +564,22 @@ class CheckoutView extends GenericView {
 							</div>	
 						</div>
 					</div>	
+					
+					<?php if($this->model->getOptions()->getOption('should_accept_terms')) { ?>
+					
+					<div class="row-fluid">
+						<div class="span12">
+							<h3 class="terms-title">Algemene voorwaarden</h3>
+							<div class="control-group">
+								<p><input  type="checkbox" name="accept_terms" /> Ik accepteer de <a href="/algemene-voorwaarden">algemene voorwaarden</a>.</p>
+							</div>	
+						</div>
+					</div>	
+					
+					
+					<?php } ?>
+					
+					
 							
 					<div class="row-fluid">
 						<div class="span12">

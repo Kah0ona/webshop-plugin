@@ -83,6 +83,15 @@ jQuery(document).ready(function($){
 				},
 				orderDateTime : {
 					required: true
+				},
+				accept_terms : {
+					required: true
+				},
+				DeliveryMethod_id : {
+					required: true
+				},
+				"payment-method" : {
+					required: true
 				}
 			},
 		
@@ -117,7 +126,17 @@ jQuery(document).ready(function($){
 			    },
 			    orderDate : {
 			    	required: reqMsg
-			    }  
+			    },
+			    accept_terms : {
+				    required: reqMsg
+			    } ,
+			    DeliveryMethod_id : {
+				    required: reqMsg
+			    },
+			    "payment-method" : {
+				    required: reqMsg
+			    }
+			    
 			},
 		    errorPlacement: function(error, element) {
 			   error.insertAfter(element);

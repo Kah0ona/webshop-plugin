@@ -41,7 +41,7 @@ class AdminView extends GenericView {
    		  $this->add_cs_field('delivered_by_us_expl', 'Door ons bezorgd uitleg');		  
    		  $this->add_cs_field('delivered_by_us_message', 'Bezorgtekst. Gebruik [afstand], [vanaf_bedrag], [bezorgkosten]');		  
    		  $this->add_cs_field('deliverymethod_text', 'Uitleg verzendmethode');		  
-
+   		  $this->add_cs_field_boolean('should_accept_terms', 'Moet de klant algemene voorwaarden accepteren?');
 
 
   		  		  		  
