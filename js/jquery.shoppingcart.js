@@ -865,9 +865,16 @@
    			var delay = 2000;
    			var containerDiv = $('<div class="product-added-popup"></div>');
    			containerDiv.appendTo('body');
+   			
+   			var popupText = 'Product toegevoegd aan de bestelling. U kunt meteen <a href="'+this.settings.checkout_page+'">afrekenen</a> of verder winkelen.';
+   			
+   			if(this.settings.popupText != null){
+	   			popupText = this.settings.popupText;
+   			}
+   			
 	    	containerDiv.html('<div class="the-alert alert alert-info fade in">' +
 	    						 '<button data-dismiss="alert" class="close" type="button">×</button>' +
-	    						 '<p>Product toegevoegd aan de bestelling. U kunt meteen <a href="'+this.settings.checkout_page+'">afrekenen</a> of verder winkelen.</p>' +
+	    						 '<p>'+popupText+'</p>' +
 	    					 '</div>');
 		    var alert = $('.the-alert').alert();
 		    window.setTimeout(function() { 

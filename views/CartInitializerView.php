@@ -28,6 +28,9 @@ class CartInitializerView extends GenericView {
 				<?php if($options->getOption('checkout_link') != null){ ?>
 				'checkout_link' : '<?php echo $options->getOption('checkout_link'); ?>',					
 				<?php } ?>
+				<?php if($options->getOption('popupText') != null){ ?>
+				'popupText' : '<?php echo $options->getOption('popupText'); ?>',					
+				<?php } ?>
 				'address' : '<?php echo $options->getOption('address'); ?>',
 				'deliveryCostsTable' : <?php echo $deliveryCostsTable; ?>,
 				'couponUrl': '<?php echo SYSTEM_URL_WEBSHOP?>/public/coupons',
