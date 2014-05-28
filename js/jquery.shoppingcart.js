@@ -709,6 +709,13 @@
 		    		x = 0;
 	    		}
 		    	deliveryCosts.price = parseFloat(x);
+		    	
+		    	//set the delviery costs to zero if the total order amount surpasses the threshold
+		    	var threshold = deliveryMethod.attr("freedeliverythreshold");
+		    	if(threshold != null && threshold != "" && totalInclVat >= parseFloat(threshold)){
+			    	deliveryCosts.price = 0;
+		    	}
+		    	
 		    	$('.deliverycosts-field').html("<strong>€ "+this.formatEuro(deliveryCosts.price)+"</strong>");
 	    	}
 	    	

@@ -80,7 +80,14 @@ class CheckoutView extends GenericView {
 		if($deliveryData != null && count($deliveryData) > 0){
 			//render select item with the options, and the prices and a javascript that makes sure the checkout form sum is added
 			foreach($deliveryData as $method){
-				echo '<option value="'.$method->DeliveryMethod_id.'" methodprice="'.$method->deliveryMethodPrice.'">'.$method->deliveryMethodName.' ('.money_format('%.2n',$method->deliveryMethodPrice).')</option>';
+				$free = '';
+				if($method->freeDeliveryIfAbove != null && is_numeric($method->freeDeliveryIfAbove) && $method->freeDeliveryIfAbove > 0){
+					$free = ". Gratis bij bestelbedrag va. &euro; ".money_format('%.2n', $method->freeDeliveryIfAbove);
+				}
+				echo '<option value="'.$method->DeliveryMethod_id.'" methodprice="'.$method->deliveryMethodPrice.'" freedeliverythreshold="'.$method->freeDeliveryIfAbove.'">'.
+					$method->deliveryMethodName.' (&euro; '.money_format('%.2n',$method->deliveryMethodPrice).
+					$free.
+					')</option>';
 			}
 		}
 

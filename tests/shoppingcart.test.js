@@ -218,7 +218,7 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 
 		
 	});
-	
+
 	describe('Calculate distance.', function(){
 		it('should calculate the distance when all address fields in the checkout form are filled out.', function(){
 			spyOn(google.maps.DirectionsService.prototype, 'route');
@@ -334,6 +334,7 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 
 		});
 	});
+	
 	
 	describe('Checkout page testsuite.', function(){
 		it('should update the cart, and recalculate prices when the amount field on the checkout page is changed', function(){
