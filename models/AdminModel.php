@@ -7,7 +7,7 @@ class AdminModel {
 	function __construct(){
 	}
 
-
+//
 
 		
 }
