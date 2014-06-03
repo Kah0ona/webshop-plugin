@@ -100,7 +100,6 @@ class GenericModel {
 	
 		$arr[$idKeyName] = $this->id;
 		$arr['useNesting'] = $useNesting ? "true":"false";
-
 		$ret = $this->fetch($this->serviceUrl, $arr, $asString);
 		if(!$asString && $ret != null && count($ret)> 0){
 			return $ret[0];
@@ -127,7 +126,12 @@ class GenericModel {
 		$options = array();
 		if($pro->ProductOption != null)
 			$options = $pro->ProductOption;		
-	
+
+		$medialib = array();
+		if($pro->MediaLibrary != null){
+			$medialib = $pro->MediaLibrary;
+		}
+
 		if($quantity === null) {
 			$quantity=1;
 		}
@@ -149,6 +153,7 @@ class GenericModel {
 			"productNumber" => $productNumber,
 			"VAT" => $VAT,
 			"ProductOption"=> $options,
+			"MediaLibrary"=>$medialib,
 			"SKU"=> $skus,
 			"productDeliveryTime" => $productDeliveryTime
 		);
@@ -170,7 +175,7 @@ class GenericModel {
 	    $params['hostname'] = $this->hostname;
 	    
 	 	$url = $url.'?'.$this->decodeParamsIntoGetString($params);
-	 	//print_r($url);
+		
 		$jsonString = $this->curl_fetch($url);
 		$this->rawData = $jsonString;		
 

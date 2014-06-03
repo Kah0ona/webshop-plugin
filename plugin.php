@@ -573,10 +573,15 @@ class SytematicWebshop {
 	 */
 	public function register_plugin_styles() {
 		//wp_enqueue_style('jquery-ui-css', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css');
-		wp_enqueue_style( 'sytematic-webshop-plugin-styles', plugins_url( '/webshop-plugin/css/display.css' ) );
-		wp_enqueue_style( 'bootstrap', plugins_url( '/webshop-plugin/css/bootstrap.min.css' ) );
-		wp_enqueue_style( 'bootstrap-responsive', plugins_url( '/webshop-plugin/css/bootstrap-responsive.min.css' ) );
-	} // end register_plugin_styles
+		
+		if(!$this->options->getOption('no_plugin_css')) {
+			wp_enqueue_style( 'sytematic-webshop-plugin-styles', plugins_url( '/webshop-plugin/css/display.css' ) );
+		}
+		if(!$this->options->getOption('no_bootstrap')) {
+			wp_enqueue_style( 'bootstrap', plugins_url( '/webshop-plugin/css/bootstrap.min.css' ) );
+			wp_enqueue_style( 'bootstrap-responsive', plugins_url( '/webshop-plugin/css/bootstrap-responsive.min.css' ) );
+		}
+	} // end register_plugin_styles 
 	
 	/**
 	 * Registers and enqueues plugin-specific scripts.

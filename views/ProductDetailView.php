@@ -177,20 +177,31 @@ class ProductDetailView extends GenericView {
 		
 			<div class="single-product product-<?php echo $data->Product_id; ?>" data-productid="<?php echo $data->Product_id; ?>" itemscope itemtype="http://schema.org/Product">
 				<div class="row-fluid">
-					<div class="span8 product-image">
-						<?php if($product->productDiscount != null){ ?>
-							<div class="product-discount-label">-<?php echo $product->productDiscount; ?>%</div>
-			 			<?php } ?>
-					
-						<?php if($data->imageDish != null && $data->imageDish != "/uploads/Product" && $data->imageDish != '') { ?>
-						<img itemprop="image" alt="<?php echo $data->productName; if($data->productNumber != null){ echo ' '.$data->productNumber; } if($data->brand != null){ echo ' '.$data->brand; } ?>" src="<?php echo SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$data->imageDish; ?>"  />
-						<?php } elseif($this->model->getOptions()->getOption('NoImage') != null) { ?>
-						<img itemprop="image" 
-							 alt="<?php echo $data->productName; if($data->productNumber != null){ echo ' '.$data->productNumber; } if($data->brand != null){ echo ' '.$data->brand; } ?>" 
-							 src="<?php echo $this->model->getOptions()->getOption('NoImage'); ?>"  />	
-							
-							
-						<?php }?>
+					<div class="span8">
+						<div class="product-image">
+							<?php if($data->productDiscount != null){ ?>
+								<div class="product-discount-label">-<?php echo $data->productDiscount; ?>%</div>
+							<?php } ?>
+						
+							<?php if($data->imageDish != null && $data->imageDish != "/uploads/Product" && $data->imageDish != '') { ?>
+							<img itemprop="image" alt="<?php echo $data->productName; if($data->productNumber != null){ echo ' '.$data->productNumber; } if($data->brand != null){ echo ' '.$data->brand; } ?>" src="<?php echo SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$data->imageDish; ?>"  />
+							<?php } elseif($this->model->getOptions()->getOption('NoImage') != null) { ?>
+							<img itemprop="image" 
+								 alt="<?php echo $data->productName; if($data->productNumber != null){ echo ' '.$data->productNumber; } if($data->brand != null){ echo ' '.$data->brand; } ?>" 
+								 src="<?php echo $this->model->getOptions()->getOption('NoImage'); ?>"  />	
+								
+								
+							<?php }?>
+						</div>
+						<?php  if($data->MediaLibrary != null && count($data->MediaLibrary) > 0) { ?>
+						<div class="product-media">
+							<?php foreach($data->MediaLibrary as $media) { ?>
+								<div class="product-media-item">
+									<img src="<?php echo SYSTEM_URL_WEBSHOP.'/uploads/MediaLibrary/'.$media->theFile; ?>" />
+								</div>
+							<?php } ?>
+						</div>
+						 <?php } ?>
 					</div>
 					
 					<div class="span4 product-details">

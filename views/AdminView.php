@@ -45,6 +45,8 @@ class AdminView extends GenericView {
 
    		    
    		  $this->add_cs_field_boolean('should_accept_terms', 'Moet de klant algemene voorwaarden accepteren?');
+   		  $this->add_cs_field_boolean('no_bootstrap', 'Geen bootstrap CSS laden?');
+   		  $this->add_cs_field_boolean('no_plugin_css', 'Geen plugin CSS laden?');
 
 
   		  		  		  
