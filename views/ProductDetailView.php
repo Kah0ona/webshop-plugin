@@ -121,6 +121,8 @@ class ProductDetailView extends GenericView {
 				});
 				
 			</script>
+			<script src="<?php echo plugins_url(); ?>/webshop-plugin/js/jquery.elevateZoom-3.0.8.min.js" type="text/javascript"></script>
+
 			<script type="text/javascript">
 				jQuery(document).ready(function($){
 					function nl2br (str, is_xhtml) {
@@ -162,7 +164,6 @@ class ProductDetailView extends GenericView {
 						$(selector).html(replaceSomeWords(findProductTextByOptionValue($(evt.target).val())));
 					});
 					
-					
 					//init
 					$('.ProductOptionSelector').each(function(){
 						var evt = $(this);
@@ -170,11 +171,35 @@ class ProductDetailView extends GenericView {
 						$(selector).html(replaceSomeWords(findProductTextByOptionValue(evt.val())));
 					});
 
-				});
-				
+					var zoomOptions = {
+						scrollZoom: true, 
+						zoomWindowWidth:300, 
+						zoomWindowHeight:300
+					};
 
+
+
+					var clickMediaItemHandler = function(){
+						var currentImg = $('.single-product .product-image > img');
+						var clickedImg = $(this);
+						//put it in the normal image spot
+						currentImg.detach();
+						clickedImg.detach().children('img').appendTo($('.single-product .product-image'));	
+						//put the normal image at the back of the media lib list
+						currentImg.appendTo('.product-media')
+							.wrap("<div class='product-media-item'></div>");
+						currentImg.parent('.product-media-item').on('click', clickMediaItemHandler);
+					//	$('.product-image img').elevateZoom(zoomOptions);
+					};
+
+					$('.product-media-item').on('click', clickMediaItemHandler);
+
+					//$('.product-image img').elevateZoom(zoomOptions);
+					
+
+				});
 			</script>
-		
+
 			<div class="single-product product-<?php echo $data->Product_id; ?>" data-productid="<?php echo $data->Product_id; ?>" itemscope itemtype="http://schema.org/Product">
 				<div class="row-fluid">
 					<div class="span8">
@@ -184,7 +209,9 @@ class ProductDetailView extends GenericView {
 							<?php } ?>
 						
 							<?php if($data->imageDish != null && $data->imageDish != "/uploads/Product" && $data->imageDish != '') { ?>
-							<img itemprop="image" alt="<?php echo $data->productName; if($data->productNumber != null){ echo ' '.$data->productNumber; } if($data->brand != null){ echo ' '.$data->brand; } ?>" src="<?php echo SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$data->imageDish; ?>"  />
+							<img data-zoom-image="<?php echo SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$data->imageDish; ?>" itemprop="image" 
+									alt="<?php echo $data->productName; if($data->productNumber != null){ echo ' '.$data->productNumber; } if($data->brand != null){ echo ' '.$data->brand; } ?>" 
+									src="<?php echo SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$data->imageDish; ?>"  />
 							<?php } elseif($this->model->getOptions()->getOption('NoImage') != null) { ?>
 							<img itemprop="image" 
 								 alt="<?php echo $data->productName; if($data->productNumber != null){ echo ' '.$data->productNumber; } if($data->brand != null){ echo ' '.$data->brand; } ?>" 
@@ -252,6 +279,7 @@ class ProductDetailView extends GenericView {
 					</div><!-- /span4 -->
 				</div><!-- /row-fluid -->
 			</div><!-- /single-product -->
+		
 		<?php
 		}
 		else {
