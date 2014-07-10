@@ -490,7 +490,7 @@ class CheckoutView extends GenericView {
 									?>
 	
 									<select class="span6" name="deliveryTime">
-										<?php for($i = 9; $i <= 18; $i++){ ?>
+										<?php for($i = 9; $i < 18; $i++){ ?>
 										<option value="<?php echo $i; ?>:00-<?php echo ($i+1); ?>:00"><?php echo $i; ?>:00-<?php echo ($i+1); ?>:00</option>
 										<?php } ?>
 									</select>

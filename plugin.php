@@ -477,6 +477,9 @@ class SytematicWebshop {
 		
 		include_once('widgets/SaleWidget.php');
 		register_widget('SaleWidget');		
+
+		include_once('widgets/FilterWidget.php');
+		register_widget('FilterWidget');		
 	}
 	
 	public function load_options(){
