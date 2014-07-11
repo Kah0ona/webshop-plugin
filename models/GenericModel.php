@@ -131,7 +131,9 @@ class GenericModel {
 		if($pro->MediaLibrary != null){
 			$medialib = $pro->MediaLibrary;
 		}
-
+		if($pro->ProductProperty != null){
+			$pp = $pro->ProductProperty;
+		}
 		if($quantity === null) {
 			$quantity=1;
 		}
@@ -154,6 +156,7 @@ class GenericModel {
 			"VAT" => $VAT,
 			"ProductOption"=> $options,
 			"MediaLibrary"=>$medialib,
+			"ProductProperty"=>$pp,
 			"SKU"=> $skus,
 			"productDeliveryTime" => $productDeliveryTime
 		);

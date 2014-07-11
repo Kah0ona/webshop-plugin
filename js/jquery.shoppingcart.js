@@ -175,6 +175,26 @@
 				    self.createAutoClosingAlert();
 			    }
 		   });
+
+		   $('body').on('click.shoppingCart', '.filter_addtocart', function(event){
+		    	event.preventDefault();
+				var elt = $(event.currentTarget);
+				var productId = parseInt(elt.attr("data-productid"));
+				var quant = parseInt($('#filter_quantity_'+productId).val());
+				if(quant == null || quant == undefined){
+					self.logger("filter_addtocart: Warning quantity is null, using 1");
+					quant = 1;
+				}
+				self.fetchProductFromServer(productId, function(jsonObj){
+					jsonObj.quantity = quant;
+					var b =	self.addProduct(null,jsonObj); 
+					if(b){
+						self.updatePrices();
+						$('.product-added').removeClass('hidden');
+						self.createAutoClosingAlert();
+					}
+				});
+		   });
 		   
 		   $('#coupon').bind('change.shoppingCart', function(){
 		    	self.checkCoupon(function(){
@@ -193,6 +213,44 @@
     		
     		return null;
 	   	},
+		fetchProductFromServer : function(productId, callback){
+			var self = this;
+			$.ajax({
+				url: this.settings.productsUrl,
+				jsonp: 'callback',
+				dataType : 'jsonp',
+				data: {
+					"hostname"   : this.hostname, 
+					"Product_id" : productId
+				},
+				success : function(jsonobj){
+					self.logger('downloaded product #'+productId+' using jsonp: ', jsonobj);
+					var prod = self.transformProduct(jsonobj[0]);
+					callback.call(self,prod);
+				}
+			});
+
+		},
+		transformProduct : function(jsonObj){
+			//returns the server-side representation of the product
+			var ret = {};
+			ret.Product_id = jsonObj.Product_id;
+			ret.title = jsonObj.productName;
+			ret.desc = jsonObj.productDesc;
+			ret.thumb = this.settings.baseUrl+"/uploads/Product/"+jsonObj.imageDish;
+			ret.price = parseFloat(jsonObj.productPrice);
+			ret.VAT = jsonObj.productVAT;
+			ret.brand = jsonObj.brand;
+			ret.quantity = 1;
+			ret.discount = jsonObj.productDiscount;
+			ret.productNumber = jsonObj.productNumber;
+			ret.ProductOption = jsonObj.ProductOption;
+			ret.MediaLibrary = jsonObj.MediaLibrary;
+			ret.ProductProperty = jsonObj.ProductProperty;
+			ret.SKU = jsonObj.SKU;
+			ret.productDeliveryTime = jsonObj.productDeliveryTime;
+			return ret;	
+		},
 	   	updateQuantityOfProduct: function(event){
 			var elt = $(event.currentTarget);
 			var productId = parseInt(elt.attr('data-productid'));

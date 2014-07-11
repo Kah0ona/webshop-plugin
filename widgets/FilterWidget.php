@@ -26,30 +26,59 @@ class FilterWidget extends WP_Widget {
 		else {
 			$defId = __( 'Definitie ID:', 'text_domain' );
 		}
+
+	 	if ( isset( $instance[ 'show_season' ] ) ) {
+			$season = $instance[ 'show_season' ];
+		}
+		else {
+			$season = __( 'Toon Seizoen?', 'text_domain' );
+		}
+	 	if ( isset( $instance[ 'show_color' ] ) ) {
+			$color = $instance[ 'show_color' ];
+		}
+		else {
+			$color = __( 'Toon kleur?', 'text_domain' );
+		}
 		?>
 		<p>
-		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
-		<input class="widefat" 
-			   id="<?php echo $this->get_field_id( 'title' ); ?>" 
-			   name="<?php echo $this->get_field_name( 'title' ); ?>" 
-			   type="text" 
-			   value="<?php echo esc_attr( $title ); ?>" /><br/>
-
-
-		<label for="<?php echo $this->get_field_id( 'definition_id' ); ?>"><?php _e( 'Definition ID:' ); ?></label> 
-		<input class="widefat" 
-			   id="<?php echo $this->get_field_id( 'definition_id' ); ?>" 
-			   name="<?php echo $this->get_field_name( 'definition_id' ); ?>" 
-			   type="text" 
-               value="<?php echo esc_attr( $defId ); ?>" />
+		
+<?php 
+			echo $this->getInput('title','Titel:','text',$title).'<br/>';
+			echo $this->getInput('definition_id','Definitie ID:','text',$defId).'<br/>';
+			echo $this->getInput('show_season','Toon seizoen?','checkbox',$season).'<br/>';
+			echo $this->getInput('show_color','Toon kleur?','checkbox',$color).'<br/>';
+		?>
 		</p>
 		<?php 	
+	}
+
+	private function getInput($name, $title, $type='text', $val=''){
+		if($type == 'checkbox' && $val == 'true') {
+			$c = ' checked="checked" ';
+			$val = 'true';
+		} else {
+			$c = '';
+		}
+
+		if($type == 'checkbox'){
+			$val = 'true';
+		}
+		return '<label for="'.$this->get_field_id($name).'">'._e($title).'</label> 
+		<input class="widefat" 
+			   id="'.$this->get_field_id($name).'" 
+			   name="'.$this->get_field_name($name).'" 
+			   type="'.$type.'" 
+			   value="'.esc_attr($val).'"  
+			   '.$c.' />';
+
 	}
 
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
 		$instance['title'] = strip_tags( $new_instance['title'] );
 		$instance['definition_id'] = strip_tags( $new_instance['definition_id'] );
+	    $instance['show_season'] = ( ! empty( $new_instance['show_season'] ) ) ? strip_tags( $new_instance['show_season'] ) : '';
+	    $instance['show_color'] = ( ! empty( $new_instance['show_color'] ) ) ? strip_tags( $new_instance['show_color'] ) : '';
 
 		return $instance;
 	}
@@ -58,6 +87,11 @@ class FilterWidget extends WP_Widget {
 		extract( $args );
 		$title = apply_filters( 'widget_title', $instance['title'] );
 		$definition_id = $instance['definition_id'];
+		$season = $instance['show_season'];
+		$color = $instance['show_color'];
+
+		$season = $season ? 'true': 'false';
+		$color = $color ? 'true' : 'false';
 
 		echo $before_widget;
 		if ( ! empty( $title ) )
@@ -66,17 +100,17 @@ class FilterWidget extends WP_Widget {
 		$options = new WebshopOptions();
 		$options->loadOptions();
 		$hostname = $options->getOption('hostname');
-
 		$render = '
-			<div id="filter_module"></div>
+			<div id="filter_module_'.$definition_id.'"></div>
 			<!-- assumes jquery is loaded above this spot -->
-			<script src="'.plugins_url().'/webshop-plugin/js/jquery.filtersystem.js"></script>
 			<script type="text/javascript">
 				jQuery(document).ready(function($){
-					$("#filter_module").filtersystem({
+					$("#filter_module_'.$definition_id.'").filtersystem({
 						"base_url" : "'.SYSTEM_URL_WEBSHOP.'",
 						"hostname" : "'.$hostname.'",
-					    "FilterDefinition_id" : "'.$definition_id.'"
+						"FilterDefinition_id" : "'.$definition_id.'",
+						"show_color" : '.$color.',
+						"show_season" : '.$season.'
 					
 					});
 				});

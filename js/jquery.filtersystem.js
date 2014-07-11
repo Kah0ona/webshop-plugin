@@ -16,6 +16,7 @@
 	};	
 	function FiltersystemPlugin(element, options){
 		this.element = element;
+		this.id = $(element).attr('id');
 		this.settings = $.extend({}, defaults, options);
 		this._defaults = defaults;
 		this._name = pluginName;
@@ -29,6 +30,8 @@
 			this.load(function(jsonObj){
 				self.renderFilterDefinition(jsonObj);
 				self.bindButtons();
+				self.restoreForm();
+				
 			});
 		},
 		load : function(callback){
@@ -54,30 +57,68 @@
 		},
 		renderFilterDefinition : function(jsonObj) {
 			this.logger('rendering filter definition');
-			var str = "<form id='filter_form' class='filter_form'>";
+			var str = "<form id='filter_form_"+this.id+"' class='filter_form'>";
 			for (var prop in jsonObj) {
 				var items = jsonObj[prop];
-				str += "<label for='"+prop+"'>"+prop+": </label>";
-				str += "<select name='"+prop+"' class='filter_select'>";
-				str += " <option>-- Alles --</option>";
-				for(var i = 0; i < items.length; i++){
-					var item = items[i];
-					str += "<option>"+item+"</option>";
+				if(
+					(prop == 'Kleur' && !this.settings.show_color) ||   
+					(prop == 'Seizoen' && !this.settings.show_season)   
+				) {
+
+				} else {
+					str += "<div class='filter_controlgroup'>";
+					str += "<label for='"+prop+"'>"+prop+": </label>";
+					str += "<select name='"+prop+"' class='filter_select'>";
+					str += " <option>-- Alles --</option>";
+
+					for(var i = 0; i < items.length; i++){
+						var item = items[i];
+						str += "<option>"+item+"</option>";
+					}
+					str += "</select>";
+					str += "</div>";
 				}
-				str += "</select>";
 			}
-			str += "<input type='button' id='filter_button' class='filter_button' value='Zoeken' />";
+			str += "<input type='button' id='filter_button_"+this.id+"' class='filter_button' value='Zoeken' />";
 			str += "</form>";
 		    $(this.element).html(str);
 
 		},
-		persist : function(){
-			//persist the selected values in a cookie/localstorage
+		persistForm : function(){
+			var obj = {};
+			$('#filter_form_'+this.id+' select').each(function(){
+				obj[$(this).attr('name')] = $(this).val();
+			});
+
+			$.cookie("filter_form_settings_"+this.id, JSON.stringify(obj));
 	    },	
+		restoreForm : function() {
+			var cookie = $.cookie("filter_form_settings_"+this.id);
+			if(cookie == null) {
+				return;
+			}
+			var obj = JSON.parse(cookie);
+			if(obj != null){
+				$('#filter_form_'+this.id+' select option').each(function(){
+					var select = $(this).parent('select');
+					var selectName = select.attr('name');
+					var val = $(this).html();
+
+					if(obj[selectName] != null && obj[selectName] == val) {
+						$(this).attr('selected','selected');
+					}
+				});
+
+				this.searchAndRenderResults();
+			}
+		},
 	    bindButtons : function(){
 			var self = this;
-			$('body').on('click.'+pluginName, "#filter_button", function(event){
+			$('body').on('click.'+pluginName, "#filter_button_"+this.id, function(event){
 				self.searchAndRenderResults();
+			});
+			$('body').on('change.'+pluginName, '#filter_form_'+this.id+' select', function(event){
+				self.persistForm();
 			});
 	   	},
 		searchAndRenderResults : function(){
@@ -123,17 +164,28 @@
 			var str = "";
 			str += "<h3>Zoekresultaten</h3>";
 			str += "<table class='filter_search_results'>";
+			str += "<tr><th></th><th>Naam</th><th>Merk</th><th>Prijs</th><th>#</th><th></th></tr>";
 			for(var i = 0; i < jsonObj.length; i++){
 				var item = jsonObj[i];
 				str += "<tr>";
 				str += " <td><img src='"+this.settings.base_url+"/uploads/Product/"+item.imageDish+"' /></td>";
 				str += " <td><a href='/products/"+item.Product_id+"'>"+item.productName+"</a></td>";
+				str += " <td>"+this.getEmptyStringIfNull(item.brand)+"</td>";
 				str += " <td>&euro; "+this.formatEuro(item.productPrice)+"</td>";
+				str += " <td><input id='filter_quantity_"+item.Product_id+"' type='text' class='filter_quantity' value='1'/></td>";
+				str += " <td><a href='#' data-productid='"+item.Product_id+"' class='filter_addtocart'>Voeg toe</a></td>";
 				str += "</tr>";
 			}
 			str += "</table>";
 
 			target.html(str);
+		},
+		getEmptyStringIfNull : function(str){
+			if(str == null){
+				return "";
+			} else {
+				return str;
+			}
 		},
 		getParametersFromForm : function() {
 			var ret = {};

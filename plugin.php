@@ -590,8 +590,13 @@ class SytematicWebshop {
 	 * Registers and enqueues plugin-specific scripts.
 	 */
 	public function register_plugin_scripts() {
-		wp_enqueue_script('bootstrap-js', plugins_url('/webshop-plugin/js/bootstrap.min.js'), array('jquery') );		
+		if(!$this->options->getOption('no_bootstrap')) {
+			wp_enqueue_script('bootstrap-js', plugins_url('/webshop-plugin/js/bootstrap.min.js'), array('jquery') );		
+		}		
 		wp_enqueue_script('jquery.json', plugins_url('/webshop-plugin/js/jquery.json.min.js'), array('jquery') );		
+		wp_enqueue_script('jquery.cookie', plugins_url('/webshop-plugin/js/jquery.cookie.js'), array('jquery') );		
+		//wp_register_script('filtersystem', plugins_url('/webshop-plugin/js/jquery.json.min.js'), false, null);
+		wp_enqueue_script('filtersystem',plugins_url('/webshop-plugin/js/jquery.filtersystem.js'),  array('jquery') );		
 		
 		$gmaps = 'http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyCPR76T3otWlBnPh1fK0Pe2bNgIJOBjVwc';
 		$handle = 'google-maps';
