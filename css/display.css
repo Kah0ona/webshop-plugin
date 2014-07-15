@@ -146,8 +146,7 @@ input.checkout-amount {
 }
 
 .deposit-container,
-.address-line-elsewhere
-
+.hidden
 {
 	display: none;
 }

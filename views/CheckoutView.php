@@ -218,7 +218,8 @@ class CheckoutView extends GenericView {
 									 		   rel="popover" 
 									 		   data-trigger="hover"
 									 		   class="label label-info xtooltip" 
-									 		   href="#" 
+											   href="#" 
+											  
 								 		   
 								 		   data-original-title="<?php echo $p->title; ?>">info</a>
 								 <?php if($p->brand != null) { ?>

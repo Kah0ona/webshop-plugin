@@ -580,19 +580,24 @@ class SytematicWebshop {
 		if(!$this->options->getOption('no_plugin_css')) {
 			wp_enqueue_style( 'sytematic-webshop-plugin-styles', plugins_url( '/webshop-plugin/css/display.css' ) );
 		}
-//		if(!$this->options->getOption('no_bootstrap')) {
+		if($this->options->getOption('no_bootstrap')) {
 			wp_enqueue_style( 'bootstrap', plugins_url( '/webshop-plugin/css/bootstrap.min.css' ) );
-//			wp_enqueue_style( 'bootstrap-responsive', plugins_url( '/webshop-plugin/css/bootstrap-responsive.min.css' ) );
-//		}
+			wp_enqueue_style( 'bootstraptheme', plugins_url( '/webshop-plugin/css/bootstrap-theme.min.css' ) );
+		} else{
+			wp_enqueue_style( 'bootstrap', plugins_url( '/webshop-plugin/css/bootstrapcomplete232.min.css' ) );
+			wp_enqueue_style( 'bootstrap-responsive', plugins_url( '/webshop-plugin/css/bootstrap-responsive232.min.css' ) );
+		}
 	} // end register_plugin_styles 
 	
 	/**
 	 * Registers and enqueues plugin-specific scripts.
 	 */
 	public function register_plugin_scripts() {
-	//	if(!$this->options->getOption('no_bootstrap')) {
+		if($this->options->getOption('no_bootstrap')) {
 			wp_enqueue_script('bootstrap-js', plugins_url('/webshop-plugin/js/bootstrap.min.js'), array('jquery') );		
-	//	}		
+		} else {
+			wp_enqueue_script('bootstrap-js', plugins_url('/webshop-plugin/js/bootstrap232.min.js'), array('jquery') );		
+		}			
 		wp_enqueue_script('jquery.json', plugins_url('/webshop-plugin/js/jquery.json.min.js'), array('jquery') );		
 		wp_enqueue_script('jquery.cookie', plugins_url('/webshop-plugin/js/jquery.cookie.js'), array('jquery') );		
 		//wp_register_script('filtersystem', plugins_url('/webshop-plugin/js/jquery.json.min.js'), false, null);

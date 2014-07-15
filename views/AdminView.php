@@ -45,10 +45,8 @@ class AdminView extends GenericView {
 
    		    
    		  $this->add_cs_field_boolean('should_accept_terms', 'Moet de klant algemene voorwaarden accepteren?');
-   		  $this->add_cs_field_boolean('no_bootstrap', 'Geen bootstrap CSS laden?');
+   		  $this->add_cs_field_boolean('no_bootstrap', 'Bootstrap 3 CSS+js laden, ipv bootstrap 2.3.2?');
    		  $this->add_cs_field_boolean('no_plugin_css', 'Geen plugin CSS laden?');
-
-
   		  		  		  
   		  $this->add_cs_field('nested_category_level','Aantal niveau\'s in categorie widget');
    		  $this->add_cs_field_boolean('use_pagination', 'Verdeel producten over meerdere pagina\'s');		    		  
