@@ -144,3 +144,12 @@ input.checkout-amount {
 .product-media-item img {
 	height: 150px;
 }
+
+.deposit-container,
+.address-line-elsewhere
+
+{
+	display: none;
+}
+
+

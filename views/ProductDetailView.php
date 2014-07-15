@@ -229,6 +229,20 @@ class ProductDetailView extends GenericView {
 							<?php } ?>
 						</div>
 						 <?php } ?>
+
+						<?php  if($data->ProductProperty != null && count($data->ProductProperty) > 0) { ?>
+						<div class="product-properties">
+							<h3>Productspecificatie</h3>
+							<table class="product-properties-table">
+							<?php foreach($data->ProductProperty as $pp) { ?>
+								<tr data-product-property-id="<?php echo $pp->ProductProperty_id; ?>">
+									<td class="product-property-key"><strong><?php echo $pp->propertyKey; ?></strong></td>
+									<td class="product-property-value"><?php echo $pp->propertyValue; ?></td>
+								</tr>
+							<?php } ?>
+							</table>
+						</div>
+						 <?php } ?>
 					</div>
 					
 					<div class="span4 product-details">
