@@ -39,7 +39,7 @@ class SearchView extends GenericView {
 	
 		<p><input type="text" name="search-products" id="product-search-box" /><a data-toggle="modal" data-target="#search-modal" class="btn btn-inverse info-button search-button">Zoeken</a></p>
 
-		<div class="modal hide fade" id="search-modal">
+		<div class="modal hide  " id="search-modal">
 			 <div class="modal-header">
 			 	<button class="close" data-dismiss="modal">×</button>
 			 	<h3>Zoekresultaten</h3>

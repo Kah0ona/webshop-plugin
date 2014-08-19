@@ -33,11 +33,25 @@ class FilterWidget extends WP_Widget {
 		else {
 			$season = __( 'Toon Seizoen?', 'text_domain' );
 		}
+
+	 	if ( isset( $instance[ 'show_brandfilter' ] ) ) {
+			$brand = $instance[ 'show_brandfilter' ];
+		}
+		else {
+			$brand = __( 'Toon Merk?', 'text_domain' );
+		}
+
 	 	if ( isset( $instance[ 'show_color' ] ) ) {
 			$color = $instance[ 'show_color' ];
 		}
 		else {
 			$color = __( 'Toon kleur?', 'text_domain' );
+		}
+	 	if ( isset( $instance[ 'extra_param' ] ) ) {
+			$extraParam = $instance[ 'extra_param' ];
+		}
+		else {
+			$extraParam= __( 'Extra parameter string', 'text_domain' );
 		}
 		?>
 		<p>
@@ -45,8 +59,10 @@ class FilterWidget extends WP_Widget {
 <?php 
 			echo $this->getInput('title','Titel:','text',$title).'<br/>';
 			echo $this->getInput('definition_id','Definitie ID:','text',$defId).'<br/>';
+			echo $this->getInput('show_brandfilter','Toon merk?','checkbox',$brand).'<br/>';
 			echo $this->getInput('show_season','Toon seizoen?','checkbox',$season).'<br/>';
 			echo $this->getInput('show_color','Toon kleur?','checkbox',$color).'<br/>';
+			echo $this->getInput('extra_param','Extra GET parameter string ','text',$extraParam).'<br/>';
 		?>
 		</p>
 		<?php 	
@@ -76,7 +92,9 @@ class FilterWidget extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
 		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance['extra_param'] = strip_tags( $new_instance['extra_param'] );
 		$instance['definition_id'] = strip_tags( $new_instance['definition_id'] );
+	    $instance['show_brandfilter'] = ( ! empty( $new_instance['show_brandfilter'] ) ) ? strip_tags( $new_instance['show_brandfilter'] ) : '';
 	    $instance['show_season'] = ( ! empty( $new_instance['show_season'] ) ) ? strip_tags( $new_instance['show_season'] ) : '';
 	    $instance['show_color'] = ( ! empty( $new_instance['show_color'] ) ) ? strip_tags( $new_instance['show_color'] ) : '';
 
@@ -88,9 +106,12 @@ class FilterWidget extends WP_Widget {
 		$title = apply_filters( 'widget_title', $instance['title'] );
 		$definition_id = $instance['definition_id'];
 		$season = $instance['show_season'];
+		$brand = $instance['show_brandfilter'];
 		$color = $instance['show_color'];
+		$extraParam = $instance['extra_param'];
 
 		$season = $season ? 'true': 'false';
+		$brand = $brand ? 'true': 'false';
 		$color = $color ? 'true' : 'false';
 
 		echo $before_widget;
@@ -110,7 +131,9 @@ class FilterWidget extends WP_Widget {
 						"hostname" : "'.$hostname.'",
 						"FilterDefinition_id" : "'.$definition_id.'",
 						"show_color" : '.$color.',
-						"show_season" : '.$season.'
+						"show_season" : '.$season.',
+						"show_brand" : '.$brand.',
+						"extra_param_string" : "'.$extraParam.'"
 					
 					});
 				});

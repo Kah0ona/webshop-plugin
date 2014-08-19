@@ -36,14 +36,24 @@
 		},
 		load : function(callback){
 			var self = this;
+			var theData = {
+				"hostname"			  : this.settings.hostname, 
+				"FilterDefinition_id" : this.settings.FilterDefinition_id
+			};
+
+			if(this.settings.extra_param_string != null){
+				var s = this.settings.extra_param_string;
+				var vars = s.split('&');
+				var p = vars[0].split('=');
+				theData['customKey'] = p[0];
+				theData['customVal'] = p[1];
+			}
+
 			$.ajax({
 				url: this.settings.base_url + this.settings.definition_url,
 				jsonp: 'callback',
 				dataType : 'jsonp',
-				data: {
-					"hostname"			  : this.settings.hostname, 
-					"FilterDefinition_id" : this.settings.FilterDefinition_id
-				},
+				data: theData,
 				success : function(jsonobj){
 					self.logger('loaded: ', jsonobj);
 					callback.call(self,jsonobj);
@@ -133,6 +143,16 @@
 			};
 			var params = this.getParametersFromForm();
 			var theData = $.extend({}, baseData, params);
+
+			if(this.settings.extra_param_string != null){
+				var s = this.settings.extra_param_string;
+				var vars = s.split('&');
+				for(var i = 0; i < vars.length; i++){
+					var p = vars[i].split('=');
+					theData[p[0]] = p[1];
+				}
+			}
+
 			$.ajax({
 				url: this.settings.base_url + this.settings.filterresults_url,
 				jsonp: 'callback',
@@ -174,6 +194,7 @@
 				str += " <td>&euro; "+this.formatEuro(item.productPrice)+"</td>";
 				str += " <td><input id='filter_quantity_"+item.Product_id+"' type='text' class='filter_quantity' value='1'/></td>";
 				str += " <td><a href='#' data-productid='"+item.Product_id+"' class='filter_addtocart'>Voeg toe</a></td>";
+
 				str += "</tr>";
 			}
 			str += "</table>";
@@ -188,12 +209,20 @@
 			}
 		},
 		getParametersFromForm : function() {
-			var ret = {};
-			$('.filter_form .filter_select').each(function(){
+			var ret = {}; 
+			$('#filter_form_'+this.id+' .filter_select').each(function(){
 				var name = $(this).attr("name");
 				var val = $(this).val();
 				if(val != "" && val != '-- Alles --'){
-					ret[name] = val
+					if(name == 'Merk'){
+						ret['brand'] = val;
+					} else if(name == 'Kleur') {
+						ret['productColor'] = val;
+					} else if(name == 'Seizoen') {
+						ret['productSeason'] = val;
+					} else {
+						ret[name] = val;
+					}
 				}
 			});
 

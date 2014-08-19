@@ -12,7 +12,7 @@
 /*global ActiveXObject alert */
 ;(function($) {
 "use strict";
-
+ 
 /*
     Usage Note:
     -----------

@@ -5,7 +5,7 @@
 * - JQuery-JSON: http://code.google.com/p/jquery-json/
 * Version: 0.6
 */
-;(function( $, window, document, undefined ) {
+;(function($, window, document, undefined ) {
 	var deliveryCosts = {"price": 0}; //object with details about the delivery costs. based on address user filled out in checkout form.
 	var distance = -1;
 	var vatMap = {};
@@ -131,7 +131,7 @@
 		    		if($(this).val() != "" && $(this).attr('id') != 'deliveryElsewhere'){
 				    	compareToAddress2 += " "+$(this).val();	
 			    	}
-		    	})
+		    	}) 
 
 		    	if(compareToAddress2.length > 0 && $('#deliveryElsewhere').is(':checked')){
 			    	compareToAddress = compareToAddress2;

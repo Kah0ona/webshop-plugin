@@ -608,7 +608,7 @@ class SytematicWebshop {
 		wp_register_script($handle,$gmaps,array());
 		wp_enqueue_script($handle);			
 		
-		if($this->isCheckoutPage()){
+		if($this->isCheckoutPage()){ 
 			$jqueryUiCss = 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/base/jquery-ui.css';
 			$handle = 'jquery-ui-css';
 			wp_register_style($handle,$jqueryUiCss, array());
