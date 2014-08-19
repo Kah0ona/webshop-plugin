@@ -5,7 +5,7 @@
 * - JQuery-JSON: http://code.google.com/p/jquery-json/
 * Version: 0.6
 */
-;(function($, window, document, undefined ) {
+;(function( $, window, document, undefined ) {
 	var deliveryCosts = {"price": 0}; //object with details about the delivery costs. based on address user filled out in checkout form.
 	var distance = -1;
 	var vatMap = {};
@@ -383,7 +383,7 @@
 	   		return ret;
 	   	},
 	    addProduct : function (event, productData) {
-				    	
+			//maybe this should be done nicer
 	    	var quant=1;
 	    	var product = null;
 	
@@ -391,6 +391,10 @@
 		       	var clicked = $(event.currentTarget);
 		       	var prodId = clicked.attr('product-id');
 
+				if($('.skuInfo-'+prodId).html() != ''){ //not in stock
+					alert('U kunt dit product niet toevoegen aan het winkelmandje, want het is niet meer op voorraad');
+					return;
+				}
 				quant = parseInt($('#product-amount-'+prodId).val());
 	  			
 		    	var productRef = this.lookupProduct(prodId);

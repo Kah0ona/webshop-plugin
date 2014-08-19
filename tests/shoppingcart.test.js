@@ -30,7 +30,7 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 		$('<input type="text" class="checkout-amount check-amount-163 span2" data-productid="163" value="2" />').appendTo('#wrap');
 	}
 	
-	afterEach(function(){33
+	afterEach(function(){
 		$('#shoppingcart').remove();
 		$('#detailform').remove();
 		$('#wrap').remove();
@@ -68,16 +68,21 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 			webshopProducts = {};
 			webshopProducts = [{"Product_id":163, "title": "Product 1", "quantity" : 8, "ProductOption": [], "price" : 12, "VAT" : 0.21}];	
 			$('#shoppingcart').shoppingCart({ detail : true });
+			$('#shoppincart').shoppingCart('clearCart');
 			$('.addtocart').click(); //simulate click
 			expect($.ajax).toHaveBeenCalled();
 			expect($.ajax.mostRecentCall.args[0].data.shoppingCart[0].quantity).toBe(8);
 		});
 		
 		it('When adding a product twice, the cart only has 1 entry for the product, but the quantity has to be 2.', function(){
+
 		    spyOn($, 'ajax');
+			$.ajax.reset();
+			console.log($.ajax);
 			webshopProducts = {};
 			webshopProducts = [{"Product_id":163, "title": "Product 1", "quantity" : 8, "ProductOption": [], "price" : 12, "VAT" : 0.21}];	
 			$('#shoppingcart').shoppingCart({ detail : true });
+			$('#shoppincart').shoppingCart('clearCart');
 			$('.addtocart').click(); //simulate click 
 			
 			expect($.ajax.calls[1].args[0].data.shoppingCart[0].quantity).toBe(8);
