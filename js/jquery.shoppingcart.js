@@ -122,6 +122,7 @@
 
 			$('body').on('change.shoppingCart', '.address-line, .address-line-elsewhere', function(){
 		    	var compareToAddress = '';
+		    	var compareToAddress = '';
 		    	var compareToAddress2="";
 		    	
 		    	$('.address-line').each(function(){
@@ -270,6 +271,19 @@
 			
 			this.persist();
 	   	},
+		allSkusAreZero : function(product) {
+			if(product.SKU == null) {
+				//return false, since we don't use the SKU system , so it always should be in store
+				return false;
+			}
+			for(var i = 0; product.SKU != null && i < product.SKU.length ; i++){
+				var sku = product.SKU[i];
+				if(sku.skuQuantity != null && sku.skuQuantity > 0){
+					return false;
+				}
+			}
+			return true;
+		},
 	   	updateInStockMessage : function(event, productId){
 	   		this.logger('updateInStockMessage');
 	   		var optionValue = null;
@@ -391,13 +405,17 @@
 		       	var clicked = $(event.currentTarget);
 		       	var prodId = clicked.attr('product-id');
 
-				if($('.skuInfo-'+prodId).html() != ''){ //not in stock
-					alert('U kunt dit product niet toevoegen aan het winkelmandje, want het is niet meer op voorraad');
-					return;
-				}
+
 				quant = parseInt($('#product-amount-'+prodId).val());
 	  			
 		    	var productRef = this.lookupProduct(prodId);
+
+				if($('.skuInfo-'+prodId).html() != '' && $('.skuInfo-'+prodId).html() != undefined && $('.skuInfo-'+prodId).html() != null 
+					|| (this.settings.hideSoldOutProducts == 'hide' && this.allSkusAreZero(productRef))		
+					){ //not in stock
+					alert('U kunt dit product niet toevoegen aan het winkelmandje, want het is niet meer op voorraad');
+					return;
+				}
 
 		    	if(productRef == null){
 			    	this.logger("FATAL: product data is not embedded in page!");
@@ -960,28 +978,6 @@
 	    	this.updatePrices();
 	    },    
 	    removeProductFromCheckoutPage : function(event){
-	    	this.logger("removeProductFromCheckoutPage");
-	  	    	
-			event.preventDefault();
- 	    	var clicked = $(event.currentTarget);
-			var parentRow = clicked.parent().parent();
-
-			parentRow.addClass('hidden');			
-	    },   		
-		/**
-		* Want to call a plugin function later than on initialization (as a public method)?
-		* $('#someElement').shoppingCart();
-		* and then later:
-		* $('#someElement').shoppingCart('test');
-		*/
-		test : function (){
-			return this.each(function(){
-				var $this = $(this);
-				var data = $this.data('shoppingCart'); //gets the data out of the element. 
-			});
-		}
-	}
-
 	$.fn[ pluginName ] = function ( options ) {
 		return this.each(function() {
 			if ( !$.data( this, "plugin_" + pluginName ) ) {

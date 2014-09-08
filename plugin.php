@@ -29,7 +29,8 @@ License:
 if($_SERVER['SERVER_NAME'] != 'localhost')
 	define('SYSTEM_URL_WEBSHOP', 'http://webshop.lokaalgevonden.nl');
 else
-	define('SYSTEM_URL_WEBSHOP', 'http://webshopdev.sytematic.nl');
+	define('SYSTEM_URL_WEBSHOP', 'http://webshop.lokaalgevonden.nl');
+	//define('SYSTEM_URL_WEBSHOP', 'http://webshopdev.sytematic.nl');
 define('BASE_URL_WEBSHOP', SYSTEM_URL_WEBSHOP.'/public');
 define('EURO_FORMAT', '%.2n');
 define('WEBSHOP_PLUGIN_PATH', plugin_dir_path(__FILE__) );

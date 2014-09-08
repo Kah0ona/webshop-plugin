@@ -68,9 +68,9 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 			webshopProducts = {};
 			webshopProducts = [{"Product_id":163, "title": "Product 1", "quantity" : 8, "ProductOption": [], "price" : 12, "VAT" : 0.21}];	
 			$('#shoppingcart').shoppingCart({ detail : true });
-			$('#shoppincart').shoppingCart('clearCart');
 			$('.addtocart').click(); //simulate click
 			expect($.ajax).toHaveBeenCalled();
+
 			expect($.ajax.mostRecentCall.args[0].data.shoppingCart[0].quantity).toBe(8);
 		});
 		
