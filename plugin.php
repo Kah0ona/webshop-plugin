@@ -29,8 +29,7 @@ License:
 if($_SERVER['SERVER_NAME'] != 'localhost')
 	define('SYSTEM_URL_WEBSHOP', 'http://webshop.lokaalgevonden.nl');
 else
-	define('SYSTEM_URL_WEBSHOP', 'http://webshop.lokaalgevonden.nl');
-	//define('SYSTEM_URL_WEBSHOP', 'http://webshopdev.sytematic.nl');
+	define('SYSTEM_URL_WEBSHOP', 'http://webshopdev.sytematic.nl');
 define('BASE_URL_WEBSHOP', SYSTEM_URL_WEBSHOP.'/public');
 define('EURO_FORMAT', '%.2n');
 define('WEBSHOP_PLUGIN_PATH', plugin_dir_path(__FILE__) );
@@ -481,6 +480,9 @@ class SytematicWebshop {
 
 		include_once('widgets/FilterWidget.php');
 		register_widget('FilterWidget');		
+
+		include_once('widgets/RimFilterWidget.php');
+		register_widget('RimFilterWidget');		
 	}
 	
 	public function load_options(){
@@ -603,6 +605,7 @@ class SytematicWebshop {
 		wp_enqueue_script('jquery.cookie', plugins_url('/webshop-plugin/js/jquery.cookie.js'), array('jquery') );		
 		//wp_register_script('filtersystem', plugins_url('/webshop-plugin/js/jquery.json.min.js'), false, null);
 		wp_enqueue_script('filtersystem',plugins_url('/webshop-plugin/js/jquery.filtersystem.js'),  array('jquery') );		
+		wp_enqueue_script('rimfiltersystem',plugins_url('/webshop-plugin/js/jquery.rimfiltersystem.js'),  array('filtersystem') );		
 		
 		$gmaps = 'http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyCPR76T3otWlBnPh1fK0Pe2bNgIJOBjVwc';
 		$handle = 'google-maps';

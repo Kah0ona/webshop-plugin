@@ -66,6 +66,7 @@ class AdminView extends GenericView {
 		  $this->add_cs_field_boolean('productoverview_disabled', 'Deactiveer /products/ overzicht (nodig indien google search gebruikt wordt)');
 		  $this->add_cs_field_boolean('use_delivery_date', 'Kunnen klanten een leverdatum aangeven?');		
 		  $this->add_cs_field_boolean('use_delivery_time', 'Kunnen klanten een levertijd aangeven?');		    		  
+		  $this->add_cs_field_boolean('custom_search_results_renderer', 'Gebruik custom javascript om zoekresultaten te tonen?');		    		  
 		    
 		  $this->add_cs_field_boolean('UseSisow', 'Gebruik iDeal via Sisow?:');		  
 		  $this->add_cs_field_boolean('UseMisterCash', 'Gebruik MisterCash via Sisow?:');		  		  

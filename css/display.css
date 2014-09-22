@@ -152,3 +152,7 @@ input.checkout-amount {
 }
 
 
+th[data-sortable="true"]:hover {
+	cursor: pointer;
+}
+

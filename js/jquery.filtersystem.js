@@ -56,6 +56,7 @@
 				data: theData,
 				success : function(jsonobj){
 					self.logger('loaded: ', jsonobj);
+					self.filterdefinition = jsonobj;
 					callback.call(self,jsonobj);
 				}
 			});
@@ -72,7 +73,8 @@
 				var items = jsonObj[prop];
 				if(
 					(prop == 'Kleur' && !this.settings.show_color) ||   
-					(prop == 'Seizoen' && !this.settings.show_season)   
+					(prop == 'Seizoen' && !this.settings.show_season) ||
+					(prop == 'Merk' && !this.settings.show_brand)   
 				) {
 
 				} else {
@@ -80,7 +82,7 @@
 					str += "<label for='"+prop+"'>"+prop+": </label>";
 					str += "<select name='"+prop+"' class='filter_select'>";
 					str += " <option>-- Alles --</option>";
-
+					items.sort();
 					for(var i = 0; i < items.length; i++){
 						var item = items[i];
 						str += "<option>"+item+"</option>";
@@ -181,25 +183,68 @@
 		},	
 		renderSearchResults : function(jsonObj){
 			var target = $(this.settings.target_elt);
+
+			if(this.settings.customResultsRenderer != undefined){
+				str = this.settings.customResultsRenderer.call(this, jsonObj);
+			} else {
+				str = this.defaultSearchRenderer(jsonObj)
+			}
+
+			target.html(str);
+		},
+		defaultSearchRenderer : function(jsonObj){
 			var str = "";
 			str += "<h3>Zoekresultaten</h3>";
 			str += "<table class='filter_search_results'>";
-			str += "<tr><th></th><th>Naam</th><th>Merk</th><th>Prijs</th><th>#</th><th></th></tr>";
+			str += "<tr><th></th><th>Naam</th><th>Merk</th>";
+
+			
+			for(var k in this.filterdefinition){
+				if(
+					(k == 'Kleur'  && this.settings.show_color) ||
+					(k == 'Merk'  && this.settings.show_brand) ||
+					(k == 'Seizoen'  && this.settings.show_season) ||
+					(k != 'Kleur' && k != 'Merk' && k != 'Seizoen')
+				) {
+					str += "<th>"+k+"</th>";
+				} 
+			}
+				
+			str += "<th>Prijs</th><th>#</th><th></th></tr>";
 			for(var i = 0; i < jsonObj.length; i++){
 				var item = jsonObj[i];
 				str += "<tr>";
 				str += " <td><img src='"+this.settings.base_url+"/uploads/Product/"+item.imageDish+"' /></td>";
-				str += " <td><a href='/products/"+item.Product_id+"'>"+item.productName+"</a></td>";
 				str += " <td>"+this.getEmptyStringIfNull(item.brand)+"</td>";
+				str += " <td><a href='/products/"+item.Product_id+"'>"+item.productName+"</a></td>";
+				var j = 0;
+			//	this.logger(this.settings);
+				for(var k in this.filterdefinition){
+					if(k == 'Kleur' && this.settings.show_color)  {
+						str += "<td>"+product.productColor+"</td>";
+					} else if(k == 'Merk' && this.settings.show_brand ) {
+						str += "<td>"+product.brand+"</td>";
+					} else if(k == 'Seizoen' && this.settings.show_season){
+						str += "<td>"+product.productSeason+"</td>"; 
+					} else if(k != 'Kleur' && k != 'Merk' && k != 'Seizoen') {
+						var val = item.ProductProperty[j]['propertyValue'];
+						if(val == undefined){
+							val = "";
+						} 
+						str += "<td>"+val+"</td>";
+						j++;
+					}	
+				}
+
+
 				str += " <td>&euro; "+this.formatEuro(item.productPrice)+"</td>";
 				str += " <td><input id='filter_quantity_"+item.Product_id+"' type='text' class='filter_quantity' value='1'/></td>";
 				str += " <td><a href='#' data-productid='"+item.Product_id+"' class='filter_addtocart'>Voeg toe</a></td>";
-
+ 
 				str += "</tr>";
 			}
 			str += "</table>";
-
-			target.html(str);
+			return str;
 		},
 		getEmptyStringIfNull : function(str){
 			if(str == null){

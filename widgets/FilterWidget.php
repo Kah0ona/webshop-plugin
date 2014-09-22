@@ -121,6 +121,9 @@ class FilterWidget extends WP_Widget {
 		$options = new WebshopOptions();
 		$options->loadOptions();
 		$hostname = $options->getOption('hostname');
+		if($options->getOption('custom_search_results_renderer') == 'true'){
+			$customRenderer = '"customResultsRenderer" : myCustomRenderer_'.$definition_id.',';
+		}
 		$render = '
 			<div id="filter_module_'.$definition_id.'"></div>
 			<!-- assumes jquery is loaded above this spot -->
@@ -133,7 +136,8 @@ class FilterWidget extends WP_Widget {
 						"show_color" : '.$color.',
 						"show_season" : '.$season.',
 						"show_brand" : '.$brand.',
-						"extra_param_string" : "'.$extraParam.'"
+						'.$customRenderer.'
+						"extra_param_string" : "'.$extraParam.'",
 					
 					});
 				});

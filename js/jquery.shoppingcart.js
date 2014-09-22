@@ -122,7 +122,7 @@
 
 			$('body').on('change.shoppingCart', '.address-line, .address-line-elsewhere', function(){
 		    	var compareToAddress = '';
-		    	var compareToAddress = '';
+		    	
 		    	var compareToAddress2="";
 		    	
 		    	$('.address-line').each(function(){
@@ -978,6 +978,29 @@
 	    	this.updatePrices();
 	    },    
 	    removeProductFromCheckoutPage : function(event){
+this.logger("removeProductFromCheckoutPage");
+	  	    	
+			event.preventDefault();
+ 	    	var clicked = $(event.currentTarget);
+			var parentRow = clicked.parent().parent();
+
+			parentRow.addClass('hidden');			
+	    },   		
+		/**
+		* Want to call a plugin function later than on initialization (as a public method)?
+		* $('#someElement').shoppingCart();
+		* and then later:
+		* $('#someElement').shoppingCart('test');
+		*/
+		test : function (){
+			return this.each(function(){
+				var $this = $(this);
+				var data = $this.data('shoppingCart'); //gets the data out of the element. 
+			});
+		}
+	}
+
+
 	$.fn[ pluginName ] = function ( options ) {
 		return this.each(function() {
 			if ( !$.data( this, "plugin_" + pluginName ) ) {
