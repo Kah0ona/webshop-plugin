@@ -11,7 +11,7 @@
 		'base_url' :          'http://webshop.lokaalgevonden.nl',
 		'filterresults_url' : '/public/filterrims',
 		'target_elt' : '#filter_search_results',
-		'items_per_page' : 25
+		'items_per_page' : 50
 	};	
 	function FiltersystemPlugin(element, options){
 		this.element = element;
@@ -25,6 +25,12 @@
 	FiltersystemPlugin.prototype = {
 		init : function( options ) {
 			var self = this;
+
+			this.current_ordering = {
+				"field" : "productPrice",
+				"direction" : "ascending"
+			};
+
 			self.bindButtons();
 			self.renderFilterDefinition();
 			this.populateSelect(this.settings.db,$('#rim_filter_form select[name="car"]'));
@@ -56,7 +62,7 @@
 			str +=	    "</select>";
 			str +=	   "</div>";
 			str +=	   "<input type='button' id='rim_filter_button' class='filter_button' value='Zoeken' />";
-			str +=	   "</form>";
+			str +=	   "</form><small class='steekmaat_credits'>Steekmaten via <a href='http://steekmaat.nl' target='_blank'>steekmaat.nl</small>";
 		    $(this.element).html(str);
 
 			this.populateSelect(this.settings.db , $('#rim_filter_form select[name="car"]'));
@@ -108,13 +114,13 @@
 						$(this).attr('selected','selected');
 					}
 				});
-				this.searchAndRenderResults();
+				this.searchAndRenderResults(this.current_ordering, 0);
 			}
 		},
 	    bindButtons : function(){
 			var self = this;
 			$('body').on('click.'+pluginName, "#rim_filter_button", function(event){
-				self.searchAndRenderResults(null, 1);
+				self.searchAndRenderResults(self.current_ordering, 0);
 			});
 			$('body').on('change.'+pluginName, '#rim_filter_form select', function(event){
 				self.persistForm();
@@ -123,7 +129,7 @@
 				self.populateModelsBasedOnBrand($('#rim_filter_form select[name="car"]').val());
 			});
 
-			$('body').on('click.'+pluginName, 'th[data-sortable="true"]', function(event){
+			$('body').on('click.'+pluginName, '.filter_search_results_rims th[data-sortable="true"]', function(event){
 				var tgt = $(event.currentTarget);
 
 				self.updateOrderingInSortHeaders(tgt);
@@ -131,9 +137,40 @@
 					"field" : tgt.attr("data-sortkey"),
 					"direction" : tgt.attr("data-sortdirection")
 				};
-				self.searchAndRenderResults(ordering, 1);
+				self.searchAndRenderResults(ordering, self.current_page);
+			});
+			//pagination
+			$('body').on('click.'+pluginName, '.filter_rims_search_results_pagination a', function(event){
+				event.preventDefault();
+				var tgt = $(event.currentTarget);
+				var page = parseInt(tgt.attr("data-page"));
+				self.searchAndRenderResults(self.current_ordering, page);
 			});
 	   	},
+		renderPagination : function(total, currentPage){ 
+			if(currentPage == null){
+				currentPage = 0;
+			}
+			var itemsPerPage = this.settings.items_per_page;
+			var numPages = Math.ceil(parseInt(total) / parseInt(itemsPerPage));
+			var html = "";
+			html += "<div class='filter_rims_search_results_pagination'>";
+			html += " <small>Gevonden resultaten: "+total+".</small>";
+			if(numPages > 1){
+				html += " <ul class='filter_search_results_pagination'>";
+				for(var i = 1; i <= numPages; i++){
+					var active = "";
+					if(i == (currentPage+1)){
+						active = "class='active'";
+					}
+					html += "  <li><a href='#' data-page='"+(i-1)+"' "+active+">"+i+"</a></li>";
+				}	
+				html += " </ul>";
+			}
+			html += "</div>";
+
+			return html;
+		},
 		updateOrderingInSortHeaders : function(tgt){
 				//unsort all other columns
 				$('th[data-sortable="true"]').not(tgt).attr("data-sortdirection", "none").each(function(){
@@ -164,15 +201,12 @@
 			tgt.html(tgt.attr("data-title")+h);
 		},
 		searchAndRenderResults : function(ordering, page){
-			var self = this;
-			var start = 0;
-			var limit = this.settings.items_per_page;
+			this.current_ordering = ordering;
+			this.current_page = page;
 
-			if(page != undefined){
-				start = this.settings.items_per_page * page;
-			} else {
-				start = 0;
-			}
+			var self = this;
+			var start = this.settings.items_per_page * this.current_page;
+			var limit = this.settings.items_per_page;
 
 			var baseData = {
 				"hostname" : this.settings.hostname, 
@@ -183,13 +217,13 @@
 			var params = this.getParametersFromForm();
 			var theData = $.extend({}, baseData, params);
 
-			if(ordering != undefined && ordering.direction != "none") {
+			if(this.current_ordering != undefined && this.current_ordering.direction != "none") {
 				var o = "";
-				if(ordering.direction == "descending"){
+				if(this.current_ordering.direction == "descending"){
 					o = "-";
 				}
-				o += ordering.field;
-				theData['order']= ordering;
+				o += this.current_ordering.field;
+				theData['order']= o;
 			}
 
 			$.ajax({
@@ -199,7 +233,7 @@
 				data: theData,
 				success : function(jsonObj){
 					self.logger('search results: ', jsonObj);
-					self.renderSearchResults(jsonObj);
+					self.renderSearchResults(jsonObj, page);
 				}
 			});
 		},
@@ -224,10 +258,10 @@
 			target.html(str);
 		},
 		defaultSearchRenderer : function(jsonObj){
-			var currentHeader = $('.filter_search_results tr').first();
+			var currentHeader = $('.filter_search_results_rims tr').first();
 			var str = "";
 			str += "<h3>Zoekresultaten</h3>";
-			str += "<table class='filter_search_results'>";
+			str += "<table class='filter_search_results filter_search_results_rims'>";
 
 			if(currentHeader != null && currentHeader.children('th').size() != 0){
 				str += "<tr>"+currentHeader.html()+"</tr>";
@@ -250,6 +284,13 @@
 				str += "</tr>";
 			}
 			str += "</table>";
+
+			var total = 0;
+			if(jsonObj.length > 0){
+				total = parseInt(jsonObj[0].productOrder);
+			}
+
+			str += this.renderPagination(total, this.current_page);
 			return str;
 		},
 		getEmptyStringIfNull : function(str){

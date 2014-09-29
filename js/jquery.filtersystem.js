@@ -11,7 +11,8 @@
 		'base_url' :          'http://webshop.lokaalgevonden.nl',
 		'definition_url' :    '/public/filterdefinitions',
 		'filterresults_url' : '/public/filterproducts',
-		'target_elt' : '#filter_search_results'
+		'target_elt' : '#filter_search_results',
+		'items_per_page' : 50 
 	
 	};	
 	function FiltersystemPlugin(element, options){
@@ -25,8 +26,15 @@
 	
 	FiltersystemPlugin.prototype = {
 		init : function( options ) {
-
 			var self = this;
+
+			this.current_ordering = {
+				"field" : "productPrice",
+				"direction" : "ascending"
+			};
+
+
+
 			this.load(function(jsonObj){
 				self.renderFilterDefinition(jsonObj);
 				self.bindButtons();
@@ -96,6 +104,32 @@
 		    $(this.element).html(str);
 
 		},
+		renderPagination : function(total, currentPage){ 
+			if(currentPage == null){
+				currentPage = 0;
+			}
+			var itemsPerPage = this.settings.items_per_page;
+			var numPages = Math.ceil(parseInt(total) / parseInt(itemsPerPage));
+			var html = "";
+			html += "<div class='filter_search_results_"+this.id+"_pagination'>";
+			html += " <small>Gevonden resultaten: "+total+".</small>";
+			if(numPages > 1){
+				html += " <ul class='filter_search_results_pagination'>";
+				for(var i = 1; i <= numPages; i++){
+					var active = "";
+					if(i == (currentPage+1)){
+						active = "class='active'";
+					}
+					html += "  <li><a href='#' data-page='"+(i-1)+"' "+active+">"+i+"</a></li>";
+				}	
+				html += " </ul>";
+			}
+			html += "</div>";
+
+			return html;
+		},
+
+
 		persistForm : function(){
 			var obj = {};
 			$('#filter_form_'+this.id+' select').each(function(){
@@ -121,22 +155,74 @@
 					}
 				});
 
-				this.searchAndRenderResults();
+				this.searchAndRenderResults(this.current_ordering, 0);
 			}
 		},
 	    bindButtons : function(){
 			var self = this;
 			$('body').on('click.'+pluginName, "#filter_button_"+this.id, function(event){
-				self.searchAndRenderResults();
+				self.searchAndRenderResults(this.current_ordering, 0);
 			});
 			$('body').on('change.'+pluginName, '#filter_form_'+this.id+' select', function(event){
 				self.persistForm();
 			});
+
+			$('body').on('click.'+pluginName, '.filter_search_results_'+this.id+' th[data-sortable="true"]', function(event){
+				var tgt = $(event.currentTarget);
+
+				self.updateOrderingInSortHeaders(tgt);
+				var ordering = {
+					"field" : tgt.attr("data-sortkey"),
+					"direction" : tgt.attr("data-sortdirection")
+				};
+				self.searchAndRenderResults(self.current_ordering, self.current_page);
+			});
+			//pagination
+			$('body').on('click.'+pluginName, '.filter_search_results_'+this.id+'_pagination a', function(event){
+				event.preventDefault();
+				var tgt = $(event.currentTarget);
+				var page = parseInt(tgt.attr("data-page"));
+				self.searchAndRenderResults(self.current_ordering, page);
+			});
 	   	},
-		searchAndRenderResults : function(){
+		updateOrderingInSortHeaders : function(tgt){
+				//unsort all other columns
+				$('.filter_search_results_'+this.id+' th[data-sortable="true"]')
+					.not(tgt).attr("data-sortdirection", "none").each(function(){
+
+					$(this).html($(this).attr('data-title'));
+				});
+
+				var dir = tgt.attr("data-sortdirection");
+				//update our target with 
+				if(dir == null || dir==undefined || dir == "none"){
+					tgt.attr("data-sortdirection", "ascending");
+				} else if(dir == "ascending") {
+					tgt.attr("data-sortdirection", "descending");
+				} else {
+					tgt.attr("data-sortdirection", "none");
+				}
+			
+				this.updateOrderingCaret(tgt);
+		},
+		updateOrderingCaret : function(tgt){
+			var dir = tgt.attr("data-sortdirection");
+	
+			var h = "";
+			if(dir == "ascending") {
+				h =  " &#9650;"
+			} else if(dir == "descending") {
+				h =  " &#9660;"
+			}
+			tgt.html(tgt.attr("data-title")+h);
+		},
+		searchAndRenderResults : function(ordering, page){
 			var self = this;
-			var start = 0;
-			var limit = 20;
+			this.current_ordering = ordering;
+			this.current_page = page;
+			var start = this.settings.items_per_page * this.current_page;
+			var limit = this.settings.items_per_page;
+
 			var baseData = {
 				"hostname" : this.settings.hostname, 
 				"start" : start,
@@ -145,6 +231,15 @@
 			};
 			var params = this.getParametersFromForm();
 			var theData = $.extend({}, baseData, params);
+
+			if(this.current_ordering != undefined && this.current_ordering.direction != "none") {
+				var o = "";
+				if(this.current_ordering.direction == "descending"){
+					o = "-";
+				}
+				o += this.current_ordering.field;
+				theData['order']= o;
+			}
 
 			if(this.settings.extra_param_string != null){
 				var s = this.settings.extra_param_string;
@@ -162,7 +257,7 @@
 				data: theData,
 				success : function(jsonObj){
 					self.logger('search results: ', jsonObj);
-					self.renderSearchResults(jsonObj);
+					self.renderSearchResults(jsonObj, page);
 				}
 			});
 		},
@@ -194,23 +289,32 @@
 		},
 		defaultSearchRenderer : function(jsonObj){
 			var str = "";
-			str += "<h3>Zoekresultaten</h3>";
-			str += "<table class='filter_search_results'>";
-			str += "<tr><th></th><th>Naam</th><th>Merk</th>";
 
-			
-			for(var k in this.filterdefinition){
-				if(
-					(k == 'Kleur'  && this.settings.show_color) ||
-					(k == 'Merk'  && this.settings.show_brand) ||
-					(k == 'Seizoen'  && this.settings.show_season) ||
-					(k != 'Kleur' && k != 'Merk' && k != 'Seizoen')
-				) {
-					str += "<th>"+k+"</th>";
-				} 
-			}
+			var currentHeader = $('.filter_search_results_'+this.id+' tr').first();
+
+			var str = "";
+			str += "<h3>Zoekresultaten</h3>";
+			str += "<table class='filter_search_results filter_search_results_"+this.id+"'>";
+
+			if(currentHeader != null && currentHeader.children('th').size() != 0){
+				str += "<tr>"+currentHeader.html()+"</tr>";
+			} else {
+				str += "<tr><th></th><th data-sortkey='productName' data-title='Naam'  data-sortable='true'>Naam</th><th>Merk</th>";
 				
-			str += "<th>Prijs</th><th>#</th><th></th></tr>";
+				for(var k in this.filterdefinition){
+					if(
+						(k == 'Kleur'  && this.settings.show_color) ||
+						(k == 'Merk'  && this.settings.show_brand) ||
+						(k == 'Seizoen'  && this.settings.show_season) ||
+						(k != 'Kleur' && k != 'Merk' && k != 'Seizoen')
+					) {
+						str += "<th>"+k+"</th>";
+					} 
+				}
+				
+				str += "<th data-sortkey='productPrice' data-title='Prijs' data-sortable='true'>Prijs</th><th>#</th><th></th></tr>";
+			}
+			
 			for(var i = 0; i < jsonObj.length; i++){
 				var item = jsonObj[i];
 				str += "<tr>";
@@ -244,6 +348,12 @@
 				str += "</tr>";
 			}
 			str += "</table>";
+
+			var total = 0;
+			if(jsonObj.length > 0){
+				total = parseInt(jsonObj[0].productOrder);
+			}
+			str += this.renderPagination(total, this.current_page);
 			return str;
 		},
 		getEmptyStringIfNull : function(str){

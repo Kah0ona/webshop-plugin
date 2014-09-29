@@ -151,8 +151,13 @@ input.checkout-amount {
 	display: none;
 }
 
-
-th[data-sortable="true"]:hover {
-	cursor: pointer;
+ul.filter_search_results_pagination li {
+	display: block;
+	float: left;
+	margin-right: 10px;
+	
 }
 
+.deliveryDatePicker {
+	margin-bottom: 5px;
+}

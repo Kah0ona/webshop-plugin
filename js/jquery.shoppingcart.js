@@ -45,12 +45,13 @@
 			
 			if($.datepicker !== undefined){
 				$.datepicker.setDefaults( $.datepicker.regional[ "nl" ] )		
-				$("#deliveryDate").datepicker({
+				$(".deliveryDatePicker").datepicker({
 					onSelect: function(dateText, inst){
 						self.logger('Selected date: '+dateText);
-					}
+					},
+					altField: "#deliveryDate"
 				});
-			}
+			} 
 
 		},
 		load : function(callback){
@@ -978,14 +979,15 @@
 	    	this.updatePrices();
 	    },    
 	    removeProductFromCheckoutPage : function(event){
-this.logger("removeProductFromCheckoutPage");
-	  	    	
-			event.preventDefault();
- 	    	var clicked = $(event.currentTarget);
-			var parentRow = clicked.parent().parent();
 
-			parentRow.addClass('hidden');			
-	    },   		
+				this.logger("removeProductFromCheckoutPage");
+					
+				event.preventDefault();
+				var clicked = $(event.currentTarget);
+				var parentRow = clicked.parent().parent();
+
+				parentRow.addClass('hidden');			
+		},   		
 		/**
 		* Want to call a plugin function later than on initialization (as a public method)?
 		* $('#someElement').shoppingCart();
@@ -993,13 +995,12 @@ this.logger("removeProductFromCheckoutPage");
 		* $('#someElement').shoppingCart('test');
 		*/
 		test : function (){
-			return this.each(function(){
-				var $this = $(this);
-				var data = $this.data('shoppingCart'); //gets the data out of the element. 
-			});
+				return this.each(function(){
+					var $this = $(this);
+					var data = $this.data('shoppingCart'); //gets the data out of the element. 
+				});
+			}
 		}
-	}
-
 
 	$.fn[ pluginName ] = function ( options ) {
 		return this.each(function() {
