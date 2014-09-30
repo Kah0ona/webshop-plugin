@@ -18,6 +18,7 @@
 				      'cart_text' : 'Mijn bestelling',
 				      'address' : '',
 				      'session_url' : '/wordpress/wp-content/plugins/webshop-plugin/models/CartStore.php',
+					  'use_scheduler' : false,
 				      'cartDataStore' : [],
 				      'deliveryMethods' : [],
 				      'deliveryCostsTable' : []
@@ -48,11 +49,89 @@
 				$(".deliveryDatePicker").datepicker({
 					onSelect: function(dateText, inst){
 						self.logger('Selected date: '+dateText);
+						if(self.settings.use_scheduler){
+							var dt = self.parseDdMmYyyyString(dateText);
+							var inTwoDays = new Date();
+							inTwoDays.setDate(inTwoDays.getDate() + 1);
+							inTwoDays.setHours(0);
+							inTwoDays.setMinutes(0);
+							if(dt.getTime() < inTwoDays.getTime()){
+								alert('Kies tenminste 2 dagen in de toekomst');
+								var s = new String((inTwoDays.getDate()+1));
+								if(s.length == 1){
+									s = "0"+s;
+								}
+								var m = new String((inTwoDays.getMonth()+1));
+								if(m.length==1){
+									m = "0"+m;
+								}
+
+								$('#deliveryDate').val(s+'-'+m+"-"+(inTwoDays.getYear()+1900));
+							}
+							self.logger('click on datepicker');
+							self.populateTimeSlotsBasedOnSelectedDate();
+						}
+
 					},
 					altField: "#deliveryDate"
-				});
-			} 
+				});			
+			}
 
+			this.loadSchedulingData();
+		},
+		populateTimeSlotsBasedOnSelectedDate : function(){
+			if(this.settings.use_scheduler){
+				var d = $('#deliveryDate').val();
+				var date = null;
+				if(d == null || d == ""){
+					date = new Date();
+				} else {
+					date = this.parseDdMmYyyyString(d);
+				}
+				var data = this.settings.scheduler_data;
+
+				var weekDay = this.getDayOfWeekByIndex(date.getDay());
+				var slotSize = data.slotSizeMinutes;
+				var hours = data.openingHours[weekDay];
+
+				//for each slot, start from start time, and create timeslots the size of time
+				var html = "";
+				for(var i = 0; i < hours.length; i++){
+					var h = hours[i];
+
+					var p = h.split("-");
+					var p2 = p[0].split(".");
+					var hS = parseInt(p2[0]);
+					var mS = parseInt(p2[1]);
+
+					var pE = p[1].split(".");
+					var hE = parseInt(pE[0]);
+					var mE = parseInt(pE[1]);
+
+					var endDateHours = new Date();
+					endDateHours.setMinutes(mE);
+					endDateHours.setHours(hE);
+
+					var slotDate = new Date();
+					slotDate.setMinutes(mS);
+					slotDate.setHours(hS);
+					for( ; this.addMinutesToDate(slotDate, slotSize).getTime() <= endDateHours.getTime(); slotDate = this.addMinutesToDate(slotDate, slotSize)){
+						var fromM = new String(slotDate.getMinutes());
+						if(fromM.length == 1){
+							fromM += "0";
+						}
+						var from = slotDate.getHours()+":"+fromM;
+						var endDate = this.addMinutesToDate(slotDate, slotSize); //end of prev slot is start of new one
+						var endM = new String(endDate.getMinutes());
+						if(endM.length == 1){
+							endM += "0";
+						}
+						var to = endDate.getHours()+":"+endM;
+						html += "<option value='"+from+"-"+to+"'>"+from+"-"+to+"</option>";
+					}
+				}
+				$('select[name="deliveryTime"]').html(html);
+			}
 		},
 		load : function(callback){
 		  var self = this;
@@ -122,6 +201,7 @@
 			});
 
 			$('body').on('change.shoppingCart', '.address-line, .address-line-elsewhere', function(){
+		    	var compareToAddress = '';
 		    	var compareToAddress = '';
 		    	
 		    	var compareToAddress2="";
@@ -197,6 +277,29 @@
 					}
 				});
 		   });
+
+		   $('body').on('click.shoppingCart', '.deliveryDatePicker', function(event){
+					   });
+		   $('body').on('change.shoppingCart', '#deliveryDate, select[name="deliveryTime"]', function(event){
+			   if(self.settings.use_scheduler){
+				   var tgt = $('.schedulerMessage');
+				   tgt.hide();
+				   tgt.html('');
+				   if(self.checkIfTimeslotIsAvailable()){
+					   self.logger("Dit moment is nog beschikbaar");
+					   tgt.removeClass('hidden');
+					   tgt.show();
+					   tgt.html('Dit moment is nog beschikbaar.');
+					   tgt.removeClass('alert-error').addClass('alert-success');
+				   } else {
+					   self.logger("Dit moment is NIET beschikbaar");
+					   tgt.removeClass('hidden');
+					   tgt.show();
+					   tgt.html('Dit moment is <strong>niet meer</strong> beschikbaar, kies een ander moment.');
+					   tgt.addClass('alert-error').removeClass('alert-success');
+				   }
+			   }
+		   });
 		   
 		   $('#coupon').bind('change.shoppingCart', function(){
 		    	self.checkCoupon(function(){
@@ -204,6 +307,147 @@
 		    	});
 		    });
 	    },
+		parseDdMmYyyyString : function(s){
+			from = s.split("-");
+			f = new Date(from[2], from[1] - 1, from[0]);
+			return f;
+		},
+		getDayOfWeekByIndex : function(i){
+			var r = null;
+			switch(i){
+				case 0:
+					r = "sunday";
+					break;
+				case 1:
+					r = "monday";
+					break;
+				case 2:
+					r = "tuesday";
+					break;
+				case 3:
+					r = "wednesday";
+					break;
+				case 4:
+					r = "thursday";
+					break;
+				case 5:
+					r = "friday";
+					break;
+				case 6:
+					r = "saturday";
+					break;
+				default:
+					r = null;
+
+			}
+
+			return r;
+		},
+		loadSchedulingData : function(){
+			var self = this;
+		    if(this.settings.use_scheduler){
+				$.ajax({
+					url: this.settings.schedulerUrl,
+					jsonp: 'callback',
+					dataType : 'jsonp',
+					data: {
+						"hostname" : this.hostname
+					},
+					success : function(jsonobj){
+						self.logger('Downloaded scheduling data using jsonp: ', jsonobj);
+						self.settings.scheduler_data = jsonobj;
+						self.populateTimeSlotsBasedOnSelectedDate();
+					}
+				});
+		   }
+
+		},
+		/**
+		 * Checks availability based on previous orders, and displays error if not available, is no op if scheduler is not used
+		 */
+		checkIfTimeslotIsAvailable : function(){
+		   var data = this.settings.scheduler_data;
+
+		   var requestedDate = this.parseDdMmYyyyString($('#deliveryDate').val());
+		   var requestedTime = this.parseTimeString($('select[name="deliveryTime"]').val());
+		   requestedDate.setHours(requestedTime.h);
+		   requestedDate.setMinutes(requestedTime.m);
+
+		   return this.isDuringOpeningHours(requestedDate, data.openingHours, data.slotSizeMinutes) &&
+				  this.isCapacityLeft(requestedDate, data.slotSizeMinutes, data.capacityPerSlot,data.occupiedSlots);
+		},
+		parseTimeString : function(s){
+			var p = s.split("-");
+			var p2 = p[0].split(":");
+			return { "h" : p2[0], "m" : p2[1] };
+		},
+		isDuringOpeningHours : function(date, hours, slotSizeMin) {
+			var dayOfWeek = this.getDayOfWeekByIndex(date.getDay()); //used for checking with opening hours
+			var hours = hours[dayOfWeek];//array like: ["10:00-12:00", "13:00-17.00"]
+
+			for(var i = 0; i < hours.length; i++){
+				var s = hours[i];
+				var pieces = s.split("-");
+				var start = pieces[0];
+				var end = pieces[1];
+
+				//vars below contain openinghours data
+				var pS = start.split(".");
+				var startHours = parseInt(pS[0]);
+				var startMin   = parseInt(pS[1]);
+
+				var pE = end.split(".");
+				var endHours = parseInt(pE[0]);
+				var endMin   = parseInt(pE[1]);
+
+				//does this fit in the slot? return true, else continue
+				if(this.fitsInSlot(startHours,startMin,endHours,endMin,date,slotSizeMin)){
+					return true;
+				}
+			}
+
+			return false;
+		},
+		addMinutesToDate : function(date, mins){
+			return new Date(date.getTime() + mins * 60000);
+		},
+		/**
+		 * starthour, startmin, endhour, endmin, date to be checked if it fits in.
+		 */
+		fitsInSlot : function(sh, sm, eh, em, date, slotSizeMins){
+			var m = date.getMinutes();
+			var h = date.getHours();
+			var dateEnd = this.addMinutesToDate(date, slotSizeMins);
+			dem = dateEnd.getMinutes();
+			deh = dateEnd.getHours();
+			return (sh < h   || (sh == h && sm <= m)) &&
+				   (eh > deh || (eh == deh && em >= dem));
+		},
+		isCapacityLeft : function(date, slotLength, capacity, occupiedSlots){
+			var dateEnd = this.addMinutesToDate(date, slotLength);
+			return this.getNumOverlaps(
+							date.getHours(),
+							date.getMinutes(),
+							dateEnd.getHours(),
+							dateEnd.getMinutes(),
+							slotLength,
+							occupiedSlots) < capacity;
+		},
+		getNumOverlaps : function(sh, sm, eh, em, slotSizeMinutes, occupiedSlots) {
+			var overlapCounter = 0;
+			for(var i = 0; i < occupiedSlots.length; i++){
+				var sObj = occupiedSlots[i];
+				var slotStart = new Date(sObj.time);
+				if(this.slotOverlaps(slotStart, slotSizeMinutes, sh, sm, eh, em)){
+					overlapCounter++;
+				}
+			}
+			return overlapCounter;
+		},
+		slotOverlaps : function(slotStart, slotSize, sh, sm, eh, em){
+			var slotEnd = this.addMinutesToDate(slotStart, slotSize);
+			return (slotEnd.getHours()   > sh || (slotEnd.getHours()   == sh && slotEnd.getMinutes()   > sm)) && (slotStart.getHours() < eh || (slotStart.getHours() == eh && slotStart.getMinutes() < em));
+		},
 	    lookupProduct: function(productId){
     		for(var i = 0; i < webshopProducts.length; i++){
     			var prod = webshopProducts[i];
@@ -977,17 +1221,16 @@
 	    	this.persist();
 	    	this.render();
 	    	this.updatePrices();
-	    },    
-	    removeProductFromCheckoutPage : function(event){
+	    },  
+		removeProductFromCheckoutPage : function(event){
+	    	this.logger("removeProductFromCheckoutPage");
+	  	    	
+			event.preventDefault();
+ 	    	var clicked = $(event.currentTarget);
+			var parentRow = clicked.parent().parent();
 
-				this.logger("removeProductFromCheckoutPage");
-					
-				event.preventDefault();
-				var clicked = $(event.currentTarget);
-				var parentRow = clicked.parent().parent();
-
-				parentRow.addClass('hidden');			
-		},   		
+			parentRow.addClass('hidden');			
+	    },   		
 		/**
 		* Want to call a plugin function later than on initialization (as a public method)?
 		* $('#someElement').shoppingCart();
@@ -995,12 +1238,12 @@
 		* $('#someElement').shoppingCart('test');
 		*/
 		test : function (){
-				return this.each(function(){
-					var $this = $(this);
-					var data = $this.data('shoppingCart'); //gets the data out of the element. 
-				});
-			}
+			return this.each(function(){
+				var $this = $(this);
+				var data = $this.data('shoppingCart'); //gets the data out of the element. 
+			});
 		}
+	}
 
 	$.fn[ pluginName ] = function ( options ) {
 		return this.each(function() {

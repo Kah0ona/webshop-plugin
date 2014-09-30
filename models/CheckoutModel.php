@@ -61,6 +61,10 @@ class CheckoutModel extends GenericModel {
 	public function allowDeliveryTime(){
 		return $this->options->getOption('use_delivery_time');
 	}
+
+	public function useScheduler() {
+		return $this->options->getOption('use_scheduler');
+	}
 	
 	public function sendOrderToBackend($post){
 		$post['hostname'] = $this->options->getOption('hostname');

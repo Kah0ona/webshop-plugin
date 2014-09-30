@@ -36,8 +36,10 @@ class CartInitializerView extends GenericView {
 				'deliveryCostsTable' : <?php echo $deliveryCostsTable; ?>,
 				'couponUrl': '<?php echo SYSTEM_URL_WEBSHOP?>/public/coupons',
 				'productsUrl': '<?php echo SYSTEM_URL_WEBSHOP?>/public/products',
+				'schedulerUrl': '<?php echo SYSTEM_URL_WEBSHOP?>/public/occupiedtimeslots',
 				'baseUrl': '<?php echo SYSTEM_URL_WEBSHOP?>',
 				'hostname' : '<?php echo $options->getOption('hostname'); ?>',
+				'use_scheduler' : <?php if($options->getOption('use_scheduler') == 'true') { echo 'true'; } else { echo 'false';} ?>,
 				'deliveryMethods' : <?php echo $deliveryMethods; ?>
 			});
 		});

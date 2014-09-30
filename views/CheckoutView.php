@@ -486,7 +486,8 @@ class CheckoutView extends GenericView {
 						   		<label class="control-label delivery-date-label" for="deliveryDate">Bezorg-/leverdatum (formaat: dd-mm-jjjj): </label>			
 								<div class="controls">	
 									<div class="deliveryDatePicker"></div>
-									<input type="text" name="deliveryDate" class="span4 input-large" id="deliveryDate" /> <br/> 
+									
+									<input type="text" name="deliveryDate" class="span4 input-large" id="deliveryDate" /> <br/>
 									<?php
 										if($this->model->allowDeliveryTime()) {
 									?>
@@ -499,6 +500,9 @@ class CheckoutView extends GenericView {
 									<?php		
 										}
 									?>
+									<?php if($this->model->useScheduler()) { ?>
+									<div class='schedulerMessage alert hidden'></div>
+									<?php }?>
 								</div>		
 							</div>					
 							<?php 
