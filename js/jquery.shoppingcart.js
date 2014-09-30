@@ -50,26 +50,7 @@
 					onSelect: function(dateText, inst){
 						self.logger('Selected date: '+dateText);
 						if(self.settings.use_scheduler){
-							var dt = self.parseDdMmYyyyString(dateText);
-							var inTwoDays = new Date();
-							inTwoDays.setDate(inTwoDays.getDate() + 1);
-							inTwoDays.setHours(0);
-							inTwoDays.setMinutes(0);
-							if(dt.getTime() < inTwoDays.getTime()){
-								alert('Kies tenminste 2 dagen in de toekomst');
-								var s = new String((inTwoDays.getDate()+1));
-								if(s.length == 1){
-									s = "0"+s;
-								}
-								var m = new String((inTwoDays.getMonth()+1));
-								if(m.length==1){
-									m = "0"+m;
-								}
-
-								$('#deliveryDate').val(s+'-'+m+"-"+(inTwoDays.getYear()+1900));
-							}
-							self.logger('click on datepicker');
-							self.populateTimeSlotsBasedOnSelectedDate();
+							self.handleDateSelect(dateText);
 						}
 
 					},
@@ -78,6 +59,47 @@
 			}
 
 			this.loadSchedulingData();
+		
+		},
+
+		populateDatePickerInit : function(){
+			var inTwoDays = new Date();
+			inTwoDays.setDate(inTwoDays.getDate() + 1);
+			inTwoDays.setHours(0);
+			inTwoDays.setMinutes(0);
+			
+			var s = new String((inTwoDays.getDate()+1));
+			if(s.length == 1){
+				s = "0"+s;
+			}
+			var m = new String((inTwoDays.getMonth()+1));
+			if(m.length==1){
+				m = "0"+m;
+			}
+			$('#deliveryDate').val(s+'-'+m+"-"+(inTwoDays.getYear()+1900));
+		},
+		handleDateSelect : function(dateText) {
+			var self = this;
+			var dt = self.parseDdMmYyyyString(dateText);
+			var inTwoDays = new Date();
+			inTwoDays.setDate(inTwoDays.getDate() + 1);
+			inTwoDays.setHours(0);
+			inTwoDays.setMinutes(0);
+			if(dt.getTime() < inTwoDays.getTime()){
+				alert('Kies tenminste 2 dagen in de toekomst');
+				var s = new String((inTwoDays.getDate()+1));
+				if(s.length == 1){
+					s = "0"+s;
+				}
+				var m = new String((inTwoDays.getMonth()+1));
+				if(m.length==1){
+					m = "0"+m;
+				}
+
+				$('#deliveryDate').val(s+'-'+m+"-"+(inTwoDays.getYear()+1900));
+			}
+			self.logger('click on datepicker');
+			self.populateTimeSlotsBasedOnSelectedDate();
 		},
 		populateTimeSlotsBasedOnSelectedDate : function(){
 			if(this.settings.use_scheduler){
@@ -129,6 +151,9 @@
 						var to = endDate.getHours()+":"+endM;
 						html += "<option value='"+from+"-"+to+"'>"+from+"-"+to+"</option>";
 					}
+				}
+				if(html.trim() == ""){
+					html = "<option>Wij zijn vandaag gesloten</option>";
 				}
 				$('select[name="deliveryTime"]').html(html);
 			}
@@ -282,22 +307,7 @@
 					   });
 		   $('body').on('change.shoppingCart', '#deliveryDate, select[name="deliveryTime"]', function(event){
 			   if(self.settings.use_scheduler){
-				   var tgt = $('.schedulerMessage');
-				   tgt.hide();
-				   tgt.html('');
-				   if(self.checkIfTimeslotIsAvailable()){
-					   self.logger("Dit moment is nog beschikbaar");
-					   tgt.removeClass('hidden');
-					   tgt.show();
-					   tgt.html('Dit moment is nog beschikbaar.');
-					   tgt.removeClass('alert-error').addClass('alert-success');
-				   } else {
-					   self.logger("Dit moment is NIET beschikbaar");
-					   tgt.removeClass('hidden');
-					   tgt.show();
-					   tgt.html('Dit moment is <strong>niet meer</strong> beschikbaar, kies een ander moment.');
-					   tgt.addClass('alert-error').removeClass('alert-success');
-				   }
+				   self.renderOccupationMessage();
 			   }
 		   });
 		   
@@ -307,6 +317,26 @@
 		    	});
 		    });
 	    },
+		renderOccupationMessage : function(){
+		   var self = this;
+		   var tgt = $('.schedulerMessage');
+		   tgt.hide();
+		   tgt.html('');
+		   if(self.checkIfTimeslotIsAvailable()){
+			   
+			   self.logger("Dit moment is nog beschikbaar");
+			   tgt.removeClass('hidden');
+			   tgt.show();
+			   tgt.html('Dit moment is nog beschikbaar.');
+			   tgt.removeClass('alert-error').addClass('alert-success');
+		   } else {
+			   self.logger("Dit moment is NIET beschikbaar");
+			   tgt.removeClass('hidden');
+			   tgt.show();
+			   tgt.html('Dit moment is <strong>niet meer</strong> beschikbaar, kies een ander moment.');
+			   tgt.addClass('alert-error').removeClass('alert-success');
+		   }
+		},
 		parseDdMmYyyyString : function(s){
 			from = s.split("-");
 			f = new Date(from[2], from[1] - 1, from[0]);
@@ -357,6 +387,8 @@
 						self.logger('Downloaded scheduling data using jsonp: ', jsonobj);
 						self.settings.scheduler_data = jsonobj;
 						self.populateTimeSlotsBasedOnSelectedDate();
+						self.populateDatePickerInit();
+						self.renderOccupationMessage();
 					}
 				});
 		   }
@@ -367,6 +399,11 @@
 		 */
 		checkIfTimeslotIsAvailable : function(){
 		   var data = this.settings.scheduler_data;
+		   if($('select[name="deliveryTime"]').val() == 'Wij zijn vandaag gesloten'){
+			   $('.schedulerMessage').addClass('hidden');
+			   $('.schedulerMessage').hide();
+			   return ; 
+		   }
 
 		   var requestedDate = this.parseDdMmYyyyString($('#deliveryDate').val());
 		   var requestedTime = this.parseTimeString($('select[name="deliveryTime"]').val());
@@ -426,6 +463,7 @@
 		isCapacityLeft : function(date, slotLength, capacity, occupiedSlots){
 			var dateEnd = this.addMinutesToDate(date, slotLength);
 			return this.getNumOverlaps(
+							date,
 							date.getHours(),
 							date.getMinutes(),
 							dateEnd.getHours(),
@@ -433,16 +471,21 @@
 							slotLength,
 							occupiedSlots) < capacity;
 		},
-		getNumOverlaps : function(sh, sm, eh, em, slotSizeMinutes, occupiedSlots) {
+		getNumOverlaps : function(date, sh, sm, eh, em, slotSizeMinutes, occupiedSlots) {
 			var overlapCounter = 0;
 			for(var i = 0; i < occupiedSlots.length; i++){
 				var sObj = occupiedSlots[i];
 				var slotStart = new Date(sObj.time);
-				if(this.slotOverlaps(slotStart, slotSizeMinutes, sh, sm, eh, em)){
+				if(this.sameDay(slotStart, date) && this.slotOverlaps(slotStart, slotSizeMinutes, sh, sm, eh, em)){
 					overlapCounter++;
 				}
 			}
 			return overlapCounter;
+		},
+		sameDay : function (date1, date2){
+			var current  = new Date(date1.getTime()).setHours(0, 0, 0, 0);
+			var previous = new Date(date2.getTime()).setHours(0, 0, 0, 0);
+			return current == previous;
 		},
 		slotOverlaps : function(slotStart, slotSize, sh, sm, eh, em){
 			var slotEnd = this.addMinutesToDate(slotStart, slotSize);
