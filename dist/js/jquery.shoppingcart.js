@@ -262,6 +262,9 @@
 		    $("body").on('change.shoppingCart', '.checkout-amount', function(event){
 				self.updateQuantityOfProduct(event);
     			self.updatePrices();
+			    if(self.settings.use_scheduler){
+				   self.renderOccupationMessage();
+			    }
 		    });
 		    
 		    
@@ -305,7 +308,7 @@
 		   });
 
 		   $('body').on('click.shoppingCart', '.deliveryDatePicker', function(event){
-					   });
+		   });
 		   $('body').on('change.shoppingCart', '#deliveryDate, select[name="deliveryTime"]', function(event){
 			   if(self.settings.use_scheduler){
 				   self.renderOccupationMessage();
