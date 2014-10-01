@@ -1,0 +1,165 @@
+/* This stylesheet is used to style the public view of the plugin. */
+
+.quantity {
+	width: 15%;
+	float: left;
+}
+
+.product-name {
+	width: 70%;
+	float: left;
+	margin-left: 5px;
+}
+
+.product-remove {
+	float: left;
+	width: 5%;
+}
+
+.product-image {
+	position: relative;
+}
+
+.product-discount-label {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
+
+.product-remove a {
+	padding-top: 0px !important;
+	line-height: 18px;
+}
+.product-row {
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+.error {
+	color: red;
+}
+
+td.text-right {
+	text-align: right !important;
+	align: right !important;
+}
+
+.dropdown-menu {
+	width: 400px;
+}
+
+
+.dropdown-menu li a {
+	text-align: right;
+}
+
+.category-level-0 {
+	text-indent: 0px;
+}
+
+.category-level-1 {
+	text-indent: 10px;
+}
+
+.category-level-2 {
+	text-indent: 20px;
+	
+}
+.category-level-3 {
+	text-indent: 30px;
+	
+}
+
+.category-level-4 {
+	text-indent: 40px;
+	
+}
+
+
+.category-level-5 {
+	text-indent: 50px;
+	
+}
+
+
+.product-overview .share-product {
+	display: none !important;
+}
+
+
+.the-alert {
+	position: fixed;
+	right: 20px;
+	top: 50px;
+	width: 230px;
+	z-index: 999999;
+}
+
+#city-modal.modal.fade {
+	transition: none !important;
+	top: 50% !important;
+}
+
+#city-modal {
+	opacity: 1 !important; /* fix for IE11 */
+}
+
+.webshop_pagination {
+	width: 100%;
+}
+.webshop_pagination .prev {
+	float: left;
+}
+
+.webshop_pagination .next {
+	float: right;
+}
+
+
+.clear-block {
+	clear: both;
+}
+
+.search-result  {
+	margin-bottom: 5px;
+}
+
+input.checkout-amount {
+	display: inline !important;
+	margin-right: 5px;
+}
+
+
+.product-media {
+}
+
+.product-media-item {
+	height: 150px;
+	width: 150px;
+	overflow: hidden;
+	float: left;
+}
+
+.product-media-item img {
+	height: 150px;
+}
+
+.deposit-container,
+.hidden
+{
+	display: none;
+}
+
+ul.filter_search_results_pagination li {
+	display: block;
+	float: left;
+	margin-right: 10px;
+	
+}
+
+.deliveryDatePicker {
+	margin-bottom: 5px;
+}
+
+
