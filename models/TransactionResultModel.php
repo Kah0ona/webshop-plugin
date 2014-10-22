@@ -35,5 +35,9 @@ class TransactionResultModel extends GenericModel {
 		
 		return $pixelHtml;
 	}
+
+
+
+
 }
 ?>

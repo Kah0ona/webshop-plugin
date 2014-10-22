@@ -26,6 +26,17 @@ abstract class GenericView {
 		<?php
 	}
 	
+	public function startsWith($haystack, $needle) {
+		return $needle === "" || strpos($haystack, $needle) === 0;
+	}
+
+	public function getImageUrl($data){
+		if($this->startsWith($data, 'https://') || $this->startsWith($data, 'http://')){
+			return $data;
+		} else {
+			return	SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$data;
+		}
+	}
 	/**
 	* $args contains an object or array with values, to be used for rendering
 	*/

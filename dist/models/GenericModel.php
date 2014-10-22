@@ -123,6 +123,9 @@ class GenericModel {
 		$productNumber = $pro->productNumber;
 		$processingTimeMinutes = $pro->processingTimeMinutes;
 		$productDeliveryTime = $pro->productDeliveryTime;
+		$quantumDiscount = $pro->quantumDiscount;
+		$quantumDiscountPer = $pro->quantumDiscountPer;
+		
 		$discount = $pro->productDiscount;
 		$options = array();
 		if($pro->ProductOption != null)
@@ -160,7 +163,9 @@ class GenericModel {
 			"ProductProperty"=>$pp,
 			"SKU"=> $skus,
 			"processingTimeMinutes" => $processingTimeMinutes,
-			"productDeliveryTime" => $productDeliveryTime
+			"productDeliveryTime" => $productDeliveryTime,
+			"quantumDiscount" => $quantumDiscount,
+			"quantumDiscountPer" => $quantumDiscountPer
 		);
 		if($getString){
 			return json_encode($jsonObj);				
@@ -204,7 +209,7 @@ class GenericModel {
 		
 	}
 
-	protected function curl_fetch($url){
+	public function curl_fetch($url){
 		$cached = $this->getCachedData($url);
 		$cached=null; //comment this out this if u want caching
 		if($cached != null){
@@ -216,6 +221,7 @@ class GenericModel {
 			curl_setopt($ch, CURLOPT_URL, $url);
 			curl_setopt($ch, CURLOPT_HEADER, FALSE);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE); 
 			$json = curl_exec($ch);
 			curl_close($ch);
 			$this->setCachedData($url, $json); 

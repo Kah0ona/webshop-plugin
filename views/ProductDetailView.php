@@ -44,6 +44,8 @@ class ProductDetailView extends GenericView {
 	    return Markdown($text);
 	}
 
+
+
 	public function render($data=null) { 
 		if($data == null)
 			$data = $this->model->getData();
@@ -97,26 +99,30 @@ class ProductDetailView extends GenericView {
 						}
 						return score;
 					}
-				
-					function NASort(a, b) {    
-						if(isNaN(a.innerHTML) || isNaN(b.innerHTML)) {
-							//sort m l xl etc in the correct order
-							var scoreA = getSizeScore(a);
-							var scoreB = getSizeScore(b);
-							
-							if(scoreA > -1 && scoreB > -1){
-								return (scoreA > scoreB) ? 1 : -1;
-							}
 
-							return 0;
-						} else {
-							return (a.innerHTML > b.innerHTML) ? 1 : -1;
-						}
-					};
-				
-					$('.ProductOptionSelector option').sort(NASort).appendTo('.ProductOptionSelector');
+					$('.ProductOptionSelector').each(function(){
+						function NASort(a, b) {    
+							if(isNaN(a.innerHTML) || isNaN(b.innerHTML)) {
+								//sort m l xl etc in the correct order
+								var scoreA = getSizeScore(a);
+								var scoreB = getSizeScore(b);
+								
+								if(scoreA > -1 && scoreB > -1){
+									return (scoreA > scoreB) ? 1 : -1;
+								}
+
+								return 0;
+							} else {
+								return (a.innerHTML > b.innerHTML) ? 1 : -1;
+							}
+						};
 					
-					$(".ProductOptionSelector").val($(".ProductOptionSelector option:first").val());
+						$(this).children('option').sort(NASort).appendTo($(this));
+						
+						$(this).val($(this).children('option').first().val());
+
+					});
+				
 
 				});
 				
@@ -209,16 +215,16 @@ class ProductDetailView extends GenericView {
 							<?php } ?>
 						
 							<?php if($data->imageDish != null && $data->imageDish != "/uploads/Product" && $data->imageDish != '') { ?>
-							<img data-zoom-image="<?php echo SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$data->imageDish; ?>" itemprop="image" 
+							<img data-zoom-image="<?php echo $this->getImageUrl($data->imageDish); ?>" itemprop="image" 
 									alt="<?php echo $data->productName; if($data->productNumber != null){ echo ' '.$data->productNumber; } if($data->brand != null){ echo ' '.$data->brand; } ?>" 
-									src="<?php echo SYSTEM_URL_WEBSHOP.'/uploads/Product/'.$data->imageDish; ?>"  />
+									src="<?php echo $this->getImageUrl($data->imageDish); ?>"  />
 							<?php } elseif($this->model->getOptions()->getOption('NoImage') != null) { ?>
 							<img itemprop="image" 
 								 alt="<?php echo $data->productName; if($data->productNumber != null){ echo ' '.$data->productNumber; } if($data->brand != null){ echo ' '.$data->brand; } ?>" 
 								 src="<?php echo $this->model->getOptions()->getOption('NoImage'); ?>"  />	
 								
 								
-							<?php }?>
+							<?php }?> 
 						</div>
 						<?php  if($data->MediaLibrary != null && count($data->MediaLibrary) > 0) { ?>
 						<div class="product-media">
@@ -321,7 +327,7 @@ class ProductDetailView extends GenericView {
 				<label class="control-label control-label-<?php echo $data->Product_id; ?>" id="ProductOptionName_<?php echo $p->ProductOption_id; ?>" for="<?php echo $p->optionName; ?>"><?php echo $p->optionName; ?>:</label>
 				
 				<div class="controls controls-<?php echo $data->Product_id; ?>">		
-					<select name="size" class="input-large ProductOptionSelector" id="ProductOption_<?php echo $p->ProductOption_id; ?>" option_id="<?php echo $p->ProductOption_id; ?>">
+					<select name="size" class="input-large ProductOptionSelector <?php if($p->influencesSKU) { echo 'InfluencesSKU'; } ?>" id="ProductOption_<?php echo $p->ProductOption_id; ?>" option_id="<?php echo $p->ProductOption_id; ?>">
 						<?php
 							$lowestValueId = 0;
 							$lowestValue = 999999;

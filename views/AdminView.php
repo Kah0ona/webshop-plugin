@@ -76,6 +76,10 @@ class AdminView extends GenericView {
 		  $this->add_cs_field('SisowDescription', 'Omschrijving iDeal betaling (max 32. tekens):');		  
 		  $this->add_cs_field_select('SisowTestModus', 'Sisow Testmodus:', array('true'=>'Aan', 'false'=>'Uit'));
 
+		  $this->add_cs_field_boolean('UseTargetpay', 'Gebruik iDeal via Targetpay?:');		  
+		  $this->add_cs_field('TargetpayLayoutCode', 'Targetpay Layoutcode:');
+		  $this->add_cs_field('TargetpayDescription', 'Targetpay omschrijving:');
+
 		  $this->add_cs_field_boolean('UseOgoneEcommmerce', 'Gebruik Ogone e-Commerce creditcard gateway?:');		  
 		  $this->add_cs_field_select('OgoneTestMode', 'Ogone Testmodus:', array('true'=>'Aan', 'false'=>'Uit'));
 		  $this->add_cs_field('OgonePassPhrase', 'Ogone Passphrase voor authenticatie:');

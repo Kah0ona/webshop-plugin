@@ -159,6 +159,7 @@ class SytematicWebshop {
 		session_start();
 		include_once('models/GenericModel.php');
 		include_once('lib/ideal/sisow.cls5.php');
+		include_once('lib/ideal/targetpay/TargetPayIdeal.class.php');
 		include_once('models/CheckoutModel.php');
 		include_once('models/DeliveryCostModel.php');
 		$this->load_options();
@@ -179,8 +180,10 @@ class SytematicWebshop {
 				$redirect = $checkout->getRedirectUrl();
 				echo json_encode(array('redirectUrl' => $redirect));			
 			}
-		}
-		elseif($_POST['payment-method'] == "ogone"){
+		} elseif($_POST['payment-method'] == 'ideal-targetpay') {
+				$redirect =	$checkout->doTargetpayTransaction(); // redirects away if everything goes well, returns an error if not;
+				echo json_encode(array('redirectUrl' => $redirect));			
+		} elseif($_POST['payment-method'] == "ogone"){
 			if($checkout->getStatus() != ORDER_SUCCESS){
 				echo json_encode(array('error' => $checkout->getStatusMessage()));
 				exit;

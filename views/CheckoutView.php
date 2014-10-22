@@ -15,6 +15,13 @@ class CheckoutView extends GenericView {
 		return $select;
 	}
 
+	private function renderTargetpayIDealForm(){
+		$select = '<select name="targetpaybank" class="valid" id="targetpaybank">
+					<script src="https://www.targetpay.com/ideal/issuers-nl.js"></script>
+				   </select>';
+		return $select;
+	}
+
 	private function getProductOptionString($product){
 		if(isset($product->ProductOption) && count($product->ProductOption) > 0){
 			$s = array();
@@ -40,13 +47,21 @@ class CheckoutView extends GenericView {
 				}
 			}
 		}
-		
+
+		$quant = $product->quantity;
+
 		$discountFactor = 1;
 		if($product->discount != null){
 			$discountFactor = 1-($product->discount/100);
 		}
+
+		$productPrice = $product->price;
+
+		if($product->quantumDiscount != null && $product->quantumDiscountPer != null && $quant >= $product->quantumDiscountPer){
+				$productPrice -= $product->quantumDiscount;
+		}
 		
-		return $discountFactor * ($product->price + $optionPrice);
+		return $discountFactor * ($productPrice + $optionPrice);
 	}
 	
 	private function renderDeliveryMethod() {
@@ -111,6 +126,9 @@ class CheckoutView extends GenericView {
 		if($this->model->getOptions()->getOption('UseSisow') == "true") {
 			$ret .= '<option value="ideal">iDeal</option>';	
 		}
+		if($this->model->getOptions()->getOption('UseTargetpay') == "true") {
+			$ret .= '<option value="ideal-targetpay">iDeal</option>';	
+		}
 		if($this->model->getOptions()->getOption('UseMisterCash') == "true") {
 			$ret .= '<option value="mistercash">MisterCash</option>';	
 		}
@@ -159,7 +177,7 @@ class CheckoutView extends GenericView {
 			
 			function hideIdealFormIfNecessary(){
 				var elt = jQuery('#payment-methods-form');
-				if(elt.val() == 'ideal'){
+				if(elt.val() == 'ideal' || elt.val() == 'ideal-targetpay'){
 						jQuery('.ideal-group').removeClass('hidden');
 					}
 					else {
@@ -542,8 +560,6 @@ class CheckoutView extends GenericView {
 								</div>		
 							</div>	
 							
-							
-							
 
 							<div class="control-group ideal-group">
 								<p>Kies uw bank om direct via iDeal te betalen</p>						
@@ -551,8 +567,13 @@ class CheckoutView extends GenericView {
 			
 								<label class="control-label" for="coupon">Uw bank:</label>					
 								<div class="controls">	
-									<?php echo $this->renderIDealForm(); ?>
-									
+									<?php 
+										if($this->model->getOptions()->getOption('UseSisow') == "true") {
+											echo $this->renderIDealForm();
+										} elseif($this->model->getOptions()->getOption('UseTargetpay') == "true") {
+											echo $this->renderTargetpayIDealForm();
+										}
+									?>
 								</div>		
 							</div>	
 						</div>

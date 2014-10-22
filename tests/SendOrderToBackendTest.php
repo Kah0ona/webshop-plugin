@@ -42,4 +42,6 @@
 	echo 'Status: '.$resultStatus;
 	echo '<br/>';
 	echo 'Status message: '.$checkout->getStatusMessage();
+
+
 ?>

@@ -175,7 +175,7 @@
 					"field" : tgt.attr("data-sortkey"),
 					"direction" : tgt.attr("data-sortdirection")
 				};
-				self.searchAndRenderResults(self.current_ordering, self.current_page);
+				self.searchAndRenderResults(ordering, self.current_page);
 			});
 			//pagination
 			$('body').on('click.'+pluginName, '.filter_search_results_'+this.id+'_pagination a', function(event){

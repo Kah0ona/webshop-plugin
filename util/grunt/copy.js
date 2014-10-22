@@ -50,12 +50,14 @@ module.exports = function (grunt) {
         src: '*.php',
         dest: 'dist/widgets',
         expand: true
-      }, {
+      }, 
+	  {
         cwd: 'lib/',
-        src: '*.*',
+        src: '**',
         dest: 'dist/lib',
         expand: true
-      }]
+      }
+		]
     }
   }
 }; 

@@ -3,6 +3,7 @@ define('ORDER_SUCCESS', 200);
 define('ORDER_FAILED', 400); //add other codes, if necessary
 define('ORDER_VALIDATION_ERROR', 400);
 define('SISOW_NOTIFY_URL', BASE_URL_WEBSHOP.'/sisow_notifications');
+define('TARGETPAY_NOTIFY_URL', BASE_URL_WEBSHOP.'/targetpay_notifications');
 class CheckoutModel extends GenericModel {
 	
 	protected $status;
@@ -71,9 +72,12 @@ class CheckoutModel extends GenericModel {
 		$post['shoppingCart'] = json_encode($this->cart);
 		$post['orderStatus'] = 'nieuw';
 		$post['PaymentMethod_id'] = $post['payment-method'];
-		if($post['PaymentMethod_id'] == "ideal" || $post['PaymentMethod_id'] == "ogone" || $post['PaymentMethod_id'] == 'mistercash'){
+		if($post['PaymentMethod_id'] == "ideal" || $post['PaymentMethod_id'] == 'ideal-targetpay' || $post['PaymentMethod_id'] == "ogone" || $post['PaymentMethod_id'] == 'mistercash'){
 			if($post['PaymentMethod_id'] == 'ideal'){
 				$post['thePaymentMethodName'] =  'iDeal betaling';
+			}
+			if($post['PaymentMethod_id'] == 'ideal-targetpay'){
+				$post['thePaymentMethodName'] =  'iDeal betaling via Targetpay';
 			}
 			if($post['PaymentMethod_id'] == 'mistercash'){
 				$post['thePaymentMethodName'] = 'MisterCash betaling';
@@ -220,7 +224,41 @@ class CheckoutModel extends GenericModel {
 		$this->redirectUrl = $sisow->issuerUrl;
 		$this->logMessage("Setting redirect url: ".$this->redirectUrl);
 	}
-	
+
+
+	public function doTargetpayTransaction() {
+		$this->logMessage("Creating TargetPay Transaction");
+		$oIdeal = new TargetPayIdeal ($this->options->getOption("TargetpayLayoutCode"));
+		$oIdeal->setIdealAmount ($this->totalPrice * 100.0);
+		$oIdeal->setIdealissuer ($_POST['targetpaybank']);
+		$oIdeal->setIdealDescription ($this->options->getOption("TargetpayDescription"));
+		$oIdeal->setIdealReturnUrl (site_url().'/success');
+
+		$this->logMessage("report url: ".TARGETPAY_NOTIFY_URL.'/'.$this->insertedOrderId);
+
+		$oIdeal->setIdealReportUrl (TARGETPAY_NOTIFY_URL.'/'.$this->insertedOrderId);
+
+		$this->logMessage("Parameters set up, starting payment...");
+		try {
+			$aReturn = $oIdeal->startPayment();
+		} catch( Exception $e ){
+			$this->logMessage('Exception: '.$e->getMessage());
+			return;
+		}
+		$this->logMessage("done.");
+		$this->logMessage('0: '.$aReturn[0]);
+		$this->logMessage('1: '.$aReturn[1]);
+		# This is the transaction id
+		$intTrxId = $aReturn[0];
+
+		# this will be the bank url that will redirect to the bank.
+		$strBankURL = $aReturn[1];
+		$this->redirectUrl = $strBankURL;
+		$this->logMessage('Redirect url: '.$this->redirectUrl);
+		$this->logMessage('Trxid: '.$intTrxId);
+
+		return $this->redirectUrl;
+	}
 	
 	public function doIDeal(){
 		$this->doSisowTransaction();

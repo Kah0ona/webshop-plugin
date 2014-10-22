@@ -150,7 +150,7 @@
 							endM += "0";
 						}
 						var to = endDate.getHours()+":"+endM;
-						html += "<option value='"+from+"-"+to+"'>"+from+"-"+to+"</option>";
+						html += "<option value='"+from+"-"+to+"'>"+from+"</option>";
 					}
 				}
 				if(html.trim() == ""){
@@ -613,7 +613,7 @@
 					// check all the other selected options for this product, and their values
 					var otherSelectedOptionValues = this.getSelectedOptionsForThisProduct(prod);
 					var sku = this.lookupSkuBySelectedOptionValues(prod, otherSelectedOptionValues);
-					var skuElt = $('.skuInfo-'+prod.Product_id).removeClass('alert').removeClass('alert-error');
+					var skuElt = $('.skuInfo-'+prod.Product_id).removeClass('alert').removeClass('alert-error').hide();
 					skuElt.html('');
 					if(sku == null){ //user doesnt use stock info, so do nothing.
 						this.logger('No sku found');
@@ -626,7 +626,7 @@
 							if(prod.productDeliveryTime != null && prod.productDeliveryTime != undefined){
 								delTime = ' De levertijd is: '+prod.productDeliveryTime;
 							}
-							skuElt.html('Dit product is tijdelijk niet meer op voorraad.'+delTime).attr('inStock','false').addClass('alert').addClass('alert-error');
+							skuElt.html('Dit product is tijdelijk niet meer op voorraad.'+delTime).attr('inStock','false').addClass('alert').addClass('alert-error').show();
 						}
 					}
 				}
@@ -696,7 +696,8 @@
 	   	},
 	   	getSelectedOptionsForThisProduct : function(product){
 	   		var ret = [];
-	   		$('.product-'+product.Product_id+' .ProductOptionSelector').each(function(){
+	   		$('.product-'+product.Product_id+' .ProductOptionSelector.InfluencesSKU').each(function(){
+				
 		   		var val = $(this).val();
 		   		ret.push(parseInt(val));
 	   		});
@@ -895,8 +896,6 @@
 			if(options2 == null){
 				options2 = [];
 			}
-
-
 		    
 		    if(options1.length != options2.length) return false;
 	
@@ -948,6 +947,15 @@
 
 
 	    		var p = parseFloat(obj.price);
+
+				var quantumDiscount = 0;
+
+				if(obj.quantumDiscount != null && 
+				   obj.quantumDiscountPer != null &&
+				   obj.quantumDiscountPer <= parseInt(obj.quantity)){
+					p -= parseFloat(obj.quantumDiscount); //deduct quantum discount from the price
+				}
+
 	    		currentPrice = p * parseInt(obj.quantity);
 	    		var optionsPrice = this.addOptionPrices(obj);
 	    		
@@ -956,8 +964,8 @@
 	    		if(obj.discount != null && obj.discount != ""){
 		    		productDiscountFactor = 1-(parseFloat(obj.discount)/100);
 	    		}
-	    		
-	    		var prodPrice = (currentPrice + optionsPrice) * productDiscountFactor;
+
+	    		var prodPrice = ((currentPrice + optionsPrice)) * productDiscountFactor;
 	    	
 	    		totalInclVat += prodPrice;
 	    		
