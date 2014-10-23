@@ -203,7 +203,7 @@ class CheckoutModel extends GenericModel {
 		}
 		$sisow->returnUrl = site_url().'/success';
 		$sisow->purchaseId = $this->insertedOrderId;
-		$sisow->description = $this->options->getOption('SisowDescription');
+		$sisow->description = $this->options->getOption('SisowDescription').' (nr. '.$this->insertedOrderId.')';
 		$sisow->amount = $this->totalPrice;
 		$sisow->issuerId = $_POST["issuerid"];
 		$sisow->notifyUrl = SISOW_NOTIFY_URL;
