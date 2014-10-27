@@ -772,7 +772,9 @@
 			var sku = this.lookupSkuBySelectedOptionValues(product, otherSelectedOptionValues);
 			this.logger('found sku: ');
 			this.logger(sku);
-			product.sku = sku;
+			if(sku != null && sku != ""){
+				product.sku = sku;
+			}
 			return product;
 	    },
 	    removeProduct : function (event) {
@@ -951,7 +953,9 @@
 				var quantumDiscount = 0;
 
 				if(obj.quantumDiscount != null && 
+				   obj.quantumDiscount != "" &&
 				   obj.quantumDiscountPer != null &&
+				   obj.quantumDiscountPer != "" &&
 				   obj.quantumDiscountPer <= parseInt(obj.quantity)){
 					p -= parseFloat(obj.quantumDiscount); //deduct quantum discount from the price
 				}
