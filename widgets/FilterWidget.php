@@ -13,56 +13,35 @@ class FilterWidget extends WP_Widget {
 		include_once(WEBSHOP_PLUGIN_PATH.'models/WebshopOptions.php');		
 	}
 
+	private function parseFromInstance($instance, $key, $title) {
+	 	if ( isset( $instance[ $key ] ) ) {
+			$ret = $instance[ $key ];
+		}
+		else {
+			$ret = __( $title, 'text_domain' );
+		}
+		return $ret;
+		
+	}
+
  	public function form( $instance ) {
-	 	if ( isset( $instance[ 'title' ] ) ) {
-			$title = $instance[ 'title' ];
-		}
-		else {
-			$title = __( 'Titel', 'text_domain' );
-		}
-	 	if ( isset( $instance[ 'definition_id' ] ) ) {
-			$defId = $instance[ 'definition_id' ];
-		}
-		else {
-			$defId = __( 'Definitie ID:', 'text_domain' );
-		}
-
-	 	if ( isset( $instance[ 'show_season' ] ) ) {
-			$season = $instance[ 'show_season' ];
-		}
-		else {
-			$season = __( 'Toon Seizoen?', 'text_domain' );
-		}
-
-	 	if ( isset( $instance[ 'show_brandfilter' ] ) ) {
-			$brand = $instance[ 'show_brandfilter' ];
-		}
-		else {
-			$brand = __( 'Toon Merk?', 'text_domain' );
-		}
-
-	 	if ( isset( $instance[ 'show_color' ] ) ) {
-			$color = $instance[ 'show_color' ];
-		}
-		else {
-			$color = __( 'Toon kleur?', 'text_domain' );
-		}
-	 	if ( isset( $instance[ 'extra_param' ] ) ) {
-			$extraParam = $instance[ 'extra_param' ];
-		}
-		else {
-			$extraParam= __( 'Extra parameter string', 'text_domain' );
-		}
+		$title  = $this->parseFromInstance($instance, 'title', 'Titel');
+		$defId  = $this->parseFromInstance($instance, 'definition_id', 'Definitie iD:');
+		$season = $this->parseFromInstance($instance, 'show_season', 'Toon seizoen?');
+		$brand  = $this->parseFromInstance($instance, 'show_brandfilter', 'Toon merk?');
+		$color  = $this->parseFromInstance($instance, 'show_color', 'Toon kleur?');
+		$extraParam = $this->parseFromInstance($instance, 'extra_param', 'Extra parameter string');
+		$useCat = $this->parseFromInstance($instance, 'use_category', 'Gebruik category ID');
 		?>
 		<p>
-		
-<?php 
+		<?php 
 			echo $this->getInput('title','Titel:','text',$title).'<br/>';
 			echo $this->getInput('definition_id','Definitie ID:','text',$defId).'<br/>';
 			echo $this->getInput('show_brandfilter','Toon merk?','checkbox',$brand).'<br/>';
 			echo $this->getInput('show_season','Toon seizoen?','checkbox',$season).'<br/>';
 			echo $this->getInput('show_color','Toon kleur?','checkbox',$color).'<br/>';
 			echo $this->getInput('extra_param','Extra GET parameter string ','text',$extraParam).'<br/>';
+			echo $this->getInput('use_category','Gebruik category ID','checkbox',$useCat).'<br/>';
 		?>
 		</p>
 		<?php 	
@@ -97,6 +76,7 @@ class FilterWidget extends WP_Widget {
 	    $instance['show_brandfilter'] = ( ! empty( $new_instance['show_brandfilter'] ) ) ? strip_tags( $new_instance['show_brandfilter'] ) : '';
 	    $instance['show_season'] = ( ! empty( $new_instance['show_season'] ) ) ? strip_tags( $new_instance['show_season'] ) : '';
 	    $instance['show_color'] = ( ! empty( $new_instance['show_color'] ) ) ? strip_tags( $new_instance['show_color'] ) : '';
+	    $instance['use_category'] = ( ! empty( $new_instance['use_category'] ) ) ? strip_tags( $new_instance['use_category'] ) : '';
 
 		return $instance;
 	}
@@ -109,10 +89,12 @@ class FilterWidget extends WP_Widget {
 		$brand = $instance['show_brandfilter'];
 		$color = $instance['show_color'];
 		$extraParam = $instance['extra_param'];
+		$useCat = $instance['use_category'];
 
 		$season = $season ? 'true': 'false';
 		$brand = $brand ? 'true': 'false';
 		$color = $color ? 'true' : 'false';
+		$useCat = $useCat ? 'true' : 'false';
 
 		echo $before_widget;
 		if ( ! empty( $title ) )
@@ -128,14 +110,23 @@ class FilterWidget extends WP_Widget {
 			<div id="filter_module_'.$definition_id.'"></div>
 			<!-- assumes jquery is loaded above this spot -->
 			<script type="text/javascript">
+
+				var catId = null;
+
+				if(WebshopItem != null && WebshopType != null && WebshopType == "categories"){
+					catId = WebshopItem;
+				}
+
 				jQuery(document).ready(function($){
 					$("#filter_module_'.$definition_id.'").filtersystem({
 						"base_url" : "'.SYSTEM_URL_WEBSHOP.'",
 						"hostname" : "'.$hostname.'",
 						"FilterDefinition_id" : "'.$definition_id.'",
+						"Category_id" : catId,
 						"show_color" : '.$color.',
 						"show_season" : '.$season.',
 						"show_brand" : '.$brand.',
+						"use_category" : '.$useCat.',
 						'.$customRenderer.'
 						"extra_param_string" : "'.$extraParam.'",
 					

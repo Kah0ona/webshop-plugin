@@ -19,6 +19,7 @@
 				      'address' : '',
 				      'session_url' : '/wordpress/wp-content/plugins/webshop-plugin/models/CartStore.php',
 					  'use_scheduler' : false,
+					  'max_future_delivery_date' : null,
 				      'cartDataStore' : [],
 				      'deliveryMethods' : [],
 				      'deliveryCostsTable' : []
@@ -80,27 +81,43 @@
 		},
 		handleDateSelect : function(dateText) {
 			var self = this;
-			var dt = self.parseDdMmYyyyString(dateText);
-			var inTwoDays = new Date();
-			inTwoDays.setDate(inTwoDays.getDate() + 1);
-			inTwoDays.setHours(0);
-			inTwoDays.setMinutes(0);
-			if(dt.getTime() < inTwoDays.getTime()){
-				alert('Kies tenminste 2 dagen in de toekomst');
-				var s = new String((inTwoDays.getDate()+1));
-				if(s.length == 1){
-					s = "0"+s;
+			var valid = this.checkTooFarInFuture();
+			var proceed = true;
+			if(valid) {
+				var tgt = $('.schedulerMessage');
+				tgt.hide();
+				tgt.html('');
+				tgt.removeClass('alert-error').addClass('alert-success');
+
+				var dt = self.parseDdMmYyyyString(dateText);
+				var inTwoDays = new Date();
+				inTwoDays.setDate(inTwoDays.getDate() + 1);
+				inTwoDays.setHours(0);
+				inTwoDays.setMinutes(0);
+				if(dt.getTime() < inTwoDays.getTime()){
+					proceed = false;
+					tgt.show();
+					tgt.html('Kies tenminste 2 dagen in de toekomst.');
+					tgt.addClass('alert-error').removeClass('alert-success');
+
+					var s = new String((inTwoDays.getDate()+1));
+					if(s.length == 1){
+						s = "0"+s;
+					}
+					var m = new String((inTwoDays.getMonth()+1));
+					if(m.length==1){
+						m = "0"+m;
+					}
+
+					$('#deliveryDate').val(s+'-'+m+"-"+(inTwoDays.getYear()+1900));
 				}
-				var m = new String((inTwoDays.getMonth()+1));
-				if(m.length==1){
-					m = "0"+m;
+				self.logger('click on datepicker');
+				self.populateTimeSlotsBasedOnSelectedDate();
+				if(proceed){ 
+					self.renderOccupationMessage();
 				}
 
-				$('#deliveryDate').val(s+'-'+m+"-"+(inTwoDays.getYear()+1900));
 			}
-			self.logger('click on datepicker');
-			self.populateTimeSlotsBasedOnSelectedDate();
-			self.renderOccupationMessage();
 		},
 		populateTimeSlotsBasedOnSelectedDate : function(){
 			if(this.settings.use_scheduler){
@@ -114,7 +131,8 @@
 				var data = this.settings.scheduler_data;
 
 				var weekDay = this.getDayOfWeekByIndex(date.getDay());
-				var slotSize = data.slotSizeMinutes;
+				var slotSize = this.calculateSlotSizeFromCart();
+
 				var hours = data.openingHours[weekDay];
 
 				//for each slot, start from start time, and create timeslots the size of time
@@ -150,7 +168,7 @@
 							endM += "0";
 						}
 						var to = endDate.getHours()+":"+endM;
-						html += "<option value='"+from+"-"+to+"'>"+from+"</option>";
+						html += "<option value='"+from+"-"+to+"'>"+from+"-"+to+"</option>";
 					}
 				}
 				if(html.trim() == ""){
@@ -308,10 +326,14 @@
 		   });
 
 		   $('body').on('click.shoppingCart', '.deliveryDatePicker', function(event){
+				event.preventDefault();
 		   });
 		   $('body').on('change.shoppingCart', '#deliveryDate, select[name="deliveryTime"]', function(event){
 			   if(self.settings.use_scheduler){
-				   self.renderOccupationMessage();
+			       var valid = self.checkTooFarInFuture();
+				   if(valid) {
+					  self.renderOccupationMessage();
+				   }
 			   }
 		   });
 		   
@@ -321,15 +343,49 @@
 		    	});
 		    });
 	    },
+		checkTooFarInFuture : function() {
+			if(this.settings.max_future_delivery_date != null && 
+			   this.settings.max_future_delivery_date != undefined){
+				var days = parseInt(this.settings.max_future_delivery_date);
+				var date = this.parseDdMmYyyyString($('#deliveryDate').val());
+
+				var date2 = new Date(date.getTime());
+				date2.setDate(date.getDate() - days);
+				var now = new Date();
+				now.setHours(0);
+				now.setMinutes(0);
+				now.setSeconds(0);
+
+				if(date2.getTime() > now.getTime()){
+					this.logger('Too far in the future');
+					var tgt = $('.schedulerMessage');
+					tgt.show();
+					tgt.html('De dag mag niet meer dan '+days+' in de toekomst liggen.');
+					tgt.addClass('alert-error').removeClass('alert-success');
+					return false;
+				}  else {
+					this.logger('Valid, not too far in future');
+					var tgt = $('.schedulerMessage');
+					tgt.hide();
+					tgt.html('');
+					tgt.removeClass('alert-error').addClass('alert-success');
+
+					return true;
+				}
+
+			} 
+			return false;
+		},
 		renderOccupationMessage : function(){
 		   var self = this;
 		   var tgt = $('.schedulerMessage');
 		   tgt.hide();
 		   tgt.html('');
+		   $('.submit-controls').removeClass('disabled');
 		   if(self.checkIfTimeslotIsAvailable()){
-			   
 			   self.logger("Dit moment is nog beschikbaar");
 			   tgt.removeClass('hidden');
+			   $('.submit-controls').removeClass('disabled');
 			   tgt.show();
 			   tgt.html('Dit moment is nog beschikbaar.');
 			   tgt.removeClass('alert-error').addClass('alert-success');
@@ -338,6 +394,7 @@
 			   tgt.removeClass('hidden');
 			   tgt.show();
 			   tgt.html('Dit moment is <strong>niet meer</strong> beschikbaar, kies een ander moment.');
+			   $('.submit-controls').addClass('disabled');
 			   tgt.addClass('alert-error').removeClass('alert-success');
 		   }
 		},
@@ -1063,7 +1120,7 @@
 			$('.submit-controls').removeClass('disabled');
 			$('.deliverycosts-field').html("<strong>€ "+this.formatEuro(0.0)+"</strong>");
 
-	    	if(deliveryMethod.attr('value') == 0){ //use settings.deliveryCostTable
+	    	if(deliveryMethod.attr('value') === "0"){ //use settings.deliveryCostTable
 		    	var doNotDeliver = true;
 		    	var notEnoughOrdered = false;
 		    	$('#not-enough-ordered').addClass('hidden').html('');

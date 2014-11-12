@@ -33,21 +33,25 @@
 				"direction" : "ascending"
 			};
 
-
-
 			this.load(function(jsonObj){
 				self.renderFilterDefinition(jsonObj);
 				self.bindButtons();
 				self.restoreForm();
-				
 			});
 		},
 		load : function(callback){
 			var self = this;
 			var theData = {
 				"hostname"			  : this.settings.hostname, 
-				"FilterDefinition_id" : this.settings.FilterDefinition_id
+//				"FilterDefinition_id" : this.settings.FilterDefinition_id
 			};
+
+			if(this.settings.use_category != null && this.settings.use_category){
+				theData['Category_id'] = this.settings.Category_id;
+			} else {
+				theData["FilterDefinition_id"] = this.settings.FilterDefinition_id;
+			}
+
 
 			if(this.settings.extra_param_string != null){
 				var s = this.settings.extra_param_string;

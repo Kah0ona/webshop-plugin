@@ -19,6 +19,7 @@ class CartInitializerView extends GenericView {
 		if($options == null) return;
 		?>
 		<script type="text/javascript">
+
 		webshopProducts = [];
 		jQuery(document).ready(function($){
 	
@@ -40,10 +41,15 @@ class CartInitializerView extends GenericView {
 				'baseUrl': '<?php echo SYSTEM_URL_WEBSHOP?>',
 				'hostname' : '<?php echo $options->getOption('hostname'); ?>',
 				'use_scheduler' : <?php if($options->getOption('use_scheduler') == 'true') { echo 'true'; } else { echo 'false';} ?>,
+
+				<?php if($options->getOption('max_future_delivery_date') != null){ ?>
+				'max_future_delivery_date' : <?php echo $options->getOption('max_future_delivery_date'); ?>,
+				<?php } ?>
 				'deliveryMethods' : <?php echo $deliveryMethods; ?>
 			});
 		});
 		
+
 		<?php
 			if($this->pageId == null){
 				$this->pageId = -1;

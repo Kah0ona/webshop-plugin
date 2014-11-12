@@ -52,7 +52,6 @@ class AdminView extends GenericView {
    		  $this->add_cs_field_boolean('use_pagination', 'Verdeel producten over meerdere pagina\'s');		    		  
    		  $this->add_cs_field('num_items_per_page', 'Aantal producten per pagina');		  
 
-
   		  $this->add_cs_field_upload('NoImage', 'Toon dit plaatje indien er geen plaatje bij een product zit');
 
   		  
@@ -61,11 +60,13 @@ class AdminView extends GenericView {
   		  $this->add_cs_field_select('ShowProductsInStock', 'Producten die niet op voorraad zijn:', array('show'=>'Tonen met melding', 'hide'=>'Verbergen'));
 		  $this->add_cs_field_boolean('show_brand', 'Toon merk van product (indien ingevuld)');		 
 		  $this->add_cs_field_boolean('show_color', 'Toon kleur van product (indien ingevuld)');		  
+		  $this->add_cs_field_boolean('custom_validation','Custom validatie? (Maak een globale functie modifyValidationRules(valOpt))');
 		   
 		  $this->add_cs_field_boolean('show_article_number', 'Toon artikelnummer van product (indien ingevuld)');		  
 		  $this->add_cs_field_boolean('productoverview_disabled', 'Deactiveer /products/ overzicht (nodig indien google search gebruikt wordt)');
 		  $this->add_cs_field_boolean('use_delivery_date', 'Kunnen klanten een leverdatum aangeven?');		
 		  $this->add_cs_field_boolean('use_delivery_time', 'Kunnen klanten een levertijd aangeven?');		    		  
+		  $this->add_cs_field('max_future_delivery_date', 'Maximaal aantal dagen in toekomst te bestellen?');		    		  
 		  $this->add_cs_field_boolean('custom_search_results_renderer', 'Gebruik custom javascript om zoekresultaten te tonen?');		    		  
 		  $this->add_cs_field_boolean('use_scheduler', 'Kunnen klanten een afspraak plannen?');		    		  
 		    

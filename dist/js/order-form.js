@@ -15,7 +15,19 @@ jQuery(document).ready(function($){
 			if($('.submit-controls').hasClass('disabled')){
 				return false;
 			}
-										
+
+			if($('#targetpaybank').is(':visible')){
+				if($('#targetpaybank').val() == ''){
+					alert('Kies eerst uw bank om de betaling te voltooien.');
+					return false;
+				}
+			}
+			
+			if($('.total-field strong').html() == '€ 0,00'){
+				alert('De bestelling is leeg, voeg eerst iets toe aan de bestelling.');
+				return false;
+			}
+
 		  	//hide the form to prevent another click
 		  	var f = $('#order-form');
 		
@@ -149,6 +161,9 @@ jQuery(document).ready(function($){
 				//alert('invalid');
 			}
 	}; 
+
+
+	validationOptions = modifyValidationRules(validationOptions);
 
 	
     $('#order-form').validate(validationOptions);

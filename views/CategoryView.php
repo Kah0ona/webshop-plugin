@@ -163,7 +163,8 @@ class CategoryView extends GenericView {
 						<?php
 							echo $this->renderListRecursiveNoGroupTitles($cat->children, $level+1);
 						?>
-						</li>						
+						</li>
+						<li class="category-item category-package" style="display:none;"></li>	
 						<?php
 							}
 						?>
@@ -187,6 +188,7 @@ class CategoryView extends GenericView {
 								echo $this->renderListRecursiveNoGroupTitles($cat->children, $level+1);
 							?>
 							</li>
+							<li class="category-item category-package" style="display:none;"></li>	
 							<?php
 								}
 							?>
@@ -224,6 +226,7 @@ class CategoryView extends GenericView {
 					echo $this->renderListRecursiveNoGroupTitles($cat->children, $level+1);
 				?>
 				</li>
+							<li class="category-item category-package" style="display:none;"></li>	
 				<?php
 				}
 				?>

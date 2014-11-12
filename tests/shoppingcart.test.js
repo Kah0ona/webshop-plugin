@@ -130,7 +130,7 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 				'	<div class="skuInfo skuInfo-1"></div>'+
 				'	<form class="form ">'+
 				'		<input class="input-large product-amount-1  " name="product-amount" id="product-amount-1" value="1" type="text" /> '+
-				'		<select name="size" class="input-large ProductOptionSelector" id="ProductOption_1" option_id="1">'+
+				'		<select name="size" class="input-large ProductOptionSelector InfluencesSKU" id="ProductOption_1" option_id="1">'+
 				'			<option extraPrice="" value="1" valueName="40" selected 	 id="ProductOptionValueName_1"> 40</option> '+
 				'			<option extraPrice="" value="2" valueName="41" id="ProductOptionValueName_2"> 41	</option> '+
 				'			<option extraPrice="" value="3" valueName="42" id="ProductOptionValueName_3"> 42</option>'+
@@ -166,7 +166,7 @@ describe("Testsuite for the shoppingcart jquery plugin.", function() {
 				'	<div class="skuInfo skuInfo-1"></div>'+
 				'	<form class="form ">'+
 				'		<input class="input-large product-amount-1  " name="product-amount" id="product-amount-1" value="1" type="text" /> '+
-				'		<select name="size" class="input-large ProductOptionSelector" id="ProductOption_1" option_id="1">'+
+				'		<select name="size" class="input-large ProductOptionSelector InfluencesSKU" id="ProductOption_1" option_id="1">'+
 				'			<option extraPrice="" value="1" valueName="40" selected 	 id="ProductOptionValueName_1"> 40</option> '+
 				'			<option extraPrice="" value="2" valueName="41" id="ProductOptionValueName_2"> 41	</option> '+
 				'			<option extraPrice="" value="3" valueName="42" id="ProductOptionValueName_3"> 42</option>'+
