@@ -263,9 +263,9 @@ class ProductDetailView extends GenericView {
 								<?php if($this->shouldDisplayProductNumber($data->productNumber)) : ?>
 								<p class="product-productnr"><strong>Artikelnummer:</strong> <?php echo $data->productNumber; ?></p>
 								<?php endif; ?>
-								<p class="product-description" itemprop="description">
+								<div class="product-description" itemprop="description">
 									<?php echo $this->doMarkdown($data->productDesc); ?>
-								</p>
+								</div>
 								<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 									<?php if($product->productDiscount != null){ ?>
 									<p class="product-price-from product-price-from-<?php echo $product->Product_id; ?>">

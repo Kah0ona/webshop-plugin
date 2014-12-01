@@ -104,7 +104,6 @@ class CategoryView extends GenericView {
 			<?php endforeach; ?>
 		</div>
 		<!-- End CategoryView -->
-
  
 	
 	<?php	
@@ -183,12 +182,12 @@ class CategoryView extends GenericView {
 							<?php 
 								if($cat->children != null && count($cat->children) > 0 && $level < $this->model->maxNestingLevels){
 							?>
-							<li class="category-item category-package category-subcategory">
+							<li class="category-item category-package category-subcategory has-children">
 							<?php
 								echo $this->renderListRecursiveNoGroupTitles($cat->children, $level+1);
 							?>
 							</li>
-							<li class="category-item category-package" style="display:none;"></li>	
+							<li class="category-item category-package has-children" style="display:none;"></li>	
 							<?php
 								}
 							?>

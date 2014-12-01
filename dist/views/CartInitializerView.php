@@ -25,7 +25,13 @@ class CartInitializerView extends GenericView {
 	
 			$('#shoppingcart').shoppingCart({
 				'session_url' : '<?php echo  get_site_url(); ?>/wp-content/plugins/webshop-plugin/models/CartStore.php'	,		
+				'personaldetails_url' : '<?php echo  get_site_url(); ?>/wp-content/plugins/webshop-plugin/models/PersonalDetailsStore.php'	,		
 				'checkout_page' : '<?php echo  get_site_url(); ?>/checkout',
+				<?php if(is_page('checkout')){ ?>
+				'is_checkout' : true,
+				<?php } else { ?>
+				'is_checkout' : false,
+				<?php } ?>
 				'hideSoldOutProducts': '<?php echo $options->getOption('ShowProductsInStock'); ?>',
 				<?php if($options->getOption('checkout_link') != null){ ?>
 				'checkout_link' : '<?php echo $options->getOption('checkout_link'); ?>',					
@@ -40,6 +46,11 @@ class CartInitializerView extends GenericView {
 				'schedulerUrl': '<?php echo SYSTEM_URL_WEBSHOP?>/public/occupiedtimeslots',
 				'baseUrl': '<?php echo SYSTEM_URL_WEBSHOP?>',
 				'hostname' : '<?php echo $options->getOption('hostname'); ?>',
+				
+				'customAddProductValidator' : <?php if($options->getOption('add_product_hook') == 'true') { echo 'customAddProductValidator'; } else { echo 'null';} ?>,
+
+
+				'onProductAdded' : <?php if($options->getOption('product_added_hook') == 'true') { echo 'onProductAdded'; } else { echo 'null';} ?>,
 				'use_scheduler' : <?php if($options->getOption('use_scheduler') == 'true') { echo 'true'; } else { echo 'false';} ?>,
 
 				<?php if($options->getOption('max_future_delivery_date') != null){ ?>

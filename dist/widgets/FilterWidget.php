@@ -92,10 +92,9 @@ class FilterWidget extends WP_Widget {
 		$useCat = $instance['use_category'];
 
 		$season = $season ? 'true': 'false';
-		$brand = $brand ? 'true': 'false';
-		$color = $color ? 'true' : 'false';
+		$brand = $brand ? 'true'  : 'false';
+		$color = $color ? 'true'  : 'false';
 		$useCat = $useCat ? 'true' : 'false';
-
 		echo $before_widget;
 		if ( ! empty( $title ) )
 			echo $before_title . $title . $after_title;
@@ -103,22 +102,31 @@ class FilterWidget extends WP_Widget {
 		$options = new WebshopOptions();
 		$options->loadOptions();
 		$hostname = $options->getOption('hostname');
-		if($options->getOption('custom_search_results_renderer') == 'true'){
-			$customRenderer = '"customResultsRenderer" : myCustomRenderer_'.$definition_id.',';
+
+		if(!$useCat || $useCat == 'false'){ 
+			$defId = $definition_id;
+		} else {
+			$defId = 0; 
 		}
+
+		if($options->getOption('custom_search_results_renderer') == 'true'){
+			$customRenderer = '"customResultsRenderer" : myCustomRenderer_'.$defId.',';
+		}
+
+		
+
 		$render = '
-			<div id="filter_module_'.$definition_id.'"></div>
+			<div id="filter_module_'.$defId.'"></div>
 			<!-- assumes jquery is loaded above this spot -->
 			<script type="text/javascript">
-
 				var catId = null;
 
-				if(WebshopItem != null && WebshopType != null && WebshopType == "categories"){
-					catId = WebshopItem;
+				if(WebshopItem_id != null && WebshopType != null && WebshopType == "categories"){
+					catId = WebshopItem_id;
 				}
 
 				jQuery(document).ready(function($){
-					$("#filter_module_'.$definition_id.'").filtersystem({
+					$("#filter_module_'.$defId.'").filtersystem({
 						"base_url" : "'.SYSTEM_URL_WEBSHOP.'",
 						"hostname" : "'.$hostname.'",
 						"FilterDefinition_id" : "'.$definition_id.'",
@@ -132,6 +140,8 @@ class FilterWidget extends WP_Widget {
 					
 					});
 				});
+
+ 
 			</script>';
 		echo $render;
 

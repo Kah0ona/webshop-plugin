@@ -156,7 +156,7 @@ class ProductView extends GenericView {
 	 <?php
 	 }
 	 
-	 public function renderPagination($categoryId=null){
+	 public function renderPagination($categoryId=-1){
 	 ?>
 	 	<script type="text/javascript">
 	 		<?php 
@@ -164,6 +164,11 @@ class ProductView extends GenericView {
 	 		if($curPage == null) {
 				$curPage = 0;
 			}
+
+			if($categoryId == ""){
+				$categoryId = -1;
+			}
+
 	 		?>
 	 	
 	 		//fetch the next page using ajax, after page has been loaded, and if it's empty hide the 'next' button

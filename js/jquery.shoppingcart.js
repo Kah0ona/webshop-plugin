@@ -15,9 +15,11 @@
 				      'detail' : false, //is this a detail page?
 				      'checkout_page' : '/checkout',
 				      'checkout_link' : 'Afrekenen',
+					  'is_checkout' : false,
 				      'cart_text' : 'Mijn bestelling',
 				      'address' : '',
 				      'session_url' : '/wordpress/wp-content/plugins/webshop-plugin/models/CartStore.php',
+				      'personaldetails_url' : '/wordpress/wp-content/plugins/webshop-plugin/models/PersonalDetailsStore.php',
 					  'use_scheduler' : false,
 					  'max_future_delivery_date' : null,
 				      'cartDataStore' : [],
@@ -44,6 +46,10 @@
 				self.render();
 				self.updatePrices();
 			});
+
+			if(this.settings.is_checkout){
+				this.loadPersonalDetails();
+			}
 			
 			if($.datepicker !== undefined){
 				$.datepicker.setDefaults( $.datepicker.regional[ "nl" ] )		
@@ -156,7 +162,7 @@
 					var slotDate = new Date();
 					slotDate.setMinutes(mS);
 					slotDate.setHours(hS);
-					for( ; this.addMinutesToDate(slotDate, slotSize).getTime() <= endDateHours.getTime(); slotDate = this.addMinutesToDate(slotDate, slotSize)){
+					for( ; this.addMinutesToDate(slotDate, slotSize).getTime() <= endDateHours.getTime() && slotSize != 0; slotDate = this.addMinutesToDate(slotDate, slotSize)){
 						var fromM = new String(slotDate.getMinutes());
 						if(fromM.length == 1){
 							fromM += "0";
@@ -213,7 +219,47 @@
 				},
 				dataType: 'json'
 			});			
-	    },	
+	    },
+		loadPersonalDetails : function(){
+		  var self = this;
+		  $.ajax({
+				url: this.settings.personaldetails_url,
+				type: 'GET',
+				data: {"action" : "load"},
+				success: function (jsonObj, textStatus, jqXHR){
+					self.logger("Loaded personal details: ");
+					self.logger(jsonObj);
+					self.populatePersonalDetailForm(jsonObj);
+
+				},
+				dataType: 'json'
+			});
+
+
+		},
+		populatePersonalDetailForm : function(jsonObj){
+			for(var key in jsonObj){
+				$('#order-form input[name="'+key+'"], #order-form textarea[name="'+key+'"]').val(jsonObj[key]);
+			}
+		},
+		storePersonalDetailsInSession : function(event){
+			var changed = $(event.currentTarget);
+			var val = changed.val();
+			var self = this;
+			var d = {};
+			d[changed.attr('name')] = val;
+
+			$.ajax({
+				url : this.settings.personaldetails_url,
+				type: 'POST',
+				data: d,
+				success: function (jsonObj, textStatus, jqXHR){
+					self.logger("Personal details persisted: ")
+					self.logger(jsonObj);
+				},
+				dataType: 'json'
+			});			
+		},
 	    bindButtons : function(){
 	    	var self = this;
 			$('body').on('change.shoppingCart', "#deliveryMethods", function(event){
@@ -232,6 +278,7 @@
 				event.stopPropagation();
 		    });
 
+
 			$('.ProductOptionSelector').bind('change.shoppingCart', function(event){
 				self.updateInStockMessage(event);
 			});
@@ -244,7 +291,9 @@
 				});
 			});
 
-			$('body').on('change.shoppingCart', '.address-line, .address-line-elsewhere', function(){
+
+			$('body').on('change.shoppingCart', '#order-form input, #order-form textarea', function(event){
+				self.storePersonalDetailsInSession(event);
 		    	var compareToAddress = '';
 		    	var compareToAddress = '';
 		    	
@@ -436,7 +485,7 @@
 		},
 		loadSchedulingData : function(){
 			var self = this;
-		    if(this.settings.use_scheduler){
+		    if(this.settings.use_scheduler && this.settings.is_checkout){
 				$.ajax({
 					url: this.settings.schedulerUrl,
 					jsonp: 'callback',
@@ -761,6 +810,11 @@
 	   		return ret;
 	   	},
 	    addProduct : function (event, productData) {
+			if(this.settings.customAddProductValidator != null){
+				var res = this.settings.customAddProductValidator.call(this, event, productData);
+//				this.logger("RES"+res);
+				if(!res) return;
+			}
 			//maybe this should be done nicer
 	    	var quant=1;
 	    	var product = null;
@@ -820,6 +874,10 @@
 			this.logger("calling render");
 			this.render();						
 
+
+			if(this.settings.onProductAdded != null){
+				this.settings.onProductAdded.call(this, product);
+			}
 			return true;
 
 	    },

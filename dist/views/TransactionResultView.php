@@ -10,8 +10,8 @@ class TransactionResultView extends GenericView {
 	protected $sha1=null;
 	
 	public function render($data=null) { 
+		$this->status = $_GET['status'];
 		if($this->model->getOptions()->getOption('UseSisow')){
-			$this->status = $_GET['status'];
 			$this->trxid = $_GET['trxid'];
 			$this->Order_id = $_GET['ec'];
 			$this->sha1 = $_GET['sha1'];
@@ -60,6 +60,15 @@ class TransactionResultView extends GenericView {
 			$res = $this->doTargetpayStatusCheck();
 			$msg = $res['msg'];
 			$class = $res['class'];
+		} else {
+			if($this->status == 'OK' || $this->status == 'Success'){
+				$msg = 'Uw bestelling is succesvol verwerkt.';
+				$class = 'success';
+			} else {
+				$msg = 'Er is iets misgegaan met de bestelling, dit is een onbekende fout. Neem a.u.b. contact met ons op.'; 
+				$class = 'error';
+			}
+
 		}
 						
 		?>
@@ -71,7 +80,7 @@ class TransactionResultView extends GenericView {
 			
 			
 			//reset the shoppingcart:
-			$_SESSION['shoppingCart'] = 'EMPTY';
+			$_SESSION['shoppingCart'] = '[]';
 			
 
 		}

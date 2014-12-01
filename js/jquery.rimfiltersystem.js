@@ -61,6 +61,10 @@
 			}
 			str +=	    "</select>";
 			str +=	   "</div>";
+			str +=	   "<div class='filter_controlgroup'>";
+			str +=		"<label for='material'>Materiaal</label>";
+			str +=		"<select name='material' class='filter_select'><option>Lichtmetaal/aluminium</option><option>Staal</option></select>";
+			str +=	   "</div>";
 			str +=	   "<input type='button' id='rim_filter_button' class='filter_button' value='Zoeken' />";
 			str +=	   "</form><small class='steekmaat_credits'>Steekmaten via <a href='http://steekmaat.nl' target='_blank'>steekmaat.nl</small>";
 		    $(this.element).html(str);
@@ -271,13 +275,18 @@
 			}
 			for(var i = 0; i < jsonObj.length; i++){
 				var item = jsonObj[i];
+
+				var inch = item.ProductProperty[0]['propertyValue'];
+				if(isNaN(inch)){
+					inch = item.ProductProperty[1]['propertyValue'];
+				}
 				str += "<tr>";
 				str += " <td><a class='lightbox' href='"+this.settings.base_url+"/uploads/Product/"+item.imageDish+"'>"+
 					" <img src='"+this.settings.base_url+"/uploads/Product/"+item.imageDish+
 					"' data-large-src='"+this.settings.base_url+"/uploads/Product/"+item.imageDish+"' "+
 					" /></a></td>";
 				str += " <td><a href='/products/"+item.Product_id+"'>"+item.productName+"</a></td>";
-				str += " <td><a href='/products/"+item.Product_id+"'>"+item.ProductProperty[0]['propertyValue']+"</a></td>";
+				str += " <td><a href='/products/"+item.Product_id+"'>"+inch+"</a></td>";
 				str += " <td>&euro; "+this.formatEuro(item.productPrice)+"</td>";
 				str += " <td><input id='filter_quantity_"+item.Product_id+"' type='text' class='filter_quantity' value='1'/></td>";
 				str += " <td><a href='#' data-productid='"+item.Product_id+"' class='filter_addtocart'>Voeg toe</a></td>";
@@ -304,9 +313,11 @@
 			var car = $('#rim_filter_form select[name="car"]').val();
 			var model = $('#rim_filter_form select[name="model"]').val();
 			var inch = $('#rim_filter_form select[name="inch"]').val();
+			var material = $('#rim_filter_form select[name="material"]').val();
 
 			var ret = this.lookupSizeByCar(car,model);
 			ret.inch = inch;
+			ret.Materiaal = material;
 			return ret;
 		},
 		lookupSizeByCar : function(car,model){

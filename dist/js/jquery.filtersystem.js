@@ -34,10 +34,23 @@
 			};
 
 			this.load(function(jsonObj){
-				self.renderFilterDefinition(jsonObj);
-				self.bindButtons();
-				self.restoreForm();
-			});
+				var count = 0;
+				for (k in jsonObj) {
+					if (jsonObj.hasOwnProperty(k)) {
+					   	count++;
+					}
+				}
+				
+				if(count > 0) { //there is something
+					$(this.element).parent().show();
+					self.renderFilterDefinition(jsonObj);
+					self.bindButtons();
+					self.restoreForm();
+				} else {
+					$(this.element).parent().hide();
+				}
+			}); 
+			
 		},
 		load : function(callback){
 			var self = this;
@@ -46,9 +59,12 @@
 //				"FilterDefinition_id" : this.settings.FilterDefinition_id
 			};
 
-			if(this.settings.use_category != null && this.settings.use_category){
+			if(this.settings.use_category != null && this.settings.use_category && this.settings.Category_id != null){
 				theData['Category_id'] = this.settings.Category_id;
 			} else {
+				if(this.settings.FilterDefinition_id == null){
+					self.logger("WARNING, no FilterDefinition_id is set, nor a Category_id is set!");
+				}
 				theData["FilterDefinition_id"] = this.settings.FilterDefinition_id;
 			}
 
@@ -252,6 +268,10 @@
 					var p = vars[i].split('=');
 					theData[p[0]] = p[1];
 				}
+			}
+
+			if(this.settings.Category_id != null){
+				theData['Category_id'] = this.settings.Category_id;
 			}
 
 			$.ajax({

@@ -17,7 +17,20 @@ class CategoryDetailView extends GenericView {
 		if($data == null) {
 			$data = $this->model->getData();
 		}
+
+
 		
+		echo '<script type="text/javascript">';	
+		echo     'WebshopType = "categories";';
+		echo     'WebshopItem_id = '.$data->Category_id.';';			
+		echo '</script>';	
+
+		echo '<script type="text/javascript">
+			jQuery(document).ready(function($){
+				$(".pagetitle").html("'.$data->categoryName.'");
+			});
+		</script>';
+
 		include_once('ProductView.php');
 		//not a problem if we feed it a category model
 
@@ -55,7 +68,7 @@ class CategoryDetailView extends GenericView {
 			$catView = new CategoryView($this->model);
 			$catView->setNumCols($this->numCols);
 			$catView->setParentId($data->Category_id);
-			echo '<h3>Subcategorieën</h3>';
+			echo '<h3 class="subcats">Subcategorieën</h3>';
 		
 			$catView->renderGrid(array('nogroup'=>$subCategories));
 		}
