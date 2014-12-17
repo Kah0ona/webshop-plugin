@@ -17,6 +17,8 @@ class CartInitializerView extends GenericView {
 	
 	public function render($options=null, $deliveryMethods = null, $deliveryCostsTable = null){
 		if($options == null) return;
+
+		$pricesInclVat = $options->getOption('prices_excl_vat') == 'true' ? "false" : "true";
 		?>
 		<script type="text/javascript">
 
@@ -41,6 +43,7 @@ class CartInitializerView extends GenericView {
 				<?php } ?>
 				'address' : '<?php echo $options->getOption('address'); ?>',
 				'deliveryCostsTable' : <?php echo $deliveryCostsTable; ?>,
+				'pricesInclVat' : <?php echo $pricesInclVat; ?>,
 				'couponUrl': '<?php echo SYSTEM_URL_WEBSHOP?>/public/coupons',
 				'productsUrl': '<?php echo SYSTEM_URL_WEBSHOP?>/public/products',
 				'schedulerUrl': '<?php echo SYSTEM_URL_WEBSHOP?>/public/occupiedtimeslots',

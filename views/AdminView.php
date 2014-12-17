@@ -43,6 +43,7 @@ class AdminView extends GenericView {
    		  $this->add_cs_field('deliverymethod_text', 'Uitleg verzendmethode');		
    		  $this->add_cs_field('popupText', 'Text in popup als product aan winkelmand wordt toegevoegd.');		  
 
+   		  $this->add_cs_field_boolean('prices_excl_vat', 'Zijn de prijzen excl. BTW?');
    		    
    		  $this->add_cs_field_boolean('should_accept_terms', 'Moet de klant algemene voorwaarden accepteren?');
    		  $this->add_cs_field_boolean('no_bootstrap', 'Bootstrap 3 CSS+js laden, ipv bootstrap 2.3.2?');

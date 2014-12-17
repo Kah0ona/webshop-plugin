@@ -22,6 +22,7 @@
 				      'personaldetails_url' : '/wordpress/wp-content/plugins/webshop-plugin/models/PersonalDetailsStore.php',
 					  'use_scheduler' : false,
 					  'max_future_delivery_date' : null,
+					  'pricesInclVat' : true,
 				      'cartDataStore' : [],
 				      'deliveryMethods' : [],
 				      'deliveryCostsTable' : []
@@ -1057,7 +1058,7 @@
 			var price = 0;
 			var vatMap = {};
 	    	//loop over cartDataStore
-	    	totalInclVat=0;
+	    	total=0;
 	    	for(var i = 0; i < this.cartDataStore.length ; i++){
 	    		var obj = this.cartDataStore[i];
 	    		var currentPrice = 0;
@@ -1086,7 +1087,7 @@
 
 	    		var prodPrice = ((currentPrice + optionsPrice)) * productDiscountFactor;
 	    	
-	    		totalInclVat += prodPrice;
+	    		total += prodPrice;
 	    		
 	    		//update vatMap
     			if(vatMap["x"+obj.VAT] == null || vatMap["x"+obj.VAT] == undefined){
@@ -1099,18 +1100,27 @@
 	    		$('.quantity-'+obj.Product_id).html(obj.quantity+'x');
 	    	}
 	    	
-	    	this.renderDeliveryMethodAndCostsOnCheckout(vatMap, totalInclVat);
+	    	this.renderDeliveryMethodAndCostsOnCheckout(vatMap, total);
 			
 			if(vatMap["x0.21"] == undefined || vatMap["x0.21"] == null){
 				vatMap["x0.21"] = 0.0;
 			}
 			
 			vatMap["x0.21"] += parseFloat(deliveryCosts.price);
-	    	totalInclVat    += parseFloat(deliveryCosts.price);
 
-			
-	    	var totalExclVat = this.renderVatRowsOnCheckout(vatMap, totalInclVat);
-	    	this.renderExclPriceOnCheckout(totalExclVat);
+			total += parseFloat(deliveryCosts.price);
+			var totalInclVat = 0;
+			var totalExclVat = 0;
+			if(this.settings.pricesInclVat){
+				totalExclVat = this.renderVatRowsOnCheckout(vatMap, total);
+				totalInclVat = total;
+			} else {//exclvat 
+				//horrible.... 
+				totalExclVat = total;
+				totalInclVat = this.renderVatRowsOnCheckout(vatMap, total);
+			}
+
+			this.renderExclPriceOnCheckout(totalExclVat);
 			this.renderDiscountOnCheckout();
 			
 			if(discount != null && discount != undefined)
@@ -1279,22 +1289,41 @@
 	    renderExclPriceOnCheckout : function(totalExclVat){
 		   $('.subtotal-field').html('&euro; '+this.formatEuro(totalExclVat));
 	    },
-	    renderVatRowsOnCheckout : function(vatMap, totalInclVat) {
-	    	var totalExclVat = totalInclVat;
-		    this.logger("renderVatRowsOnCheckout");
-		    this.logger(vatMap);
-		  	for(var vatKey in vatMap){
-			  	var perc = parseFloat(vatKey.substring(1));
+		/**
+		 * If this.settings.pricesInclVat is true, returns the price excl. vat, otherwise returns price INCL vat.
+		 */
+	    renderVatRowsOnCheckout : function(vatMap, total) {
+			if(this.settings.pricesInclVat){
+				var totalExclVat = total;
+				this.logger("renderVatRowsOnCheckout");
+				this.logger(vatMap);
+				for(var vatKey in vatMap){
+					var perc = parseFloat(vatKey.substring(1));
 
-			  	var x = vatKey.replace(".", "_");
-			  	var val = parseFloat(vatMap[vatKey]);
+					var x = vatKey.replace(".", "_");
+					var val = parseFloat(vatMap[vatKey]);
 
-			  	var vat = val - (val / (1+perc));
+					var vat = val - (val / (1+perc));
 
-			  	$('.vat-value-'+x).html(this.formatEuro(vat));
-			  	
-			  	totalExclVat -= vat;
-		  	}  
+					$('.vat-value-'+x).html(this.formatEuro(vat));
+					
+					totalExclVat -= vat;
+				}  
+			} else { //excl vat
+				this.logger("renderVatRowsOnCheckout");
+				this.logger(vatMap);
+				var sumVats = 0;
+				for(var vatKey in vatMap){
+					var perc = parseFloat(vatKey.substring(1));
+
+					var x = vatKey.replace(".", "_");
+					var val = parseFloat(vatMap[vatKey]);
+					var vat = val * perc;
+					sumVats += vat;
+					$('.vat-value-'+x).html(this.formatEuro(vat));
+				}  
+				return total + sumVats;
+			}
 		  	return totalExclVat;
 	    },	    
 	    addOptionPrices : function(obj){
