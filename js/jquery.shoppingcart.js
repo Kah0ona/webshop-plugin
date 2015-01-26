@@ -204,7 +204,7 @@
 				console.log(msg);	
 			} 
 		},
-		persist : function(){
+		persist : function(callback){
 			if(this.cartDataStore.length == 0){
 				this.cartDataStore="EMPTY";
 			}
@@ -217,6 +217,7 @@
 				success: function (jsonObj, textStatus, jqXHR){
 					self.logger("Persisted: ")
 					self.logger(jsonObj);
+					callback.call(self, jsonObj);
 				},
 				dataType: 'json'
 			});			
@@ -329,6 +330,7 @@
 		    
 		    $("body").on('change.shoppingCart', '.checkout-amount', function(event){
 				self.updateQuantityOfProduct(event);
+
     			self.updatePrices();
 			    if(self.settings.use_scheduler){
 				   self.renderOccupationMessage();
@@ -665,6 +667,13 @@
 			ret.productDeliveryTime = jsonObj.productDeliveryTime;
 			return ret;	
 		},
+		renderProductPriceOnCheckout : function(product){
+			if(product.customPrice != null){
+				var price = parseFloat(product.customPrice);
+				$('.checkout-product-price[data-productid="'+product.Product_id+'"]').html("&euro; "+this.formatEuro(price));
+			}
+		},
+
 	   	updateQuantityOfProduct: function(event){
 			var elt = $(event.currentTarget);
 			var productId = parseInt(elt.attr('data-productid'));
@@ -679,6 +688,10 @@
 				var p = this.cartDataStore[i];
 				if(p.Product_id == productId){ //found
 					p.quantity = qty;
+					if(this.settings.beforeInsertingProductToCartHook != null){
+						this.settings.beforeInsertingProductToCartHook.call(this, p, true);
+					}
+					this.renderProductPriceOnCheckout(p);
 				}
 			}
 			
@@ -860,25 +873,37 @@
 				this.logger("product exists");
 
 				existingProduct.quantity = parseInt(existingProduct.quantity) + parseInt(product.quantity);				
+
+				if(this.settings.beforeInsertingProductToCartHook != null){
+					this.settings.beforeInsertingProductToCartHook.call(this, existingProduct, true);
+				}
+
 			}
 			else {
-			   this.logger("product does not exist");
-			   if(this.cartDataStore == "EMPTY")
-			   		this.cartDataStore = [];
-			   
-			   this.cartDataStore.push(product);
+				this.logger("product does not exist");
+				if(this.cartDataStore == "EMPTY") {
+					this.cartDataStore = [];
+				}
+
+
+				if(this.settings.beforeInsertingProductToCartHook != null){
+					product = this.settings.beforeInsertingProductToCartHook.call(this, product, false);
+				}
+
+				this.cartDataStore.push(product);
 			}
 			this.logger("cart: ");
 			this.logger(this.cartDataStore);
-			
-			this.persist();
+			var self = this;
+			this.persist(function(jsonObj){
+				if(self.settings.onProductAdded != null){
+					self.settings.onProductAdded.call(this, product);
+				}
+			});
 			this.logger("calling render");
 			this.render();						
 
 
-			if(this.settings.onProductAdded != null){
-				this.settings.onProductAdded.call(this, product);
-			}
 			return true;
 
 	    },
@@ -1063,39 +1088,46 @@
 	    		var obj = this.cartDataStore[i];
 	    		var currentPrice = 0;
 
+				if(obj.customPrice != null) { 
+					//if there is a calculated custom price in the cart, use this price, and override normal price.
+					//discounts will not be applied!
+					var prodPrice = parseFloat(obj.customPrice);
+					total += prodPrice;
+					vatMap["x"+obj.VAT] += prodPrice;
+				} else {
+					var p = parseFloat(obj.price);
 
-	    		var p = parseFloat(obj.price);
+					var quantumDiscount = 0;
 
-				var quantumDiscount = 0;
+					if(obj.quantumDiscount != null && 
+					   obj.quantumDiscount != "" &&
+					   obj.quantumDiscountPer != null &&
+					   obj.quantumDiscountPer != "" &&
+					   obj.quantumDiscountPer <= parseInt(obj.quantity)){
+						p -= parseFloat(obj.quantumDiscount); //deduct quantum discount from the price
+					}
 
-				if(obj.quantumDiscount != null && 
-				   obj.quantumDiscount != "" &&
-				   obj.quantumDiscountPer != null &&
-				   obj.quantumDiscountPer != "" &&
-				   obj.quantumDiscountPer <= parseInt(obj.quantity)){
-					p -= parseFloat(obj.quantumDiscount); //deduct quantum discount from the price
+					currentPrice = p * parseInt(obj.quantity);
+					var optionsPrice = this.addOptionPrices(obj);
+					
+					var productDiscountFactor = 1;
+					
+					if(obj.discount != null && obj.discount != ""){
+						productDiscountFactor = 1-(parseFloat(obj.discount)/100);
+					}
+
+					var prodPrice = ((currentPrice + optionsPrice)) * productDiscountFactor;
+				
+					total += prodPrice;
+					
+					//update vatMap
+					if(vatMap["x"+obj.VAT] == null || vatMap["x"+obj.VAT] == undefined){
+						vatMap["x"+obj.VAT] = 0;
+					}
+
+					this.logger("updating vatMap with: "+ parseFloat(prodPrice));
+					vatMap["x"+obj.VAT] += parseFloat(prodPrice);
 				}
-
-	    		currentPrice = p * parseInt(obj.quantity);
-	    		var optionsPrice = this.addOptionPrices(obj);
-	    		
-	    		var productDiscountFactor = 1;
-	    		
-	    		if(obj.discount != null && obj.discount != ""){
-		    		productDiscountFactor = 1-(parseFloat(obj.discount)/100);
-	    		}
-
-	    		var prodPrice = ((currentPrice + optionsPrice)) * productDiscountFactor;
-	    	
-	    		total += prodPrice;
-	    		
-	    		//update vatMap
-    			if(vatMap["x"+obj.VAT] == null || vatMap["x"+obj.VAT] == undefined){
-	    			vatMap["x"+obj.VAT] = 0;
-	    		}
-
-	    		this.logger("updating vatMap with: "+ parseFloat(prodPrice));
-	    		vatMap["x"+obj.VAT] += parseFloat(prodPrice);
 	    		
 	    		$('.quantity-'+obj.Product_id).html(obj.quantity+'x');
 	    	}

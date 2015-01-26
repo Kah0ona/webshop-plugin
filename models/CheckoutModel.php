@@ -72,7 +72,9 @@ class CheckoutModel extends GenericModel {
 		$post['shoppingCart'] = json_encode($this->cart);
 		$post['orderStatus'] = 'nieuw';
 		$post['PaymentMethod_id'] = $post['payment-method'];
-		if($post['PaymentMethod_id'] == "ideal" || $post['PaymentMethod_id'] == 'ideal-targetpay' || $post['PaymentMethod_id'] == "ogone" || $post['PaymentMethod_id'] == 'mistercash'){
+		if($post['PaymentMethod_id'] == "ideal" || $post['PaymentMethod_id'] == 'ideal-targetpay' 
+												|| $post['PaymentMethod_id'] == "ogone" 
+												|| $post['PaymentMethod_id'] == 'mistercash'){
 			if($post['PaymentMethod_id'] == 'ideal'){
 				$post['thePaymentMethodName'] =  'iDeal betaling';
 			}

@@ -41,6 +41,7 @@ class AdminView extends GenericView {
    		  $this->add_cs_field('delivered_by_us_expl', 'Door ons bezorgd uitleg');		  
    		  $this->add_cs_field('delivered_by_us_message', 'Bezorgtekst. Gebruik [afstand], [vanaf_bedrag], [bezorgkosten]');		  
    		  $this->add_cs_field('deliverymethod_text', 'Uitleg verzendmethode');		
+   		  $this->add_cs_field('comments_expl', 'Opmerkingsveld uitleg');		
    		  $this->add_cs_field('popupText', 'Text in popup als product aan winkelmand wordt toegevoegd.');		  
 
    		  $this->add_cs_field_boolean('prices_excl_vat', 'Zijn de prijzen excl. BTW?');
@@ -55,6 +56,7 @@ class AdminView extends GenericView {
 
    		  $this->add_cs_field_boolean('add_product_hook', 'Add Product Hook. Maak custom valideer functie voordat een product in het winkelmandje gaat.');		    		  
    		  $this->add_cs_field_boolean('product_added_hook', 'Add Product Hook. Maak custom functie nadat een product in het winkelmandje gaat.');		    		  
+   		  $this->add_cs_field_boolean('modify_product_hook', 'Maak custom functie die het te inserten product in het winkelmandje kan aanpassen.');
   		  $this->add_cs_field_upload('NoImage', 'Toon dit plaatje indien er geen plaatje bij een product zit');
 
   		  

@@ -51,7 +51,8 @@ class CartInitializerView extends GenericView {
 				'hostname' : '<?php echo $options->getOption('hostname'); ?>',
 				
 				'customAddProductValidator' : <?php if($options->getOption('add_product_hook') == 'true') { echo 'customAddProductValidator'; } else { echo 'null';} ?>,
-
+				'beforeInsertingProductToCartHook' : <?php if($options->getOption('modify_product_hook') == 'true') { echo 'beforeInsertingProductToCartHook'; } else { echo 'null';} ?>,
+				
 
 				'onProductAdded' : <?php if($options->getOption('product_added_hook') == 'true') { echo 'onProductAdded'; } else { echo 'null';} ?>,
 				'use_scheduler' : <?php if($options->getOption('use_scheduler') == 'true') { echo 'true'; } else { echo 'false';} ?>,

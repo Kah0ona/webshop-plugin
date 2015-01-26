@@ -39,29 +39,33 @@ class CheckoutView extends GenericView {
 	}
 	
 	private function calculateProductPrice($product){
-		$optionPrice = 0;
-		if($product->ProductOption != null) {
-			foreach($product->ProductOption as $option){
-				if($option['extraPrice'] != null){
-					$optionPrice += (float) $option['extraPrice'];					
+		if($product->customPrice != null){
+			return 1 * $product->customPrice;
+		} else {
+			$optionPrice = 0;
+			if($product->ProductOption != null) {
+				foreach($product->ProductOption as $option){
+					if($option['extraPrice'] != null){
+						$optionPrice += (float) $option['extraPrice'];					
+					}
 				}
 			}
+
+			$quant = $product->quantity;
+
+			$discountFactor = 1;
+			if($product->discount != null){
+				$discountFactor = 1-($product->discount/100);
+			}
+
+			$productPrice = $product->price;
+
+			if($product->quantumDiscount != null && $product->quantumDiscountPer != null && $quant >= $product->quantumDiscountPer){
+					$productPrice -= $product->quantumDiscount;
+			}
+			
+			return $discountFactor * ($productPrice + $optionPrice);
 		}
-
-		$quant = $product->quantity;
-
-		$discountFactor = 1;
-		if($product->discount != null){
-			$discountFactor = 1-($product->discount/100);
-		}
-
-		$productPrice = $product->price;
-
-		if($product->quantumDiscount != null && $product->quantumDiscountPer != null && $quant >= $product->quantumDiscountPer){
-				$productPrice -= $product->quantumDiscount;
-		}
-		
-		return $discountFactor * ($productPrice + $optionPrice);
 	}
 	
 	private function renderDeliveryMethod() {
@@ -247,7 +251,7 @@ class CheckoutView extends GenericView {
 								<br/>- <strong>Productnummer:</strong> <?php echo $p->productNumber; ?>	 
 								 <?php } ?>									
 							</td>
-							<td class="text-right">€ <?php echo money_format('%.2n', $this->calculateProductPrice($p)); ?></td>
+							<td class="text-right checkout-product-price" data-productid="<?php echo $p->Product_id; ?>">€ <?php echo money_format('%.2n', $this->calculateProductPrice($p)); ?></td>
 							<td class="text-center">
 								<a class="removefromcart-checkout" href="#" 
 								   productid="<?php echo $p->Product_id; ?>" 
@@ -311,9 +315,9 @@ class CheckoutView extends GenericView {
 			</div>
 		</div>
 		<form name="order-form_" id="order-form" class="form-horizontal" action="<?php echo site_url(); ?>/wp-admin/admin-ajax.php" method="post">
+			  <fieldset> 
 			<div class="row-fluid">
 			
-			  <fieldset> 
 			  
 				 <div class="span6">
 				 	<?php if($this->model->getAllowPickingUp()):  ?>
@@ -492,7 +496,14 @@ class CheckoutView extends GenericView {
 							<h3 class="ordercomment-title">Bestellingsgegevens</h3>
 							<div class="control-group order-comment-control">
 								<p class="infotextordercomment"></p>
-								<label class="control-label order-comment" for="orderComment">Opmerkingen:</label>			
+								<label class="control-label order-comment" for="orderComment">
+									<?php
+									$commentsExpl = 'Opmerkingen:';
+									if($this->model->getOptions()->getOption('comments_expl') != null){
+										$commentsExpl = $this->model->getOptions()->getOption('comments_expl');
+
+									}						
+									echo $commentsExpl; ?></label>			
 								<div class="controls">	
 									<textarea id="orderComment" name="orderComment" class="input-large" rows="4"></textarea>
 								</div>		
@@ -627,8 +638,8 @@ class CheckoutView extends GenericView {
 						</div>
 					</div>
 			 	</div>
-			  </fieldset>
 			</div>
+			  </fieldset>
 		 </form>			
 	
 	<?php
