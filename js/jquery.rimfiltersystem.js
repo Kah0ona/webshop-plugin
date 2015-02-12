@@ -33,9 +33,12 @@
 
 			self.bindButtons();
 			self.renderFilterDefinition();
-			this.populateSelect(this.settings.db,$('#rim_filter_form select[name="car"]'));
-			var models = this.settings.db[$('#rim_filter_form select[name="car"]').val()]; //models of currently selected car
-			this.populateSelect(models,$('#rim_filter_form select[name="model"]'));
+
+//			this.populateSelect(this.settings.db,$('#rim_filter_form select[name="car"]'));
+//			var models = this.settings.db[$('#rim_filter_form select[name="car"]').val()]; //models of currently selected car
+//			this.populateSelect(models,$('#rim_filter_form select[name="model"]'));
+			self.restoreForm();
+
 		},
 		logger : function(msg){
 			if(window.console) {
@@ -69,7 +72,7 @@
 			str +=	   "</form><small class='steekmaat_credits'>Steekmaten via <a href='http://steekmaat.nl' target='_blank'>steekmaat.nl</small>";
 		    $(this.element).html(str);
 
-			this.populateSelect(this.settings.db , $('#rim_filter_form select[name="car"]'));
+			//this.populateSelect(this.settings.db , $('#rim_filter_form select[name="car"]'));
 
 
 		},
@@ -100,9 +103,9 @@
 				obj[$(this).attr('name')] = $(this).val();
 			});
 
-			$.cookie("rim_filter_form_settings_", JSON.stringify(obj));
+			$.cookie("rim_filter_form_settings", JSON.stringify(obj));
 	    },	
-		restoreForm : function() {
+/*		restoreForm : function() {
 			var cookie = $.cookie("rim_filter_form_settings");
 			if(cookie == null) {
 				return;
@@ -120,6 +123,72 @@
 				});
 				this.searchAndRenderResults(this.current_ordering, 0);
 			}
+		},
+		*/
+
+		restoreForm : function() {
+			var cookie = $.cookie("rim_filter_form_settings");
+			if(cookie == null) {
+				this.populateSelect(this.settings.db,$('#rim_filter_form select[name="car"]'));
+				var models = this.settings.db[$('#rim_filter_form select[name="car"]').val()]; //models of currently selected car
+				this.populateSelect(models,$('#rim_filter_form select[name="model"]'));
+				return;
+			}
+
+			var obj = JSON.parse(cookie);
+			var carElt = $('#rim_filter_form select[name="car"]');
+			
+			//restore the car brand field first.
+			this.populateSelect(this.settings.db, carElt);
+
+			carElt.children('option').each(function(){
+				var selectName = carElt.attr('name'); // 'car'
+				var val = $(this).html();
+
+				if(obj[selectName] != null && obj[selectName] == val) {
+					$(this).attr('selected','selected');
+				}
+			});
+
+			var models = this.settings.db[$('#rim_filter_form select[name="car"]').val()]; //models of currently selected car
+
+			var modelsElt = $('#rim_filter_form select[name="model"]');
+
+			this.populateSelect(models,modelsElt);
+			
+
+			modelsElt.children('option').each(function(){
+				var selectName = modelsElt.attr('name'); // 'model'
+				var val = $(this).html();
+
+				if(obj[selectName] != null && obj[selectName] == val) {
+					$(this).attr('selected','selected');
+				}
+			});
+
+			var inchElt = $('#rim_filter_form select[name="inch"]');
+
+			inchElt.children('option').each(function(){
+				var selectName = inchElt.attr('name'); // 'inch'
+				var val = $(this).html();
+
+				if(obj[selectName] != null && obj[selectName] == val) {
+					$(this).attr('selected','selected');
+				}
+			});
+
+			var materialElt = $('#rim_filter_form select[name="material"]');
+			
+			materialElt.children('option').each(function(){
+				var selectName = materialElt.attr('name'); // 'material'
+				var val = $(this).html();
+
+				if(obj[selectName] != null && obj[selectName] == val) {
+					$(this).attr('selected','selected');
+				}
+			});
+
+			this.searchAndRenderResults(self.current_ordering, 0);
 		},
 	    bindButtons : function(){
 			var self = this;
@@ -238,8 +307,13 @@
 				success : function(jsonObj){
 					self.logger('search results: ', jsonObj);
 					self.renderSearchResults(jsonObj, page);
+					self.scrollToDiv('.Search-results');
 				}
 			});
+		},
+		scrollToDiv : function(className){
+			$('html,body').animate({ scrollTop: $(className).offset().top}, 'slow');
+
 		},
 	    formatEuro : function(price){
 			Number.prototype.formatMoney = function(c, d, t){

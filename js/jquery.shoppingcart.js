@@ -656,6 +656,7 @@
 			ret.price = parseFloat(jsonObj.productPrice);
 			ret.VAT = jsonObj.productVAT;
 			ret.brand = jsonObj.brand;
+			ret.color = jsonObj.productColor;
 			ret.quantity = 1;
 			ret.processingTimeMinutes = jsonObj.processingTimeMinutes;
 			ret.discount = jsonObj.productDiscount;

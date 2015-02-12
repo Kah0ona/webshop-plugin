@@ -112,8 +112,14 @@ class FilterWidget extends WP_Widget {
 		if($options->getOption('custom_search_results_renderer') == 'true'){
 			$customRenderer = '"customResultsRenderer" : myCustomRenderer_'.$defId.',';
 		}
+		$autoSearch = '"searchOnPageLoad" : ';
+		if($options->getOption('search_on_page_load') == 'true') { 
+			$autoSearch .= 'true'; 
+		} else { 
+			$autoSearch .='false'; 
+		} 
 
-		
+
 
 		$render = '
 			<div id="filter_module_'.$defId.'"></div>
@@ -137,6 +143,7 @@ class FilterWidget extends WP_Widget {
 						"use_category" : '.$useCat.',
 						'.$customRenderer.'
 						"extra_param_string" : "'.$extraParam.'",
+						'.$autoSearch.'
 					
 					});
 				});

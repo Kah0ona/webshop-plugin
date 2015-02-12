@@ -256,7 +256,7 @@ class CheckoutView extends GenericView {
 								<a class="removefromcart-checkout" href="#" 
 								   productid="<?php echo $p->Product_id; ?>" 
 									   <?php echo $this->getSelectedOptionIdAttr($p); ?>
-								   productdata='<?php echo json_encode($p); ?>'>&times;</a>
+								   productdata='<?php echo str_replace('\'', '', json_encode($p)); ?>'>&times;</a>
 							</td>					
 					</tr>		
 					<?php } ?>

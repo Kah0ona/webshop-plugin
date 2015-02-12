@@ -7,6 +7,7 @@
 */
 ;(function( $, window, document, undefined ) {
 	var pluginName = "filtersystem";
+	var atLeastOneSelected = false;
 	var defaults =  {
 		'base_url' :          'http://webshop.lokaalgevonden.nl',
 		'definition_url' :    '/public/filterdefinitions',
@@ -46,6 +47,9 @@
 					self.renderFilterDefinition(jsonObj);
 					self.bindButtons();
 					self.restoreForm();
+					if(this.settings.searchOnPageLoad && atLeastOneSelected){
+						this.searchAndRenderResults(this.current_ordering, 0);
+					}
 				} else {
 					$(this.element).parent().hide();
 				}
@@ -144,8 +148,11 @@
 							return a.length - b.length;
 						});
 
-						for (var z = 0; z < this.length; z++)
-							this[z] = this[z].join("");
+						for (var z = 0; z < this.length; z++) {
+							if(this[z].constructor === Array){
+								this[z] = this[z].join("");
+							}
+						}
 					}
 					//****************
 					items.alphanumSort();
@@ -188,6 +195,10 @@
 
 			return html;
 		},
+		scrollToDiv : function(className){
+			$('html,body').animate({ scrollTop: $(className).offset().top}, 'slow');
+
+		},
 
 
 		persistForm : function(){
@@ -199,6 +210,7 @@
 			$.cookie("filter_form_settings_"+this.id, JSON.stringify(obj));
 	    },	
 		restoreForm : function() {
+			atLeastOneSelected = false;
 			var cookie = $.cookie("filter_form_settings_"+this.id);
 			if(cookie == null) {
 				return;
@@ -212,10 +224,13 @@
 
 					if(obj[selectName] != null && obj[selectName] == val) {
 						$(this).attr('selected','selected');
+						if(val != '-- Alles --') {
+							atLeastOneSelected=true;
+						}
 					}
 				});
 
-				this.searchAndRenderResults(this.current_ordering, 0);
+
 			}
 		},
 	    bindButtons : function(){
@@ -322,6 +337,7 @@
 				success : function(jsonObj){
 					self.logger('search results: ', jsonObj);
 					self.renderSearchResults(jsonObj, page);
+					self.scrollToDiv('.Search-results');
 				}
 			});
 		},

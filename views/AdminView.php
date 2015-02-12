@@ -56,6 +56,8 @@ class AdminView extends GenericView {
 
    		  $this->add_cs_field_boolean('add_product_hook', 'Add Product Hook. Maak custom valideer functie voordat een product in het winkelmandje gaat.');		    		  
    		  $this->add_cs_field_boolean('product_added_hook', 'Add Product Hook. Maak custom functie nadat een product in het winkelmandje gaat.');		    		  
+   		  $this->add_cs_field_boolean('search_on_page_load', 'Automatisch zoeken na laden pagina indien er een filterwidget in beeld is.');
+
    		  $this->add_cs_field_boolean('modify_product_hook', 'Maak custom functie die het te inserten product in het winkelmandje kan aanpassen.');
   		  $this->add_cs_field_upload('NoImage', 'Toon dit plaatje indien er geen plaatje bij een product zit');
 

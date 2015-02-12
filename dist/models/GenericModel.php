@@ -125,7 +125,7 @@ class GenericModel {
 		$productDeliveryTime = $pro->productDeliveryTime;
 		$quantumDiscount = $pro->quantumDiscount;
 		$quantumDiscountPer = $pro->quantumDiscountPer;
-		
+		$productColor = $pro->productColor;
 		$discount = $pro->productDiscount;
 		$options = array();
 		if($pro->ProductOption != null)
@@ -156,6 +156,7 @@ class GenericModel {
 			"price"=> $price,
 			"discount"=> $discount,
 			"brand" => $brand,
+			"color" => $productColor,
 			"productNumber" => $productNumber,
 			"VAT" => $VAT,
 			"ProductOption"=> $options,
