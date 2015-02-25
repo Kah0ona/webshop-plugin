@@ -54,6 +54,10 @@ class CheckoutModel extends GenericModel {
 	public function getDeliveryMethodModel() {
 		return $this->deliveryMethodModel;
 	}
+
+	public function pricesExclVat() {
+		return $this->options->getOption('prices_excl_vat') == "true";
+	}
 	
 	
 	public function allowDeliveryDate(){
@@ -163,6 +167,13 @@ class CheckoutModel extends GenericModel {
 				}
 				else {
 					$this->totalPrice = $obj->totalPrice;						
+
+					/** TODO FIX THIS MAJOR HACK!!! */
+					if($this->pricesExclVat()){
+						$this->totalPrice = $this->totalPrice * 1.21;
+					}
+
+					/** TODO */
 					$this->status = ORDER_SUCCESS;
 					$this->statusMessage = "De bestelling is succesvol verstuurd.";
 					$this->insertedOrderId= $obj->Order__id;
