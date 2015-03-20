@@ -162,4 +162,7 @@ ul.filter_search_results_pagination li {
 	margin-bottom: 5px;
 }
 
-
+.popover img {
+	width: 100% !important;
+	position: static;
+}

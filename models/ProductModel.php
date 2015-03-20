@@ -26,12 +26,12 @@ class ProductModel extends GenericModel {
 		
 	}
 	private function filterParamsSale($params){
-		$params['sale'] = $this->getSaleParam();
+		//$params['sale'] = $this->getSaleParam();
 		return $params;
 	}
 		
 	public function fetchProducts($params, $returnString=false){
-		$params = $this->filterParamsSale($params);
+		//$params = $this->filterParamsSale($params);
 		return $this->fetch($this->serviceUrl, $params, $returnString);
 	}
 	

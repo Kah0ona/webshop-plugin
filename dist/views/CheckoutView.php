@@ -190,8 +190,10 @@ class CheckoutView extends GenericView {
 			}
 			
 			jQuery(document).ready(function($){
-				$('.xtooltip').popover();
-				
+				$('.xtooltip').popover({
+					html: true
+				});
+			
 				$('#deliveryElsewhere').change(function(){
 					$('.address-line-more').toggleClass('hidden');
 				});
@@ -211,7 +213,9 @@ class CheckoutView extends GenericView {
 				
 			});
 			
-		</script>					
+		</script>		
+
+
 		<div class="row-fluid">
 		 <div class="span12 checkout">
 			<table  class="table checkout-table">
@@ -236,7 +240,7 @@ class CheckoutView extends GenericView {
 					<tr class="product-row-<?php echo $p->Product_id; ?>">
 							<td><input type="text" class="checkout-amount span2" data-productid="<?php echo $p->Product_id; ?>" value="<?php echo $p->quantity; ?>" />x</td>
 							<td><?php echo $p->title.' '.$this->getProductOptionString($p); ?>
-								<a data-content="<p class=' '><?php echo htmlspecialchars($p->desc); ?></p><img src='<?php echo $p->thumb; ?>' />" 
+								<a data-content="<p class=' '><?php echo htmlspecialchars($p->desc); ?></p><img style='width: 100%;' src='<?php echo $p->thumb; ?>' />" 
 									 		   rel="popover" 
 									 		   data-trigger="hover"
 									 		   class="label label-info xtooltip" 

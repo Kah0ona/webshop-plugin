@@ -392,6 +392,8 @@
 			var ret = this.lookupSizeByCar(car,model);
 			ret.inch = inch;
 			ret.Materiaal = material;
+			ret.car = car.toUpperCase();
+			ret.model = model;
 			return ret;
 		},
 		lookupSizeByCar : function(car,model){
