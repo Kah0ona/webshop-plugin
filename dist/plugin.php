@@ -26,7 +26,7 @@ License:
 
 */
 //print_r($_SERVER);
-if($_SERVER['SERVER_NAME'] != 'localhost')
+if($_SERVER['SERVER_NAME'] != 'wordpress')
 	define('SYSTEM_URL_WEBSHOP', 'http://webshop.lokaalgevonden.nl');
 else
 	define('SYSTEM_URL_WEBSHOP', 'http://webshopdev.sytematic.nl');

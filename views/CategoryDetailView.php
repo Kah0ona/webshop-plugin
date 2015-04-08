@@ -18,10 +18,9 @@ class CategoryDetailView extends GenericView {
 			$data = $this->model->getData();
 		}
 
-
 		
 		echo '<script type="text/javascript">';	
-		echo     'WebshopType = "categories";';
+		echo     'WebshopType = "categories"; ';
 		echo     'WebshopItem_id = '.$data->Category_id.';';			
 		echo '</script>';	
 

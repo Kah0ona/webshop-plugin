@@ -84,6 +84,9 @@ class CategoryView extends GenericView {
 	?>
 				
 		<!-- Start rendering CategoryView -->
+		<script type="text/javascript">
+			var currentCategory = <?php echo $this->parentId == null ? '0' : $this->parentId; ?>;
+		</script>
 		<div class="category-overview-grid" id="category-overview-grid-<?php echo $this->parentId; ?>">
 			<?php foreach($data as $group=>$categories) : $i = 1; $c = count($categories); ?>
 				<?php if($group != 'nogroup'): ?>
@@ -158,7 +161,7 @@ class CategoryView extends GenericView {
 						<?php 
 							if($cat->children != null && count($cat->children) > 0 && $level < $this->model->maxNestingLevels){
 						?>
-						<li class="category-item category-package category-subcategory">
+							<li class="category-item category-package category-subcategory category-subcategory-of-<?php echo $cat->Category_id; ?>">
 						<?php
 							echo $this->renderListRecursiveNoGroupTitles($cat->children, $level+1);
 						?>
@@ -220,7 +223,7 @@ class CategoryView extends GenericView {
 				<?php 
 					if($cat->children != null && count($cat->children) > 0 && $level < $this->model->maxNestingLevels){
 				?>
-				<li class="category-item category-package category-subcategory">
+				<li class="category-item category-package category-subcategory category-subcategory-of-<?php echo $cat->Category_id; ?>">
 				<?php
 					echo $this->renderListRecursiveNoGroupTitles($cat->children, $level+1);
 				?>

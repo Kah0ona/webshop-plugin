@@ -49,7 +49,7 @@ class CartInitializerView extends GenericView {
 				'schedulerUrl': '<?php echo SYSTEM_URL_WEBSHOP?>/public/occupiedtimeslots',
 				'baseUrl': '<?php echo SYSTEM_URL_WEBSHOP?>',
 				'hostname' : '<?php echo $options->getOption('hostname'); ?>',
-				
+				'customCartLoadedHook' : <?php if($options->getOption('cart_loaded_hook') == 'true') { echo 'cartLoadedHook'; } else { echo 'null';} ?>,
 				'customAddProductValidator' : <?php if($options->getOption('add_product_hook') == 'true') { echo 'customAddProductValidator'; } else { echo 'null';} ?>,
 				'beforeInsertingProductToCartHook' : <?php if($options->getOption('modify_product_hook') == 'true') { echo 'beforeInsertingProductToCartHook'; } else { echo 'null';} ?>,
 				'searchOnPageLoad' : <?php if($options->getOption('search_on_page_load') == 'true') { echo 'true'; } else { echo 'false'; } ?>,
@@ -70,6 +70,7 @@ class CartInitializerView extends GenericView {
 			}
 			echo 'WebshopType = "'.$this->type.'"; ';		
 			echo 'WebshopItem_id = '.$this->pageId.';';			
+
 		?>
 
 		

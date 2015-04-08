@@ -1050,8 +1050,8 @@
 		    	
 		    	var found = false;
 			    for(var j = 0; j < options2.length; j++){
-				   if(checkingVal    === options2[j].ProductOptionValue_id &&
-				   	  checkingOption === options2[j].ProductOption_id) {
+				   if(checkingVal    === parseInt(options2[j].ProductOptionValue_id) &&
+				   	  checkingOption === parseInt(options2[j].ProductOption_id)) {
 				   		found = true;
 				   		break;
 				   }
